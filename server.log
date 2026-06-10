@@ -11030,3 +11030,207 @@
 2026-06-10 20:16:01,127 - DEBUG - GET /favicon.ico
 2026-06-10 20:16:01,131 - INFO - 127.0.0.1 - - [10/Jun/2026 20:16:01] "GET /favicon.ico HTTP/1.1" 404 -
 
+2026-06-10 22:50:18,128 - DEBUG - GET /index.html
+2026-06-10 22:50:18,132 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:18] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-10 22:50:18,359 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-10 22:50:18,360 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:18] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-10 22:50:18,379 - DEBUG - GET /static/css/style.css
+2026-06-10 22:50:18,380 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:18] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-10 22:50:18,683 - DEBUG - GET /static/js/main.js
+2026-06-10 22:50:18,683 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:18] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:18,690 - DEBUG - GET /images/logo.png
+2026-06-10 22:50:18,690 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:18] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-10 22:50:18,692 - DEBUG - GET /images/1.png
+2026-06-10 22:50:18,692 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:18] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-10 22:50:19,244 - DEBUG - GET /static/js/logger.js
+2026-06-10 22:50:19,244 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:19] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:19,247 - DEBUG - GET /static/js/permission-manager.js
+2026-06-10 22:50:19,248 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:19] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:19,249 - DEBUG - GET /static/js/news-template-engine.js
+2026-06-10 22:50:19,249 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:19] "GET /static/js/news-template-engine.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:19,255 - DEBUG - GET /static/js/news-manager.js
+2026-06-10 22:50:19,255 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:19] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:19,257 - DEBUG - GET /static/js/news-form.js
+2026-06-10 22:50:19,257 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:19] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:19,258 - DEBUG - GET /images/2.png
+2026-06-10 22:50:19,259 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:19] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-10 22:50:19,579 - DEBUG - GET /images/3.png
+2026-06-10 22:50:19,579 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:19] "GET /images/3.png HTTP/1.1" 200 -
+
+2026-06-10 22:50:19,584 - DEBUG - GET /images/bg.jpg
+2026-06-10 22:50:19,584 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:19] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:23,506 - DEBUG - GET /index.html
+2026-06-10 22:50:23,506 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:23] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-10 22:50:23,646 - DEBUG - GET /static/css/style.css
+2026-06-10 22:50:23,647 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:23] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-10 22:50:23,770 - DEBUG - GET /static/js/main.js
+2026-06-10 22:50:23,771 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:23] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:23,913 - DEBUG - GET /images/logo.png
+2026-06-10 22:50:23,913 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:23] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-10 22:50:23,917 - DEBUG - GET /images/1.png
+2026-06-10 22:50:23,917 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:23] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-10 22:50:23,920 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-10 22:50:23,920 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:23] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-10 22:50:23,980 - DEBUG - GET /images/2.png
+2026-06-10 22:50:23,981 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:23] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-10 22:50:24,303 - DEBUG - GET /static/js/logger.js
+2026-06-10 22:50:24,304 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:24] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:24,307 - DEBUG - GET /static/js/permission-manager.js
+2026-06-10 22:50:24,307 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:24] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:24,308 - DEBUG - GET /static/js/news-template-engine.js
+2026-06-10 22:50:24,308 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:24] "GET /static/js/news-template-engine.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:24,309 - DEBUG - GET /static/js/news-manager.js
+2026-06-10 22:50:24,310 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:24] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:24,311 - DEBUG - GET /static/js/news-form.js
+2026-06-10 22:50:24,311 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:24] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:24,313 - DEBUG - GET /images/3.png
+2026-06-10 22:50:24,313 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:24] "GET /images/3.png HTTP/1.1" 200 -
+
+2026-06-10 22:50:24,621 - DEBUG - GET /images/bg.jpg
+2026-06-10 22:50:24,622 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:24] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:27,004 - DEBUG - GET /news.html
+2026-06-10 22:50:27,005 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:27] "GET /news.html HTTP/1.1" 200 -
+
+2026-06-10 22:50:27,129 - DEBUG - GET /static/css/style.css
+2026-06-10 22:50:27,129 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:27] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-10 22:50:27,267 - DEBUG - GET /static/css/news-form.css
+2026-06-10 22:50:27,267 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:27] "GET /static/css/news-form.css HTTP/1.1" 200 -
+
+2026-06-10 22:50:27,396 - DEBUG - GET /static/js/main.js
+2026-06-10 22:50:27,396 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:27] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:27,401 - DEBUG - GET /images/logo.png
+2026-06-10 22:50:27,403 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:27] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-10 22:50:27,404 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-10 22:50:27,405 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:27] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-10 22:50:27,468 - DEBUG - GET /images/bg.jpg
+2026-06-10 22:50:27,469 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:27] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:27,784 - DEBUG - GET /static/js/logger.js
+2026-06-10 22:50:27,785 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:27] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:27,789 - DEBUG - GET /static/js/permission-manager.js
+2026-06-10 22:50:27,790 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:27] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:27,792 - DEBUG - GET /static/js/news-template-engine.js
+2026-06-10 22:50:27,792 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:27] "GET /static/js/news-template-engine.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:27,794 - DEBUG - GET /static/js/news-manager.js
+2026-06-10 22:50:27,794 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:27] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:27,795 - DEBUG - GET /static/js/news-form.js
+2026-06-10 22:50:27,796 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:27] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:28,120 - DEBUG - GET /get-news
+2026-06-10 22:50:28,125 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:28] "GET /get-news HTTP/1.1" 200 -
+
+2026-06-10 22:50:28,382 - DEBUG - GET /images/img_n/1781018732688.jpg
+2026-06-10 22:50:28,383 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:28] "GET /images/img_n/1781018732688.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:28,468 - DEBUG - GET /images/img_n/1781019147263.jpg
+2026-06-10 22:50:28,469 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:28] "GET /images/img_n/1781019147263.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:28,472 - DEBUG - GET /images/img_n/1781019147250.jpg
+2026-06-10 22:50:28,474 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:28] "GET /images/img_n/1781019147250.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:28,475 - DEBUG - GET /images/img_n/1781018732676.jpg
+2026-06-10 22:50:28,476 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:28] "GET /images/img_n/1781018732676.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:28,479 - DEBUG - GET /images/img_n/1781017393211.jpg
+2026-06-10 22:50:28,479 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:28] "GET /images/img_n/1781017393211.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:28,481 - DEBUG - GET /images/img_n/1781017393197.jpg
+2026-06-10 22:50:28,481 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:28] "GET /images/img_n/1781017393197.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:28,707 - DEBUG - GET /images/img_n/1781017229532.jpg
+2026-06-10 22:50:28,708 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:28] "GET /images/img_n/1781017229532.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:28,800 - DEBUG - GET /images/img_n/1781017229521.jpg
+2026-06-10 22:50:28,800 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:28] "GET /images/img_n/1781017229521.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:28,809 - DEBUG - GET /images/img_n/1781017229509.jpg
+2026-06-10 22:50:28,809 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:28] "GET /images/img_n/1781017229509.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:28,821 - DEBUG - GET /images/img_n/1781017229501.jpg
+2026-06-10 22:50:28,821 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:28] "GET /images/img_n/1781017229501.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:28,824 - DEBUG - GET /images/img_n/images/img_n/1781002918608.jpg
+2026-06-10 22:50:28,825 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:28] "GET /images/img_n/images/img_n/1781002918608.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:28,827 - DEBUG - GET /images/img_n/images/img_n/1781002918303.jpg
+2026-06-10 22:50:28,830 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:28] "GET /images/img_n/images/img_n/1781002918303.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:29,032 - DEBUG - GET /images/img_n/400.png
+2026-06-10 22:50:29,032 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:29] "GET /images/img_n/400.png HTTP/1.1" 200 -
+
+2026-06-10 22:50:31,413 - DEBUG - GET /index.html
+2026-06-10 22:50:31,413 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:31] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-10 22:50:31,556 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-10 22:50:31,556 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:31] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-10 22:50:31,667 - DEBUG - GET /static/css/style.css
+2026-06-10 22:50:31,668 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:31] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-10 22:50:31,883 - DEBUG - GET /static/js/main.js
+2026-06-10 22:50:31,884 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:31] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:31,889 - DEBUG - GET /images/bg.jpg
+2026-06-10 22:50:31,890 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:31] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-10 22:50:31,891 - DEBUG - GET /images/logo.png
+2026-06-10 22:50:31,891 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:31] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-10 22:50:32,177 - DEBUG - GET /static/js/logger.js
+2026-06-10 22:50:32,177 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:32] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:32,180 - DEBUG - GET /static/js/permission-manager.js
+2026-06-10 22:50:32,180 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:32] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:32,181 - DEBUG - GET /static/js/news-template-engine.js
+2026-06-10 22:50:32,181 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:32] "GET /static/js/news-template-engine.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:32,210 - DEBUG - GET /static/js/news-manager.js
+2026-06-10 22:50:32,210 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:32] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:32,213 - DEBUG - GET /static/js/news-form.js
+2026-06-10 22:50:32,213 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:32] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-10 22:50:32,214 - DEBUG - GET /images/1.png
+2026-06-10 22:50:32,214 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:32] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-10 22:50:32,500 - DEBUG - GET /images/2.png
+2026-06-10 22:50:32,500 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:32] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-10 22:50:32,503 - DEBUG - GET /images/3.png
+2026-06-10 22:50:32,503 - INFO - 127.0.0.1 - - [10/Jun/2026 22:50:32] "GET /images/3.png HTTP/1.1" 200 -
+
