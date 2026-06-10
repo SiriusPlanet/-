@@ -1,0 +1,636 @@
+/* === Сброс и базовые стили === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-image: url('../../images/bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh;
+    padding-bottom: 6%;
+    transition: filter 0.8s ease;
+}
+
+/* === Контейнер для всего контента === */
+.page-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2% 1%;
+}
+
+/* === Глобальный оверлей === */
+#access-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(0, 40, 20, 0.94),
+        rgba(0, 25, 15, 0.98)
+    );
+    z-index: 9998;
+    pointer-events: auto;
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+}
+
+/* === Кнопка доступа === */
+.access-button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    text-align: center;
+    pointer-events: auto;    
+}
+
+#fileAccessButton {
+    padding: 2% 4%;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #00ffaa;
+    background: transparent;
+    border: 2px solid #00ffaa;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    box-shadow: 0 0 3vw rgba(0, 255, 170, 0.4);
+    transition: all 0.3s ease;
+    min-width: 28%;
+}
+
+/* === Единый стиль для карточек === */
+.card,
+.hero,
+.site-header,
+.product-card,
+.privacy-policy,
+.news-header-panel {
+    border-radius: 1.6rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(1rem);
+    box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* === Шапка сайта === */
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2% 2%;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 0.4rem 1.5rem rgba(0, 0, 0, 0.12);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* === Навигация === */
+.main-nav ul {
+    display: flex;
+    gap: 3%;
+    list-style: none;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #3498db;
+    padding: 1.5% 3%;
+    transition: color 0.3s ease;
+}
+
+/* === Каталог товаров === */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+    gap: 2%;
+    padding: 2%;
+}
+
+.product-card {
+    background: white;
+    border-radius: 1.6rem;
+    box-shadow: 0 0.2rem 1.5rem rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.product-card img {
+    width: 100%;
+    height: 25vw;
+    object-fit: cover;
+    border-radius: 1.6rem 1.6rem 0 0;
+    margin-bottom: 2%;
+}
+
+.product-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1%;
+    color: #2c3e50;
+}
+
+.price {
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 1.2rem;
+    margin-top: 1%;
+}
+
+/* === Новости === */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+    gap: 2%;
+    padding: 2%;
+}
+
+.news-card {
+    background: white;
+    border-radius: 1.6rem;
+    box-shadow: 0 0.2rem 1.5rem rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    position: relative;
+}
+
+.news-card-image-wrapper {
+    padding-bottom: 56.25%; /* Соотношение 16:9 */
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.6rem 1.6rem 0 0;
+}
+
+.news-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.news-card-content {
+    padding: 2%;
+}
+
+.news-card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 1%;
+}
+
+/* === Модальные окна === */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.modal.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-dialog {
+    width: 80%;
+    max-width: 90%;
+    padding: 2%;
+    background: white;
+    border-radius: 1.6rem;
+    box-shadow: 0 1.2rem 4rem rgba(0, 0, 0, 0.25);
+}
+
+/* === Формы === */
+.news-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2%;
+}
+
+.news-form input,
+.news-form textarea {
+    width: 100%;
+    padding: 1.5% 2%;
+    border: 2px solid #e0e0e0;
+    border-radius: 0.8rem;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* === Футер === (продолжение) */
+.site-footer {
+    padding: 2% 2%;
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid #eee;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(1rem);
+    box-shadow: 0 -0.2rem 1rem rgba(0, 0, 0, 0.05);
+    border-radius: 1.6rem;
+    overflow: hidden;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3%;
+    justify-content: center;
+    list-style: none;
+}
+
+/* === Секция с файлами === */
+.files-section {
+    padding: 4% 2%;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 1.6rem;
+    box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.1);
+    margin-bottom: 2%;
+}
+
+.files-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+    gap: 2%;
+    list-style: none;
+    padding: 0;
+}
+
+.file-item {
+    background: white;
+    border-radius: 1.2rem;
+    padding: 2%;
+    box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.file-item:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.file-icon {
+    width: 10%;
+    height: auto;
+    margin-right: 2%;
+    vertical-align: middle;
+}
+
+.file-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.file-size {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* === Галерея изображений === */
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+    gap: 2%;
+    padding: 2%;
+}
+
+.photo-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.6rem;
+}
+
+.photo-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
+    transition: height 0.3s ease;
+}
+
+.photo-item:hover .photo-overlay {
+    height: 100%;
+}
+
+.photo-caption {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.photo-item:hover .photo-caption {
+    opacity: 1;
+}
+
+/* === Адаптивные стили === */
+@media (max-width: 768px) {
+    .products-grid,
+    .news-grid,
+    .files-list,
+    .photo-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-dialog {
+        width: 90%;
+        max-width: 100%;
+    }
+
+    #fileAccessButton {
+        min-width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 3% 1%;
+    }
+
+    .site-header {
+        flex-direction: column;
+        gap: 2%;
+        padding: 3% 2%;
+    }
+
+    .main-nav ul {
+        gap: 2%;
+    }
+
+    .product-card img {
+        height: 30vw;
+    }
+
+    .news-card-image-wrapper {
+        padding-bottom: 60%; /* Корректировка для маленьких экранов */
+    }
+}
+
+/* === Специальные стили для файлов === */
+.files-section {
+    padding: 4% 2%;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 1.6rem;
+    box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.1);
+    margin-bottom: 2%;
+}
+
+.file-download-button {
+    display: inline-block;
+    padding: 1.5% 3%;
+    background: #3498db;
+    color: white;
+    border-radius: 0.8rem;
+    margin-top: 1%;
+    transition: background 0.2s ease;
+}
+
+.file-download-button:hover {
+    background: #2980b9;
+}
+
+.file-details {
+    margin-top: 1%;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.file-type-icon {
+    width: 2rem;
+    height: auto;
+    margin-right: 1%;
+    vertical-align: middle;
+}
+
+/* === Стили для превью файлов === */
+.file-preview {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.6rem;
+    margin-bottom: 2%;
+}
+
+.file-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.file-preview-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
+    transition: height 0.3s ease;
+}
+
+.file-preview:hover .file-preview-overlay {
+    height: 100%;
+}
+
+.file-preview-actions {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.file-preview:hover .file-preview-actions {
+    opacity: 1;
+}
+
+/* === Специальные медиа-запросы для файлов === */
+@media (max-width: 576px) {
+    .file-details {
+        font-size: 0.8rem;
+    }
+
+    .file-download-button {
+        padding: 1% 2%;
+    }
+}
+
+@media (max-width: 320px) {
+    .file-name {
+        font-size: 1rem;
+    }
+
+    .file-details {
+        font-size: 0.7rem;
+    }
+}
+
+/* === Специальные эффекты для файлов === */
+.file-preview:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.file-preview:active {
+    transform: scale(1);
+}
+
+/* === Уведомления === */
+.notification {
+    position: fixed;
+    top: 2%;
+    right: 2%;
+    padding: 1.5% 3%;
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 0.8rem;
+    box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+.notification.success {
+    background: #c3e6cb;
+    color: #155724;
+    border-color: #8fd1b3;
+}
+
+/* === Лоадер === */
+.loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    display: none;
+}
+
+.loader.active {
+    display: block;
+}
+
+/* === Печатные стили === */
+@media print {
+    .modal,
+    .notification,
+    .loader,
+    .access-overlay {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+}
+
+/* === Общие переходы === */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* === Утилиты === */
+.hidden {
+    display: none !important;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    overflow: hidden;
+}
+
+/* === Финальные настройки === */
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%; /* 1rem = 10px */
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: #3498db;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #2980b9;
+}
+
+button {
+    cursor: pointer;
+}
+
+input,
+textarea,
+select {
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 1.5% 2%;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.8rem;
+    transition: border-color 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #3498db;
+}

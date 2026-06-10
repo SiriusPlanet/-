@@ -1,0 +1,96 @@
+/* === Политика конфиденциальности === */
+.privacy-policy {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    line-height: 1.7;
+    color: #333;
+}
+
+.privacy-policy h1 {
+    text-align: center;
+    font-size: 2.2em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.privacy-policy h2,
+.privacy-policy h3 {
+    color: #2980b9;
+    margin: 25px 0 15px;
+    font-size: 1.4em;
+}
+
+.privacy-policy p {
+    margin-bottom: 16px;
+    font-size: 1.05em;
+}
+
+.privacy-policy ul,
+.privacy-policy ol {
+    margin: 15px 0;
+    padding-left: 30px;
+}
+
+.privacy-policy ul li,
+.privacy-policy ol li {
+    margin-bottom: 10px;
+    font-size: 1.05em;
+}
+
+.privacy-policy a {
+    color: #8e44ad;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.privacy-policy a:hover {
+    color: #e74c3c;
+    text-decoration: underline;
+}
+
+/* === Блок контактов === */
+.contact-info {
+    background: #f8f9fa;
+    padding: 20px;
+    border-left: 4px solid #3498db;
+    margin: 30px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.contact-info h3 {
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+.last-paragraph {
+    font-style: italic;
+    color: #666;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.1em;
+    padding: 15px;
+    background: #edf2f7;
+    border-radius: 8px;
+}
+
+/* === Адаптивность === */
+@media (max-width: 768px) {
+    .privacy-policy {
+        margin: 20px 10px;
+        padding: 20px;
+    }
+
+    .privacy-policy h1 {
+        font-size: 1.8em;
+    }
+
+    .privacy-policy h2 {
+        font-size: 1.3em;
+    }
+}

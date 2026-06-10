@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест модального окна</title>
+    <style>
+        #testModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+        }
+        
+        .modal-dialog {
+            background: white;
+            padding: 20px;
+            max-width: 800px;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <button id="openModalBtn">Открыть модальное окно</button>
+
+    <div id="testModal" class="modal">
+        <div class="modal-dialog">
+            <h2>Тестовое модальное окно</h2>
+            <p>Это содержимое модального окна</p>
+            <button id="closeModalBtn">Закрыть</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('testModal');
+            const openBtn = document.getElementById('openModalBtn');
+            const closeBtn = document.getElementById('closeModalBtn');
+
+            openBtn.addEventListener('click', () => {
+                console.log('Открываем модальное окно');
+                modal.style.display = 'block';
+            });
+
+            closeBtn.addEventListener('click', () => {
+                console.log('Закрываем модальное окно');
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.style.display === 'block') {
+                    console.log('Закрытие по Esc');
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

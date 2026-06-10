@@ -1,0 +1,750 @@
+/* === СБРОС И БАЗОВЫЕ СТИЛИ === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-image: url('/images/bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh;
+    /* ⚠️ Убираем padding-bottom — теперь используем flex-контейнер page-wrapper */
+    padding: 0 2vw; /* вместо 2vw — теперь это отступы по бокам всей страницы */
+}
+
+/* --- Глобальное затемнение (TVA Access Layer) --- */
+
+#access-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(0, 40, 20, 0.94),
+        rgba(0, 25, 15, 0.98)
+    );
+    z-index: 9998;
+    pointer-events: auto;
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+    animation: noiseFade 2s ease-in-out;
+}
+
+/* Шум — как сквозь тряпку времени */
+#access-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-blend-mode: overlay;
+    pointer-events: none;
+}
+
+.access-granted #access-overlay {
+    display: none !important;
+    pointer-events: none !important;
+}
+
+.access-granted .access-button {
+    display: none !important;
+}
+
+@keyframes noiseFade {
+    from {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+    to {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.3' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+}
+
+.access-granted #access-overlay {
+    animation: noiseFadeOut 0.8s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes noiseFadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* --- Кнопка доступа к файлам --- */
+.access-button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    text-align: center;
+    width: min(300px, 90vw); /* адаптируется под ширину экрана */
+}
+
+#fileAccessButton {
+    width: 100%;
+    padding: 1.2em 1.5em; /* 19.2px / 24px → 1.2em / 1.5em */
+    font-size: 1.125rem; /* 18px → 1.125rem */
+    font-weight: bold;
+    color: #00ffaa;
+    background: transparent;
+    border: 0.125rem solid #00ffaa; /* 2px → 0.125rem */
+    border-radius: 0.5rem; /* 8px → 0.5rem */
+    cursor: pointer;
+    box-shadow: 0 0 0.9375rem rgba(0, 255, 170, 0.4); /* 15px → 0.9375rem */
+    transition: all 0.3s ease;
+}
+
+#fileAccessButton:hover {
+    background: rgba(0, 255, 170, 0.1);
+    box-shadow: 0 0 1.5625rem rgba(0, 255, 170, 0.6); /* 25px → 1.5625rem */
+    transform: scale(1.05);
+}
+
+#fileAccessButton:active {
+    transform: scale(0.98);
+}
+
+/* --- Блокировка контента до доступа --- */
+body:not(.access-granted) header,
+body:not(.access-granted) main,
+body:not(.access-granted) footer,
+body:not(.access-granted) .main-nav a,
+body:not(.access-granted) .product-card {
+    filter: blur(0.5rem) brightness(0.2); /* 8px → 0.5rem */
+    pointer-events: none;
+}
+
+/* === Единый стиль для всех карточек и блоков === */
+.card,
+.hero,
+.site-header,
+.product-card,
+.privacy-policy,
+.news-header-panel {
+    border-radius: 1rem; /* 16px → 1rem */
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(0.625rem); /* 10px → 0.625rem */
+    -webkit-backdrop-filter: blur(0.625rem);
+    box-shadow: 0 0.375rem 1.25rem rgba(0, 0, 0, 0.12); /* 6px → 0.375rem, 20px → 1.25rem */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover,
+.product-card:hover,
+.news-card:hover {
+    transform: translateY(-0.3125rem); /* -5px → -0.3125rem */
+    box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.18); /* 10px → 0.625rem, 25px → 1.5625rem */
+}
+
+/* === ОТСТУПЫ МЕЖДУ СЕКЦИЯМИ — в процентах и rem === */
+main > section,
+.catalog,
+.news-container,
+.privacy-policy {
+    margin: 2.5rem auto; /* 40px → 2.5rem */
+    max-width: 96%;
+}
+
+.header-group {
+    width: 100%;
+    position: relative; /* не sticky здесь — sticky только у .news-header-panel */
+    z-index: 101; /* чуть выше, чем у .site-header (100) */
+}
+
+/* === ШАПКА САЙТА === */
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9375rem 1.25rem; /* 15px → 0.9375rem, 2% ≈ 1.25rem */
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.12); /* 4px → 0.25rem, 15px → 0.9375rem */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    max-width: 100%;
+    margin: 0 auto;
+    min-height: 4.5rem;
+    /*border-radius: 1rem;*/
+    box-sizing: border-box;
+}
+
+.logo-link {
+    display: block;
+    margin-right: 1.25rem; /* 20px → 1.25rem */
+    flex-shrink: 0;
+}
+
+.site-title {
+    flex: 1;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* === НАВИГАЦИЯ === */
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5625rem; /* 25px → 1.5625rem */
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    padding: 0.3125rem 0.625rem; /* 5px, 10px → 0.3125rem, 0.625rem */
+    border-radius: 0.25rem;
+}
+
+.main-nav a:hover {
+    color: #2980b9;
+    background: rgba(52, 152, 219, 0.1);
+}
+
+/* === КНОПКА АВТОРИЗАЦИИ === */
+.auth-link a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: 0.0625rem solid #3498db; /* 1px → 0.0625rem */
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.auth-link a:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+/* === ГЛАВНЫЙ БАННЕР === */
+.hero {
+    text-align: center;
+    padding: 3.125rem 1.875rem; /* 50px, 30px → 3.125rem, 1.875rem */
+    max-width: 50rem;
+    margin: 2.5rem auto 1.875rem;
+}
+
+.hero h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+}
+
+.hero p {
+    font-size: 1.125rem;
+    color: #7f8c8d;
+}
+
+/* === КАТАЛОГ ТОВАРОВ === */
+.catalog h2 {
+    text-align: center;
+    font-size: 1.75rem;
+    margin-bottom: 1.875rem;
+    color: #2c3e50;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); /* 280px → 18rem */
+    gap: 1.875rem; /* 30px → 1.875rem */
+}
+
+.product-card img {
+    width: 100%;
+    height: 11.25rem; /* 180px → 11.25rem */
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 0.9375rem;
+}
+
+.product-card h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.625rem;
+    color: #2c3e50;
+}
+
+.product-card p {
+    margin-bottom: 0.375rem;
+    color: #555;
+    font-size: 0.95em;
+}
+
+.price {
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 1.125rem;
+    margin-top: 0.5rem;
+}
+
+/* === БЕГУЩАЯ СТРОКА НОВОСТЕЙ === */
+.ticker-container {
+    background: #1a1a2e;
+    color: #00ff88;
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    padding: 0.5rem 0;
+    text-align: center;
+    border-bottom: 0.125rem solid #00ff88;
+}
+
+#news-ticker {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker-scroll 30s linear infinite;
+}
+
+@keyframes ticker-scroll {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+}
+
+/* === СЕТЬ НОВОСТЕЙ === */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 1.3125rem; /* 21px → 1.3125rem */
+    padding: 1.3125rem;
+    justify-content: center;
+}
+
+/* === КАРТОЧКА НОВОСТИ — квадратная, с рамкой и отступом === */
+.news-card {
+    max-width: 28rem;
+    width: 100%;
+    background: white;
+    border-radius: 0.75rem; /* 12px → 0.75rem */
+    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.news-card-image-wrapper {
+    width: 100%;
+    padding-bottom: 56.25%; /* Формат 16:9 — остаётся как есть, это пропорция */
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.625rem; /* 10px → 0.625rem */
+    background: #f8f9fa;
+    margin-bottom: 0.9375rem;
+}
+
+.news-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.news-card-content {
+    padding: 0.875rem; /* 14px → 0.875rem */
+}
+
+.news-card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 0 0 0.375rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.news-card-description {
+    font-size: 0.8125rem;
+    color: #7f8c8d;
+    margin: 0;
+    line-height: 1.4;
+    padding: 0.5rem;
+    word-break: break-word;
+    overflow: hidden;
+    display: block;
+    max-height: calc(3 * 1.4em);
+}
+
+@media (max-width: 480px) {
+    .news-card-description {
+        font-size: 0.75rem;
+        line-height: 1.5;
+        max-height: calc(4 * 1.5em);
+    }
+}
+
+/* === МОДАЛЬНЫЕ ОКНА === */
+
+/* Общий контейнер */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+/* Класс для показа окна */
+.modal.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Диалог (рамка) — теперь адаптивная через min/max-width */
+.modal-dialog {
+    width: min(90vw, 35rem); /* до 90% ширины экрана, но не больше 35rem */
+    max-height: 90vh;
+    position: relative;
+}
+
+/* Контент внутри */
+.modal-content {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Заголовок */
+.modal-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 0.0625rem solid #e8e8e8;
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+/* Тело с формой */
+.modal-body {
+    padding: 1.5rem 2rem;
+    overflow-y: auto;
+    max-height: 70vh;
+}
+
+.modal-actions {
+    padding: 1rem 2rem;
+    border-top: 0.0625rem solid #e8e8e8;
+    background: #fafafa;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.modal-footer {
+    padding: 0.75rem 1.25rem;
+    border-top: 0.0625rem solid #e0e0e0;
+    background: #f9f9f9;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.625rem;
+    width: 100%;
+}
+
+/* === СТИЛИ ДЛЯ КНОПОК В МОДАЛКАХ === */
+.save-btn, .cancel-btn {
+    padding: 0.625rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+    border: none;
+}
+
+.save-btn {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 0.25rem 0.75rem rgba(52, 152, 219, 0.3);
+}
+
+.save-btn:hover {
+    background: #2980b9;
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.375rem 1rem rgba(52, 152, 219, 0.4);
+}
+
+.cancel-btn {
+    background: #ecf0f1;
+    color: #7f8c8d;
+}
+
+.cancel-btn:hover {
+    background: #dfe6e9;
+    color: #34495e;
+}
+
+/* === СПЕЦИФИЧНЫЕ СТИЛИ ДЛЯ НОВОСТЕЙ === */
+.news-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem; /* 18px → 1.125rem */
+    width: 100%;
+}
+
+.news-form label {
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+/* Поля ввода */
+.news-form input,
+.news-form textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 0.125rem solid #e0e0e0;
+    border-radius: 0.625rem;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.news-form input:focus,
+.news-form textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.1875rem rgba(52, 152, 219, 0.15);
+}
+
+.news-form textarea {
+    min-height: 7.5rem;
+    resize: vertical;
+}
+
+.news-form input[type="file"] {
+    padding: 0.375rem;
+    background: #f9f9f9;
+}
+
+/* Адаптив для мобильных: одна колонка */
+@media (max-width: 600px) {
+    .news-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* === ФУТЕР — В ПОТОКЕ, НЕ FIXED === */
+.site-footer {
+    max-width: 96%;
+    margin: 2.5rem auto 0;
+    padding: 1.875rem 1.25rem;
+    text-align: center;
+    color: #666;
+    font-size: 0.95em;
+    border-top: 0.0625rem solid #eee;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(0.625rem);
+    box-shadow: 0 -0.125rem 0.625rem rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #8e44ad;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #e74c3c;
+}
+
+/* === Toast-уведомления === */
+.toast-notification {
+    position: fixed;
+    top: 1.25rem; /* 20px → 1.25rem */
+    right: 1.25rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: bold;
+    z-index: 10000;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease-out forwards;
+    max-width: 25rem; /* ~400px → 25rem */
+    word-wrap: break-word;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* === ОБЩАЯ ОБЁРТКА СТРАНИЦЫ === */
+.page-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/* === ОГРАНИЧЕНИЕ КОНТЕНТА === */
+.container {
+    max-width: 70rem; /* ~1200px → 70rem */
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    position: relative;
+}
+
+/* === ЛОГОТИП — НЕ БОЛЬШЕ 80px ВЫСОТОЙ === */
+.logo {
+    max-height: 3.4375rem; /* 55px → 3.4375rem */
+    height: auto;
+    width: auto;
+    display: block;
+}
+
+/* === ГРУППА ШАПКИ И ПАНЕЛИ === */
+.header-group {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+/* === ПАНЕЛЬ "ХРОНИКИ ИЗМЕРЕНИЙ" — выезжает при скроле вверх === */
+.news-header-panel {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 1.25rem;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(0.625rem);
+    -webkit-backdrop-filter: blur(0.625rem);
+    overflow: hidden;
+    position: sticky;
+    top: 4.5rem; /* ~72px (высота .site-header) → 4.5rem */
+    z-index: 90;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.news-header-panel.hidden {
+    transform: translateY(-100%);
+}
+
+/* === ПАНЕЛЬ ЗАГОЛОВКА СТРАНИЦЫ НОВОСТЕЙ === */
+.header-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.header-grid h1 {
+    font-size: 1.75rem;
+    color: #2c3e50;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.header-grid .last-update {
+    flex: 1;
+    text-align: center;
+    font-size: 1rem;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.header-grid .add-news-btn {
+    padding: 0.625rem 1.25rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.header-grid .add-news-btn:hover {
+    background: #2980b9;
+}
+
+/* === АДАПТАЦИЯ — УПРОЩЁННАЯ === */
+@media (max-width: 768px) {
+    .site-header,
+    main > section,
+    .catalog,
+    .news-container {
+        max-width: 98%;
+        margin: 0.9375rem auto; /* 15px → 0.9375rem */
+        border-radius: 0.75rem;
+    }
+
+    .site-header {
+        flex-direction: column;
+        gap: 0.75rem; /* 12px → 0.75rem */
+        padding: 0.75rem 0.9375rem; /* 12px, 15px → 0.75rem, 0.9375rem */
+    }
+
+    .main-nav ul {
+        gap: 0.9375rem; /* 15px → 0.9375rem */
+    }
+
+    .products-grid,
+    .news-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem; /* 20px → 1.25rem */
+    }
+
+    #fileAccessButton {
+        width: 90%;
+        min-width: auto;
+    }
+
+    /* ✅ Убираем "жёсткие" настройки — теперь всё через flex */
+    .news-header-panel {
+        top: 3.75rem; /* ~60px (меньшая высота шапки) → 3.75rem */
+    }
+}
+
+@media (max-width: 600px) {
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .news-card {
+        max-width: 100%;
+    }
+}

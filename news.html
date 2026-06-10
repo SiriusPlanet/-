@@ -1,0 +1,106 @@
+<!-- news.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Хроно-архив TVA</title>
+    <link rel="stylesheet" href="./static/css/style.css" />
+    <!--link rel="stylesheet" href="./static/css/news.css" -->
+    <link rel="stylesheet" href="./static/css/news-form.css" />
+</head>
+<body>
+    <!-- Оверлей доступа -->
+    <div id="access-overlay"></div>
+    <div class="access-button">
+        <button id="fileAccessButton">Дать доступ</button>
+    </div>
+    <!-- Шапка -->
+    <div class="header-group">
+        <header class="site-header">
+            <a href="index.html" class="logo-link">
+                <img src="images/logo.png" alt="Логотип магазина воспоминаний" class="logo">
+                <span class="site-title"></span>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="actions.html">Акции</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="news.html">Новости</a></li>
+                    <li><a href="requisites.html">Реквизиты</a></li>
+                </ul>
+            </nav>
+            <div class="auth-link">
+                <a href="login.html">Клиентам</a>
+            </div>
+        </header>
+    <!-- Хроники на пнели -->
+        <div class="news-header-panel" id="newsHeaderPanel">
+            <div class="header-grid">
+                <h1>Хроники измерений</h1>
+                <div class="last-update update-date">—</div>
+                <button class="add-news-btn">Имплантировать хронозапись</button>
+            </div>
+        </div>
+    </div>
+    <!-- Контейнер новостей -->
+    <main>
+        <section class="news-container">
+            <div class="news-grid"></div>
+        </section>
+    </main>
+
+    <!-- Модальное окно для ПРОСМОТРА новости -->
+    <div id="viewNewsModal" class="modal hidden">
+        <div class="modal-content"></div>
+    </div>
+
+    <!-- Модальное окно для ДОБАВЛЕНИЯ новости -->
+    <div id="addNewsModal" class="modal hidden">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Целевое событие в линейном времени</h2>
+                    <h8>ВНИМАНИЕ: имплантация в прошлое относительно нынешних координат может иметь каскадные последствия!</h8> <!-- мелким шрифтом, цвет запёкшейся крови -->
+                </div>
+                    <div class="modal-body">
+                        <form id="newsForm" class="modal-form">
+                            <label for="title"><!-- Целевое событие в линейном времени --></label><!-- Целевое событие в линейном времени -->
+                            <div class="file-upload-wrapper">
+                                <label for="image" class="file-upload-label" >
+                                    <span>📷</span>
+                                    <span>Выберите файл для иллюстрации...</span>
+                                </label>
+                                <input type="file" id="image" accept="image/*" style="display: none" />
+                            </div>
+                            <input type="text" id="title" placeholder="Заголовок" required class="modal-input" />
+                            <input type="date" id="date" required class="modal-input" />
+                            <textarea id="preview" placeholder="Краткое описание" required class="modal-textarea" rows="4"></textarea>
+                            <textarea id="content" placeholder="Полный текст" required class="modal-textarea" rows="6"></textarea>
+                            <div class="modal-actions">
+                                <button type="submit" class="btn-submit">Имплантировать</button>
+                                <!-- <button type="button" class="cancel-btn">Рассчитать вероятности</button> пока не раелизовано (нужен 1ый уровень авторизации)-->
+                                <button type="button" class="cancel-btn">Отмена</button><!-- кнопки - только обводка, заполнение цветом при наведении -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script defer type="module" src="./static/js/main.js"></script>
+
+    <!-- Футер (остался на месте) -->
+    <footer class="site-footer">
+        <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
+        <ul class="footer-links">
+            <li><a href="privacy.html">Политика конфиденциальности</a></li>
+            <li><a href="delivery.html">Доставка и оплата</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

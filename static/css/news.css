@@ -1,0 +1,55 @@
+/* Контейнер для новостей */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 21px; /* Отступы между карточками */
+    padding: 21px; /* Отступы от краёв */
+}
+
+/* Основная карточка новости */
+.news-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Внутренний контейнер для изображения */
+.news-card-inner {
+    padding: 3px;
+    border-radius: 9px;
+    overflow: hidden;
+    background: white;
+    /* Фиксируем высоту под прямоугольник (например, 16:9) */
+    height: 180px; /* Можно менять — главное, чтобы был фикс. размер */
+}
+
+/* Стили для изображения */
+/* Изображение — растягиваем по ширине, высота автоматом, НО не искажаем */
+.news-card-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ключевое: не обрезаем, вписываем целиком */
+    border-radius: 9px;
+    background: #f0f0f0; /* Фон под пустое пространство */
+}
+/* Контент новости */
+.news-card-content {
+    padding: 15px;
+    background: white;
+    border-radius: 9px;
+}
+
+/* Дополнительные стили для заголовков и текста */
+.news-card-title {
+    font-size: 18px;
+    margin: 0 0 10px;
+    color: #333;
+}
+
+.news-card-description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}

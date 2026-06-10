@@ -1,0 +1,206 @@
+/* === МОДАЛЬНОЕ ОКНО ДЛЯ НОВОСТЕЙ — ИЗОЛИРОВАННОЕ === */
+
+/* Контейнер модалки */
+#addNewsModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+#addNewsModal.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#addNewsModal.hidden {
+    display: none;
+}
+
+/* Диалог — УМЕНЬШЕННЫЙ */
+#addNewsModal .modal-dialog {
+    width: min(80vw, 89%);
+    max-height: min(80vh, 89%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* === КРАТКОЕ ОПИСАНИЕ — 2 СТРОКИ === */
+#addNewsModal textarea#preview {
+    min-height: 2em;
+    resize: vertical;
+}
+
+/* === ПОЛНАЯ НОВОСТЬ — 5 СТРОК === */
+#addNewsModal textarea#content {
+    min-height: 5em;
+    resize: vertical;
+}
+
+/* Контент — скруглённая модалка */
+#addNewsModal .modal-content {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Тело формы */
+#addNewsModal .modal-body {
+    padding: 24px 32px;
+    overflow-y: auto;
+    max-height: 60vh;
+}
+
+/* Акции с кнопками */
+#addNewsModal .modal-actions {
+    padding: 13px 34px;
+    border-top: 1px solid #e8e8e8;
+    background: #fafafa;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* === ЦЕНТРИРОВАНИЕ ШАПКИ === */
+#addNewsModal .modal-header {
+    text-align: center;
+    margin-bottom: 13px;
+}
+
+/* === ДОБАВЛЕНИЕ КАРТИНКИ — ПЕРВОЕ ПОЛЕ В ФОРМЕ === */
+.file-upload-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 8px 0;
+}
+
+/* Кнопка выбора файла — идентична «Имплантировать» */
+.file-upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px 5px;
+    background: transparent;
+    border: 2px solid #3498db;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #3498db;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.file-upload-label:hover {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 6px 16px rgba(52, 152, 219, 0.3);
+}
+
+.file-upload-label span {
+    font-size: 1.2rem;
+}
+
+/* ← ТЕКСТ ДОЛЖЕН БЫТЬ ИДЕНТИЧЕН — 600, а не 60 */
+.file-upload-label span:last-child {
+    font-size: 1rem;
+    font-weight: 60;
+    color: #3498db;
+    transition: color 0.2s; /* ← добавить transition */
+}
+
+.file-upload-label:hover span:last-child {
+    color: white; /* ← белый текст при наведении */
+}
+
+/* === ФОРМА — ПОЛЯ ВВОДА С ГОЛУБОЙ ОБВОДКОЙ === */
+#addNewsModal .modal-input,
+#addNewsModal .modal-textarea {
+    width: 100%;
+    padding: 8px 8px;
+    border: 2px solid #3498db;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    background: #fff;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin: 8px 0;
+}
+
+/* Добавим тёмную обводку для чёткости */
+#addNewsModal .modal-input,
+#addNewsModal .modal-textarea {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#addNewsModal .modal-input:focus,
+#addNewsModal .modal-textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15), 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* === ЛЕЙБЛЫ === */
+#addNewsModal label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+    color: #34495e;
+    font-size: 1rem;
+}
+
+/* === КНОПКИ В МОДАЛКЕ === */
+#addNewsModal .btn-submit,
+#addNewsModal .cancel-btn {
+    padding: 10px 24px;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+    border: 2px solid #3498db;
+}
+
+#addNewsModal .btn-submit {
+    background: transparent;
+    color: #3498db;
+}
+
+#addNewsModal .btn-submit:hover {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 6px 16px rgba(52, 152, 219, 0.3);
+}
+
+#addNewsModal .cancel-btn {
+    background: transparent;
+    color: #7f8c8d;
+    border-color: #7f8c8d;
+}
+
+#addNewsModal .cancel-btn:hover {
+    border-color: #3498db;
+    color: #3498db;
+    background: rgba(52, 152, 219, 0.05);
+}
+
+/* === СТИЛИ ДЛЯ h8 — ПРЕДУПРЕЖДЕНИЕ В МОДАЛКЕ === */
+#addNewsModal .modal-header h8 {
+    display: block;
+    font-size: 0.5rem;
+    color: #330e0e;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-top: 0.25rem;
+}
