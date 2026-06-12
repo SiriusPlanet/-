@@ -37,7 +37,6 @@ body {
     transition: opacity 0.8s ease-out;
     animation: noiseFade 2s ease-in-out;
 }
-
 /* Шум — как сквозь тряпку времени */
 #access-overlay::before {
     content: '';
@@ -496,13 +495,8 @@ main > section,
     color: #7f8c8d;
 }
 
-.cancel-btn:hover {
-    background: #dfe6e9;
-    color: #34495e;
+".cancel-btn:hover {\r\n    background: #dfe6e9;\r\n    color: #34495e;\r\n}\r\n\r\n/* === МЕЛКИЙ ТЕКСТ (ВНИМАНИЕ/ПРЕДУПРЕЖДЕНИЕ) === */\r\n.warning {\r\n    font-size: 0.75rem;\r\n    color: #8b0000;\r\n    font-weight: 500;\r\n}\r\n\r\n/* === КНОПКА ОТПРАВКИ ФОРМЫ === */\r\n.btn-submit {\r\n    padding: 0.625rem 1.5rem;\r\n    background: #3498db;\r\n    color: white;\r\n    border-radius: 0.5rem;\r\n    cursor: pointer;\r\n    font-size: 1rem;\r\n    font-weight: 600;\r\n    border: none;\r\n    transition: all 0.2s;\r\n}\r\n\r\n.btn-submit:hover {\r\n    background: #2980b9;\r\n    transform: translateY(-0.125rem);\r\n    box-shadow: 0 0.25rem 0.75rem rgba(52, 152, 219, 0.3);\r\n}\r\n\r\n/* === СПЕЦИФИЧНЫЕ СТИЛИ ДЛЯ НОВОСТЕЙ === */\r\n.news-form {"
 }
-
-/* === СПЕЦИФИЧНЫЕ СТИЛИ ДЛЯ НОВОСТЕЙ === */
-.news-form {
     display: flex;
     flex-direction: column;
     gap: 1.125rem; /* 18px → 1.125rem */
