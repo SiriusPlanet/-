@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <title>Хроно-архив TVA</title>
+    
+    <!-- Управление доступом - ЗАГРУЖАЕТСЯ ПЕРВЫМ -->
+    <script type="module" src="./static/js/access-init.js"></script>
+    
     <link rel="stylesheet" href="./static/css/style.css" />
     <!--link rel="stylesheet" href="./static/css/news.css" -->
     <link rel="stylesheet" href="./static/css/news-form.css" />
@@ -63,7 +67,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h2>Целевое событие в линейном времени</h2>
-                    "<small class=\"warning\">ВНИМАНИЕ: имплантация в прошлое относительно нынешних координат может иметь каскадные последствия!</small> <!-- мелким шрифтом, цвет запёкшейся крови -->"
+                    "<small class="warning">ВНИМАНИЕ: имплантация в прошлое относительно нынешних координат может иметь каскадные последствия!</small> <!-- мелким шрифтом, цвет запёкшейся крови -->"
                 </div>
                     <div class="modal-body">
                         <form id="newsForm" class="modal-form">

@@ -1,38 +1,50 @@
 // static/js/main.js
 import { Logger } from './logger.js';
-import { PermissionManager } from './permission-manager.js';
 import { NewsManager } from './news-manager.js';
 import { NewsForm } from './news-form.js';
 
 class MainApp {
     constructor() {
-        this.pm = new PermissionManager();
+        // PermissionManager инициализируется в access-init.js
+        // Здесь только ссылка на уже инициализированный объект
+        this.pm = window.permissionManager || null;
         this.newsManager = null;
         this.newsForm = null;
+        
+        console.log('[MainApp] Конструктор вызван, pm =', this.pm ? 'OK' : 'null');
     }
 
     async init() {
         try {
-            if (!this.pm.hasPermission()) {
-                Logger.warn('Нет прав доступа');
-                return;
+            // Проверяем, есть ли PermissionManager
+            if (!this.pm) {
+                Logger.warn('[MainApp] PermissionManager не найден. Проверьте access-init.js');
+                // Продолжаем без PermissionManager (для страниц без новостей)
             }
 
             await this.initComponents();
             this.initEventListeners();
-            Logger.log('Приложение успешно инициализировано');
+            Logger.log('[MainApp] Приложение успешно инициализировано');
         } catch (error) {
-            Logger.error('Ошибка инициализации', error);
+            Logger.error('[MainApp] Ошибка инициализации', error);
         }
     }
 
     initComponents() {
-        // Инициализируем только если ��ы на странице новостей
+        // Инициализируем только если мы на странице новостей
         const addBtn = document.querySelector('.add-news-btn');
         const modal = document.getElementById('addNewsModal');
         
         if (!addBtn || !modal) {
-            // Это не страница новостей — не инициализируем
+            // Это не страница новостей — не инициализируем компоненты новостей
+            console.log('[MainApp] Это не страница новостей, пропускаем инициализацию');
+            return;
+        }
+        
+        console.log('[MainApp] Инициализация компонентов новостей...');
+        
+        if (!this.pm) {
+            Logger.error('[MainApp] PermissionManager не передан в компоненты новостей');
             return;
         }
         
@@ -40,6 +52,8 @@ class MainApp {
         this.newsManager.init();
         this.newsForm = new NewsForm(this.newsManager);
         this.newsForm.init();
+        
+        console.log('[MainApp] Компоненты новостей инициализированы');
     }
 
     initEventListeners() {
@@ -68,7 +82,7 @@ class MainApp {
 
     async handleFormSubmit(form) {
         try {
-            if (!this.pm.hasPermission()) {
+            if (!this.pm || !this.pm.hasPermission()) {
                 throw new Error('Нет прав доступа');
             }
 
@@ -90,7 +104,10 @@ class MainApp {
                 this.newsManager.showError(response.error);
             }
         } catch (error) {
-            Logger.error('Ошибка отправки формы', error);
+            Logger.error('[MainApp] Ошибка отправки формы', error);
+            if (this.newsManager) {
+                this.newsManager.showError(error.message || 'Ошибка отправки');
+            }
         }
     }
 
@@ -132,7 +149,7 @@ class MainApp {
     }
 
     handleError(error) {
-        Logger.error('Глобальная ошибка', error);
+        Logger.error('[MainApp] Глобальная ошибка', error);
         if (this.newsManager) {
             this.newsManager.showError(error.message);
         }
@@ -150,12 +167,19 @@ window.openNews = (id) => {
     modal.classList.add('is-visible');
 };
 
+// Экспортируем PermissionManager в глобальную область видимости
+// (для использования в других скриптах)
+if (typeof window.permissionManager === 'undefined') {
+    // Переменная не установлена - значит access-init.js не загружен
+    console.warn('[MainApp] window.permissionManager не найден. Загрузите access-init.js первым.');
+}
+
 // Точка входа
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const app = new MainApp();
         await app.init();
     } catch (error) {
-        console.error('Критическая ошибка при инициализации:', error);
+        console.error('[MainApp] Критическая ошибка при инициализации:', error);
     }
 });

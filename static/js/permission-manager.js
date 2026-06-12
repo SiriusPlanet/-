@@ -114,8 +114,13 @@ export class PermissionManager {
     }
 }
 
+// Сохраняем ссылку на PermissionManager в глобальной области видимости
+window.permissionManager = null;
+
 // Инициализация
 document.addEventListener('DOMContentLoaded', () => {
     const pm = new PermissionManager();
     pm.init();
+    window.permissionManager = pm;
+    console.log('[PermissionManager] Инициализирован и сохранён в window.permissionManager');
 });

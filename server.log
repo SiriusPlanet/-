@@ -12618,3 +12618,128 @@
 2026-06-12 15:52:36,469 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:36] "GET /api/check-access HTTP/1.1" 200 -
 
 2026-06-12 16:57:51,002 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 17:25:21,595 - DEBUG - GET /index.html
+2026-06-12 17:25:21,598 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:21] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-12 17:25:21,668 - DEBUG - GET /images/logo.png
+2026-06-12 17:25:21,669 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-12 17:25:21,669 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:21] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-12 17:25:21,841 - DEBUG - GET /static/css/style.css
+2026-06-12 17:25:21,841 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:21] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-12 17:25:21,982 - DEBUG - GET /static/js/main.js
+2026-06-12 17:25:21,982 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:21] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-12 17:25:21,983 - DEBUG - GET /images/1.png
+2026-06-12 17:25:21,983 - DEBUG - serve_images: filename=1.png, path=f:\I0\002MySiS\MySite\images\1.png, exists=True
+2026-06-12 17:25:21,983 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:21] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-12 17:25:22,011 - DEBUG - GET /images/2.png
+2026-06-12 17:25:22,012 - DEBUG - serve_images: filename=2.png, path=f:\I0\002MySiS\MySite\images\2.png, exists=True
+2026-06-12 17:25:22,012 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:22] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-12 17:25:22,375 - DEBUG - GET /static/js/logger.js
+2026-06-12 17:25:22,375 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:22] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-12 17:25:22,376 - DEBUG - GET /static/js/permission-manager.js
+2026-06-12 17:25:22,376 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:22] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-12 17:25:22,377 - DEBUG - GET /static/js/news-manager.js
+2026-06-12 17:25:22,377 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:22] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-12 17:25:22,378 - DEBUG - GET /static/js/news-form.js
+2026-06-12 17:25:22,378 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:22] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-12 17:25:22,378 - DEBUG - GET /images/3.png
+2026-06-12 17:25:22,379 - DEBUG - serve_images: filename=3.png, path=f:\I0\002MySiS\MySite\images\3.png, exists=True
+2026-06-12 17:25:22,379 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:22] "GET /images/3.png HTTP/1.1" 200 -
+
+2026-06-12 17:25:22,381 - DEBUG - GET /images/bg.jpg
+2026-06-12 17:25:22,381 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-12 17:25:22,381 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:22] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-12 17:25:22,693 - DEBUG - GET /static/js/access-levels.js
+2026-06-12 17:25:22,694 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:22] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-12 17:25:23,390 - DEBUG - GET /api/check-access
+2026-06-12 17:25:23,390 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:23] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 17:25:32,914 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 17:25:37,217 - DEBUG - GET /index.html
+2026-06-12 17:25:37,218 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:37] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-12 17:25:37,529 - DEBUG - GET /static/css/style.css
+2026-06-12 17:25:37,529 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:37] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-12 17:25:37,594 - DEBUG - GET /static/js/main.js
+2026-06-12 17:25:37,594 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:37] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-12 17:25:37,595 - DEBUG - GET /images/logo.png
+2026-06-12 17:25:37,596 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-12 17:25:37,596 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:37] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-12 17:25:37,599 - DEBUG - GET /images/1.png
+2026-06-12 17:25:37,599 - DEBUG - serve_images: filename=1.png, path=f:\I0\002MySiS\MySite\images\1.png, exists=True
+2026-06-12 17:25:37,599 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:37] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-12 17:25:37,915 - DEBUG - GET /static/js/logger.js
+2026-06-12 17:25:37,915 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:37] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-12 17:25:37,916 - DEBUG - GET /static/js/permission-manager.js
+2026-06-12 17:25:37,916 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:37] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-12 17:25:37,917 - DEBUG - GET /static/js/news-manager.js
+2026-06-12 17:25:37,917 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:37] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-12 17:25:37,933 - DEBUG - GET /static/js/news-form.js
+2026-06-12 17:25:37,933 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:37] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-12 17:25:37,934 - DEBUG - GET /images/2.png
+2026-06-12 17:25:37,934 - DEBUG - serve_images: filename=2.png, path=f:\I0\002MySiS\MySite\images\2.png, exists=True
+2026-06-12 17:25:37,934 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:37] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-12 17:25:37,937 - DEBUG - GET /images/3.png
+2026-06-12 17:25:37,937 - DEBUG - serve_images: filename=3.png, path=f:\I0\002MySiS\MySite\images\3.png, exists=True
+2026-06-12 17:25:37,937 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:37] "GET /images/3.png HTTP/1.1" 200 -
+
+2026-06-12 17:25:38,243 - DEBUG - GET /static/js/access-levels.js
+2026-06-12 17:25:38,243 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:38] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-12 17:25:38,244 - DEBUG - GET /images/bg.jpg
+2026-06-12 17:25:38,245 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-12 17:25:38,245 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:38] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-12 17:25:38,582 - DEBUG - GET /favicon.ico
+2026-06-12 17:25:38,583 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:38] "GET /favicon.ico HTTP/1.1" 404 -
+
+2026-06-12 17:25:41,824 - DEBUG - GET /static/css/style.css
+2026-06-12 17:25:41,825 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:41] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-12 17:25:42,132 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-12 17:25:42,132 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:42] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-12 17:25:48,862 - DEBUG - GET /api/check-access
+2026-06-12 17:25:48,863 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:48] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 17:25:49,661 - DEBUG - GET /api/check-access
+2026-06-12 17:25:49,661 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:49] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 17:25:52,069 - DEBUG - GET /api/check-access
+2026-06-12 17:25:52,069 - INFO - 127.0.0.1 - - [12/Jun/2026 17:25:52] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 17:37:16,483 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 17:38:22,882 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 17:40:17,876 - DEBUG - GET /static/js/access-init.js
+2026-06-12 17:40:17,876 - INFO - 127.0.0.1 - - [12/Jun/2026 17:40:17] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-12 17:40:17,877 - DEBUG - GET /static/css/style.css
+2026-06-12 17:40:17,878 - INFO - 127.0.0.1 - - [12/Jun/2026 17:40:17] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-12 17:42:13,968 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 17:43:26,898 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 17:44:26,921 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 17:44:50,527 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 17:44:55,535 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 17:46:22,304 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 17:47:46,750 - INFO - [OK] Сервер запущен на порту 8000
