@@ -450,30 +450,30 @@ class PathsHelper:
 
 # --- Запуск сервера ---
 def run(server_class=HTTPServer, handler_class=SimpleHandler, port=8000):
+    os.makedirs(os.path.join(PROJECT_ROOT, 'data', 'news'), exist_ok=True)
     try:
-        # Инициализация папок (один раз при старте)
-        os.makedirs(os.path.join(PROJECT_ROOT, 'data', 'news'), exist_ok=True)
         PathsHelper.ensure_images_dir()
-
-        server_address = ('', port)
-        httpd = server_class(server_address, handler_class)
-
-        logging.info(f"[OK] Сервер запущен на порту {port}")
-        print(f'[OK] Сервер запущен на http://localhost:{port}')
-
-        def signal_handler(sig, frame):
-            print('\n[STOP] Остановка сервера...')
-            httpd.shutdown()
-            sys.exit(0)
-
-        signal.signal(signal.SIGINT, signal_handler)
-
-        httpd.serve_forever()
-
     except Exception as e:
-        logging.error(f"Критическая ошибка сервера: {e}")
-        print(f"[ERROR] Ошибка: {e}")
+        print(f"[WARN] Не удалось создать images/img_n: {e}")
+    
+    httpd = server_class(('', port), handler_class)
+    httpd.daemon_threads = True  # 👈 это всё, что нужно
+
+    logging.info(f"[OK] Сервер запущен на порту {port}")
+    print(f'[OK] Сервер запущен на http://localhost:{port}')
+
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("\n[STOP] Остановка сервера...")
+        httpd.shutdown()
+        sys.exit(0)
 
 
 if __name__ == '__main__':
-    run()
+    try:
+        run()
+    except Exception as e:
+        logging.error(f"Критическая ошибка запуска: {e}")
+        print(f"[CRITICAL] Ошибка: {e}")
+        sys.exit(1)
