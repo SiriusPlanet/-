@@ -1,5 +1,9 @@
 // static/js/permission-manager.js
-она должна делаться но проверять за 2мimport { AccessLevels } from './access-levels.js';
+// не имеет отношения к регистрациям
+// должна делаться но проверять за 2мс если есть доступ локалсторедж завеса с кнопкой не появляется
+// это про дотуп сайта к собственному функцианалу
+
+import { AccessLevels } from './access-levels.js';
 
 export class PermissionManager {
     constructor() {
