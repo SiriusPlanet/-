@@ -158,7 +158,7 @@ export class NewsManager {
             
             card.innerHTML = `
                 <div class="news-card-image-wrapper">
-                    ${item.image ? `<img src="/images/img_n/${item.image}" alt="Изображение события" class="news-image" loading="lazy">` : ''}
+                    ${item.image ? `<img src=\"/images/img_n/${item.image}\" alt=\"Изображение события\" class=\"news-image\" loading=\"lazy\">` : ''}
                 </div>
                 <div class="news-card-content">
                     <h3 class="news-card-title">${this.escapeHtml(item.title)}</h3>

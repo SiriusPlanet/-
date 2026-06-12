@@ -6,7 +6,7 @@ SIS.SITE v1.0 — Simple Integrated Site System
 
 Разработано не как «правильно», а как *реально работает*.
 
-Здесь нет фреймво��ков — есть понимание.  
+Здесь нет фреймворков — есть понимание.  
 Нет шаблонов — есть логика.  
 Нет избыточности — есть необходимость.
 
@@ -390,8 +390,14 @@ class SimpleHandler(BaseHTTPRequestHandler):
         # Извлекаем только имя файла, даже если был путь /images/img_n/name.jpg
         filename = image_path.split('/')[-1]
 
-        file_path = PathsHelper.get_image_path(filename)
-
+        # Сначала ищем в корне images/ (для logo.png, 1.png и т.д.)
+        file_path = os.path.join(PROJECT_ROOT, 'images', filename)
+        
+        # Если не найдено, ищем в images/img_n/ (для новостных картинок)
+        if not os.path.exists(file_path):
+            file_path = PathsHelper.get_image_path(filename)
+        
+        # Если и там нет, используем fallback (400.png)
         if not os.path.exists(file_path):
             file_path = PathsHelper.get_fallback_path()
 
@@ -414,6 +420,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
 class PathsHelper:
     @staticmethod
     def get_image_url(filename):
+        # Возвращаем путь без префикса /images/ — сервер сам найдет в img_n
         return f"/images/img_n/{filename}"
 
     @staticmethod
