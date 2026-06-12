@@ -11,29 +11,24 @@ export class PermissionManager {
     }
 
     hasPermission() {
-        // ✅ Есть доступ, если уровень > 0
         return this.accessLevels.getLevel() > 0;
     }
 
     getPermissionLevel() {
-        // Возвращает текущий уровень доступа (0-3)
         return this.accessLevels.getLevel();
     }
 
     setPermissionLevel(level) {
-        // Устанавливает уровень доступа
         this.accessLevels.setLevel(level);
     }
 
     initElements() {
-        // Находим элементы — если есть
         this.button = document.getElementById('fileAccessButton');
         this.overlay = document.getElementById('access-overlay');
         this.container = document.querySelector('.access-button');
     }
 
     showOverlay() {
-        // ✅ Показываем, если они есть (в HTML)
         if (!this.overlay) return;
         this.overlay.style.display = 'block';
         this.overlay.style.pointerEvents = 'auto';
@@ -43,7 +38,6 @@ export class PermissionManager {
     }
 
     hideOverlay() {
-        // ✅ Скрываем без удаления — просто display: none
         if (this.overlay) {
             this.overlay.style.display = 'none';
             this.overlay.style.pointerEvents = 'none';
@@ -54,11 +48,27 @@ export class PermissionManager {
     }
 
     async checkLocalhostAccess() {
-        // Проверка доступности localhost (сервера)
-        let timeoutId;
+        // Если доступ уже был предоставлен через кнопку, возвращаем true сразу
+        if (localStorage.getItem('access_granted_via_button') === 'true') {
+            console.log('✅ Доступ уже предоставлен через кнопку, проверка localhost пропущена');
+            this.hasLocalhostAccess = true;
+            return true;
+        }
+        
+        // Проверяем кэш - результат уже сохранён?
+        const cachedChecked = localStorage.getItem('localhost_checked');
+        const cachedHasAccess = localStorage.getItem('localhost_has_access');
+        
+        if (cachedChecked === 'true' && cachedHasAccess !== null) {
+            this.hasLocalhostAccess = cachedHasAccess === 'true';
+            console.log(this.hasLocalhostAccess ? '✅ Кэш: доступ к localhost есть' : '❌ Кэш: доступ к localhost отсутствует');
+            return this.hasLocalhostAccess;
+        }
+        
+        // Если кэша нет, это первый запуск - проверяем доступ
         try {
             const controller = new AbortController();
-            timeoutId = setTimeout(() => controller.abort(), 2000); // 2 секунды таймаут
+            const timeoutId = setTimeout(() => controller.abort(), 2000);
             
             const response = await fetch('/api/check-access', {
                 method: 'GET',
@@ -75,41 +85,44 @@ export class PermissionManager {
             this.hasLocalhostAccess = true;
             console.log('✅ Доступ к localhost есть (сервер отвечает)');
             
+            // Сохраняем результат проверки
+            localStorage.setItem('localhost_checked', 'true');
+            localStorage.setItem('localhost_has_access', 'true');
+            
             if (data.access === true && data.level > 0) {
                 this.accessLevels.setLevel(data.level);
             }
             
             return true;
         } catch (error) {
-            clearTimeout(timeoutId);
             this.hasLocalhostAccess = false;
             console.warn('⚠️ Доступ к localhost отсутствует (сервер недоступен)');
             console.debug('Ошибка проверки:', error.message);
+            
+            // Сохраняем результат проверки
+            localStorage.setItem('localhost_checked', 'true');
+            localStorage.setItem('localhost_has_access', 'false');
             return false;
         }
     }
 
     async requestAccess() {
-        // 🔧 ОФЛАЙН-РЕЖИМ: кнопка "Дать доступ" - сразу разрешаем доступ локально
-        // Это нужно для обхода CORS, когда сервер не запущен
         console.log('✅ Кнопка "Дать доступ" нажата - предоставляем локальный доступ');
         
-        // В офлайне проверяем есть ли уже сохранённый уровень
-        const savedLevel = this.accessLevels.getLevel();
-        if (savedLevel > 0) {
-            console.log(`✅ Используем сохранённый уровень ${savedLevel}`);
-            return true;
-        }
-        
-        // Если нет сохранённого уровня, разрешаем временный доступ
-        console.log('✅ Временный доступ (уровень 1)');
+        // В офлайн режиме сразу выдаем уровень 1 без запросов к серверу
         this.accessLevels.setLevel(1);
+        
+        console.log('✅ Временный доступ (уровень 1) предоставлен');
         return true;
     }
 
     grantPermission() {
         localStorage.setItem(this.storageKey, 'true');
-        this.hideOverlay(); // ← просто скрываем
+        // Помечаем, что доступ предоставлен через кнопку, проверка localhost больше не нужна
+        localStorage.setItem('access_granted_via_button', 'true');
+        localStorage.setItem('localhost_checked', 'true');
+        localStorage.setItem('localhost_has_access', 'false');
+        this.hideOverlay();
         document.body.classList.add('access-granted');
         console.log('✅ Доступ предоставлен');
     }
@@ -117,27 +130,21 @@ export class PermissionManager {
     async init() {
         if (this.isPaused) return;
 
-        // ✅ Проверяем доступ к localhost ПЕРВОЙ НАЧАЛО
         await this.checkLocalhostAccess();
 
-        // Если есть доступ к localhost — кнопка НЕ показывается
         if (this.hasLocalhostAccess) {
             console.log('✅ Доступ к localhost есть — кнопка "Получить доступ" скрыта');
-            // Скрываем кнопку и оверлей
             this.hideOverlay();
             
-            // Если сервер отвечает, проверяем уровень доступа
             if (this.hasPermission()) {
                 document.body.classList.add('access-granted');
             }
             return;
         }
 
-        // ❌ Если НЕТ доступа к localhost — показываем кнопку
         console.log('❌ Доступ к localhost отсутствует — показываем кнопку "Получить доступ"');
         this.showOverlay();
 
-        // Подключаем кнопку
         if (this.button) {
             this.button.addEventListener('click', async () => {
                 const hasAccess = await this.requestAccess();
@@ -149,10 +156,8 @@ export class PermissionManager {
     }
 }
 
-// Сохраняем ссылку на PermissionManager в глобальной области видимости
 window.permissionManager = null;
 
-// Инициализация
 document.addEventListener('DOMContentLoaded', () => {
     const pm = new PermissionManager();
     pm.init();

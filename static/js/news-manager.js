@@ -13,16 +13,7 @@ export class NewsManager {
         this.newsList = [];
     }
 
-    // Инициализация менеджера новостей
-    async init() {
-        try {
-            await this.loadNews();
-            this.setupDeleteButtons();
-            console.log('✅ NewsManager инициализирован');
-        } catch (error) {
-            Logger.error('Ошибка инициализации NewsManager', error);
-        }
-    }
+
     
     // Загрузка новостей
     async loadNews() {

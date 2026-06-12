@@ -30,7 +30,7 @@ class MainApp {
         }
     }
 
-    initComponents() {
+{"text": "    async initComponents() {
         // Инициализируем только если мы на странице новостей
         const addBtn = document.querySelector('.add-news-btn');
         const modal = document.getElementById('addNewsModal');
@@ -50,11 +50,15 @@ class MainApp {
         
         this.newsManager = new NewsManager(this.pm);
         this.newsManager.init();
+        
+        // Загружаем новости только на странице новостей
+        await this.newsManager.loadNews();
+        
         this.newsForm = new NewsForm(this.newsManager);
         this.newsForm.init();
         
         console.log('[MainApp] Компоненты новостей инициализированы');
-    }
+    }"}
 
     initEventListeners() {
         this.setupGlobalHandlers();
