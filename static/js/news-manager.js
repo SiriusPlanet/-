@@ -1,6 +1,6 @@
 // static/js/news-manager.js
 import { Logger } from './logger.js';
-import { NewsForm } from './news-form.js';
+import { AccessLevels } from './access-levels.js';
 
 export class NewsManager {
     constructor(permissionManager) {
@@ -9,6 +9,7 @@ export class NewsManager {
         }
 
         this.pm = permissionManager;
+        this.accessLevels = new AccessLevels();
         this.newsList = [];
     }
 
@@ -16,7 +17,7 @@ export class NewsManager {
     async init() {
         try {
             await this.loadNews();
-            //this.setupEventListeners();
+            this.setupDeleteButtons();
             console.log('✅ NewsManager инициализирован');
         } catch (error) {
             Logger.error('Ошибка инициализации NewsManager', error);
@@ -73,8 +74,10 @@ export class NewsManager {
         }
 
         try {
-            const res = await fetch(`/delete-news/${newsId}`, {
-                method: 'DELETE'
+            const res = await fetch('/api/delete-news', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: newsId })
             });
 
             if (!res.ok) throw new Error('Ошибка удаления');
@@ -95,9 +98,10 @@ export class NewsManager {
         }
 
         try {
-            const res = await fetch(`/update-news/${newsId}`, {
-                method: 'PUT',
-                body: formData
+            const res = await fetch('/api/update-news', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: newsId, ...Object.fromEntries(formData) })
             });
 
             if (!res.ok) throw new Error('Ошибка обновления');
@@ -135,16 +139,10 @@ export class NewsManager {
         const container = document.querySelector('.news-grid');
         if (!container) return;
 
-        // Очищаем контейнер
         container.innerHTML = '';
 
-        // Создаем индикатор загрузки
-        container.innerHTML = '<div class="loading">Загрузка новостей...</div>';
-
-        // Загружаем только первые X новостей (0, X);
         const visibleNews = this.newsList.slice(0, this.newsList.length);
         
-        // Создаем фрагмент для оптимизации
         const fragment = document.createDocumentFragment();
         
         visibleNews.forEach((item, index) => {
@@ -153,25 +151,21 @@ export class NewsManager {
             card.classList.add('news-card');
             card.dataset.id = item.id;
             
-            // Добавляем атрибут для ленивой загрузки
-            card.dataset.lazy = true;
-            
             card.innerHTML = `
                 <div class="news-card-image-wrapper">
-                    ${item.image ? `<img src="/images/img_n/${item.image}" alt="Изображение события" class="news-image" loading="lazy">` : ''}
+                    ${item.image ? `<img src="/images/img_n/${item.image}" alt="${this.escapeHtml(item.title)}" class="news-image" loading="lazy">` : ''}
                 </div>
                 <div class="news-card-content">
                     <h3 class="news-card-title">${this.escapeHtml(item.title)}</h3>
                     <p class="news-card-description">${this.escapeHtml(item.preview)}</p>
                     <button class="read-more-btn" onclick="window.openNews(${item.id})">ЧИТАТЬ ПОЛНОСТЬЮ</button>
+                    ${this.renderDeleteButton(item.id)}
                 </div>
             `;
             
             fragment.appendChild(card);
         });
 
-        // Добавляем все элементы сразу
-        container.innerHTML = '';
         container.appendChild(fragment);
         
         // Убираем индикатор загрузки
@@ -186,39 +180,20 @@ export class NewsManager {
             justify-items: center;
         `;
         
-        // Добавляем анимацию появления
         this.showNewsWithAnimation();
+        this.setupDeleteButtons();
     }
 
-    // Ленивая загрузка изображений
-    initLazyLoad() {
-        const images = document.querySelectorAll('img[loading="lazy"]');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    const src = img.getAttribute('data-src');
-                    if (src) {
-                        img.src = src;
-                        img.removeAttribute('data-src');
-                        observer.unobserve(img);
-                    }
+    setupDeleteButtons() {
+        const deleteBtns = document.querySelectorAll('.delete-btn');
+        deleteBtns.forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const id = parseInt(btn.dataset.id, 10);
+                if (confirm('Удалить хронозапись?')) {
+                    await this.deleteNews(id);
+                    this.showToast('Новость удалена');
                 }
             });
-        });
-
-        images.forEach(image => {
-            observer.observe(image);
-        });
-    }
-
-    // Анимация появления карточек
-    showNewsWithAnimation() {
-        const cards = document.querySelectorAll('.news-card');
-        cards.forEach((card, index) => {
-            setTimeout(() => {
-                card.classList.add('show');
-            }, index * 150);
         });
     }
 
@@ -253,5 +228,15 @@ export class NewsManager {
         toast.textContent = message;
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 3000);
+    }
+
+    // Рендер кнопки удаления (только для админов)
+    renderDeleteButton(id) {
+        const level = this.accessLevels.getLevel();
+        if (level < 3) return ''; // Только администратор (уровень 3)
+
+        return `
+            <button class="delete-btn" data-id="${id}">🗑️ Удалить</button>
+        `;
     }
 }

@@ -12526,3 +12526,94 @@
 2026-06-12 12:03:23,096 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
 2026-06-12 12:03:23,097 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:23] "GET /images/3.png HTTP/1.1" 500 -
 
+2026-06-12 14:11:32,775 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 14:12:52,272 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 14:13:52,290 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 14:14:07,687 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 15:04:19,240 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 15:52:26,289 - DEBUG - GET /index.html
+2026-06-12 15:52:26,291 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:26] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-12 15:52:26,353 - DEBUG - GET /images/logo.png
+2026-06-12 15:52:26,354 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-12 15:52:26,354 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:26] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-12 15:52:26,548 - DEBUG - GET /static/css/style.css
+2026-06-12 15:52:26,548 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:26] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-12 15:52:26,656 - DEBUG - GET /static/js/main.js
+2026-06-12 15:52:26,657 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:26] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-12 15:52:26,657 - DEBUG - GET /images/1.png
+2026-06-12 15:52:26,658 - DEBUG - serve_images: filename=1.png, path=f:\I0\002MySiS\MySite\images\1.png, exists=True
+2026-06-12 15:52:26,658 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:26] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-12 15:52:26,717 - DEBUG - GET /static/js/logger.js
+2026-06-12 15:52:26,718 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:26] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-12 15:52:27,018 - DEBUG - GET /static/js/permission-manager.js
+2026-06-12 15:52:27,019 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:27] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-12 15:52:27,019 - DEBUG - GET /static/js/news-manager.js
+2026-06-12 15:52:27,020 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:27] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-12 15:52:27,020 - DEBUG - GET /static/js/news-form.js
+2026-06-12 15:52:27,020 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:27] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-12 15:52:27,021 - DEBUG - GET /images/2.png
+2026-06-12 15:52:27,021 - DEBUG - serve_images: filename=2.png, path=f:\I0\002MySiS\MySite\images\2.png, exists=True
+2026-06-12 15:52:27,021 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:27] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-12 15:52:27,027 - DEBUG - GET /images/3.png
+2026-06-12 15:52:27,028 - DEBUG - serve_images: filename=3.png, path=f:\I0\002MySiS\MySite\images\3.png, exists=True
+2026-06-12 15:52:27,028 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:27] "GET /images/3.png HTTP/1.1" 200 -
+
+2026-06-12 15:52:27,041 - DEBUG - GET /images/bg.jpg
+2026-06-12 15:52:27,042 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-12 15:52:27,042 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:27] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-12 15:52:27,352 - DEBUG - GET /static/js/access-levels.js
+2026-06-12 15:52:27,352 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:27] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-12 15:52:29,318 - DEBUG - GET /api/check-access
+2026-06-12 15:52:29,318 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:29] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 15:52:31,366 - DEBUG - GET /api/check-access
+2026-06-12 15:52:31,366 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:31] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 15:52:32,212 - DEBUG - GET /api/check-access
+2026-06-12 15:52:32,212 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:32] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 15:52:32,652 - DEBUG - GET /api/check-access
+2026-06-12 15:52:32,652 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:32] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 15:52:33,232 - DEBUG - GET /api/check-access
+2026-06-12 15:52:33,233 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:33] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 15:52:33,499 - DEBUG - GET /api/check-access
+2026-06-12 15:52:33,500 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:33] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 15:52:33,679 - DEBUG - GET /api/check-access
+2026-06-12 15:52:33,679 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:33] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 15:52:35,293 - DEBUG - GET /api/check-access
+2026-06-12 15:52:35,293 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:35] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 15:52:35,556 - DEBUG - GET /api/check-access
+2026-06-12 15:52:35,556 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:35] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 15:52:35,617 - DEBUG - GET /api/check-access
+2026-06-12 15:52:35,617 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:35] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 15:52:35,881 - DEBUG - GET /api/check-access
+2026-06-12 15:52:35,881 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:35] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 15:52:35,990 - DEBUG - GET /api/check-access
+2026-06-12 15:52:35,990 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:35] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 15:52:36,238 - DEBUG - GET /api/check-access
+2026-06-12 15:52:36,238 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:36] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 15:52:36,469 - DEBUG - GET /api/check-access
+2026-06-12 15:52:36,469 - INFO - 127.0.0.1 - - [12/Jun/2026 15:52:36] "GET /api/check-access HTTP/1.1" 200 -
+

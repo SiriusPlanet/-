@@ -1,14 +1,27 @@
-// .\static\js\permission-manager.js
+// static/js/permission-manager.js
+import { AccessLevels } from './access-levels.js';
+
 export class PermissionManager {
     constructor() {
         this.storageKey = 'permissions_granted';
+        this.accessLevels = new AccessLevels();
         this.isPaused = false;
         this.initElements();
     }
 
     hasPermission() {
-        // ✅ Простая проверка: есть ли ключ и он равен 'true'?
-        return localStorage.getItem(this.storageKey) === 'true';
+        // ✅ Есть доступ, если уровень > 0
+        return this.accessLevels.getLevel() > 0;
+    }
+
+    getPermissionLevel() {
+        // Возвращает текущий уровень доступа (0-3)
+        return this.accessLevels.getLevel();
+    }
+
+    setPermissionLevel(level) {
+        // Устанавливает уровень доступа
+        this.accessLevels.setLevel(level);
     }
 
     initElements() {
@@ -29,7 +42,7 @@ export class PermissionManager {
     }
 
     hideOverlay() {
-        // ✅ Скрываем без удаления — простоdisplay: none
+        // ✅ Скрываем без удаления — просто display: none
         if (this.overlay) {
             this.overlay.style.display = 'none';
             this.overlay.style.pointerEvents = 'none';
@@ -40,13 +53,32 @@ export class PermissionManager {
     }
 
     async requestAccess() {
+        // 🔧 ОФЛАЙН-РЕЖИМ: если сервер недоступен — разрешаем доступ локально
         try {
             const response = await fetch('/api/check-access');
+            if (!response.ok) throw new Error('Сервер недоступен');
             const data = await response.json();
-            return data.access === true;
-        } catch (error) {
-            console.error('Ошибка запроса доступа:', error);
+            
+            if (data.access === true && data.level > 0) {
+                this.accessLevels.setLevel(data.level);
+                return true;
+            }
             return false;
+        } catch (error) {
+            console.warn('⚠️ Офлайн-режим: недоступен API check-access — разрешаем локально');
+            console.debug('Ошибка:', error.message);
+            
+            // В офлайне проверяем есть ли уже сохранённый уровень
+            const savedLevel = this.accessLevels.getLevel();
+            if (savedLevel > 0) {
+                console.log(`✅ Используем сохранённый уровень ${savedLevel}`);
+                return true;
+            }
+            
+            // Если нет сохранённого уровня, разрешаем временный доступ
+            console.log('✅ Временный доступ в офлайне (уровень 1)');
+            this.accessLevels.setLevel(1);
+            return true;
         }
     }
 

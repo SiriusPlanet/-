@@ -12,4 +12,12 @@ export class Logger {
     static info(message) {
         console.info(`%c[INFO] ${message}`, 'color: #3498db');
     }
+    
+    static warn(message) {
+        console.warn(`%c[WARN] ${new Date().toLocaleTimeString()}: ${message}`, 'color: #f39c12');
+    }
+
+    static debug(message) {
+        console.debug(`%c[DEBUG] ${new Date().toLocaleTimeString()}: ${message}`, 'color: #95a5a6');
+    }
 }
