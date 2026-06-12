@@ -1,5 +1,5 @@
 // static/js/permission-manager.js
-import { AccessLevels } from './access-levels.js';
+она должна делаться но проверять за 2мimport { AccessLevels } from './access-levels.js';
 
 export class PermissionManager {
     constructor() {
@@ -47,28 +47,9 @@ export class PermissionManager {
         }
     }
 
-    async checkLocalhostAccess() {
-        // Если доступ уже был предоставлен через кнопку, возвращаем true сразу
-        if (localStorage.getItem('access_granted_via_button') === 'true') {
-            console.log('✅ Доступ уже предоставлен через кнопку, проверка localhost пропущена');
-            this.hasLocalhostAccess = true;
-            return true;
-        }
-        
-        // Проверяем кэш - результат уже сохранён?
-        const cachedChecked = localStorage.getItem('localhost_checked');
-        const cachedHasAccess = localStorage.getItem('localhost_has_access');
-        
-        if (cachedChecked === 'true' && cachedHasAccess !== null) {
-            this.hasLocalhostAccess = cachedHasAccess === 'true';
-            console.log(this.hasLocalhostAccess ? '✅ Кэш: доступ к localhost есть' : '❌ Кэш: доступ к localhost отсутствует');
-            return this.hasLocalhostAccess;
-        }
-        
-        // Если кэша нет, это первый запуск - проверяем доступ
-        try {
+{"text": "    async checkLocalhostAccess() {\n        // Проверяем кэш - результат уже сохранён?\n        const cachedChecked = localStorage.getItem('localhost_checked');\n        const cachedHasAccess = localStorage.getItem('localhost_has_access');\n        \n        if (cachedChecked === 'true' && cachedHasAccess !== null) {\n            this.hasLocalhostAccess = cachedHasAccess === 'true';\n            console.log(this.hasLocalhostAccess ? '✅ Кэш: доступ к localhost есть' : '❌ Кэш: доступ к localhost отсутствует');\n            return this.hasLocalhostAccess;\n        }\n        \n        let timeoutId;\n        try {"}
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 2000);
+            timeoutId = setTimeout(() => controller.abort(), 2000);
             
             const response = await fetch('/api/check-access', {
                 method: 'GET',
@@ -81,47 +62,25 @@ export class PermissionManager {
                 throw new Error('Сервер недоступен');
             }
             
-            const data = await response.json();
-            this.hasLocalhostAccess = true;
-            console.log('✅ Доступ к localhost есть (сервер отвечает)');
-            
-            // Сохраняем результат проверки
-            localStorage.setItem('localhost_checked', 'true');
-            localStorage.setItem('localhost_has_access', 'true');
-            
-            if (data.access === true && data.level > 0) {
-                this.accessLevels.setLevel(data.level);
-            }
-            
-            return true;
-        } catch (error) {
-            this.hasLocalhostAccess = false;
-            console.warn('⚠️ Доступ к localhost отсутствует (сервер недоступен)');
-            console.debug('Ошибка проверки:', error.message);
-            
-            // Сохраняем результат проверки
-            localStorage.setItem('localhost_checked', 'true');
-            localStorage.setItem('localhost_has_access', 'false');
-            return false;
-        }
+{"text": "            const data = await response.json();\n            this.hasLocalhostAccess = true;\n            console.log('✅ Доступ к localhost есть (сервер отвечает)');\n            \n            // Сохраняем результат проверки\n            localStorage.setItem('localhost_checked', 'true');\n            localStorage.setItem('localhost_has_access', 'true');\n            \n            if (data.access === true && data.level > 0) {\n                this.accessLevels.setLevel(data.level);\n            }\n            \n            return true;\n        } catch (error) {\n            clearTimeout(timeoutId);\n            this.hasLocalhostAccess = false;\n            console.warn('⚠️ Доступ к localhost отсутствует (сервер недоступен)');\n            console.debug('Ошибка проверки:', error.message);\n            \n            // Сохраняем результат проверки\n            localStorage.setItem('localhost_checked', 'true');\n            localStorage.setItem('localhost_has_access', 'false');\n            return false;\n        }"}
     }
 
     async requestAccess() {
         console.log('✅ Кнопка "Дать доступ" нажата - предоставляем локальный доступ');
         
-        // В офлайн режиме сразу выдаем уровень 1 без запросов к серверу
-        this.accessLevels.setLevel(1);
+        const savedLevel = this.accessLevels.getLevel();
+        if (savedLevel > 0) {
+            console.log(`✅ Используем сохранённый уровень ${savedLevel}`);
+            return true;
+        }
         
-        console.log('✅ Временный доступ (уровень 1) предоставлен');
+        console.log('✅ Временный доступ (уровень 1)');
+        this.accessLevels.setLevel(1);
         return true;
     }
 
     grantPermission() {
         localStorage.setItem(this.storageKey, 'true');
-        // Помечаем, что доступ предоставлен через кнопку, проверка localhost больше не нужна
-        localStorage.setItem('access_granted_via_button', 'true');
-        localStorage.setItem('localhost_checked', 'true');
-        localStorage.setItem('localhost_has_access', 'false');
         this.hideOverlay();
         document.body.classList.add('access-granted');
         console.log('✅ Доступ предоставлен');
