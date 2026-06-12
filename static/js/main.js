@@ -5,8 +5,6 @@ import { NewsForm } from './news-form.js';
 
 class MainApp {
     constructor() {
-        // PermissionManager инициализируется в access-init.js
-        // Здесь только ссылка на уже инициализированный объект
         this.pm = window.permissionManager || null;
         this.newsManager = null;
         this.newsForm = null;
@@ -16,10 +14,8 @@ class MainApp {
 
     async init() {
         try {
-            // Проверяем, есть ли PermissionManager
             if (!this.pm) {
                 Logger.warn('[MainApp] PermissionManager не найден. Проверьте access-init.js');
-                // Продолжаем без PermissionManager (для страниц без новостей)
             }
 
             await this.initComponents();
@@ -30,13 +26,11 @@ class MainApp {
         }
     }
 
-{"text": "    async initComponents() {
-        // Инициализируем только если мы на странице новостей
+    async initComponents() {
         const addBtn = document.querySelector('.add-news-btn');
         const modal = document.getElementById('addNewsModal');
         
         if (!addBtn || !modal) {
-            // Это не страница новостей — не инициализируем компоненты новостей
             console.log('[MainApp] Это не страница новостей, пропускаем инициализацию');
             return;
         }
@@ -50,20 +44,15 @@ class MainApp {
         
         this.newsManager = new NewsManager(this.pm);
         this.newsManager.init();
-        
-        // Загружаем новости только на странице новостей
         await this.newsManager.loadNews();
-        
         this.newsForm = new NewsForm(this.newsManager);
         this.newsForm.init();
         
         console.log('[MainApp] Компоненты новостей инициализированы');
-    }"}
+    }
 
     initEventListeners() {
         this.setupGlobalHandlers();
-        
-        // Устанавливаем обработчики только если компоненты инициализированы
         if (this.newsManager && this.newsForm) {
             this.setupFormHandlers();
         }
@@ -77,7 +66,6 @@ class MainApp {
     setupFormHandlers() {
         const form = document.getElementById('newsForm');
         if (!form) return;
-
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             await this.handleFormSubmit(e.target);
@@ -160,25 +148,17 @@ class MainApp {
     }
 }
 
-// Открытие новости в модальном окне
 window.openNews = (id) => {
     const modal = document.getElementById('viewNewsModal');
     if (!modal) return;
-    
-    // Показываем модальное окно с заглушкой
-    // В будущем здесь будет загрузка новости по ID
     modal.classList.remove('hidden');
     modal.classList.add('is-visible');
 };
 
-// Экспортируем PermissionManager в глобальную область видимости
-// (для использования в других скриптах)
 if (typeof window.permissionManager === 'undefined') {
-    // Переменная не установлена - значит access-init.js не загружен
     console.warn('[MainApp] window.permissionManager не найден. Загрузите access-init.js первым.');
 }
 
-// Точка входа
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const app = new MainApp();

@@ -12752,3 +12752,89 @@
 2026-06-12 21:32:53,457 - INFO - [OK] Сервер запущен на порту 8000
 2026-06-12 21:45:34,604 - INFO - [OK] Сервер запущен на порту 8000
 2026-06-12 21:50:41,380 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 21:57:38,567 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 21:57:46,536 - DEBUG - GET /news.html
+2026-06-12 21:57:46,536 - INFO - 127.0.0.1 - - [12/Jun/2026 21:57:46] "GET /news.html HTTP/1.1" 200 -
+
+2026-06-12 21:57:46,641 - DEBUG - GET /static/js/access-init.js
+2026-06-12 21:57:46,642 - INFO - 127.0.0.1 - - [12/Jun/2026 21:57:46] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-12 21:57:46,785 - DEBUG - GET /static/css/style.css
+2026-06-12 21:57:46,785 - INFO - 127.0.0.1 - - [12/Jun/2026 21:57:46] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-12 21:58:50,363 - DEBUG - GET /static/js/main.js
+2026-06-12 21:58:50,363 - INFO - 127.0.0.1 - - [12/Jun/2026 21:58:50] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-12 21:58:50,364 - DEBUG - GET /images/logo.png
+2026-06-12 21:58:50,364 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-12 21:58:50,364 - INFO - 127.0.0.1 - - [12/Jun/2026 21:58:50] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-12 21:58:50,369 - DEBUG - GET /static/js/permission-manager.js
+2026-06-12 21:58:50,369 - INFO - 127.0.0.1 - - [12/Jun/2026 21:58:50] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-12 21:58:50,378 - DEBUG - GET /images/bg.jpg
+2026-06-12 21:58:50,378 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-12 21:58:50,378 - INFO - 127.0.0.1 - - [12/Jun/2026 21:58:50] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-12 21:59:44,266 - DEBUG - GET /news.html
+2026-06-12 21:59:44,267 - INFO - 127.0.0.1 - - [12/Jun/2026 21:59:44] "GET /news.html HTTP/1.1" 200 -
+
+2026-06-12 21:59:44,296 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-12 21:59:44,297 - INFO - 127.0.0.1 - - [12/Jun/2026 21:59:44] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-12 21:59:44,530 - DEBUG - GET /static/css/style.css
+2026-06-12 21:59:44,531 - INFO - 127.0.0.1 - - [12/Jun/2026 21:59:44] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-12 21:59:44,656 - DEBUG - GET /static/js/access-init.js
+2026-06-12 21:59:44,656 - INFO - 127.0.0.1 - - [12/Jun/2026 21:59:44] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-12 21:59:44,664 - DEBUG - GET /static/js/main.js
+2026-06-12 21:59:44,664 - INFO - 127.0.0.1 - - [12/Jun/2026 21:59:44] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-12 21:59:44,665 - DEBUG - GET /images/logo.png
+2026-06-12 21:59:44,665 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-12 21:59:44,665 - INFO - 127.0.0.1 - - [12/Jun/2026 21:59:44] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-12 21:59:44,984 - DEBUG - GET /static/js/permission-manager.js
+2026-06-12 21:59:44,984 - INFO - 127.0.0.1 - - [12/Jun/2026 21:59:44] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-12 21:59:45,312 - DEBUG - GET /static/js/access-levels.js
+2026-06-12 21:59:45,313 - INFO - 127.0.0.1 - - [12/Jun/2026 21:59:45] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-12 21:59:45,564 - DEBUG - GET /static/js/logger.js
+2026-06-12 21:59:45,564 - INFO - 127.0.0.1 - - [12/Jun/2026 21:59:45] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-12 21:59:45,641 - DEBUG - GET /api/check-access
+2026-06-12 21:59:45,641 - INFO - 127.0.0.1 - - [12/Jun/2026 21:59:45] "GET /api/check-access HTTP/1.1" 200 -
+
+2026-06-12 21:59:45,642 - DEBUG - GET /images/bg.jpg
+2026-06-12 21:59:45,643 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-12 21:59:45,643 - INFO - 127.0.0.1 - - [12/Jun/2026 21:59:45] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-12 21:59:45,889 - DEBUG - GET /favicon.ico
+2026-06-12 21:59:45,890 - INFO - 127.0.0.1 - - [12/Jun/2026 21:59:45] "GET /favicon.ico HTTP/1.1" 404 -
+
+2026-06-12 22:00:54,177 - DEBUG - GET /news.html
+2026-06-12 22:00:54,178 - INFO - 127.0.0.1 - - [12/Jun/2026 22:00:54] "GET /news.html HTTP/1.1" 200 -
+
+2026-06-12 22:00:54,224 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-12 22:00:54,225 - INFO - 127.0.0.1 - - [12/Jun/2026 22:00:54] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-12 22:00:54,415 - DEBUG - GET /static/css/style.css
+2026-06-12 22:00:54,416 - INFO - 127.0.0.1 - - [12/Jun/2026 22:00:54] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-12 22:00:54,547 - DEBUG - GET /static/js/access-init.js
+2026-06-12 22:00:54,547 - INFO - 127.0.0.1 - - [12/Jun/2026 22:00:54] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-12 22:00:54,548 - DEBUG - GET /static/js/main.js
+2026-06-12 22:00:54,548 - INFO - 127.0.0.1 - - [12/Jun/2026 22:00:54] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-12 22:00:54,860 - DEBUG - GET /static/js/permission-manager.js
+2026-06-12 22:00:54,861 - INFO - 127.0.0.1 - - [12/Jun/2026 22:00:54] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-12 22:00:55,124 - DEBUG - GET /static/js/access-levels.js
+2026-06-12 22:00:55,124 - INFO - 127.0.0.1 - - [12/Jun/2026 22:00:55] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-12 22:00:55,172 - DEBUG - GET /static/js/logger.js
+2026-06-12 22:00:55,172 - INFO - 127.0.0.1 - - [12/Jun/2026 22:00:55] "GET /static/js/logger.js HTTP/1.1" 200 -
+
