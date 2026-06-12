@@ -6,6 +6,7 @@ export class PermissionManager {
         this.storageKey = 'permissions_granted';
         this.accessLevels = new AccessLevels();
         this.isPaused = false;
+        this.hasLocalhostAccess = false;
         this.initElements();
     }
 
@@ -52,34 +53,58 @@ export class PermissionManager {
         }
     }
 
-    async requestAccess() {
-        // 🔧 ОФЛАЙН-РЕЖИМ: если сервер недоступен — разрешаем доступ локально
+    async checkLocalhostAccess() {
+        // Проверка доступности localhost (сервера)
+        let timeoutId;
         try {
-            const response = await fetch('/api/check-access');
-            if (!response.ok) throw new Error('Сервер недоступен');
+            const controller = new AbortController();
+            timeoutId = setTimeout(() => controller.abort(), 2000); // 2 секунды таймаут
+            
+            const response = await fetch('/api/check-access', {
+                method: 'GET',
+                signal: controller.signal
+            });
+            
+            clearTimeout(timeoutId);
+            
+            if (!response.ok) {
+                throw new Error('Сервер недоступен');
+            }
+            
             const data = await response.json();
+            this.hasLocalhostAccess = true;
+            console.log('✅ Доступ к localhost есть (сервер отвечает)');
             
             if (data.access === true && data.level > 0) {
                 this.accessLevels.setLevel(data.level);
-                return true;
             }
-            return false;
+            
+            return true;
         } catch (error) {
-            console.warn('⚠️ Офлайн-режим: недоступен API check-access — разрешаем локально');
-            console.debug('Ошибка:', error.message);
-            
-            // В офлайне проверяем есть ли уже сохранённый уровень
-            const savedLevel = this.accessLevels.getLevel();
-            if (savedLevel > 0) {
-                console.log(`✅ Используем сохранённый уровень ${savedLevel}`);
-                return true;
-            }
-            
-            // Если нет сохранённого уровня, разрешаем временный доступ
-            console.log('✅ Временный доступ в офлайне (уровень 1)');
-            this.accessLevels.setLevel(1);
+            clearTimeout(timeoutId);
+            this.hasLocalhostAccess = false;
+            console.warn('⚠️ Доступ к localhost отсутствует (сервер недоступен)');
+            console.debug('Ошибка проверки:', error.message);
+            return false;
+        }
+    }
+
+    async requestAccess() {
+        // 🔧 ОФЛАЙН-РЕЖИМ: кнопка "Дать доступ" - сразу разрешаем доступ локально
+        // Это нужно для обхода CORS, когда сервер не запущен
+        console.log('✅ Кнопка "Дать доступ" нажата - предоставляем локальный доступ');
+        
+        // В офлайне проверяем есть ли уже сохранённый уровень
+        const savedLevel = this.accessLevels.getLevel();
+        if (savedLevel > 0) {
+            console.log(`✅ Используем сохранённый уровень ${savedLevel}`);
             return true;
         }
+        
+        // Если нет сохранённого уровня, разрешаем временный доступ
+        console.log('✅ Временный доступ (уровень 1)');
+        this.accessLevels.setLevel(1);
+        return true;
     }
 
     grantPermission() {
@@ -89,17 +114,27 @@ export class PermissionManager {
         console.log('✅ Доступ предоставлен');
     }
 
-    init() {
+    async init() {
         if (this.isPaused) return;
 
-        // ✅ ЕДИНСТВЕННАЯ ПРОВЕРКА — и всё
-        if (this.hasPermission()) {
-            // Доступ уже есть — сразу разрешаем и выходим
-            document.body.classList.add('access-granted');
+        // ✅ Проверяем доступ к localhost ПЕРВОЙ НАЧАЛО
+        await this.checkLocalhostAccess();
+
+        // Если есть доступ к localhost — кнопка НЕ показывается
+        if (this.hasLocalhostAccess) {
+            console.log('✅ Доступ к localhost есть — кнопка "Получить доступ" скрыта');
+            // Скрываем кнопку и оверлей
+            this.hideOverlay();
+            
+            // Если сервер отвечает, проверяем уровень доступа
+            if (this.hasPermission()) {
+                document.body.classList.add('access-granted');
+            }
             return;
         }
 
-        // ✅ Только если access = false — показываем завесу
+        // ❌ Если НЕТ доступа к localhost — показываем кнопку
+        console.log('❌ Доступ к localhost отсутствует — показываем кнопку "Получить доступ"');
         this.showOverlay();
 
         // Подключаем кнопку
