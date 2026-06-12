@@ -12391,3 +12391,138 @@
 2026-06-12 11:55:38,254 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
 2026-06-12 11:55:38,254 - INFO - 127.0.0.1 - - [12/Jun/2026 11:55:38] "GET /images/img_n/1781017229532.jpg HTTP/1.1" 500 -
 
+2026-06-12 12:03:11,002 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-12 12:03:18,849 - DEBUG - GET /news.html
+2026-06-12 12:03:18,849 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:18] "GET /news.html HTTP/1.1" 200 -
+
+2026-06-12 12:03:18,889 - DEBUG - GET /images/logo.png
+2026-06-12 12:03:18,889 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:18,890 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:18] "GET /images/logo.png HTTP/1.1" 500 -
+
+2026-06-12 12:03:19,115 - DEBUG - GET /static/css/style.css
+2026-06-12 12:03:19,115 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:19] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-12 12:03:19,195 - DEBUG - GET /static/css/news-form.css
+2026-06-12 12:03:19,196 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:19] "GET /static/css/news-form.css HTTP/1.1" 200 -
+
+2026-06-12 12:03:19,197 - DEBUG - GET /static/js/main.js
+2026-06-12 12:03:19,197 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:19] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-12 12:03:19,461 - DEBUG - GET /static/js/logger.js
+2026-06-12 12:03:19,462 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:19] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-12 12:03:19,527 - DEBUG - GET /static/js/permission-manager.js
+2026-06-12 12:03:19,528 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:19] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-12 12:03:19,529 - DEBUG - GET /static/js/news-template-engine.js
+2026-06-12 12:03:19,529 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:19] "GET /static/js/news-template-engine.js HTTP/1.1" 200 -
+
+2026-06-12 12:03:19,530 - DEBUG - GET /static/js/news-manager.js
+2026-06-12 12:03:19,530 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:19] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-12 12:03:19,531 - DEBUG - GET /static/js/news-form.js
+2026-06-12 12:03:19,532 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:19] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-12 12:03:19,532 - DEBUG - GET /images/bg.jpg
+2026-06-12 12:03:19,533 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:19,533 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:19] "GET /images/bg.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:19,858 - DEBUG - GET /get-news
+2026-06-12 12:03:19,860 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:19] "GET /get-news HTTP/1.1" 200 -
+
+2026-06-12 12:03:20,096 - DEBUG - GET /images/img_n/images/img_n/1781002918608.jpg
+2026-06-12 12:03:20,097 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:20,098 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:20] "GET /images/img_n/images/img_n/1781002918608.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:20,195 - DEBUG - GET /images/img_n/1781017229532.jpg
+2026-06-12 12:03:20,196 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:20,196 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:20] "GET /images/img_n/1781017229532.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:20,197 - DEBUG - GET /images/img_n/1781017229521.jpg
+2026-06-12 12:03:20,197 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:20,198 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:20] "GET /images/img_n/1781017229521.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:20,199 - DEBUG - GET /images/img_n/1781017229509.jpg
+2026-06-12 12:03:20,199 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:20,199 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:20] "GET /images/img_n/1781017229509.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:20,200 - DEBUG - GET /images/img_n/1781017229501.jpg
+2026-06-12 12:03:20,200 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:20,201 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:20] "GET /images/img_n/1781017229501.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:20,202 - DEBUG - GET /images/img_n/400.png
+2026-06-12 12:03:20,202 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:20,202 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:20] "GET /images/img_n/400.png HTTP/1.1" 500 -
+
+2026-06-12 12:03:20,407 - DEBUG - GET /images/img_n/images/img_n/1781002918303.jpg
+2026-06-12 12:03:20,407 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:20,408 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:20] "GET /images/img_n/images/img_n/1781002918303.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:20,522 - DEBUG - GET /images/img_n/1781019147263.jpg
+2026-06-12 12:03:20,522 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:20,522 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:20] "GET /images/img_n/1781019147263.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:20,523 - DEBUG - GET /images/img_n/1781018732688.jpg
+2026-06-12 12:03:20,523 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:20,524 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:20] "GET /images/img_n/1781018732688.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:20,524 - DEBUG - GET /images/img_n/1781018732676.jpg
+2026-06-12 12:03:20,525 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:20,525 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:20] "GET /images/img_n/1781018732676.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:20,526 - DEBUG - GET /images/img_n/1781017393211.jpg
+2026-06-12 12:03:20,526 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:20,526 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:20] "GET /images/img_n/1781017393211.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:20,527 - DEBUG - GET /images/img_n/1781019147250.jpg
+2026-06-12 12:03:20,527 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:20,528 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:20] "GET /images/img_n/1781019147250.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:20,722 - DEBUG - GET /images/img_n/1781017393197.jpg
+2026-06-12 12:03:20,722 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:20,723 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:20] "GET /images/img_n/1781017393197.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:22,212 - DEBUG - GET /index.html
+2026-06-12 12:03:22,213 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:22] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-12 12:03:22,339 - DEBUG - GET /static/css/style.css
+2026-06-12 12:03:22,340 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:22] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-12 12:03:22,470 - DEBUG - GET /static/js/main.js
+2026-06-12 12:03:22,471 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:22] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-12 12:03:22,559 - DEBUG - GET /images/bg.jpg
+2026-06-12 12:03:22,560 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:22,561 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:22] "GET /images/bg.jpg HTTP/1.1" 500 -
+
+2026-06-12 12:03:22,562 - DEBUG - GET /static/js/logger.js
+2026-06-12 12:03:22,562 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:22] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-12 12:03:22,563 - DEBUG - GET /static/js/permission-manager.js
+2026-06-12 12:03:22,563 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:22] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-12 12:03:22,779 - DEBUG - GET /static/js/news-template-engine.js
+2026-06-12 12:03:22,779 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:22] "GET /static/js/news-template-engine.js HTTP/1.1" 200 -
+
+2026-06-12 12:03:22,780 - DEBUG - GET /static/js/news-manager.js
+2026-06-12 12:03:22,780 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:22] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-12 12:03:22,787 - DEBUG - GET /static/js/news-form.js
+2026-06-12 12:03:22,787 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:22] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-12 12:03:22,877 - DEBUG - GET /images/logo.png
+2026-06-12 12:03:22,877 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:22,878 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:22] "GET /images/logo.png HTTP/1.1" 500 -
+
+2026-06-12 12:03:22,879 - DEBUG - GET /images/1.png
+2026-06-12 12:03:22,879 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:22,879 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:22] "GET /images/1.png HTTP/1.1" 500 -
+
+2026-06-12 12:03:22,880 - DEBUG - GET /images/2.png
+2026-06-12 12:03:22,880 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:22,880 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:22] "GET /images/2.png HTTP/1.1" 500 -
+
+2026-06-12 12:03:23,096 - DEBUG - GET /images/3.png
+2026-06-12 12:03:23,096 - ERROR - Критическая ошибка GET: 'SimpleHandler' object has no attribute 'serve_images'
+2026-06-12 12:03:23,097 - INFO - 127.0.0.1 - - [12/Jun/2026 12:03:23] "GET /images/3.png HTTP/1.1" 500 -
+
