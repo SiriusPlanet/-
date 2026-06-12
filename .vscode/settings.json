@@ -1,0 +1,17 @@
+{
+  "gitlens.enabled": true,
+  "gitlens.codeLens": {
+    "enabled": true,
+    "scmFormat": "default"
+  },
+  "gitlens.views.history.enabled": true,
+  "gitlens.views.fileHistory.enabled": true,
+  "gitlens.views.lineHistory.enabled": true,
+  "gitlens.views.remoteBranches.enabled": true,
+
+  "gitlens.currentLine.enabled": true,
+  "gitlens.advanced.messages": {
+    "suppressCommitHasNoWrapper": true,
+    "suppressCommitNotFoundWarning": true
+  }
+}
