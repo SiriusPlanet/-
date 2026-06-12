@@ -385,36 +385,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
         """
         self.wfile.write(form_html.encode('utf-8'))
 
-    def serve_images(self):
-        image_path = self.path[len('/images/'):].split('?')[0]
-        # Извлекаем только имя файла, даже если был путь /images/img_n/name.jpg
-        filename = image_path.split('/')[-1]
-
-        # Сначала ищем в корне images/ (для logo.png, 1.png и т.д.)
-        file_path = os.path.join(PROJECT_ROOT, 'images', filename)
-        
-        # Если не найдено, ищем в images/img_n/ (для новостных картинок)
-        if not os.path.exists(file_path):
-            file_path = PathsHelper.get_image_path(filename)
-        
-        # Если и там нет, используем fallback (400.png)
-        if not os.path.exists(file_path):
-            file_path = PathsHelper.get_fallback_path()
-
-        content_type, _ = mimetypes.guess_type(file_path)
-        if content_type is None:
-            content_type = 'image/png'
-
-        self.send_response(200)
-        self.send_header('Content-Type', content_type)
-        self.end_headers()
-
-        try:
-            with open(file_path, 'rb') as f:
-                self.wfile.write(f.read())
-        except Exception as e:
-            logging.error(f"Ошибка отдачи изображения: {e}")
-            self.send_error_utf8(500, f"Ошибка изображения: {e}")
+{"text": "    def serve_images(self):\n        image_path = self.path[len('/images/'):].split('?')[0]\n        # Извлекаем только имя файла, даже если был путь /images/img_n/name.jpg\n        filename = image_path.split('/')[-1]\n\n        # Ищем в images/img_n/ (основная директория для новостных картинок)\n        file_path = PathsHelper.get_image_path(filename)\n        \n        # Если не найдено, ищем в корне images/ (для logo.png, 1.png и т.д.)\n        if not os.path.exists(file_path):\n            file_path = os.path.join(PROJECT_ROOT, 'images', filename)\n        \n        # Если и там нет, используем fallback (400.png)\n        if not os.path.exists(file_path):\n            file_path = PathsHelper.get_fallback_path()\n\n        logging.debug(f\"serve_images: filename={filename}, path={file_path}, exists={os.path.exists(file_path)}\")\n\n        content_type, _ = mimetypes.guess_type(file_path)\n        if content_type is None:\n            content_type = 'image/png'\n\n        self.send_response(200)\n        self.send_header('Content-Type', content_type)\n        self.end_headers()\n\n        try:\n            with open(file_path, 'rb') as f:\n                self.wfile.write(f.read())\n        except Exception as e:\n            logging.error(f\"Ошибка отдачи изображения: {e}\")\n            self.send_error_utf8(500, f\"Ошибка изображения: {e}\")"}
 
 
 class PathsHelper:
