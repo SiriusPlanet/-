@@ -51,7 +51,19 @@ export class PermissionManager {
         }
     }
 
-{"text": "    async checkLocalhostAccess() {\n        // Проверяем кэш - результат уже сохранён?\n        const cachedChecked = localStorage.getItem('localhost_checked');\n        const cachedHasAccess = localStorage.getItem('localhost_has_access');\n        \n        if (cachedChecked === 'true' && cachedHasAccess !== null) {\n            this.hasLocalhostAccess = cachedHasAccess === 'true';\n            console.log(this.hasLocalhostAccess ? '✅ Кэш: доступ к localhost есть' : '❌ Кэш: доступ к localhost отсутствует');\n            return this.hasLocalhostAccess;\n        }\n        \n        let timeoutId;\n        try {"}
+    async checkLocalhostAccess() {
+        // Проверяем кэш - результат уже сохранён?
+        const cachedChecked = localStorage.getItem('localhost_checked');
+        const cachedHasAccess = localStorage.getItem('localhost_has_access');
+        
+        if (cachedChecked === 'true' && cachedHasAccess !== null) {
+            this.hasLocalhostAccess = cachedHasAccess === 'true';
+            console.log(this.hasLocalhostAccess ? '✅ Кэш: доступ к localhost есть' : '❌ Кэш: доступ к localhost отсутствует');
+            return this.hasLocalhostAccess;
+        }
+        
+        let timeoutId;
+        try {
             const controller = new AbortController();
             timeoutId = setTimeout(() => controller.abort(), 2000);
             
@@ -66,7 +78,30 @@ export class PermissionManager {
                 throw new Error('Сервер недоступен');
             }
             
-{"text": "            const data = await response.json();\n            this.hasLocalhostAccess = true;\n            console.log('✅ Доступ к localhost есть (сервер отвечает)');\n            \n            // Сохраняем результат проверки\n            localStorage.setItem('localhost_checked', 'true');\n            localStorage.setItem('localhost_has_access', 'true');\n            \n            if (data.access === true && data.level > 0) {\n                this.accessLevels.setLevel(data.level);\n            }\n            \n            return true;\n        } catch (error) {\n            clearTimeout(timeoutId);\n            this.hasLocalhostAccess = false;\n            console.warn('⚠️ Доступ к localhost отсутствует (сервер недоступен)');\n            console.debug('Ошибка проверки:', error.message);\n            \n            // Сохраняем результат проверки\n            localStorage.setItem('localhost_checked', 'true');\n            localStorage.setItem('localhost_has_access', 'false');\n            return false;\n        }"}
+            const data = await response.json();
+            this.hasLocalhostAccess = true;
+            console.log('✅ Доступ к localhost есть (сервер отвечает)');
+            
+            // Сохраняем результат проверки
+            localStorage.setItem('localhost_checked', 'true');
+            localStorage.setItem('localhost_has_access', 'true');
+            
+            if (data.access === true && data.level > 0) {
+                this.accessLevels.setLevel(data.level);
+            }
+            
+            return true;
+        } catch (error) {
+            if (timeoutId) clearTimeout(timeoutId);
+            this.hasLocalhostAccess = false;
+            console.warn('⚠️ Доступ к localhost отсутствует (сервер недоступен)');
+            console.debug('Ошибка проверки:', error.message);
+            
+            // Сохраняем результат проверки
+            localStorage.setItem('localhost_checked', 'true');
+            localStorage.setItem('localhost_has_access', 'false');
+            return false;
+        }
     }
 
     async requestAccess() {
@@ -75,11 +110,13 @@ export class PermissionManager {
         const savedLevel = this.accessLevels.getLevel();
         if (savedLevel > 0) {
             console.log(`✅ Используем сохранённый уровень ${savedLevel}`);
+            this.grantPermission();
             return true;
         }
         
         console.log('✅ Временный доступ (уровень 1)');
         this.accessLevels.setLevel(1);
+        this.grantPermission();
         return true;
     }
 
@@ -92,6 +129,13 @@ export class PermissionManager {
 
     async init() {
         if (this.isPaused) return;
+
+        // Проверяем, находимся ли мы на странице новостей
+        const newsButton = document.querySelector('.add-news-btn');
+        if (!newsButton) {
+            console.log('ℹ️ Не страница новостей — проверка доступа не требуется');
+            return;
+        }
 
         await this.checkLocalhostAccess();
 
