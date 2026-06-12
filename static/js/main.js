@@ -1,7 +1,6 @@
 // static/js/main.js
 import { Logger } from './logger.js';
 import { PermissionManager } from './permission-manager.js';
-import { NewsTemplateEngine } from './news-template-engine.js';
 import { NewsManager } from './news-manager.js';
 import { NewsForm } from './news-form.js';
 
@@ -28,7 +27,7 @@ class MainApp {
     }
 
     initComponents() {
-        // Инициализируем только если мы на странице новостей
+        // Инициализируем только если ��ы на странице новостей
         const addBtn = document.querySelector('.add-news-btn');
         const modal = document.getElementById('addNewsModal');
         
@@ -139,6 +138,17 @@ class MainApp {
         }
     }
 }
+
+// Открытие новости в модальном окне
+window.openNews = (id) => {
+    const modal = document.getElementById('viewNewsModal');
+    if (!modal) return;
+    
+    // Показываем модальное окно с заглушкой
+    // В будущем здесь будет загрузка новости по ID
+    modal.classList.remove('hidden');
+    modal.classList.add('is-visible');
+};
 
 // Точка входа
 document.addEventListener('DOMContentLoaded', async () => {
