@@ -19,7 +19,9 @@ class MainApp {
             }
 
             await this.initComponents();
-            this.initEventListeners();
+            this.setupFormHandlers();
+            this.setupScrollHandler();
+            this.setupGlobalHandlers();
             Logger.log('[MainApp] Приложение успешно инициализировано');
         } catch (error) {
             Logger.error('[MainApp] Ошибка инициализации', error);
@@ -50,11 +52,32 @@ class MainApp {
         console.log('[MainApp] Компоненты новостей инициализированы');
     }
 
-    initEventListeners() {
-        this.setupGlobalHandlers();
-        if (this.newsManager && this.newsForm) {
-            this.setupFormHandlers();
+    setupScrollHandler() {
+        const scrollThreshold = 5;
+        let lastScrollTop = 0;
+        
+        this.newsHeaderPanel = document.querySelector('.news-header-panel');
+        if (!this.newsHeaderPanel) {
+            console.log('[MainApp] Панель .news-header-panel не найдена');
+            return;
         }
+        
+        const handleScroll = () => {
+            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (currentScrollTop > lastScrollTop && currentScrollTop > scrollThreshold) {
+                // Скролл вниз - скрываем панель
+                this.newsHeaderPanel.classList.add('hidden');
+            } else {
+                // Скролл вверх - показываем панель
+                this.newsHeaderPanel.classList.remove('hidden');
+            }
+            
+            lastScrollTop = currentScrollTop;
+        };
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        console.log('[MainApp] Слушатель скролла установлен');
     }
 
     setupGlobalHandlers() {
