@@ -118,13 +118,11 @@ body:not(.access-granted) .product-card {
     pointer-events: none;
 }
 
-/* === Единый стиль для всех карточек и блоков === */
+/* === Единый стиль для всех карточек и блоков (кроме шапок) === */
 .card,
 .hero,
-.site-header,
 .product-card,
-.privacy-policy,
-.news-header-panel {
+.privacy-policy {
     border-radius: 1rem;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.96);
@@ -150,10 +148,15 @@ main > section,
     max-width: 96%;
 }
 
+/* === ГРУППА ШАПКИ И ПАНЕЛИ === */
 .header-group {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     width: 100%;
-    position: relative;
-    z-index: 101;
+    max-width: none;
+    margin: 0;
+    border-radius: 0 0 1rem 1rem;
 }
 
 /* === ШАПКА САЙТА === */
@@ -167,10 +170,12 @@ main > section,
     position: sticky;
     top: 0;
     z-index: 100;
-    max-width: 100%;
-    margin: 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
     min-height: 4.5rem;
     box-sizing: border-box;
+    border-radius: 0 0 1rem 1rem;
 }
 
 .logo-link {
@@ -669,73 +674,6 @@ main > section,
     color: #e74c3c;
 }
 
-/* === АДАПТИВНОСТЬ === */
-@media (max-width: 600px) {
-    .hero h2 {
-        font-size: 1.75rem;
-    }
-    
-    .hero p {
-        font-size: 1rem;
-    }
-    
-    .terms h2 {
-        font-size: 1.75rem;
-    }
-}
-
-/* === Toast-уведомления === */
-.toast-notification {
-    position: fixed;
-    top: 1.25rem;
-    right: 1.25rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 0.5rem;
-    color: white;
-    font-weight: bold;
-    z-index: 10000;
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
-    animation: slideIn 0.3s ease-out forwards;
-    max-width: 25rem;
-    word-wrap: break-word;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-/* === ОБЩАЯ ОБЁРТКА СТРАНИЦЫ === */
-.page-wrapper {
-    max-width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
-}
-
-/* === ОГРАНИЧЕНИЕ КОНТЕНТА === */
-.container {
-    max-width: 70rem;
-    margin: 0 auto;
-    padding: 0 1.25rem;
-    position: relative;
-}
-
-/* === ЛОГОТИП === */
-.logo {
-    max-height: 3.4375rem;
-    height: auto;
-    width: auto;
-    display: block;
-}
-
-/* === ГРУППА ШАПКИ И ПАНЕЛИ === */
-.header-group {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    width: 100%;
-}
-
 /* === ПАНЕЛЬ "ХРОНИКИ ИЗМЕРЕНИЙ" === */
 .news-header-panel {
     background: rgba(255, 255, 255, 0.98);
@@ -743,15 +681,15 @@ main > section,
     width: 100%;
     max-width: none;
     margin: 0;
-    border-radius: 0 0 1rem 1rem;
-    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.12);
-    backdrop-filter: blur(0.625rem);
-    -webkit-backdrop-filter: blur(0.625rem);
+    border-radius: 0;
     overflow: hidden;
     position: sticky;
     top: 4.5rem;
     z-index: 90;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 .news-header-panel.hidden {
@@ -796,6 +734,21 @@ main > section,
 
 .header-grid .add-news-btn:hover {
     background: #2980b9;
+}
+
+/* === АДАПТИВНОСТЬ === */
+@media (max-width: 600px) {
+    .hero h2 {
+        font-size: 1.75rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .terms h2 {
+        font-size: 1.75rem;
+    }
 }
 
 /* === АДАПТАЦИЯ — УПРОЩЁННАЯ === */
@@ -843,4 +796,48 @@ main > section,
     .news-card {
         max-width: 100%;
     }
+}
+
+/* === Toast-уведомления === */
+.toast-notification {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: bold;
+    z-index: 10000;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease-out forwards;
+    max-width: 25rem;
+    word-wrap: break-word;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* === ОБЩАЯ ОБЁРТКА СТРАНИЦЫ === */
+.page-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/* === ОГРАНИЧЕНИЕ КОНТЕНТА === */
+.container {
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    position: relative;
+}
+
+/* === ЛОГОТИП === */
+.logo {
+    max-height: 3.4375rem;
+    height: auto;
+    width: auto;
+    display: block;
 }

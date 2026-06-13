@@ -13253,3 +13253,31 @@
 2026-06-13 11:07:44,888 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
 2026-06-13 11:07:44,889 - INFO - 127.0.0.1 - - [13/Jun/2026 11:07:44] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
 
+2026-06-13 11:18:30,090 - DEBUG - GET /login.html
+2026-06-13 11:18:30,090 - INFO - 127.0.0.1 - - [13/Jun/2026 11:18:30] "GET /login.html HTTP/1.1" 200 -
+
+2026-06-13 11:18:30,216 - DEBUG - GET /static/css/style.css
+2026-06-13 11:18:30,216 - INFO - 127.0.0.1 - - [13/Jun/2026 11:18:30] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 11:18:30,347 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 11:18:30,347 - INFO - 127.0.0.1 - - [13/Jun/2026 11:18:30] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 11:18:30,622 - DEBUG - GET /images/bg.jpg
+2026-06-13 11:18:30,622 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 11:18:30,623 - INFO - 127.0.0.1 - - [13/Jun/2026 11:18:30] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 11:18:30,947 - DEBUG - GET /static/js/logger.js
+2026-06-13 11:18:30,948 - INFO - 127.0.0.1 - - [13/Jun/2026 11:18:30] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 11:18:43,428 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 11:18:43,428 - INFO - 127.0.0.1 - - [13/Jun/2026 11:18:43] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 11:18:43,765 - DEBUG - GET /static/css/style.css
+2026-06-13 11:18:43,766 - INFO - 127.0.0.1 - - [13/Jun/2026 11:18:43] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 11:18:43,767 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 11:18:43,767 - INFO - 127.0.0.1 - - [13/Jun/2026 11:18:43] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 11:19:23,180 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 11:19:23,181 - INFO - 127.0.0.1 - - [13/Jun/2026 11:19:23] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
