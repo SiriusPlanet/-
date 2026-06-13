@@ -51,7 +51,18 @@ export class PermissionManager {
         }
     }
 
+    hasGrantedPermission() {
+        return localStorage.getItem(this.storageKey) === 'true';
+    }
+
     async checkLocalhostAccess() {
+        // Если разрешение уже дано - пропускаем проверку
+        if (this.hasGrantedPermission()) {
+            this.hasLocalhostAccess = true;
+            console.log('✅ Разрешение уже дано - пропускаем проверку localhost');
+            return true;
+        }
+
         // Проверяем кэш - результат уже сохранён?
         const cachedChecked = localStorage.getItem('localhost_checked');
         const cachedHasAccess = localStorage.getItem('localhost_has_access');
@@ -130,35 +141,46 @@ export class PermissionManager {
     async init() {
         if (this.isPaused) return;
 
-        // Проверяем, находимся ли мы на странице новостей
-        const newsButton = document.querySelector('.add-news-btn');
-        if (!newsButton) {
-            console.log('ℹ️ Не страница новостей — проверка доступа не требуется');
+        // 1. Быстрая проверка (2мс) — есть ли разрешение?
+        if (this.hasGrantedPermission()) {
+            console.log('✅ Разрешение уже дано - продолжаем работу');
+            this.hideOverlay();
+            document.body.classList.add('access-granted');
             return;
         }
 
+        // 2. Быстрая проверка кэша — результат проверки localhost уже есть?
+        const cachedHasAccess = localStorage.getItem('localhost_has_access');
+        if (cachedHasAccess === 'true') {
+            console.log('✅ Кэш: доступ к localhost есть — продолжаем работу');
+            this.hasLocalhostAccess = true;
+            this.hideOverlay();
+            document.body.classList.add('access-granted');
+            return;
+        }
+
+        // 3. Если кэша нет — проверяем localhost (2сек таймаут, но это фоновая проверка)
+        // НЕ показываем завесу пока идет проверка — она может быть быстрой (2мс)
         await this.checkLocalhostAccess();
 
-        if (this.hasLocalhostAccess) {
-            console.log('✅ Доступ к localhost есть — кнопка "Получить доступ" скрыта');
-            this.hideOverlay();
-            
-            if (this.hasPermission()) {
-                document.body.classList.add('access-granted');
+        // 4. Если доступа нет — показываем завесу
+        if (!this.hasLocalhostAccess) {
+            console.log('❌ Доступ к localhost отсутствует — показываем завесу');
+            this.showOverlay();
+
+            // ВЕШАЕМ СОБЫТИЕ НА КНОПКУ
+            if (this.button) {
+                this.button.addEventListener('click', async () => {
+                    console.log('🎉 Обнаружено нажатие на кнопку "Дать доступ"');
+                    const hasAccess = await this.requestAccess();
+                    if (hasAccess) {
+                        this.grantPermission();
+                    }
+                });
+                console.log('✅ Событие click на кнопке "Дать доступ" зарегистрировано');
+            } else {
+                console.warn('⚠️ Кнопка #fileAccessButton не найдена');
             }
-            return;
-        }
-
-        console.log('❌ Доступ к localhost отсутствует — показываем кнопку "Получить доступ"');
-        this.showOverlay();
-
-        if (this.button) {
-            this.button.addEventListener('click', async () => {
-                const hasAccess = await this.requestAccess();
-                if (hasAccess) {
-                    this.grantPermission();
-                }
-            });
         }
     }
 }
