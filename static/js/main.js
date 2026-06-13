@@ -43,7 +43,6 @@ class MainApp {
         }
         
         this.newsManager = new NewsManager(this.pm);
-        this.newsManager.init();
         await this.newsManager.loadNews();
         this.newsForm = new NewsForm(this.newsManager);
         this.newsForm.init();
