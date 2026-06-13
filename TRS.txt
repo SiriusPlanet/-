@@ -1,0 +1,127 @@
+# \MySite\TRS.txt
+# Реальная структура
+
+PowerShell 7.6.2
+PS C:\Windows\System32> cd f:/I0/002MySiS/
+PS F:\I0\002MySiS> tree /f
+Структура папок тома Kontextolit
+Серийный номер тома: B455-2026
+F:.
+├───msis311_env - вынесенное окружение
+│   │   pyvenv.cfg
+│   │
+│   ...
+│
+└───MySite - внутренний рут
+    │   about.html
+    │   actions.html
+    │   catalog.html
+    │   contacts.html
+    │   delivery.html
+    │   IMAGES_ORDER.md
+    │   index.html
+    │   login.html
+    │   news.html
+    │   privacy.html
+    │   requirements.txt
+    │   server.log
+    │   siss.py
+    │   start-server.bat
+    │   start_server_siss.bat
+    │   test-modal.html
+    │   test_server.py
+    │   Без названия
+    │   новый 169.txt
+    │
+    ├───.gigacode
+    │   └───plans
+    │           access-logic.md
+    │           analysis.md
+    │           check-css.js
+    │           fix-cors-offline.md
+    │           fix-main-js.md
+    │           fix-style.js
+    │           github-setup.md
+    │           implementation.md
+    │           LOGIC_DESCRIPTION.md
+    │           plan-actions.md
+    │           sitemap-implementation.md
+    │
+    ├───.vscode
+    │       settings.json
+    │
+    ├───data
+    │   └───news
+    │           1781002918303.json
+    │           1781002918608.json
+    │           1781017229501.json
+    │           1781017229509.json
+    │           1781017229521.json
+    │           1781017229532.json
+    │           1781017393197.json
+    │           1781017393211.json
+    │           1781018732676.json
+    │           1781018732688.json
+    │           1781019147250.json
+    │           1781019147263.json
+    │           news.txt
+    │
+    ├───images
+    │   │   1.png
+    │   │   2.png
+    │   │   3.png
+    │   │   4.png
+    │   │   5.png
+    │   │   6.png
+    │   │   7.png
+    │   │   8.png
+    │   │   90.png
+    │   │   91.png
+    │   │   92.png
+    │   │   93.png
+    │   │   94.png
+    │   │   BG.jpg
+    │   │   logo.png
+    │   │
+    │   └───img_n
+    │           1781002918303.jpg
+    │           1781002918608.jpg
+    │           1781017229501.jpg
+    │           1781017229509.jpg
+    │           1781017229521.jpg
+    │           1781017229532.jpg
+    │           1781017393197.jpg
+    │           1781017393211.jpg
+    │           1781018732676.jpg
+    │           1781018732688.jpg
+    │           1781019147250.jpg
+    │           1781019147263.jpg
+    │           400.png
+    │
+    ├───static
+    │   ├───css
+    │   │       #privacy.css
+    │   │       news-form.css
+    │   │       news.css
+    │   │       style.css
+    │   │       style02.css
+    │   │
+    │   └───js
+    │           #validator.js
+    │           access-init.js
+    │           access-levels.js
+    │           logger.js
+    │           main.js
+    │           news-form.js
+    │           news-manager.js
+    │           news-template-engine.js
+    │           permission-manager.js
+    │           validator.js
+    │
+    ├───templates
+    │       news-card.html
+    │
+    └───__pycache__
+            siss.cpython-311.pyc
+
+PS F:\I0\002MySiS>
