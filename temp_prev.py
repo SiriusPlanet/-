@@ -1,6 +1,5 @@
 # siss.py (simple.support.server)
 # -*- coding: utf-8 -*-
-
 """
 SIS.SITE v1.0 — Simple Integrated Site System  
 Архитектура, born from reality — not from textbooks.
@@ -121,15 +120,6 @@ class SimpleHandler(BaseHTTPRequestHandler):
 
             if self.path == '/get-news':
                 return self.handle_get_news()
-
-            if self.path == '/api/login':
-                return self.handle_api_login()
-
-            if self.path == '/api/delete-news':
-                return self.handle_api_delete_news()
-
-            if self.path == '/api/update-news':
-                return self.handle_api_update_news()
 
             # Редиректы и формы
             if self.path == '/create':
@@ -278,13 +268,6 @@ class SimpleHandler(BaseHTTPRequestHandler):
         else:
             self.send_error_utf8(404, "Неизвестный POST-эндпоинт")
 
-    def do_DELETE(self):
-        """Обработчик DELETE-запросов для удаления новостей"""
-        if self.path == '/api/delete-news':
-            return self.handle_api_delete_news()
-        else:
-            self.send_error_utf8(404, "Неизвестный DELETE-эндпоинт")
-
     def send_json_response(self, success, message=None, **kwargs):
         self.send_response(200 if success else 400)
         self.send_header('Content-Type', 'application/json')
@@ -307,153 +290,6 @@ class SimpleHandler(BaseHTTPRequestHandler):
             "timestamp": datetime.now().isoformat()
         }
         self.wfile.write(json.dumps(response).encode('utf-8'))
-
-    def handle_api_login(self):
-        """Обработка входа пользователя"""
-        try:
-            length = int(self.headers.get('Content-Length', 0))
-            raw_data = self.rfile.read(length)
-            data = json.loads(raw_data.decode('utf-8'))
-
-            username = data.get('username', '').strip()
-            password = data.get('password', '').strip()
-
-            # ⚠️ ВРЕМЕННАЯ АВТОРИЗАЦИЯ (демо)
-            # В продакшене используйте хеширование паролей!
-            user_level = 0  # Гость по умолчанию
-
-            if username == 'admin' and password == 'admin123':
-                user_level = 3  # Администратор
-            elif username == 'moderator' and password == 'mod123':
-                user_level = 2  # Модератор
-            elif username == 'user' and password == 'user123':
-                user_level = 1  # Пользователь
-
-            self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
-            self.send_header('Access-Control-Allow-Origin', '*')
-            self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-            self.end_headers()
-
-            if user_level > 0:
-                response = {
-                    "success": True,
-                    "level": user_level,
-                    "message": f"Добро пожаловать, {username}!"
-                }
-            else:
-                response = {
-                    "success": False,
-                    "message": "Неверное имя пользователя или пароль"
-                }
-
-            self.wfile.write(json.dumps(response, ensure_ascii=False).encode())
-
-        except Exception as e:
-            logging.error(f"Ошибка входа: {e}")
-            self.send_error_utf8(500, "Ошибка сервера")
-
-    def handle_api_delete_news(self):
-        """Удаление новости по ID"""
-        try:
-            # Получаем ID из body (POST) или query string (GET)
-            length = int(self.headers.get('Content-Length', 0))
-            data = {}
-
-            if length > 0:
-                raw_data = self.rfile.read(length)
-                data = json.loads(raw_data.decode('utf-8'))
-
-            news_id = data.get('id')
-            
-            if not news_id:
-                return self.send_json_response(False, "Отсутствует ID новости")
-
-            # Ищем файл с таким ID
-            news_dir = os.path.join(PROJECT_ROOT, 'data', 'news')
-            files = os.listdir(news_dir)
-
-            json_file = None
-            for file in files:
-                if file.startswith(f"{news_id}.json"):
-                    json_file = file
-                    break
-
-            if not json_file:
-                return self.send_json_response(False, "Новость не найдена")
-
-            # Удаляем JSON файл
-            file_path = os.path.join(news_dir, json_file)
-            os.remove(file_path)
-
-            # Удаляем изображение, если есть
-            with open(file_path, 'r', encoding='utf-8') as f:
-                news = json.load(f)
-
-            image_filename = news.get('image')
-            if image_filename:
-                img_path = PathsHelper.get_image_path(image_filename)
-                if os.path.exists(img_path):
-                    os.remove(img_path)
-                    logging.info(f"Удалено изображение: {img_path}")
-
-            self.send_json_response(True, "Новость удалена")
-
-        except Exception as e:
-            logging.error(f"Ошибка удаления новости: {e}")
-            self.send_error_utf8(500, "Ошибка сервера")
-
-    def handle_api_update_news(self):
-        """Обновление новости по ID"""
-        try:
-            length = int(self.headers.get('Content-Length', 0))
-            raw_data = self.rfile.read(length)
-            data = json.loads(raw_data.decode('utf-8'))
-
-            news_id = data.get('id')
-            if not news_id:
-                return self.send_json_response(False, "Отсутствует ID новости")
-
-            # Ищем файл
-            news_dir = os.path.join(PROJECT_ROOT, 'data', 'news')
-            json_file = None
-            for file in os.listdir(news_dir):
-                if file.startswith(f"{news_id}.json"):
-                    json_file = file
-                    break
-
-            if not json_file:
-                return self.send_json_response(False, "Новость не найдена")
-
-            file_path = os.path.join(news_dir, json_file)
-
-            with open(file_path, 'r', encoding='utf-8') as f:
-                news = json.load(f)
-
-            # Обновляем поля
-            news['title'] = data.get('title', news['title'])
-            news['date'] = data.get('date', news['date'])
-            news['preview'] = data.get('preview', news['preview'])
-            news['content'] = data.get('content', news['content'])
-
-            # Если загружено новое изображение
-            if 'image' in data and data['image']:
-                image_filename = news.get('image')
-                if image_filename and image_filename != data['image']:
-                    old_img_path = PathsHelper.get_image_path(image_filename)
-                    if os.path.exists(old_img_path):
-                        os.remove(old_img_path)
-
-                news['image'] = data['image']
-
-            with open(file_path, 'w', encoding='utf-8') as f:
-                json.dump(news, f, ensure_ascii=False, indent=2)
-
-            self.send_json_response(True, "Новость обновлена")
-
-        except Exception as e:
-            logging.error(f"Ошибка обновления новости: {e}")
-            self.send_error_utf8(500, "Ошибка сервера")
 
     def handle_get_news(self):
         try:
@@ -500,7 +336,6 @@ class SimpleHandler(BaseHTTPRequestHandler):
             self.send_error_utf8(500, "Ошибка сервера")
 
     def handle_news_request(self):
-        """Обработка запросов к отдельной новости"""
         try:
             filename = self.path.split('/')[-1]
             if not filename.endswith('.json'):
@@ -550,47 +385,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
         """
         self.wfile.write(form_html.encode('utf-8'))
 
-    # --- Image serving with explicit MIME types ---
-    def get_image_content_type(self, filename):
-        """Возвращает MIME-тип по расширению файла"""
-        ext = os.path.splitext(filename)[1].lower()
-        if ext in ['.png']:
-            return 'image/png'
-        elif ext in ['.jpg', '.jpeg']:
-            return 'image/jpeg'
-        return 'image/png'  # default
-
-    def serve_images(self):
-        image_path = self.path[len('/images/'):].split('?')[0]
-        # Извлекаем только имя файла, даже если был путь /images/img_n/name.jpg
-        filename = image_path.split('/')[-1]
-
-        # Ищем в images/img_n/ (основная директория для новостных картинок)
-        file_path = PathsHelper.get_image_path(filename)
-        
-        # Если не найдено, ищем в корне images/ (для logo.png, 1.png и т.д.)
-        if not os.path.exists(file_path):
-            file_path = os.path.join(PROJECT_ROOT, 'images', filename)
-        
-        # Если и там нет, используем fallback (400.png)
-        if not os.path.exists(file_path):
-            file_path = PathsHelper.get_fallback_path()
-
-        logging.debug(f"serve_images: filename={filename}, path={file_path}, exists={os.path.exists(file_path)}")
-
-        # Явно задаем MIME-тип по расширению
-        content_type = self.get_image_content_type(filename)
-
-        self.send_response(200)
-        self.send_header('Content-Type', content_type)
-        self.end_headers()
-
-        try:
-            with open(file_path, 'rb') as f:
-                self.wfile.write(f.read())
-        except Exception as e:
-            logging.error(f"Ошибка отдачи изображения: {e}")
-            self.send_error_utf8(500, f"Ошибка изображения: {e}")
+{"text": "    def serve_images(self):\n        image_path = self.path[len('/images/'):].split('?')[0]\n        # Извлекаем только имя файла, даже если был путь /images/img_n/name.jpg\n        filename = image_path.split('/')[-1]\n\n        # Ищем в images/img_n/ (основная директория для новостных картинок)\n        file_path = PathsHelper.get_image_path(filename)\n        \n        # Если не найдено, ищем в корне images/ (для logo.png, 1.png и т.д.)\n        if not os.path.exists(file_path):\n            file_path = os.path.join(PROJECT_ROOT, 'images', filename)\n        \n        # Если и там нет, используем fallback (400.png)\n        if not os.path.exists(file_path):\n            file_path = PathsHelper.get_fallback_path()\n\n        logging.debug(f\"serve_images: filename={filename}, path={file_path}, exists={os.path.exists(file_path)}\")\n\n        content_type, _ = mimetypes.guess_type(file_path)\n        if content_type is None:\n            content_type = 'image/png'\n\n        self.send_response(200)\n        self.send_header('Content-Type', content_type)\n        self.end_headers()\n\n        try:\n            with open(file_path, 'rb') as f:\n                self.wfile.write(f.read())\n        except Exception as e:\n            logging.error(f\"Ошибка отдачи изображения: {e}\")\n            self.send_error_utf8(500, f\"Ошибка изображения: {e}\")"}
 
 
 class PathsHelper:

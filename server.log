@@ -14037,3 +14037,840 @@
 2026-06-13 15:30:27,364 - DEBUG - serve_images: filename=400.png, path=f:\I0\002MySiS\MySite\images\img_n\400.png, exists=True
 2026-06-13 15:30:27,364 - INFO - 127.0.0.1 - - [13/Jun/2026 15:30:27] "GET /images/img_n/400.png HTTP/1.1" 200 -
 
+2026-06-13 15:39:43,830 - DEBUG - GET /news.html
+2026-06-13 15:39:43,830 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:43] "GET /news.html HTTP/1.1" 200 -
+
+2026-06-13 15:39:43,872 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 15:39:43,873 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:43] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 15:39:44,092 - DEBUG - GET /static/css/style.css
+2026-06-13 15:39:44,092 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:44] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 15:39:44,188 - DEBUG - GET /static/css/news-form.css
+2026-06-13 15:39:44,189 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:44] "GET /static/css/news-form.css HTTP/1.1" 200 -
+
+2026-06-13 15:39:44,189 - DEBUG - GET /static/js/access-init.js
+2026-06-13 15:39:44,189 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:44] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-13 15:39:44,190 - DEBUG - GET /static/js/main.js
+2026-06-13 15:39:44,190 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:44] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-13 15:39:44,191 - DEBUG - GET /images/logo.png
+2026-06-13 15:39:44,191 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-13 15:39:44,191 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:44] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-13 15:39:44,514 - DEBUG - GET /images/bg.jpg
+2026-06-13 15:39:44,515 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 15:39:44,515 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:44] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 15:39:44,516 - DEBUG - GET /static/js/permission-manager.js
+2026-06-13 15:39:44,516 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:44] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-13 15:39:44,523 - DEBUG - GET /static/js/logger.js
+2026-06-13 15:39:44,523 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:44] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 15:39:44,524 - DEBUG - GET /static/js/news-manager.js
+2026-06-13 15:39:44,524 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:44] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-13 15:39:44,525 - DEBUG - GET /static/js/news-form.js
+2026-06-13 15:39:44,525 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:44] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-13 15:39:44,842 - DEBUG - GET /static/js/access-levels.js
+2026-06-13 15:39:44,843 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:44] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-13 15:39:45,155 - DEBUG - GET /get-news
+2026-06-13 15:39:45,157 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /get-news HTTP/1.1" 200 -
+
+2026-06-13 15:39:45,184 - DEBUG - GET /favicon.ico
+2026-06-13 15:39:45,184 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /favicon.ico HTTP/1.1" 404 -
+
+2026-06-13 15:39:45,417 - DEBUG - GET /images/img_n/1781017229501.jpg
+2026-06-13 15:39:45,418 - DEBUG - serve_images: filename=1781017229501.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229501.jpg, exists=True
+2026-06-13 15:39:45,418 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /images/img_n/1781017229501.jpg HTTP/1.1" 200 -
+
+2026-06-13 15:39:45,498 - DEBUG - GET /images/img_n/1781017229509.jpg
+2026-06-13 15:39:45,498 - DEBUG - serve_images: filename=1781017229509.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229509.jpg, exists=True
+2026-06-13 15:39:45,499 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /images/img_n/1781017229509.jpg HTTP/1.1" 200 -
+
+2026-06-13 15:39:45,500 - DEBUG - GET /images/img_n/1781017229532.jpg
+2026-06-13 15:39:45,500 - DEBUG - serve_images: filename=1781017229532.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229532.jpg, exists=True
+2026-06-13 15:39:45,500 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /images/img_n/1781017229532.jpg HTTP/1.1" 200 -
+
+2026-06-13 15:39:45,501 - DEBUG - GET /images/img_n/1781017229521.jpg
+2026-06-13 15:39:45,501 - DEBUG - serve_images: filename=1781017229521.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229521.jpg, exists=True
+2026-06-13 15:39:45,501 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /images/img_n/1781017229521.jpg HTTP/1.1" 200 -
+
+2026-06-13 15:39:45,502 - DEBUG - GET /images/img_n/images/img_n/1781002918303.jpg
+2026-06-13 15:39:45,503 - DEBUG - serve_images: filename=1781002918303.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781002918303.jpg, exists=True
+2026-06-13 15:39:45,503 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /images/img_n/images/img_n/1781002918303.jpg HTTP/1.1" 200 -
+
+2026-06-13 15:39:45,504 - DEBUG - GET /images/img_n/images/img_n/1781002918608.jpg
+2026-06-13 15:39:45,504 - DEBUG - serve_images: filename=1781002918608.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781002918608.jpg, exists=True
+2026-06-13 15:39:45,504 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /images/img_n/images/img_n/1781002918608.jpg HTTP/1.1" 200 -
+
+2026-06-13 15:39:45,729 - DEBUG - GET /images/img_n/1781019147263.jpg
+2026-06-13 15:39:45,730 - DEBUG - serve_images: filename=1781019147263.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781019147263.jpg, exists=True
+2026-06-13 15:39:45,730 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /images/img_n/1781019147263.jpg HTTP/1.1" 200 -
+
+2026-06-13 15:39:45,829 - DEBUG - GET /images/img_n/1781019147250.jpg
+2026-06-13 15:39:45,829 - DEBUG - serve_images: filename=1781019147250.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781019147250.jpg, exists=True
+2026-06-13 15:39:45,829 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /images/img_n/1781019147250.jpg HTTP/1.1" 200 -
+
+2026-06-13 15:39:45,830 - DEBUG - GET /images/img_n/1781018732688.jpg
+2026-06-13 15:39:45,831 - DEBUG - serve_images: filename=1781018732688.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781018732688.jpg, exists=True
+2026-06-13 15:39:45,831 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /images/img_n/1781018732688.jpg HTTP/1.1" 200 -
+
+2026-06-13 15:39:45,832 - DEBUG - GET /images/img_n/1781018732676.jpg
+2026-06-13 15:39:45,832 - DEBUG - serve_images: filename=1781018732676.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781018732676.jpg, exists=True
+2026-06-13 15:39:45,832 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /images/img_n/1781018732676.jpg HTTP/1.1" 200 -
+
+2026-06-13 15:39:45,833 - DEBUG - GET /images/img_n/1781017393211.jpg
+2026-06-13 15:39:45,834 - DEBUG - serve_images: filename=1781017393211.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017393211.jpg, exists=True
+2026-06-13 15:39:45,834 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /images/img_n/1781017393211.jpg HTTP/1.1" 200 -
+
+2026-06-13 15:39:45,835 - DEBUG - GET /images/img_n/1781017393197.jpg
+2026-06-13 15:39:45,835 - DEBUG - serve_images: filename=1781017393197.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017393197.jpg, exists=True
+2026-06-13 15:39:45,835 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:45] "GET /images/img_n/1781017393197.jpg HTTP/1.1" 200 -
+
+2026-06-13 15:39:46,042 - DEBUG - GET /images/img_n/400.png
+2026-06-13 15:39:46,043 - DEBUG - serve_images: filename=400.png, path=f:\I0\002MySiS\MySite\images\img_n\400.png, exists=True
+2026-06-13 15:39:46,043 - INFO - 127.0.0.1 - - [13/Jun/2026 15:39:46] "GET /images/img_n/400.png HTTP/1.1" 200 -
+
+2026-06-13 16:11:36,285 - DEBUG - GET /news.html
+2026-06-13 16:11:36,285 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:36] "GET /news.html HTTP/1.1" 200 -
+
+2026-06-13 16:11:36,323 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 16:11:36,323 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:36] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 16:11:36,548 - DEBUG - GET /static/css/style.css
+2026-06-13 16:11:36,548 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:36] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 16:11:36,646 - DEBUG - GET /static/css/news-form.css
+2026-06-13 16:11:36,646 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:36] "GET /static/css/news-form.css HTTP/1.1" 200 -
+
+2026-06-13 16:11:36,647 - DEBUG - GET /static/js/access-init.js
+2026-06-13 16:11:36,647 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:36] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-13 16:11:36,648 - DEBUG - GET /static/js/main.js
+2026-06-13 16:11:36,648 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:36] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-13 16:11:36,649 - DEBUG - GET /images/logo.png
+2026-06-13 16:11:36,649 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-13 16:11:36,649 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:36] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-13 16:11:36,968 - DEBUG - GET /images/bg.jpg
+2026-06-13 16:11:36,969 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 16:11:36,969 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:36] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:11:36,975 - DEBUG - GET /static/js/permission-manager.js
+2026-06-13 16:11:36,976 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:36] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:11:36,976 - DEBUG - GET /static/js/logger.js
+2026-06-13 16:11:36,977 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:36] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 16:11:36,977 - DEBUG - GET /static/js/news-manager.js
+2026-06-13 16:11:36,977 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:36] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:11:36,978 - DEBUG - GET /static/js/news-form.js
+2026-06-13 16:11:36,978 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:36] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-13 16:11:37,234 - DEBUG - GET /static/js/access-levels.js
+2026-06-13 16:11:37,235 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-13 16:11:37,298 - DEBUG - GET /get-news
+2026-06-13 16:11:37,300 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /get-news HTTP/1.1" 200 -
+
+2026-06-13 16:11:37,564 - DEBUG - GET /favicon.ico
+2026-06-13 16:11:37,564 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /favicon.ico HTTP/1.1" 404 -
+
+2026-06-13 16:11:37,569 - DEBUG - GET /images/img_n/1781017229532.jpg
+2026-06-13 16:11:37,570 - DEBUG - serve_images: filename=1781017229532.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229532.jpg, exists=True
+2026-06-13 16:11:37,570 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /images/img_n/1781017229532.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:11:37,646 - DEBUG - GET /images/img_n/1781017229509.jpg
+2026-06-13 16:11:37,647 - DEBUG - serve_images: filename=1781017229509.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229509.jpg, exists=True
+2026-06-13 16:11:37,647 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /images/img_n/1781017229509.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:11:37,648 - DEBUG - GET /images/img_n/1781017229521.jpg
+2026-06-13 16:11:37,648 - DEBUG - serve_images: filename=1781017229521.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229521.jpg, exists=True
+2026-06-13 16:11:37,648 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /images/img_n/1781017229521.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:11:37,649 - DEBUG - GET /images/img_n/1781017229501.jpg
+2026-06-13 16:11:37,649 - DEBUG - serve_images: filename=1781017229501.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229501.jpg, exists=True
+2026-06-13 16:11:37,649 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /images/img_n/1781017229501.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:11:37,650 - DEBUG - GET /images/img_n/1781017393197.jpg
+2026-06-13 16:11:37,650 - DEBUG - serve_images: filename=1781017393197.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017393197.jpg, exists=True
+2026-06-13 16:11:37,650 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /images/img_n/1781017393197.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:11:37,879 - DEBUG - GET /images/img_n/images/img_n/1781002918608.jpg
+2026-06-13 16:11:37,879 - DEBUG - serve_images: filename=1781002918608.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781002918608.jpg, exists=True
+2026-06-13 16:11:37,879 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /images/img_n/images/img_n/1781002918608.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:11:37,880 - DEBUG - GET /images/img_n/images/img_n/1781002918303.jpg
+2026-06-13 16:11:37,880 - DEBUG - serve_images: filename=1781002918303.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781002918303.jpg, exists=True
+2026-06-13 16:11:37,881 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /images/img_n/images/img_n/1781002918303.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:11:37,975 - DEBUG - GET /images/img_n/1781019147263.jpg
+2026-06-13 16:11:37,976 - DEBUG - serve_images: filename=1781019147263.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781019147263.jpg, exists=True
+2026-06-13 16:11:37,976 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /images/img_n/1781019147263.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:11:37,977 - DEBUG - GET /images/img_n/1781019147250.jpg
+2026-06-13 16:11:37,977 - DEBUG - serve_images: filename=1781019147250.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781019147250.jpg, exists=True
+2026-06-13 16:11:37,977 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /images/img_n/1781019147250.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:11:37,978 - DEBUG - GET /images/img_n/1781018732688.jpg
+2026-06-13 16:11:37,979 - DEBUG - serve_images: filename=1781018732688.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781018732688.jpg, exists=True
+2026-06-13 16:11:37,979 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /images/img_n/1781018732688.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:11:37,980 - DEBUG - GET /images/img_n/1781018732676.jpg
+2026-06-13 16:11:37,980 - DEBUG - serve_images: filename=1781018732676.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781018732676.jpg, exists=True
+2026-06-13 16:11:37,980 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:37] "GET /images/img_n/1781018732676.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:11:38,208 - DEBUG - GET /images/img_n/1781017393211.jpg
+2026-06-13 16:11:38,208 - DEBUG - serve_images: filename=1781017393211.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017393211.jpg, exists=True
+2026-06-13 16:11:38,208 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:38] "GET /images/img_n/1781017393211.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:11:38,209 - DEBUG - GET /images/img_n/400.png
+2026-06-13 16:11:38,209 - DEBUG - serve_images: filename=400.png, path=f:\I0\002MySiS\MySite\images\img_n\400.png, exists=True
+2026-06-13 16:11:38,209 - INFO - 127.0.0.1 - - [13/Jun/2026 16:11:38] "GET /images/img_n/400.png HTTP/1.1" 200 -
+
+2026-06-13 16:12:13,294 - DEBUG - GET /index.html
+2026-06-13 16:12:13,294 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:13] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-13 16:12:13,431 - DEBUG - GET /static/css/style.css
+2026-06-13 16:12:13,431 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:13] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 16:12:13,554 - DEBUG - GET /static/js/access-init.js
+2026-06-13 16:12:13,554 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:13] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:13,667 - DEBUG - GET /static/js/main.js
+2026-06-13 16:12:13,667 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:13] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:13,668 - DEBUG - GET /images/logo.png
+2026-06-13 16:12:13,668 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-13 16:12:13,668 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:13] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-13 16:12:13,670 - DEBUG - GET /images/1.png
+2026-06-13 16:12:13,670 - DEBUG - serve_images: filename=1.png, path=f:\I0\002MySiS\MySite\images\1.png, exists=True
+2026-06-13 16:12:13,671 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:13] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-13 16:12:13,673 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 16:12:13,673 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:13] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 16:12:13,996 - DEBUG - GET /static/js/permission-manager.js
+2026-06-13 16:12:13,996 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:13] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:13,997 - DEBUG - GET /static/js/logger.js
+2026-06-13 16:12:13,997 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:13] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:13,997 - DEBUG - GET /static/js/news-manager.js
+2026-06-13 16:12:13,997 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:13] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:14,026 - DEBUG - GET /static/js/news-form.js
+2026-06-13 16:12:14,026 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:14] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:14,027 - DEBUG - GET /static/js/access-levels.js
+2026-06-13 16:12:14,027 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:14] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:14,027 - DEBUG - GET /images/2.png
+2026-06-13 16:12:14,028 - DEBUG - serve_images: filename=2.png, path=f:\I0\002MySiS\MySite\images\2.png, exists=True
+2026-06-13 16:12:14,028 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:14] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-13 16:12:14,321 - DEBUG - GET /images/3.png
+2026-06-13 16:12:14,321 - DEBUG - serve_images: filename=3.png, path=f:\I0\002MySiS\MySite\images\3.png, exists=True
+2026-06-13 16:12:14,321 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:14] "GET /images/3.png HTTP/1.1" 200 -
+
+2026-06-13 16:12:14,323 - DEBUG - GET /images/bg.jpg
+2026-06-13 16:12:14,323 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 16:12:14,323 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:14] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:21,856 - DEBUG - GET /static/css/style.css
+2026-06-13 16:12:21,856 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:21] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 16:12:21,979 - DEBUG - GET /static/js/main.js
+2026-06-13 16:12:21,980 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:21] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:22,012 - DEBUG - GET /images/logo.png
+2026-06-13 16:12:22,012 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-13 16:12:22,013 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:22] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-13 16:12:22,015 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 16:12:22,015 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:22] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 16:12:22,118 - DEBUG - GET /static/js/logger.js
+2026-06-13 16:12:22,119 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:22] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:22,318 - DEBUG - GET /static/js/news-manager.js
+2026-06-13 16:12:22,319 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:22] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:22,327 - DEBUG - GET /static/js/news-form.js
+2026-06-13 16:12:22,327 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:22] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:22,328 - DEBUG - GET /images/bg.jpg
+2026-06-13 16:12:22,328 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 16:12:22,329 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:22] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:22,631 - DEBUG - GET /static/js/access-levels.js
+2026-06-13 16:12:22,631 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:22] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:27,865 - DEBUG - GET /static/css/style.css
+2026-06-13 16:12:27,865 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:27] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 16:12:27,897 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 16:12:27,897 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:27] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 16:12:28,131 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 16:12:28,131 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:28] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 16:12:47,078 - DEBUG - GET /news.html
+2026-06-13 16:12:47,079 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:47] "GET /news.html HTTP/1.1" 200 -
+
+2026-06-13 16:12:47,386 - DEBUG - GET /static/css/style.css
+2026-06-13 16:12:47,387 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:47] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 16:12:47,454 - DEBUG - GET /static/css/news-form.css
+2026-06-13 16:12:47,455 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:47] "GET /static/css/news-form.css HTTP/1.1" 200 -
+
+2026-06-13 16:12:47,455 - DEBUG - GET /static/js/access-init.js
+2026-06-13 16:12:47,455 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:47] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:47,456 - DEBUG - GET /static/js/main.js
+2026-06-13 16:12:47,456 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:47] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:47,457 - DEBUG - GET /images/logo.png
+2026-06-13 16:12:47,457 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-13 16:12:47,457 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:47] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-13 16:12:47,460 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 16:12:47,460 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:47] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 16:12:47,774 - DEBUG - GET /static/js/permission-manager.js
+2026-06-13 16:12:47,774 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:47] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:47,785 - DEBUG - GET /static/js/logger.js
+2026-06-13 16:12:47,786 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:47] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:47,786 - DEBUG - GET /static/js/news-manager.js
+2026-06-13 16:12:47,787 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:47] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:47,787 - DEBUG - GET /static/js/news-form.js
+2026-06-13 16:12:47,787 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:47] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:47,788 - DEBUG - GET /images/bg.jpg
+2026-06-13 16:12:47,788 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 16:12:47,788 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:47] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:48,099 - DEBUG - GET /static/js/access-levels.js
+2026-06-13 16:12:48,100 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:48] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:48,413 - DEBUG - GET /get-news
+2026-06-13 16:12:48,415 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:48] "GET /get-news HTTP/1.1" 200 -
+
+2026-06-13 16:12:48,677 - DEBUG - GET /images/img_n/1781019147263.jpg
+2026-06-13 16:12:48,678 - DEBUG - serve_images: filename=1781019147263.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781019147263.jpg, exists=True
+2026-06-13 16:12:48,678 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:48] "GET /images/img_n/1781019147263.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:48,760 - DEBUG - GET /images/img_n/1781017229521.jpg
+2026-06-13 16:12:48,761 - DEBUG - serve_images: filename=1781017229521.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229521.jpg, exists=True
+2026-06-13 16:12:48,761 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:48] "GET /images/img_n/1781017229521.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:48,762 - DEBUG - GET /images/img_n/1781017229501.jpg
+2026-06-13 16:12:48,762 - DEBUG - serve_images: filename=1781017229501.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229501.jpg, exists=True
+2026-06-13 16:12:48,762 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:48] "GET /images/img_n/1781017229501.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:48,763 - DEBUG - GET /images/img_n/images/img_n/1781002918608.jpg
+2026-06-13 16:12:48,763 - DEBUG - serve_images: filename=1781002918608.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781002918608.jpg, exists=True
+2026-06-13 16:12:48,763 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:48] "GET /images/img_n/images/img_n/1781002918608.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:48,764 - DEBUG - GET /images/img_n/1781017229509.jpg
+2026-06-13 16:12:48,764 - DEBUG - serve_images: filename=1781017229509.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229509.jpg, exists=True
+2026-06-13 16:12:48,764 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:48] "GET /images/img_n/1781017229509.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:48,765 - DEBUG - GET /images/img_n/images/img_n/1781002918303.jpg
+2026-06-13 16:12:48,766 - DEBUG - serve_images: filename=1781002918303.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781002918303.jpg, exists=True
+2026-06-13 16:12:48,766 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:48] "GET /images/img_n/images/img_n/1781002918303.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:48,990 - DEBUG - GET /images/img_n/1781019147250.jpg
+2026-06-13 16:12:48,990 - DEBUG - serve_images: filename=1781019147250.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781019147250.jpg, exists=True
+2026-06-13 16:12:48,990 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:48] "GET /images/img_n/1781019147250.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:49,081 - DEBUG - GET /images/img_n/1781018732688.jpg
+2026-06-13 16:12:49,081 - DEBUG - serve_images: filename=1781018732688.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781018732688.jpg, exists=True
+2026-06-13 16:12:49,081 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:49] "GET /images/img_n/1781018732688.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:49,082 - DEBUG - GET /images/img_n/1781018732676.jpg
+2026-06-13 16:12:49,082 - DEBUG - serve_images: filename=1781018732676.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781018732676.jpg, exists=True
+2026-06-13 16:12:49,082 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:49] "GET /images/img_n/1781018732676.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:49,091 - DEBUG - GET /images/img_n/1781017393211.jpg
+2026-06-13 16:12:49,091 - DEBUG - serve_images: filename=1781017393211.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017393211.jpg, exists=True
+2026-06-13 16:12:49,091 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:49] "GET /images/img_n/1781017393211.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:49,093 - DEBUG - GET /images/img_n/1781017393197.jpg
+2026-06-13 16:12:49,094 - DEBUG - serve_images: filename=1781017393197.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017393197.jpg, exists=True
+2026-06-13 16:12:49,094 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:49] "GET /images/img_n/1781017393197.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:49,095 - DEBUG - GET /images/img_n/1781017229532.jpg
+2026-06-13 16:12:49,095 - DEBUG - serve_images: filename=1781017229532.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229532.jpg, exists=True
+2026-06-13 16:12:49,095 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:49] "GET /images/img_n/1781017229532.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:49,304 - DEBUG - GET /images/img_n/400.png
+2026-06-13 16:12:49,305 - DEBUG - serve_images: filename=400.png, path=f:\I0\002MySiS\MySite\images\img_n\400.png, exists=True
+2026-06-13 16:12:49,305 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:49] "GET /images/img_n/400.png HTTP/1.1" 200 -
+
+2026-06-13 16:12:55,937 - DEBUG - GET /index.html
+2026-06-13 16:12:55,937 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:55] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,065 - DEBUG - GET /static/css/style.css
+2026-06-13 16:12:56,065 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,210 - DEBUG - GET /static/js/access-init.js
+2026-06-13 16:12:56,211 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,308 - DEBUG - GET /static/js/main.js
+2026-06-13 16:12:56,308 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,309 - DEBUG - GET /static/js/permission-manager.js
+2026-06-13 16:12:56,309 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,310 - DEBUG - GET /images/logo.png
+2026-06-13 16:12:56,310 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-13 16:12:56,310 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,312 - DEBUG - GET /images/1.png
+2026-06-13 16:12:56,312 - DEBUG - serve_images: filename=1.png, path=f:\I0\002MySiS\MySite\images\1.png, exists=True
+2026-06-13 16:12:56,312 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,588 - DEBUG - GET /static/js/logger.js
+2026-06-13 16:12:56,588 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,589 - DEBUG - GET /static/js/news-manager.js
+2026-06-13 16:12:56,589 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,618 - DEBUG - GET /static/js/news-form.js
+2026-06-13 16:12:56,618 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,625 - DEBUG - GET /static/js/access-levels.js
+2026-06-13 16:12:56,626 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,633 - DEBUG - GET /images/2.png
+2026-06-13 16:12:56,634 - DEBUG - serve_images: filename=2.png, path=f:\I0\002MySiS\MySite\images\2.png, exists=True
+2026-06-13 16:12:56,634 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,641 - DEBUG - GET /images/3.png
+2026-06-13 16:12:56,642 - DEBUG - serve_images: filename=3.png, path=f:\I0\002MySiS\MySite\images\3.png, exists=True
+2026-06-13 16:12:56,642 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /images/3.png HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,902 - DEBUG - GET /images/bg.jpg
+2026-06-13 16:12:56,902 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 16:12:56,902 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:12:56,903 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 16:12:56,903 - INFO - 127.0.0.1 - - [13/Jun/2026 16:12:56] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 16:15:13,002 - DEBUG - GET /index.html
+2026-06-13 16:15:13,003 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:13] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-13 16:15:20,713 - DEBUG - GET /index.html
+2026-06-13 16:15:20,713 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:20] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-13 16:15:33,373 - DEBUG - GET /index.html
+2026-06-13 16:15:33,374 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:33] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-13 16:15:33,419 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 16:15:33,420 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:33] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 16:15:33,634 - DEBUG - GET /static/css/style.css
+2026-06-13 16:15:33,634 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:33] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 16:15:33,746 - DEBUG - GET /static/js/access-init.js
+2026-06-13 16:15:33,747 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:33] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-13 16:15:33,747 - DEBUG - GET /static/js/main.js
+2026-06-13 16:15:33,747 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:33] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-13 16:15:33,748 - DEBUG - GET /images/logo.png
+2026-06-13 16:15:33,748 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-13 16:15:33,748 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:33] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-13 16:15:33,751 - DEBUG - GET /images/1.png
+2026-06-13 16:15:33,751 - DEBUG - serve_images: filename=1.png, path=f:\I0\002MySiS\MySite\images\1.png, exists=True
+2026-06-13 16:15:33,752 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:33] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-13 16:15:34,058 - DEBUG - GET /images/2.png
+2026-06-13 16:15:34,059 - DEBUG - serve_images: filename=2.png, path=f:\I0\002MySiS\MySite\images\2.png, exists=True
+2026-06-13 16:15:34,059 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:34] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-13 16:15:34,061 - DEBUG - GET /images/3.png
+2026-06-13 16:15:34,061 - DEBUG - serve_images: filename=3.png, path=f:\I0\002MySiS\MySite\images\3.png, exists=True
+2026-06-13 16:15:34,062 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:34] "GET /images/3.png HTTP/1.1" 200 -
+
+2026-06-13 16:15:34,063 - DEBUG - GET /images/bg.jpg
+2026-06-13 16:15:34,064 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 16:15:34,064 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:34] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:15:34,066 - DEBUG - GET /static/js/permission-manager.js
+2026-06-13 16:15:34,066 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:34] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:15:34,077 - DEBUG - GET /static/js/logger.js
+2026-06-13 16:15:34,077 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:34] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 16:15:34,078 - DEBUG - GET /static/js/news-manager.js
+2026-06-13 16:15:34,079 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:34] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:15:34,385 - DEBUG - GET /static/js/news-form.js
+2026-06-13 16:15:34,385 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:34] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-13 16:15:34,386 - DEBUG - GET /static/js/access-levels.js
+2026-06-13 16:15:34,386 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:34] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-13 16:15:34,729 - DEBUG - GET /favicon.ico
+2026-06-13 16:15:34,730 - INFO - 127.0.0.1 - - [13/Jun/2026 16:15:34] "GET /favicon.ico HTTP/1.1" 404 -
+
+2026-06-13 16:38:30,634 - DEBUG - GET /news.html
+2026-06-13 16:38:30,634 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:30] "GET /news.html HTTP/1.1" 200 -
+
+2026-06-13 16:38:30,699 - DEBUG - GET /static/js/access-init.js
+2026-06-13 16:38:30,700 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:30] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,009 - DEBUG - GET /static/css/style.css
+2026-06-13 16:38:31,009 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,010 - DEBUG - GET /static/css/news-form.css
+2026-06-13 16:38:31,010 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /static/css/news-form.css HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,011 - DEBUG - GET /static/js/main.js
+2026-06-13 16:38:31,011 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,012 - DEBUG - GET /images/logo.png
+2026-06-13 16:38:31,012 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-13 16:38:31,013 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,309 - DEBUG - GET /static/js/permission-manager.js
+2026-06-13 16:38:31,309 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,371 - DEBUG - GET /static/js/logger.js
+2026-06-13 16:38:31,371 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,372 - DEBUG - GET /static/js/news-manager.js
+2026-06-13 16:38:31,372 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,373 - DEBUG - GET /static/js/news-form.js
+2026-06-13 16:38:31,373 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,374 - DEBUG - GET /static/js/access-levels.js
+2026-06-13 16:38:31,374 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,623 - DEBUG - GET /get-news
+2026-06-13 16:38:31,626 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /get-news HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,716 - DEBUG - GET /images/bg.jpg
+2026-06-13 16:38:31,717 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 16:38:31,717 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,981 - DEBUG - GET /images/img_n/1781019147263.jpg
+2026-06-13 16:38:31,981 - DEBUG - serve_images: filename=1781019147263.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781019147263.jpg, exists=True
+2026-06-13 16:38:31,981 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /images/img_n/1781019147263.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,982 - DEBUG - GET /images/img_n/1781019147250.jpg
+2026-06-13 16:38:31,983 - DEBUG - serve_images: filename=1781019147250.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781019147250.jpg, exists=True
+2026-06-13 16:38:31,983 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /images/img_n/1781019147250.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,984 - DEBUG - GET /images/img_n/1781018732688.jpg
+2026-06-13 16:38:31,984 - DEBUG - serve_images: filename=1781018732688.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781018732688.jpg, exists=True
+2026-06-13 16:38:31,984 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /images/img_n/1781018732688.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,986 - DEBUG - GET /images/img_n/1781018732676.jpg
+2026-06-13 16:38:31,986 - DEBUG - serve_images: filename=1781018732676.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781018732676.jpg, exists=True
+2026-06-13 16:38:31,986 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /images/img_n/1781018732676.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:38:31,988 - DEBUG - GET /images/img_n/1781017393211.jpg
+2026-06-13 16:38:31,989 - DEBUG - serve_images: filename=1781017393211.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017393211.jpg, exists=True
+2026-06-13 16:38:31,989 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:31] "GET /images/img_n/1781017393211.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:38:32,043 - DEBUG - GET /images/img_n/1781017393197.jpg
+2026-06-13 16:38:32,043 - DEBUG - serve_images: filename=1781017393197.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017393197.jpg, exists=True
+2026-06-13 16:38:32,043 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:32] "GET /images/img_n/1781017393197.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:38:32,307 - DEBUG - GET /images/img_n/1781017229532.jpg
+2026-06-13 16:38:32,308 - DEBUG - serve_images: filename=1781017229532.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229532.jpg, exists=True
+2026-06-13 16:38:32,308 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:32] "GET /images/img_n/1781017229532.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:38:32,317 - DEBUG - GET /images/img_n/1781017229521.jpg
+2026-06-13 16:38:32,317 - DEBUG - serve_images: filename=1781017229521.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229521.jpg, exists=True
+2026-06-13 16:38:32,317 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:32] "GET /images/img_n/1781017229521.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:38:32,319 - DEBUG - GET /images/img_n/1781017229509.jpg
+2026-06-13 16:38:32,319 - DEBUG - serve_images: filename=1781017229509.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229509.jpg, exists=True
+2026-06-13 16:38:32,319 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:32] "GET /images/img_n/1781017229509.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:38:32,325 - DEBUG - GET /images/img_n/1781017229501.jpg
+2026-06-13 16:38:32,326 - DEBUG - serve_images: filename=1781017229501.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781017229501.jpg, exists=True
+2026-06-13 16:38:32,326 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:32] "GET /images/img_n/1781017229501.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:38:32,327 - DEBUG - GET /images/img_n/images/img_n/1781002918608.jpg
+2026-06-13 16:38:32,328 - DEBUG - serve_images: filename=1781002918608.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781002918608.jpg, exists=True
+2026-06-13 16:38:32,328 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:32] "GET /images/img_n/images/img_n/1781002918608.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:38:32,363 - DEBUG - GET /images/img_n/images/img_n/1781002918303.jpg
+2026-06-13 16:38:32,363 - DEBUG - serve_images: filename=1781002918303.jpg, path=f:\I0\002MySiS\MySite\images\img_n\1781002918303.jpg, exists=True
+2026-06-13 16:38:32,363 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:32] "GET /images/img_n/images/img_n/1781002918303.jpg HTTP/1.1" 200 -
+
+2026-06-13 16:38:32,636 - DEBUG - GET /images/img_n/400.png
+2026-06-13 16:38:32,637 - DEBUG - serve_images: filename=400.png, path=f:\I0\002MySiS\MySite\images\img_n\400.png, exists=True
+2026-06-13 16:38:32,637 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:32] "GET /images/img_n/400.png HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,040 - DEBUG - GET /index.html
+2026-06-13 16:38:39,040 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,167 - DEBUG - GET /static/css/style.css
+2026-06-13 16:38:39,168 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,293 - DEBUG - GET /static/js/access-init.js
+2026-06-13 16:38:39,294 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,411 - DEBUG - GET /static/js/main.js
+2026-06-13 16:38:39,411 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,412 - DEBUG - GET /static/js/permission-manager.js
+2026-06-13 16:38:39,412 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,413 - DEBUG - GET /images/logo.png
+2026-06-13 16:38:39,413 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-13 16:38:39,413 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,415 - DEBUG - GET /images/1.png
+2026-06-13 16:38:39,415 - DEBUG - serve_images: filename=1.png, path=f:\I0\002MySiS\MySite\images\1.png, exists=True
+2026-06-13 16:38:39,415 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,638 - DEBUG - GET /static/js/access-levels.js
+2026-06-13 16:38:39,638 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,639 - DEBUG - GET /static/js/logger.js
+2026-06-13 16:38:39,639 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,744 - DEBUG - GET /static/js/news-manager.js
+2026-06-13 16:38:39,745 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,755 - DEBUG - GET /static/js/news-form.js
+2026-06-13 16:38:39,755 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,756 - DEBUG - GET /images/2.png
+2026-06-13 16:38:39,756 - DEBUG - serve_images: filename=2.png, path=f:\I0\002MySiS\MySite\images\2.png, exists=True
+2026-06-13 16:38:39,756 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,758 - DEBUG - GET /images/3.png
+2026-06-13 16:38:39,758 - DEBUG - serve_images: filename=3.png, path=f:\I0\002MySiS\MySite\images\3.png, exists=True
+2026-06-13 16:38:39,759 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /images/3.png HTTP/1.1" 200 -
+
+2026-06-13 16:38:39,950 - DEBUG - GET /images/bg.jpg
+2026-06-13 16:38:39,951 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 16:38:39,951 - INFO - 127.0.0.1 - - [13/Jun/2026 16:38:39] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 17:20:41,668 - DEBUG - GET /index.html
+2026-06-13 17:20:41,669 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:41] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-13 17:20:41,717 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 17:20:41,717 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:41] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 17:20:41,928 - DEBUG - GET /static/css/style.css
+2026-06-13 17:20:41,928 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:41] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 17:20:42,043 - DEBUG - GET /static/js/access-init.js
+2026-06-13 17:20:42,043 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:42] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-13 17:20:42,044 - DEBUG - GET /static/js/main.js
+2026-06-13 17:20:42,044 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:42] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-13 17:20:42,045 - DEBUG - GET /images/logo.png
+2026-06-13 17:20:42,045 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-13 17:20:42,045 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:42] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-13 17:20:42,047 - DEBUG - GET /images/1.png
+2026-06-13 17:20:42,047 - DEBUG - serve_images: filename=1.png, path=f:\I0\002MySiS\MySite\images\1.png, exists=True
+2026-06-13 17:20:42,048 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:42] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-13 17:20:42,390 - DEBUG - GET /images/bg.jpg
+2026-06-13 17:20:42,390 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 17:20:42,390 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:42] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 17:20:42,392 - DEBUG - GET /static/js/permission-manager.js
+2026-06-13 17:20:42,392 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:42] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-13 17:20:42,392 - DEBUG - GET /static/js/logger.js
+2026-06-13 17:20:42,392 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:42] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 17:20:42,393 - DEBUG - GET /static/js/news-manager.js
+2026-06-13 17:20:42,393 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:42] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-13 17:20:42,394 - DEBUG - GET /static/js/news-form.js
+2026-06-13 17:20:42,394 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:42] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-13 17:20:42,394 - DEBUG - GET /images/2.png
+2026-06-13 17:20:42,395 - DEBUG - serve_images: filename=2.png, path=f:\I0\002MySiS\MySite\images\2.png, exists=True
+2026-06-13 17:20:42,395 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:42] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-13 17:20:42,714 - DEBUG - GET /static/js/access-levels.js
+2026-06-13 17:20:42,714 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:42] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-13 17:20:42,726 - DEBUG - GET /images/3.png
+2026-06-13 17:20:42,726 - DEBUG - serve_images: filename=3.png, path=f:\I0\002MySiS\MySite\images\3.png, exists=True
+2026-06-13 17:20:42,726 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:42] "GET /images/3.png HTTP/1.1" 200 -
+
+2026-06-13 17:20:43,060 - DEBUG - GET /favicon.ico
+2026-06-13 17:20:43,060 - INFO - 127.0.0.1 - - [13/Jun/2026 17:20:43] "GET /favicon.ico HTTP/1.1" 404 -
+
+2026-06-13 19:35:43,726 - DEBUG - GET /index.html
+2026-06-13 19:35:43,727 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:43] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-13 19:35:43,840 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 19:35:43,841 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:43] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 19:35:44,090 - DEBUG - GET /static/css/style.css
+2026-06-13 19:35:44,091 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:44] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 19:35:44,175 - DEBUG - GET /static/js/access-init.js
+2026-06-13 19:35:44,176 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:44] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-13 19:35:44,177 - DEBUG - GET /static/js/main.js
+2026-06-13 19:35:44,177 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:44] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-13 19:35:44,185 - DEBUG - GET /images/logo.png
+2026-06-13 19:35:44,185 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-13 19:35:44,185 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:44] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-13 19:35:44,205 - DEBUG - GET /images/1.png
+2026-06-13 19:35:44,206 - DEBUG - serve_images: filename=1.png, path=f:\I0\002MySiS\MySite\images\1.png, exists=True
+2026-06-13 19:35:44,206 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:44] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-13 19:35:44,689 - DEBUG - GET /static/js/permission-manager.js
+2026-06-13 19:35:44,690 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:44] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-13 19:35:44,691 - DEBUG - GET /static/js/logger.js
+2026-06-13 19:35:44,691 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:44] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 19:35:44,698 - DEBUG - GET /static/js/news-manager.js
+2026-06-13 19:35:44,698 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:44] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-13 19:35:44,705 - DEBUG - GET /static/js/news-form.js
+2026-06-13 19:35:44,705 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:44] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-13 19:35:44,715 - DEBUG - GET /images/3.png
+2026-06-13 19:35:44,715 - DEBUG - serve_images: filename=3.png, path=f:\I0\002MySiS\MySite\images\3.png, exists=True
+2026-06-13 19:35:44,715 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:44] "GET /images/3.png HTTP/1.1" 200 -
+
+2026-06-13 19:35:44,734 - DEBUG - GET /images/2.png
+2026-06-13 19:35:44,734 - DEBUG - serve_images: filename=2.png, path=f:\I0\002MySiS\MySite\images\2.png, exists=True
+2026-06-13 19:35:44,734 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:44] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-13 19:35:45,025 - DEBUG - GET /static/js/access-levels.js
+2026-06-13 19:35:45,026 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:45] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-13 19:35:45,032 - DEBUG - GET /images/bg.jpg
+2026-06-13 19:35:45,033 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 19:35:45,033 - INFO - 127.0.0.1 - - [13/Jun/2026 19:35:45] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 20:12:25,317 - DEBUG - GET /index.html
+2026-06-13 20:12:25,318 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:25] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-13 20:12:25,375 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 20:12:25,375 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:25] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 20:12:25,581 - DEBUG - GET /static/css/style.css
+2026-06-13 20:12:25,581 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:25] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 20:12:25,695 - DEBUG - GET /static/js/access-init.js
+2026-06-13 20:12:25,695 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:25] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-13 20:12:25,696 - DEBUG - GET /static/js/main.js
+2026-06-13 20:12:25,696 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:25] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-13 20:12:25,697 - DEBUG - GET /images/logo.png
+2026-06-13 20:12:25,697 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-13 20:12:25,697 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:25] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-13 20:12:25,700 - DEBUG - GET /images/1.png
+2026-06-13 20:12:25,701 - DEBUG - serve_images: filename=1.png, path=f:\I0\002MySiS\MySite\images\1.png, exists=True
+2026-06-13 20:12:25,701 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:25] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-13 20:12:26,115 - DEBUG - GET /images/bg.jpg
+2026-06-13 20:12:26,116 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 20:12:26,116 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:26] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 20:12:26,117 - DEBUG - GET /static/js/permission-manager.js
+2026-06-13 20:12:26,118 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:26] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-13 20:12:26,119 - DEBUG - GET /static/js/news-manager.js
+2026-06-13 20:12:26,119 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:26] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-13 20:12:26,120 - DEBUG - GET /static/js/logger.js
+2026-06-13 20:12:26,120 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:26] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 20:12:26,121 - DEBUG - GET /static/js/news-form.js
+2026-06-13 20:12:26,121 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:26] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-13 20:12:26,122 - DEBUG - GET /images/2.png
+2026-06-13 20:12:26,123 - DEBUG - serve_images: filename=2.png, path=f:\I0\002MySiS\MySite\images\2.png, exists=True
+2026-06-13 20:12:26,123 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:26] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-13 20:12:26,434 - DEBUG - GET /static/js/access-levels.js
+2026-06-13 20:12:26,435 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:26] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-13 20:12:26,435 - DEBUG - GET /images/3.png
+2026-06-13 20:12:26,436 - DEBUG - serve_images: filename=3.png, path=f:\I0\002MySiS\MySite\images\3.png, exists=True
+2026-06-13 20:12:26,436 - INFO - 127.0.0.1 - - [13/Jun/2026 20:12:26] "GET /images/3.png HTTP/1.1" 200 -
+
+2026-06-13 20:46:39,880 - DEBUG - GET /index.html
+2026-06-13 20:46:39,881 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:39] "GET /index.html HTTP/1.1" 200 -
+
+2026-06-13 20:46:39,940 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-13 20:46:39,940 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:39] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-13 20:46:40,141 - DEBUG - GET /static/css/style.css
+2026-06-13 20:46:40,141 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:40] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-13 20:46:40,271 - DEBUG - GET /static/js/access-init.js
+2026-06-13 20:46:40,271 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:40] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-13 20:46:40,272 - DEBUG - GET /static/js/main.js
+2026-06-13 20:46:40,272 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:40] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-13 20:46:40,273 - DEBUG - GET /images/logo.png
+2026-06-13 20:46:40,273 - DEBUG - serve_images: filename=logo.png, path=f:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-13 20:46:40,273 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:40] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-13 20:46:40,276 - DEBUG - GET /images/1.png
+2026-06-13 20:46:40,277 - DEBUG - serve_images: filename=1.png, path=f:\I0\002MySiS\MySite\images\1.png, exists=True
+2026-06-13 20:46:40,277 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:40] "GET /images/1.png HTTP/1.1" 200 -
+
+2026-06-13 20:46:40,675 - DEBUG - GET /images/bg.jpg
+2026-06-13 20:46:40,675 - DEBUG - serve_images: filename=bg.jpg, path=f:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-13 20:46:40,676 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:40] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-13 20:46:40,678 - DEBUG - GET /static/js/permission-manager.js
+2026-06-13 20:46:40,678 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:40] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-13 20:46:40,679 - DEBUG - GET /static/js/logger.js
+2026-06-13 20:46:40,679 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:40] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-13 20:46:40,680 - DEBUG - GET /static/js/news-manager.js
+2026-06-13 20:46:40,680 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:40] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-13 20:46:40,681 - DEBUG - GET /static/js/news-form.js
+2026-06-13 20:46:40,681 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:40] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-13 20:46:40,682 - DEBUG - GET /images/2.png
+2026-06-13 20:46:40,683 - DEBUG - serve_images: filename=2.png, path=f:\I0\002MySiS\MySite\images\2.png, exists=True
+2026-06-13 20:46:40,683 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:40] "GET /images/2.png HTTP/1.1" 200 -
+
+2026-06-13 20:46:41,009 - DEBUG - GET /static/js/access-levels.js
+2026-06-13 20:46:41,010 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:41] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-13 20:46:41,010 - DEBUG - GET /images/3.png
+2026-06-13 20:46:41,011 - DEBUG - serve_images: filename=3.png, path=f:\I0\002MySiS\MySite\images\3.png, exists=True
+2026-06-13 20:46:41,011 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:41] "GET /images/3.png HTTP/1.1" 200 -
+
+2026-06-13 20:46:41,366 - DEBUG - GET /favicon.ico
+2026-06-13 20:46:41,367 - INFO - 127.0.0.1 - - [13/Jun/2026 20:46:41] "GET /favicon.ico HTTP/1.1" 404 -
+

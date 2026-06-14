@@ -85,7 +85,7 @@ F:.
     │           news-form.js
     │           news-manager.js
     │           news-template-engine.js
-    │           permission-manager.js
+    │           permission-manager.js  (обход корс для того чтобы офлайн проект мог исполнять свой функционал)
     │           validator.js
     │
     ├───templates

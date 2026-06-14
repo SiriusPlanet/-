@@ -14,10 +14,12 @@ body {
     background-attachment: fixed;
     background-position: center;
     min-height: 100vh;
-    padding: 0 2vw;
+    /* ⚠️ Убираем padding-bottom — теперь используем flex-контейнер page-wrapper */
+    padding: 0 2vw; /* вместо 2vw — теперь это отступы по бокам всей страницы */
 }
 
 /* --- Глобальное затемнение (TVA Access Layer) --- */
+
 #access-overlay {
     position: fixed;
     top: 0;
@@ -36,6 +38,7 @@ body {
     animation: noiseFade 2s ease-in-out;
 }
 
+/* Шум — как сквозь тряпку времени */
 #access-overlay::before {
     content: '';
     position: absolute;
@@ -81,26 +84,26 @@ body {
     transform: translate(-50%, -50%);
     z-index: 9999;
     text-align: center;
-    width: min(300px, 90vw);
+    width: min(300px, 90vw); /* адаптируется под ширину экрана */
 }
 
 #fileAccessButton {
     width: 100%;
-    padding: 1.2em 1.5em;
-    font-size: 1.125rem;
+    padding: 1.2em 1.5em; /* 19.2px / 24px → 1.2em / 1.5em */
+    font-size: 1.125rem; /* 18px → 1.125rem */
     font-weight: bold;
     color: #00ffaa;
     background: transparent;
-    border: 0.125rem solid #00ffaa;
-    border-radius: 0.5rem;
+    border: 0.125rem solid #00ffaa; /* 2px → 0.125rem */
+    border-radius: 0.5rem; /* 8px → 0.5rem */
     cursor: pointer;
-    box-shadow: 0 0 0.9375rem rgba(0, 255, 170, 0.4);
+    box-shadow: 0 0 0.9375rem rgba(0, 255, 170, 0.4); /* 15px → 0.9375rem */
     transition: all 0.3s ease;
 }
 
 #fileAccessButton:hover {
     background: rgba(0, 255, 170, 0.1);
-    box-shadow: 0 0 1.5625rem rgba(0, 255, 170, 0.6);
+    box-shadow: 0 0 1.5625rem rgba(0, 255, 170, 0.6); /* 25px → 1.5625rem */
     transform: scale(1.05);
 }
 
@@ -114,69 +117,46 @@ body:not(.access-granted) main,
 body:not(.access-granted) footer,
 body:not(.access-granted) .main-nav a,
 body:not(.access-granted) .product-card {
-    filter: blur(0.5rem) brightness(0.2);
+    filter: blur(0.5rem) brightness(0.2); /* 8px → 0.5rem */
     pointer-events: none;
 }
 
-/* === Единый стиль для всех карточек и блоков (кроме шапок) === */
+/* === Единый стиль для всех карточек и блоков === */
 .card,
 .hero,
+.site-header,
 .product-card,
-.privacy-policy {
-    border-radius: 1rem;
+.privacy-policy,
+.news-header-panel {
+    border-radius: 1rem; /* 16px → 1rem */
     overflow: hidden;
     background: rgba(255, 255, 255, 0.96);
-    backdrop-filter: blur(0.625rem);
+    backdrop-filter: blur(0.625rem); /* 10px → 0.625rem */
     -webkit-backdrop-filter: blur(0.625rem);
-    box-shadow: 0 0.375rem 1.25rem rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0.375rem 1.25rem rgba(0, 0, 0, 0.12); /* 6px → 0.375rem, 20px → 1.25rem */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover,
 .product-card:hover,
 .news-card:hover {
-    transform: translateY(-0.3125rem);
-    box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.18);
+    transform: translateY(-0.3125rem); /* -5px → -0.3125rem */
+    box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.18); /* 10px → 0.625rem, 25px → 1.5625rem */
 }
 
-/* === ОТСТУПЫ МЕЖДУ СЕКЦИЯМИ === */
+/* === ОТСТУПЫ МЕЖДУ СЕКЦИЯМИ — в процентах и rem === */
 main > section,
 .catalog,
 .news-container,
 .privacy-policy {
-    margin: 2.5rem auto;
+    margin: 2.5rem auto; /* 40px → 2.5rem */
     max-width: 96%;
 }
 
-/* === ГРУППА ШАПКИ И ПАНЕЛИ === */
 .header-group {
-    position: sticky;
-    top: 0;
-    z-index: 100;
     width: 100%;
-    max-width: none;
-    margin: 0;
-}
-
-/* === АДАПТИВНОЕ СКРУГЛЕНИЕ УГЛОВ ДЛЯ ХЕДЕРОВ === */
-/* Верхний угол первого блока */
-.header-group > :first-child {
-    border-radius: 1rem 1rem 0 0;
-}
-
-/* Нижний угол последнего блока */
-.header-group > :last-child {
-    border-radius: 0 0 1rem 1rem;
-}
-
-/* Все углы у единственного блока */
-.header-group > :only-child {
-    border-radius: 1rem;
-}
-
-/* Средние блоки (прямые углы) */
-.header-group > :nth-child(n+2):not(:last-child) {
-    border-radius: 0;
+    position: relative; /* не sticky здесь — sticky только у .news-header-panel */
+    z-index: 101; /* чуть выше, чем у .site-header (100) */
 }
 
 /* === ШАПКА САЙТА === */
@@ -184,22 +164,22 @@ main > section,
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.9375rem 1.25rem;
+    padding: 0.9375rem 1.25rem; /* 15px → 0.9375rem, 2% ≈ 1.25rem */
     background: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.12); /* 4px → 0.25rem, 15px → 0.9375rem */
     position: sticky;
     top: 0;
     z-index: 100;
-    width: 100%;
-    max-width: none;
-    margin: 0;
+    max-width: 100%;
+    margin: 0 auto;
     min-height: 4.5rem;
+    /*border-radius: 1rem;*/
     box-sizing: border-box;
 }
 
 .logo-link {
     display: block;
-    margin-right: 1.25rem;
+    margin-right: 1.25rem; /* 20px → 1.25rem */
     flex-shrink: 0;
 }
 
@@ -215,7 +195,7 @@ main > section,
 .main-nav ul {
     list-style: none;
     display: flex;
-    gap: 1.5625rem;
+    gap: 1.5625rem; /* 25px → 1.5625rem */
 }
 
 .main-nav a {
@@ -223,7 +203,7 @@ main > section,
     color: #3498db;
     font-weight: bold;
     transition: color 0.3s ease;
-    padding: 0.3125rem 0.625rem;
+    padding: 0.3125rem 0.625rem; /* 5px, 10px → 0.3125rem, 0.625rem */
     border-radius: 0.25rem;
 }
 
@@ -238,7 +218,7 @@ main > section,
     color: #3498db;
     font-weight: bold;
     padding: 0.5rem 1rem;
-    border: 0.0625rem solid #3498db;
+    border: 0.0625rem solid #3498db; /* 1px → 0.0625rem */
     border-radius: 0.25rem;
     transition: all 0.3s ease;
 }
@@ -251,7 +231,7 @@ main > section,
 /* === ГЛАВНЫЙ БАННЕР === */
 .hero {
     text-align: center;
-    padding: 3.125rem 1.875rem;
+    padding: 3.125rem 1.875rem; /* 50px, 30px → 3.125rem, 1.875rem */
     max-width: 50rem;
     margin: 2.5rem auto 1.875rem;
 }
@@ -277,13 +257,13 @@ main > section,
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-    gap: 1.875rem;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); /* 280px → 18rem */
+    gap: 1.875rem; /* 30px → 1.875rem */
 }
 
 .product-card img {
     width: 100%;
-    height: 11.25rem;
+    height: 11.25rem; /* 180px → 11.25rem */
     object-fit: cover;
     border-radius: 0.5rem;
     margin-bottom: 0.9375rem;
@@ -334,20 +314,20 @@ main > section,
 .news-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-    gap: 1.3125rem;
+    gap: 1.3125rem; /* 21px → 1.3125rem */
     padding: 1.3125rem;
     justify-content: center;
 }
 
-/* === КАРТОЧКА НОВОСТИ === */
+/* === КАРТОЧКА НОВОСТИ — квадратная, с рамкой и отступом === */
 .news-card {
     max-width: 28rem;
     width: 100%;
     background: white;
-    border-radius: 0.75rem;
+    border-radius: 0.75rem; /* 12px → 0.75rem */
     box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    aspect-ratio: 16 / 9;
+    "aspect-ratio: 16 / 9;"
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -355,10 +335,10 @@ main > section,
 
 .news-card-image-wrapper {
     width: 100%;
-    padding-bottom: 56.25%;
+    padding-bottom: 56.25%; /* Формат 16:9 — остаётся как есть, это пропорция */
     position: relative;
     overflow: hidden;
-    border-radius: 0.625rem;
+    border-radius: 0.625rem; /* 10px → 0.625rem */
     background: #f8f9fa;
     margin-bottom: 0.9375rem;
 }
@@ -373,7 +353,7 @@ main > section,
 }
 
 .news-card-content {
-    padding: 0.875rem;
+    padding: 0.875rem; /* 14px → 0.875rem */
 }
 
 .news-card-title {
@@ -407,6 +387,8 @@ main > section,
 }
 
 /* === МОДАЛЬНЫЕ ОКНА === */
+
+/* Общий контейнер */
 .modal {
     position: fixed;
     top: 0;
@@ -423,17 +405,20 @@ main > section,
     transition: opacity 0.3s ease;
 }
 
+/* Класс для показа окна */
 .modal.is-visible {
     opacity: 1;
     visibility: visible;
 }
 
+/* Диалог (рамка) — теперь адаптивная через min/max-width */
 .modal-dialog {
-    width: min(90vw, 35rem);
+    width: min(90vw, 35rem); /* до 90% ширины экрана, но не больше 35rem */
     max-height: 90vh;
     position: relative;
 }
 
+/* Контент внутри */
 .modal-content {
     background: #fff;
     border-radius: 1rem;
@@ -443,6 +428,7 @@ main > section,
     flex-direction: column;
 }
 
+/* Заголовок */
 .modal-header {
     padding: 1.5rem 2rem;
     border-bottom: 0.0625rem solid #e8e8e8;
@@ -456,6 +442,7 @@ main > section,
     font-weight: 700;
 }
 
+/* Тело с формой */
 .modal-body {
     padding: 1.5rem 2rem;
     overflow-y: auto;
@@ -514,37 +501,11 @@ main > section,
     color: #34495e;
 }
 
-/* === МЕЛКИЙ ТЕКСТ === */
-.warning {
-    font-size: 0.75rem;
-    color: #8b0000;
-    font-weight: 500;
-}
-
-/* === КНОПКА ОТПРАВКИ ФОРМЫ === */
-.btn-submit {
-    padding: 0.625rem 1.5rem;
-    background: #3498db;
-    color: white;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    transition: all 0.2s;
-}
-
-.btn-submit:hover {
-    background: #2980b9;
-    transform: translateY(-0.125rem);
-    box-shadow: 0 0.25rem 0.75rem rgba(52, 152, 219, 0.3);
-}
-
 /* === СПЕЦИФИЧНЫЕ СТИЛИ ДЛЯ НОВОСТЕЙ === */
 .news-form {
     display: flex;
     flex-direction: column;
-    gap: 1.125rem;
+    gap: 1.125rem; /* 18px → 1.125rem */
     width: 100%;
 }
 
@@ -555,6 +516,7 @@ main > section,
     display: block;
 }
 
+/* Поля ввода */
 .news-form input,
 .news-form textarea {
     width: 100%;
@@ -584,13 +546,14 @@ main > section,
     background: #f9f9f9;
 }
 
+/* Адаптив для мобильных: одна колонка */
 @media (max-width: 600px) {
     .news-form {
         grid-template-columns: 1fr;
     }
 }
 
-/* === ФУТЕР === */
+/* === ФУТЕР — В ПОТОКЕ, НЕ FIXED === */
 .site-footer {
     max-width: 96%;
     margin: 2.5rem auto 0;
@@ -624,91 +587,74 @@ main > section,
     color: #e74c3c;
 }
 
-/* === СЕКЦИЯ ПРИВЕТСТВИЯ (hero) === */
-.hero {
-    max-width: 96%;
-    margin: 2.5rem auto;
-    padding: 3.75rem 2rem;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.98);
-    border-radius: 1rem;
-    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
-}
-
-.hero h2 {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 0.75rem;
-}
-
-.hero p {
-    font-size: 1.25rem;
-    color: #666;
-}
-
-/* === СЕКЦИЯ УСЛОВИЙ (terms) === */
-.terms {
-    max-width: 96%;
-    margin: 2.5rem auto;
-    padding: 2.5rem 2rem;
-    background: rgba(255, 255, 255, 0.98);
-    border-radius: 1rem;
-    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
-}
-
-.terms h2 {
-    font-size: 2.25rem;
-    color: #333;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.terms ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.terms li {
-    padding: 0.75rem 0;
-    padding-left: 2rem;
-    position: relative;
-    color: #555;
-}
-
-.terms li::before {
-    content: "⚡";
-    position: absolute;
-    left: 0;
-    font-size: 1.25rem;
-}
-
-/* === СТАТУС НА СКЛАДЕ === */
-.stock-status {
+/* === Toast-уведомления === */
+.toast-notification {
+    position: fixed;
+    top: 1.25rem; /* 20px → 1.25rem */
+    right: 1.25rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    color: white;
     font-weight: bold;
-    color: #27ae60;
-    margin-top: 0.5rem;
+    z-index: 10000;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease-out forwards;
+    max-width: 25rem; /* ~400px → 25rem */
+    word-wrap: break-word;
 }
 
-.stock-status.out-of-stock {
-    color: #e74c3c;
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
 }
 
-/* === ПАНЕЛЬ "ХРОНИКИ ИЗМЕРЕНИЙ" === */
+/* === ОБЩАЯ ОБЁРТКА СТРАНИЦЫ === */
+.page-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/* === ОГРАНИЧЕНИЕ КОНТЕНТА === */
+.container {
+    max-width: 70rem; /* ~1200px → 70rem */
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    position: relative;
+}
+
+/* === ЛОГОТИП — НЕ БОЛЬШЕ 80px ВЫСОТОЙ === */
+.logo {
+    max-height: 3.4375rem; /* 55px → 3.4375rem */
+    height: auto;
+    width: auto;
+    display: block;
+}
+
+/* === ГРУППА ШАПКИ И ПАНЕЛИ === */
+.header-group {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+/* === ПАНЕЛЬ "ХРОНИКИ ИЗМЕРЕНИЙ" — выезжает при скроле вверх === */
 .news-header-panel {
     background: rgba(255, 255, 255, 0.98);
     padding: 1.25rem;
     width: 100%;
     max-width: none;
     margin: 0;
-    border-radius: 0;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(0.625rem);
+    -webkit-backdrop-filter: blur(0.625rem);
     overflow: hidden;
     position: sticky;
-    top: 4.5rem;
+    top: 4.5rem; /* ~72px (высота .site-header) → 4.5rem */
     z-index: 90;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
 }
 
 .news-header-panel.hidden {
@@ -755,21 +701,6 @@ main > section,
     background: #2980b9;
 }
 
-/* === АДАПТИВНОСТЬ === */
-@media (max-width: 600px) {
-    .hero h2 {
-        font-size: 1.75rem;
-    }
-    
-    .hero p {
-        font-size: 1rem;
-    }
-    
-    .terms h2 {
-        font-size: 1.75rem;
-    }
-}
-
 /* === АДАПТАЦИЯ — УПРОЩЁННАЯ === */
 @media (max-width: 768px) {
     .site-header,
@@ -777,25 +708,24 @@ main > section,
     .catalog,
     .news-container {
         max-width: 98%;
-        margin: 0.9375rem auto;
+        margin: 0.9375rem auto; /* 15px → 0.9375rem */
         border-radius: 0.75rem;
     }
 
     .site-header {
         flex-direction: column;
-        gap: 0.75rem;
-        padding: 0.75rem 0.9375rem;
+        gap: 0.75rem; /* 12px → 0.75rem */
+        padding: 0.75rem 0.9375rem; /* 12px, 15px → 0.75rem, 0.9375rem */
     }
 
     .main-nav ul {
-        flex-direction: row;
-        gap: 0.9375rem;
+        gap: 0.9375rem; /* 15px → 0.9375rem */
     }
 
     .products-grid,
     .news-grid {
         grid-template-columns: 1fr;
-        gap: 1.25rem;
+        gap: 1.25rem; /* 20px → 1.25rem */
     }
 
     #fileAccessButton {
@@ -803,8 +733,9 @@ main > section,
         min-width: auto;
     }
 
+    /* ✅ Убираем "жёсткие" настройки — теперь всё через flex */
     .news-header-panel {
-        top: 3.75rem;
+        top: 3.75rem; /* ~60px (меньшая высота шапки) → 3.75rem */
     }
 }
 
@@ -816,48 +747,4 @@ main > section,
     .news-card {
         max-width: 100%;
     }
-}
-
-/* === Toast-уведомления === */
-.toast-notification {
-    position: fixed;
-    top: 1.25rem;
-    right: 1.25rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 0.5rem;
-    color: white;
-    font-weight: bold;
-    z-index: 10000;
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
-    animation: slideIn 0.3s ease-out forwards;
-    max-width: 25rem;
-    word-wrap: break-word;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-/* === ОБЩАЯ ОБЁРТКА СТРАНИЦЫ === */
-.page-wrapper {
-    max-width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
-}
-
-/* === ОГРАНИЧЕНИЕ КОНТЕНТА === */
-.container {
-    max-width: 70rem;
-    margin: 0 auto;
-    padding: 0 1.25rem;
-    position: relative;
-}
-
-/* === ЛОГОТИП === */
-.logo {
-    max-height: 3.4375rem;
-    height: auto;
-    width: auto;
-    display: block;
 }
