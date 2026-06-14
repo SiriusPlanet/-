@@ -134,7 +134,7 @@ mkdir templates/card-constructor
     <h3 class="news-card-title">{{title}}</h3>
     <p class="news-card-ticker">{{ticker}}</p>  <!-- Бегущая строка -->
     <p class="news-card-description">{{preview}}</p>
-    <button class="read-more-btn" onclick="window.openNews({{id}})">ЧИТАТЬ ПОЛНОСТЬЮ</button>
+    <button class="read-more-btn" onclick="window.openNews('{{id}}')">ЧИТАТЬ ПОЛНОСТЬЮ</button>
   </div>
 </div>
 ```

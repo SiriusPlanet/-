@@ -15854,3 +15854,4 @@
 2026-06-14 11:27:48,944 - DEBUG - serve_images: filename=400.png, path=f:\I0\002MySiS\MySite\images\img_n\400.png, exists=True
 2026-06-14 11:27:48,944 - INFO - 127.0.0.1 - - [14/Jun/2026 11:27:48] "GET /images/img_n/400.png HTTP/1.1" 200 -
 
+2026-06-14 13:51:33,333 - INFO - [OK] Сервер запущен на порту 8000
