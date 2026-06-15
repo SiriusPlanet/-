@@ -4,6 +4,7 @@
 import { Logger } from './logger.js';
 import { NewsManager } from './news-manager.js';
 import { NewsForm } from './news-form.js';
+import { CatalogManager } from './catalog.js';
 
 class MainApp {
     constructor() {
@@ -11,6 +12,7 @@ class MainApp {
         this.newsManager = null;
         this.newsForm = null;
         this.newsHeaderPanel = null;
+        this.catalogManager = null;
         
         console.log('[MainApp] Конструктор вызван, pm будет получен из window.permissionManager');
     }
@@ -50,24 +52,32 @@ class MainApp {
         const modal = document.getElementById('addNewsModal');
         
         if (!addBtn || !modal) {
-            console.log('[MainApp] Это не страница новостей, пропускаем инициализацию компонентов новостей');
-            // НЕ прерываем инициализацию - просто пропускаем новости
+            console.log('[MainApp] Это не страница новостей/каталога, пропускаем инициализацию компонентов');
             return;
         }
         
-        console.log('[MainApp] Инициализация компонентов новостей...');
+        console.log('[MainApp] Инициализация компонентов...');
         
         if (!this.pm) {
-            Logger.error('[MainApp] PermissionManager не передан в компоненты новостей');
+            Logger.error('[MainApp] PermissionManager не передан в компоненты');
             return;
         }
         
         this.newsManager = new NewsManager(this.pm);
-        await this.newsManager.loadNews();
-        this.newsForm = new NewsForm(this.newsManager);
-        this.newsForm.init();
         
-        console.log('[MainApp] Компоненты новостей инициализированы');
+        // Определяем тип страницы по наличию catalog.js
+        try {
+            const catalogModule = await import('./catalog.js');
+            this.catalogManager = new catalogModule.CatalogManager(this.newsManager);
+            console.log('[MainApp] CatalogManager инициализирован');
+        } catch (e) {
+            console.log('[MainApp] catalog.js не найден или не загружен');
+            this.newsManager = new NewsManager(this.pm);
+            await this.newsManager.loadNews();
+            this.newsForm = new NewsForm(this.newsManager);
+            this.newsForm.init();
+            console.log('[MainApp] NewsForm инициализирован');
+        }
     }
 
     setupScrollHandler() {
@@ -76,7 +86,7 @@ class MainApp {
         
         this.newsHeaderPanel = document.querySelector('.news-header-panel');
         if (!this.newsHeaderPanel) {
-            console.log('[MainApp] Панель .news-header-panel не найдена (не страница новостей)');
+            console.log('[MainApp] Панель .news-header-panel не найдена');
             return;
         }
         
@@ -106,7 +116,7 @@ class MainApp {
     setupFormHandlers() {
         const form = document.getElementById('newsForm');
         if (!form) {
-            console.log('[MainApp] Форма #newsForm не найдена (не страница новостей)');
+            console.log('[MainApp] Форма #newsForm не найдена');
             return;
         }
         form.addEventListener('submit', async (e) => {

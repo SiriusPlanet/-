@@ -1,23 +1,16 @@
-<!-- Файл: \\MySite\\catalog.html -->
+<!-- catalog.html - Страница каталога товаров -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Сувенирный магазин с уникальными подарками и воспоминаниями на любой вкус">
-    <title>Сувенирный магазин</title>
+    <meta charset="UTF-8" />
+    <title>Каталог товаров - Хроно-архив TVA</title>
     
     <!-- Управление доступом - ЗАГРУЖАЕТСЯ ПЕРВЫМ -->
-    <script type="module" src="static/js/access-init.js"></script>
+    <script type="module" src="./static/js/access-init.js"></script>
     
-    <!-- Основные стили -->
-    <link rel="stylesheet" href="static/css/style.css">
-    
-    <!-- Основной скрипт -->
-    <script type="module" src="static/js/main.js"></script>
-    <!-- Конструктор карточек и страницы -->
-    <script type="module" src="static/js/news-card-constructor.js"></script>
-    <script type="module" src="static/js/news-page-constructor.js"></script>
+    <link rel="stylesheet" href="./static/css/style.css" />
+    <link rel="stylesheet" href="./static/css/news.css" />
+    <link rel="stylesheet" href="./static/css/news-form.css" />
     
     <style>
         /* --- Глобальное затемнение — пока доступ не дан --- */
@@ -93,6 +86,45 @@
             filter: blur(8px) brightness(0.2);
             pointer-events: none;
         }
+
+        /* === СТИЛИ ДЛЯ ЗАКЛАДОК В ФОРМЕ === */
+        .tabs-container {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #7f8c8d;
+            transition: all 0.2s;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .tab-btn:hover {
+            color: #3498db;
+            background: rgba(52, 152, 219, 0.05);
+        }
+
+        .tab-btn.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -103,29 +135,116 @@
     <div class="access-button">
         <button id="fileAccessButton">Получить доступ к файлам</button>
     </div>
-    
-    <!-- Остальной контент -->
-    <header class="site-header">
-        <a href="index.html" class="logo-link">
-            <img src="images/logo.png" alt="Логотип магазина воспоминаний" class="logo">
-            <span class="site-title"></span>
-        </a>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="catalog.html">Каталог</a></li>
-                <li><a href="actions.html">Акции</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-                <li><a href="news.html">Новости</a></li>
-                <li><a href="requisites.html">Реквизиты</a></li>
-            </ul>
-        </nav>
-        <div class="auth-link">
-            <a href="login.html">Клиентам</a>
+    <!-- Шапка -->
+    <div class="header-group">
+        <header class="site-header">
+            <a href="index.html" class="logo-link">
+                <img src="images/logo.png" alt="Логотип магазина воспоминаний" class="logo">
+                <span class="site-title"></span>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="actions.html">Акции</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="news.html">Новости</a></li>
+                    <li><a href="requisites.html">Реквизиты</a></li>
+                </ul>
+            </nav>
+            <div class="auth-link">
+                <a href="login.html">Клиентам</a>
+            </div>
+        </header>
+    <!-- Панель каталога -->
+        <div class="news-header-panel" id="newsHeaderPanel">
+            <div class="header-grid">
+                <h1>Каталог товаров</h1>
+                <div class="last-update update-date">—</div>
+                <button class="add-news-btn">Добавить лот</button>
+            </div>
         </div>
-    </header>
-    
+    </div>
+    <!-- Контейнер товаров -->
+    <main>
+        <section class="news-container">
+            <div class="news-grid"></div>
+        </section>
+    </main>
+
+    <!-- Модальное окно для ПРОСМОТРА новости/товара -->
+    <div id="viewNewsModal" class="modal hidden">
+        <div class="modal-content"></div>
+    </div>
+
+    <!-- Модальное окно для ДОБАВЛЕНИЯ (с закладками) -->
+    <div id="addNewsModal" class="modal hidden">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Добавление лота</h2>
+                </div>
+                <div class="modal-body">
+                    <!-- Закладки -->
+                    <div class="tabs-container">
+                        <button class="tab-btn active" data-tab="news">Новости</button>
+                        <button class="tab-btn" data-tab="products">Товары</button>
+                    </div>
+                    
+                    <!-- Вкладка Новости -->
+                    <div class="tab-content active" id="tab-news">
+                        <form id="newsForm" class="modal-form">
+                            <label for="title">Заголовок</label>
+                            <div class="file-upload-wrapper">
+                                <label for="image" class="file-upload-label">
+                                    <span>📷</span>
+                                    <span>Выберите файл для иллюстрации...</span>
+                                </label>
+                                <input type="file" id="image" accept="image/*" style="display: none" />
+                            </div>
+                            <input type="text" id="title" placeholder="Заголовок" required class="modal-input" />
+                            <input type="date" id="date" required class="modal-input" />
+                            <textarea id="preview" placeholder="Краткое описание" required class="modal-textarea" rows="4"></textarea>
+                            <textarea id="content" placeholder="Полный текст" required class="modal-textarea" rows="6"></textarea>
+                            <div class="modal-actions">
+                                <button type="submit" class="btn-submit">Сохранить</button>
+                                <button type="button" class="cancel-btn">Отмена</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Вкладка Товары -->
+                    <div class="tab-content" id="tab-products">
+                        <form id="productForm" class="modal-form">
+                            <label for="productImage">Изображение</label>
+                            <div class="file-upload-wrapper">
+                                <label for="productImage" class="file-upload-label">
+                                    <span>📷</span>
+                                    <span>Выберите файл для иллюстрации...</span>
+                                </label>
+                                <input type="file" id="productImage" accept="image/*" style="display: none" />
+                            </div>
+                            <input type="text" id="productName" placeholder="Название товара" required class="modal-input" />
+                            <input type="number" id="productPrice" placeholder="Цена" required class="modal-input" />
+                            <textarea id="productDescription" placeholder="Описание товара" required class="modal-textarea" rows="4"></textarea>
+                            <div class="modal-actions">
+                                <button type="submit" class="btn-submit">Сохранить лот</button>
+                                <button type="button" class="cancel-btn">Отмена</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основной скрипт -->
+    <script type="module" src="./static/js/main.js"></script>
+    <script type="module" src="./static/js/catalog.js"></script>
+    <script type="module" src="./static/js/catalog-page-constructor.js"></script>
+
+    <!-- Футер (остался на месте) -->
     <footer class="site-footer">
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
         <ul class="footer-links">

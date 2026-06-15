@@ -219,15 +219,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
                         print(f"[WARN] Ошибка разбора части: {e}")
                         continue
 
-                print(f"[INFO] data: {list(data.keys())}")
-                print(f"[INFO] files: {list(files.keys())}")
-
-                # Извлечение и валидация
-                title = data.get('title', '').strip()
-                date = data.get('date', '').strip()
-                preview = data.get('preview', '').strip()
-                content = data.get('content', '').strip()
-                discount = data.get('discount', '').strip()  # ← НОВОЕ: скидка
+{"text": "                print(f\"[INFO] data: {list(data.keys())}\")\n                print(f\"[INFO] files: {list(files.keys())}\")\n\n                # Определяем тип лота (новость или товар)\n                lot_type = data.get('lotType', 'news')  # по умолчанию - новость\n                print(f\"[INFO] lotType: {lot_type}\")\n\n                if lot_type == 'product':\n                    # Обработка товара\n                    title = data.get('productName', '').strip()\n                    price = data.get('productPrice', '').strip()\n                    content = data.get('productDescription', '').strip()\n                    preview = content[:100] + (\"...\" if len(content) > 100 else \"\") if content else \"\"\n                    date = datetime.now().strftime('%Y-%m-%d')\n                    discount = ''\n                else:\n                    # Обработка новости\n                    title = data.get('title', '').strip()\n                    date = data.get('date', '').strip()\n                    preview = data.get('preview', '').strip()\n                    content = data.get('content', '').strip()\n                    discount = data.get('discount', '').strip()  # ← НОВОЕ: скидка"}
                 image_file = files.get('image')
 
                 # Авто-подстановка
@@ -239,28 +231,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
                 if not title or not content:
                     return self.send_json_response(False, 'Отсутствуют обязательные поля')
 
-                # Сохранение
-                news_id = int(time.time() * 1000)
-
-                image_path = None
-                if image_file:
-                    img_name = f"{news_id}.jpg"
-                    img_path = PathsHelper.get_image_path(img_name)
-                    os.makedirs(os.path.dirname(img_path), exist_ok=True)
-
-                    with open(img_path, 'wb') as f:
-                        f.write(image_file['content'])
-                    image_path = img_name
-
-                news_json = {
-                    "id": news_id,
-                    "title": title,
-                    "date": date or datetime.now().strftime('%Y-%m-%d'),
-                    "preview": preview,
-                    "content": content,
-                    "image": image_path or "400.png",
-                    "discount": int(discount) if discount and discount.isdigit() else 0
-                }
+{"text": "                # Сохранение\n                news_id = int(time.time() * 1000)\n\n                image_path = None\n                if image_file:\n                    img_name = f\"{news_id}.jpg\"\n                    img_path = PathsHelper.get_image_path(img_name)\n                    os.makedirs(os.path.dirname(img_path), exist_ok=True)\n\n                    with open(img_path, 'wb') as f:\n                        f.write(image_file['content'])\n                    image_path = img_name\n\n                news_json = {\n                    \"id\": news_id,\n                    \"title\": title,\n                    \"date\": date or datetime.now().strftime('%Y-%m-%d'),\n                    \"preview\": preview,\n                    \"content\": content,\n                    \"image\": image_path or \"400.png\",\n                    \"discount\": int(discount) if discount and discount.isdigit() else 0,\n                    \"lotType\": lot_type\n                }"}
 
                 json_path = os.path.join(PROJECT_ROOT, 'data', 'news', f"{news_id}.json")
                 os.makedirs(os.path.dirname(json_path), exist_ok=True)
@@ -482,7 +453,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
                             news = json.load(f)
                             if not isinstance(news, dict) or not all(k in news for k in ["title", "date", "preview", "content", "image"]):
                                 raise ValueError("Неверная структура JSON")
-                            news_list.append(news)
+"                            news[\"lotType\"] = \"product\" if \"price\" in news else \"news\"\n                            news_list.append(news)"}
                 except Exception as e:
                     logging.error(f"Ошибка обработки {file}: {e}")
 

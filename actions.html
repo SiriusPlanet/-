@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="static/css/discount-popup.css">
     <script type="module" src="static/js/main.js"></script>
     <script type="module" src="static/js/discount-popup.js"></script>
+    <script type="module" src="static/js/actions-page-constructor.js"></script>
     
     <style>
         /* --- Глобальное затемнение — пока доступ не дан --- */
@@ -131,81 +132,10 @@
         <!-- Секция акций -->
         <section class="catalog">
             <h2>Квантовые акции</h2>
-            <div class="products-grid">
-                <!-- Акция 1: Камни бесконечности -->
-                <div class="product-card" itemscope itemtype="https://schema.org/Offer">
-                    <img src="images/3.png" alt="Камни бесконечности со скидкой" width="200" height="200">
-                    <h3 itemprop="name">Камни бесконечности — 15% со скидкой</h3>
-                    <p itemprop="description">Пока не вылетели из кармана квантовой нестабильности.</p>
-                    <p>Скидка: 15% (до квантового разрыва)</p>
-                    <p class="price"><span itemprop="price">1 530 000 руб.</span> (было 1 800 000)</p>
-                    <p class="stock-status">✅ В наличии (но может исчезнуть в любой момент)</p>
-                </div>
+            <div class="products-grid"></div>
+            </section>
 
-                <!-- Акция 2: Перчатка Таноса -->
-                <div class="product-card" itemscope itemtype="https://schema.org/Offer">
-                    <img src="images/2.png" alt="Перчатка Таноса с бесплатной доставкой" width="200" height="200">
-                    <h3 itemprop="name">Перчатка Таноса — бесплатная доставка во времени</h3>
-                    <p itemprop="description">Доставка в любую точку пространства-времени.</p>
-                    <p>Бонус: конфета от Брюса Баннера (если повезёт)</p>
-                    <p class="price"><span itemprop="price">4 000 000 руб.</span></p>
-                    <p class="stock-status">✅ В наличии (кроме Камня времени)</p>
-                </div>
-
-                <!-- Акция 3: Рука Барона Земо -->
-                <div class="product-card" itemscope itemtype="https://schema.org/Offer">
-                    <img src="images/1.png" alt="Рука Барона Земо со скидкой" width="200" height="200">
-                    <h3 itemprop="name">Рука Барона Земо — 2-я со скидкой 50%</h3>
-                    <p itemprop="description">Для ценителей коллекционных предметов.</p>
-                    <p>Скидка: 50% на вторую руку (пока Барон не вернул)</p>
-                    <p class="price"><span itemprop="price">1 250 000 руб.</span> (было 2 500 000)</p>
-                    <p class="stock-status">✅ Один экземпляр (второй может исчезнуть)</p>
-                </div>
-
-                <!-- Акция 4: Рука солдата -->
-                <div class="product-card" itemscope itemtype="https://schema.org/Offer">
-                    <img src="images/1.png" alt="Рука солдата с индивидуальным подгоном" width="200" height="200">
-                    <h3 itemprop="name">Рука солдата — индивидуальный подгон</h3>
-                    <p itemprop="description">Измерение на месте и времени.</p>
-                    <p>Бесплатная перенастройка под ваш размер (пока не исчезла)</p>
-                    <p class="price"><span itemprop="price">2 500 000 руб.</span></p>
-                    <p class="stock-status">✅ В наличии (в параллельной вселенной может быть меньше)</p>
-                </div>
-
-                <!-- Акция 5: Камни в подарочной упаковке -->
-                <div class="product-card" itemscope itemtype="https://schema.org/Offer">
-                    <img src="images/3.png" alt="Камни бесконечности в подарочной упаковке" width="200" height="200">
-                    <h3 itemprop="name">Камни бесконечности — подарочная упаковка</h3>
-                    <p itemprop="description">Любой камень в подарочной упаковке.</p>
-                    <p>Бонус: бесплатная доставка в ваше воспоминание</p>
-                    <p class="price"><span itemprop="price">1 800 000 руб.</span></p>
-                    <p class="stock-status">✅ В наличии (кроме Камня времени)</p>
-                </div>
-
-                <!-- Акция 6: Скидка на все товары -->
-                <div class="product-card" itemscope itemtype="https://schema.org/Offer">
-                    <img src="images/logo.png" alt="Скидка на все товары магазина" width="200" height="200">
-                    <h3 itemprop="name">Скидка 10% на всё (кроме камней времени)</h3>
-                    <p itemprop="description">Промокод: QUANTUM10</p>
-                    <p>Акция действует до следующего квантового скачка</p>
-                    <p class="price">Скидка: 10%</p>
-                    <p class="stock-status">✅ Активна (но может исчезнуть в любой момент)</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция условий акций -->
-        <section class="terms">
-            <h2>Условия акций</h2>
-            <ul>
-                <li>Акции могут исчезнуть в любой момент — это нормально (квантовая нестабильность).</li>
-                <li>Скидки действуют до следующего квантового скачка (время устанавливается комиссией золотых рыбок).</li>
-                <li>Бонусы могут появиться в неожиданное время и месте (это часть процесса).</li>
-                <li>Все акции проходят в присутствии комиссии золотых рыбок (решения окончательные).</li>
-                <li>Цены указаны в воспоминаниях и могут измениться при переходе в другую линию времени.</li>
-                <li>Деньги не возвращаются — они становятся частью вашего воспоминания.</li>
-            </ul>
-        </section>
+        
     </main>
 
     <!-- Футер -->
