@@ -227,6 +227,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
                 date = data.get('date', '').strip()
                 preview = data.get('preview', '').strip()
                 content = data.get('content', '').strip()
+                discount = data.get('discount', '').strip()  # ← НОВОЕ: скидка
                 image_file = files.get('image')
 
                 # Авто-подстановка
@@ -257,7 +258,8 @@ class SimpleHandler(BaseHTTPRequestHandler):
                     "date": date or datetime.now().strftime('%Y-%m-%d'),
                     "preview": preview,
                     "content": content,
-                    "image": image_path or "400.png"
+                    "image": image_path or "400.png",
+                    "discount": int(discount) if discount and discount.isdigit() else 0
                 }
 
                 json_path = os.path.join(PROJECT_ROOT, 'data', 'news', f"{news_id}.json")

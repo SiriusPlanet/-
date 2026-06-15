@@ -15866,3 +15866,4 @@
 2026-06-15 03:34:51,266 - DEBUG - GET /static/js/discount-popup.js
 2026-06-15 03:34:51,267 - INFO - 127.0.0.1 - - [15/Jun/2026 03:34:51] "GET /static/js/discount-popup.js HTTP/1.1" 200 -
 
+2026-06-15 03:37:01,199 - INFO - [OK] Сервер запущен на порту 8000
