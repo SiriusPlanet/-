@@ -11,7 +11,9 @@ export class PermissionManager {
         this.accessLevels = new AccessLevels();
         this.isPaused = false;
         this.hasLocalhostAccess = false;
-        this.initElements();
+        this.button = null;
+        this.overlay = null;
+        this.container = null;
     }
 
     hasPermission() {
@@ -141,6 +143,9 @@ export class PermissionManager {
     async init() {
         if (this.isPaused) return;
 
+        // Инициализируем DOM элементы
+        this.initElements();
+
         // 1. Быстрая проверка (2мс) — есть ли разрешение?
         if (this.hasGrantedPermission()) {
             console.log('✅ Разрешение уже дано - продолжаем работу');
@@ -190,6 +195,3 @@ export class PermissionManager {
         }
     }
 }
-
-// Инициализация производится в access-init.js
-// window.permissionManager уже установлен

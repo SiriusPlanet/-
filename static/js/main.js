@@ -180,6 +180,13 @@ window.openNews = (id) => {
     modal.classList.add('is-visible');
 };
 
+// Ждем инициализации access-init.js
+if (window.__accessInitPromise) {
+    window.__accessInitPromise.then(() => {
+        console.log('[MainApp] access-init.js завершен, продолжаем инициализацию');
+    });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         console.log('[MainApp] Ожидание инициализации PermissionManager...');
