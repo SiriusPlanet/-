@@ -159,11 +159,12 @@ export class PermissionManager {
             return;
         }
 
-        // 3. Если кэша нет — проверяем localhost (2сек таймаут, но это фоновая проверка)
-        // НЕ показываем завесу пока идет проверка — она может быть быстрой (2мс)
-        await this.checkLocalhostAccess();
+        // Если кэша нет, проверяем localhost
+        // Проверка может быть быстрой (2мс) или медленной (2сек таймаут)
+        // Завеса показывается только если доступа НЕТ
+        this.hasLocalhostAccess = await this.checkLocalhostAccess();
 
-        // 4. Если доступа нет — показываем завесу
+        // Если доступа нет — показываем завесу
         if (!this.hasLocalhostAccess) {
             console.log('❌ Доступ к localhost отсутствует — показываем завесу');
             this.showOverlay();
@@ -181,6 +182,11 @@ export class PermissionManager {
             } else {
                 console.warn('⚠️ Кнопка #fileAccessButton не найдена');
             }
+        } else {
+            // Если доступ есть, сразу скрываем завесу и добавляем класс
+            console.log('✅ Доступ к localhost есть — продолжаем работу');
+            this.hideOverlay();
+            document.body.classList.add('access-granted');
         }
     }
 }

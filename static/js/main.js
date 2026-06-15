@@ -5,17 +5,20 @@ import { NewsForm } from './news-form.js';
 
 class MainApp {
     constructor() {
-        this.pm = window.permissionManager || null;
+        this.pm = null;
         this.newsManager = null;
         this.newsForm = null;
         
-        console.log('[MainApp] Конструктор вызван, pm =', this.pm ? 'OK' : 'null');
+        console.log('[MainApp] Конструктор вызван, pm будет получен из window.permissionManager');
     }
 
     async init() {
         try {
-            if (!this.pm) {
+            // Получаем PermissionManager из window
+            if (!window.permissionManager) {
                 Logger.warn('[MainApp] PermissionManager не найден. Проверьте access-init.js');
+            } else {
+                this.pm = window.permissionManager;
             }
 
             await this.initComponents();
@@ -177,12 +180,14 @@ window.openNews = (id) => {
     modal.classList.add('is-visible');
 };
 
-if (typeof window.permissionManager === 'undefined') {
-    console.warn('[MainApp] window.permissionManager не найден. Загрузите access-init.js первым.');
-}
+{"text": "// Ждём инициализацию PermissionManager\nasync function waitForPermissionManager() {\n    const maxWait = 2000; // макс. время ожидания (2 сек)\n    const interval = 50; // проверка каждые 50мс\n    let elapsed = 0;\n    \n    // Ждём появения window.permissionManager (не undefined и не null)\n    while ((window.permissionManager === undefined || window.permissionManager === null) && elapsed < maxWait) {\n        await new Promise(resolve => setTimeout(resolve, interval));\n        elapsed += interval;\n    }\n    \n    return window.permissionManager;\n}"}
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
+        console.log('[MainApp] Ожидание инициализации PermissionManager...');
+        const pm = await waitForPermissionManager();
+        console.log('[MainApp] PermissionManager получен:', pm ? 'OK' : 'null');
+        
         const app = new MainApp();
         await app.init();
     } catch (error) {

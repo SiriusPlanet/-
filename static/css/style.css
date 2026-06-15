@@ -65,18 +65,7 @@ body {
     }
 }
 
-.access-granted #access-overlay {
-    animation: noiseFadeOut 0.8s ease-out forwards;
-    pointer-events: none;
-}
-
-@keyframes noiseFadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
-/* --- Кнопка доступа к файлам --- */
-.access-button {
+{"text": "/* --- Кнопка доступа к файлам --- */\n.access-button {"}
     position: fixed;
     top: 50%;
     left: 50%;
