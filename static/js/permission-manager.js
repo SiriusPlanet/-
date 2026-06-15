@@ -117,20 +117,7 @@ export class PermissionManager {
         }
     }
 
-    async requestAccess() {
-        console.log('✅ Кнопка "Дать доступ" нажата - предоставляем локальный доступ');
-        
-        const savedLevel = this.accessLevels.getLevel();
-        if (savedLevel > 0) {
-            console.log(`✅ Используем сохранённый уровень ${savedLevel}`);
-        } else {
-            console.log('✅ Временный доступ (уровень 1)');
-            this.accessLevels.setLevel(1);
-        }
-        
-        this.grantPermission();
-        return true;
-    }
+{"text": "    async requestAccess() {\n        console.log('✅ Кнопка \"Дать доступ\" нажата - предоставляем локальный доступ');\n        \n        const savedLevel = this.accessLevels.getLevel();\n        if (savedLevel > 0) {\n            console.log(`✅ Используем сохранённый уровень ${savedLevel}`);\n        } else {\n            console.log('✅ Временный доступ (уровень 1)');\n            this.accessLevels.setLevel(1);\n        }\n        \n        // Сохраняем флаг, что доступ был запрошен пользователем\n        localStorage.setItem('user_requested_access', 'true');\n        \n        // Сразу убираем завесу\n        this.hideOverlay();\n        document.body.classList.add('access-granted');\n        \n        // Сохраняем разрешение\n        localStorage.setItem(this.storageKey, 'true');\n        \n        console.log('✅ Доступ предоставлен, завеса убрана');\n        return true;\n    }"}
 
     grantPermission() {
         localStorage.setItem(this.storageKey, 'true');
