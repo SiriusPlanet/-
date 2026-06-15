@@ -123,12 +123,11 @@ export class PermissionManager {
         const savedLevel = this.accessLevels.getLevel();
         if (savedLevel > 0) {
             console.log(`✅ Используем сохранённый уровень ${savedLevel}`);
-            this.grantPermission();
-            return true;
+        } else {
+            console.log('✅ Временный доступ (уровень 1)');
+            this.accessLevels.setLevel(1);
         }
         
-        console.log('✅ Временный доступ (уровень 1)');
-        this.accessLevels.setLevel(1);
         this.grantPermission();
         return true;
     }
@@ -179,9 +178,7 @@ export class PermissionManager {
                 this.button.addEventListener('click', async () => {
                     console.log('🎉 Обнаружено нажатие на кнопку "Дать доступ"');
                     const hasAccess = await this.requestAccess();
-                    if (hasAccess) {
-                        this.grantPermission();
-                    }
+                    // requestAccess уже вызывает grantPermission(), не нужно повторно
                 });
                 console.log('✅ Событие click на кнопке "Дать доступ" зарегистрировано');
             } else {
