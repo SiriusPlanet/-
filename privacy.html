@@ -5,11 +5,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Политика конфиденциальности — Магазин воспоминаний</title>
+    
+    <!-- Система доступа - ЗАГРУЖАЕТСЯ ПЕРВОЙ -->
+    <script type="module" src="static/js/access-init.js"></script>
+    
     <link rel="stylesheet" href="static/css/style.css">
     <link rel="stylesheet" href="static/css/privacy.css">
     <script type="module" src="static/js/main.js"></script>
+    
+    <style>
+        /* --- Глобальное затемнение — пока доступ не дан --- */
+        body:not(.access-granted) {
+            overflow: hidden;
+        }
+
+        #access-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at 50% 50%,
+                rgba(0, 40, 20, 0.94),
+                rgba(0, 25, 15, 0.98)
+            );
+            z-index: 9998;
+            pointer-events: auto;
+            opacity: 1;
+            transition: opacity 0.8s ease-out;
+
+            /* Шум — как сквозь тряпку */
+            --noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-image: var(--noise);
+            background-blend-mode: overlay;
+        }
+
+        .access-granted #access-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* --- Кнопка — только если нет доступа --- */
+        .access-button {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            text-align: center;
+        }
+
+        #fileAccessButton {
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #00ffaa;
+            background: transparent;
+            border: 2px solid #00ffaa;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 255, 170, 0.4);
+            transition: all 0.3s ease;
+            min-width: 280px;
+        }
+
+        #fileAccessButton:hover {
+            background: rgba(0, 255, 170, 0.1);
+            box-shadow: 0 0 25px rgba(0, 255, 170, 0.6);
+            transform: scale(1.05);
+        }
+
+        #fileAccessButton:active {
+            transform: scale(0.98);
+        }
+
+        /* --- Блокировка контента до доступа --- */
+        body:not(.access-granted) header,
+        body:not(.access-granted) main,
+        body:not(.access-granted) footer {
+            filter: blur(8px) brightness(0.2);
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
+    <!-- Затемнение -->
+    <div id="access-overlay"></div>
+    
+    <!-- Панель доступа -->
+    <div class="access-button">
+        <button id="fileAccessButton">Получить доступ к файлам</button>
+    </div>
+    
+    <!-- Остальной контент -->
     <header class="site-header">
         <a href="index.html" class="logo-link">
             <img src="images/logo.png" alt="Логотип магазина воспоминаний" class="logo">
@@ -37,7 +126,7 @@
 
             <p>Добро пожаловать в «Магазин воспоминаний» — место, где воспоминания ценнее золота, а конфиденциальность важнее квантовой запутанности!</p>
 
-            <p>Мы серьёзно относимся к защите ваших данных (даже если сами данные иногда путешествуют во времени). Эта политика объясняет, какие данные мы собираем, как их используем и как обеспечиваем их безопасность.</p>
+            <p>Мы серьезно относимся к защите ваших данных (даже если сами данные иногда путешествуют во времени). Эта политика объясняет, какие данные мы собираем, как их используем и как обеспечиваем их безопасность.</p>
 
             <h2>Какие данные мы собираем</h2>
             <ul>
@@ -60,7 +149,7 @@
             <ul>
                 <li>шифрование данных (наши криптографы — потомки древних магов);</li>
                 <li>ограниченный доступ для сотрудников (только посвящённые могут видеть ваши данные);</li>
-                <li>регулярные проверки безопасности (мы вызываем духов аудита каждую неделю);</li>
+                <li>регулярные проверки безопасности (мы вызыва��м духов аудита каждую неделю);</li>
                 <li>защита от несанкционированного доступа (наши серверы охраняют цифровые драконы).</li>
             </ul>
 

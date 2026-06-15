@@ -19,7 +19,7 @@ class MainApp {
         try {
             // Ждем глобальной инициализации системы доступа
             if (!window.__globalAccessPromise) {
-                Logger.warn('[MainApp] __globalAccessPromise не найден. Проверьте access-init.js');
+                Logger.warn('[MainApp] __globalAccessPromise не найден. Проверьте global-access.js');
             }
             
             // Ждем разрешения или таймаута (чтобы не висеть вечно)
@@ -199,8 +199,8 @@ window.openNews = (id) => {
 };
 
 // Ждем инициализации access-init.js
-if (window.__globalAccessPromise) {
-    window.__globalAccessPromise.then(() => {
+if (window.__accessInitPromise) {
+    window.__accessInitPromise.then(() => {
         console.log('[MainApp] access-init.js завершен, продолжаем инициализацию');
     });
 }
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         console.log('[MainApp] Ожидание инициализации PermissionManager...');
         const pm = window.permissionManager;
-        console.log('[MainApp] PermissionManager получен:', pm ? 'OK' : 'null (будет получен из access-init.js)');
+        console.log('[MainApp] PermissionManager получен:', pm ? 'OK' : 'null (будет получен из global-access.js)');
         
         const app = new MainApp();
         await app.init();
