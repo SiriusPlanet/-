@@ -65,7 +65,8 @@ body {
     }
 }
 
-{"text": "/* --- Кнопка доступа к файлам --- */\n.access-button {"}
+/* --- Кнопка доступа к файлам --- */
+.access-button {
     position: fixed;
     top: 50%;
     left: 50%;
