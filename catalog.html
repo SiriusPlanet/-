@@ -1,60 +1,6 @@
-<!-- Файл: \MySite\catalog.html -->
+<!-- Файл: \\MySite\\catalog.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <title>Каталог — Магазин воспоминаний</title>
-    <link rel="stylesheet" href="static/css/style.css">
-</head>
-<body>
-    <header class="site-header">
-        <a href="index.html" class="logo-link">
-            <img src="images/logo.png" alt="Логотип" class="logo">
-            <span class="site-title">Магазин воспоминаний</span>
-        </a>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="catalog.html">Каталог</a></li>
-                <li><a href="actions.html">Акции</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-                <li><a href="news.html">Новости</a></li>
-                <li><a href="requisites.html">Реквизиты</a></li>
-            </ul>
-        </nav>
-        <div class="auth-link">
-            <a href="login.html">Клиентам</a>
-        </div>
-    </header>
-
-    <main>
-        <section class="catalog">
-            <h2>Каталог артефактов</h2>
-            <div class="products-grid">
-                <div class="product-card">
-                    <img src="images/1.png" alt="Рука Барона Земо">
-                    <h3>Рука Барона Земо</h3>
-                    <p>Сила: 8/10</p>
-                    <p>Статус: оригинал</p>
-                    <p class="price">2 500 000 ₽</p>
-                </div>
-                <div class="product-card">
-                    <img src="images/2.png" alt="Перчатка Таноса">
-                    <h3>Перчатка Таноса</h3>
-                    <p>Сила: ∞</p>
-                    <p>Статус: оригинал (кроме Камня времени)</p>
-                    <p class="price">4 000 000 ₽</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <p>© 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
-        <ul class="footer-links">
-            <li><a href="privacy.html">Политика</a></li>
-            <li><a href="delivery.html">Доставка</a></li>
-        </ul>
-    </footer>
-</body>
-</html>
+"    <!-- Управление доступом - ЗАГРУЖАЕТСЯ ПЕРВЫМ -->\n    <script type=\"module\" src=\"./static/js/access-init.js\"></script>\n    <link rel=\"stylesheet\" href=\"./static/css/style.css\">\n</head>\n<body>\n    <!-- Оверлей доступа -->\n    <div id=\"access-overlay\"></div>\n    <div class=\"access-button\">\n        <button id=\"fileAccessButton\">Получить доступ к файлам</button>\n    </div>\n    <header class=\"site-header\">\n        <a href=\"index.html\" class=\"logo-link\">\n            <img src=\"images/logo.png\" alt=\"Логотип\" class=\"logo\">\n            <span class=\"site-title\">Магазин воспоминаний</span>\n        </a>\n        <nav class=\"main-nav\">\n            <ul>\n                <li><a href=\"index.html\">Главная</a></li>\n                <li><a href=\"about.html\">О нас</a></li>\n                <li><a href=\"catalog.html\">Каталог</a></li>\n                <li><a href=\"actions.html\">Акции</a></li>\n                <li><a href=\"contacts.html\">Контакты</a></li>\n                <li><a href=\"news.html\">Новости</a></li>\n                <li><a href=\"requisites.html\">Реквизиты</a></li>\n            </ul>\n        </nav>\n        <div class=\"auth-link\">\n            <a href=\"login.html\">Клиентам</a>\n        </div>\n    </header>\n\n    <main>\n        <section class=\"catalog\">\n            <h2>Каталог артефактов</h2>\n            <div class=\"products-grid\">\n                <div class=\"product-card\">\n                    <img src=\"images/1.png\" alt=\"Рука Барона Земо\">\n                    <h3>Рука Барона Земо</h3>\n                    <p>Сила: 8/10</p>\n                    <p>Статус: оригинал</p>\n                    <p class=\"price\">2 500 000 ₽</p>\n                </div>\n                <div class=\"product-card\">\n                    <img src=\"images/2.png\" alt=\"Перчатка Таноса\">\n                    <h3>Перчатка Таноса</h3>\n                    <p>Сила: ∞</p>\n                    <p>Статус: оригинал (кроме Камня времени)</p>\n                    <p class=\"price\">4 000 000 ₽</p>\n                </div>\n            </div>\n        </section>\n    </main>\n\n    <footer class=\"site-footer\">\n        <p>© 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>\n        <ul class=\"footer-links\">\n            <li><a href=\"privacy.html\">Политика</a></li>\n            <li><a href=\"delivery.html\">Доставка</a></li>\n        </ul>\n    </footer>\n</body>\n<!-- Основной скрипт - ЗАГРУЖАЕТСЯ ПОСЛЕ access-init.js -->\n<script type=\"module\" src=\"./static/js/main.js\"></script>\n</html>"}
