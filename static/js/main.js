@@ -180,12 +180,10 @@ window.openNews = (id) => {
     modal.classList.add('is-visible');
 };
 
-
-
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         console.log('[MainApp] Ожидание инициализации PermissionManager...');
-        const pm = await waitForPermissionManager();
+        const pm = window.permissionManager;
         console.log('[MainApp] PermissionManager получен:', pm ? 'OK' : 'null');
         
         const app = new MainApp();

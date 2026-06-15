@@ -3,15 +3,8 @@
 
 import { PermissionManager } from './permission-manager.js';
 
-// Гарантируем, что PermissionManager инициализируется до main.js
-window.__accessInitPromise = new Promise((resolve) => {
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            resolve();
-        });
-    } else {
-        resolve();
-    }
-});
-
-console.log('[access-init] Модуль доступа загружен, ждём DOMContentLoaded');
+// Инициализируем PermissionManager сразу
+const pm = new PermissionManager();
+pm.init();
+window.permissionManager = pm;
+console.log('[access-init] PermissionManager инициализирован');

@@ -191,11 +191,5 @@ export class PermissionManager {
     }
 }
 
-window.permissionManager = null;
-
-document.addEventListener('DOMContentLoaded', () => {
-    const pm = new PermissionManager();
-    pm.init();
-    window.permissionManager = pm;
-    console.log('[PermissionManager] Инициализирован и сохранён в window.permissionManager');
-});
+// Инициализация производится в access-init.js
+// window.permissionManager уже установлен
