@@ -180,7 +180,7 @@ window.openNews = (id) => {
     modal.classList.add('is-visible');
 };
 
-{"text": "// Ждём инициализацию PermissionManager\nasync function waitForPermissionManager() {\n    const maxWait = 2000; // макс. время ожидания (2 сек)\n    const interval = 50; // проверка каждые 50мс\n    let elapsed = 0;\n    \n    // Ждём появения window.permissionManager (не undefined и не null)\n    while ((window.permissionManager === undefined || window.permissionManager === null) && elapsed < maxWait) {\n        await new Promise(resolve => setTimeout(resolve, interval));\n        elapsed += interval;\n    }\n    \n    return window.permissionManager;\n}"}
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
