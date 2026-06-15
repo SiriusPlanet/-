@@ -15857,3 +15857,12 @@
 2026-06-14 13:51:33,333 - INFO - [OK] Сервер запущен на порту 8000
 2026-06-15 03:30:05,212 - INFO - [OK] Сервер запущен на порту 8000
 2026-06-15 03:31:18,121 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-15 03:34:25,856 - DEBUG - GET /actions.html
+2026-06-15 03:34:25,858 - INFO - 127.0.0.1 - - [15/Jun/2026 03:34:25] "GET /actions.html HTTP/1.1" 200 -
+
+2026-06-15 03:34:46,946 - DEBUG - GET /static/css/discount-popup.css
+2026-06-15 03:34:46,946 - INFO - 127.0.0.1 - - [15/Jun/2026 03:34:46] "GET /static/css/discount-popup.css HTTP/1.1" 200 -
+
+2026-06-15 03:34:51,266 - DEBUG - GET /static/js/discount-popup.js
+2026-06-15 03:34:51,267 - INFO - 127.0.0.1 - - [15/Jun/2026 03:34:51] "GET /static/js/discount-popup.js HTTP/1.1" 200 -
+
