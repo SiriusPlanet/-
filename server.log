@@ -15882,3 +15882,138 @@
 2026-06-15 23:11:17,983 - INFO - [OK] Сервер запущен на порту 8000
 2026-06-15 23:12:14,849 - INFO - [OK] Сервер запущен на порту 8000
 2026-06-15 23:13:39,390 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-15 23:34:12,573 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-15 23:59:03,951 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-16 00:02:12,386 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-16 00:08:42,456 - INFO - [OK] Сервер запущен на порту 8000
+2026-06-16 00:08:42,733 - DEBUG - GET /
+2026-06-16 00:08:42,734 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:42] "GET / HTTP/1.1" 200 -
+
+2026-06-16 00:08:42,777 - DEBUG - GET /static/css/style.css
+2026-06-16 00:08:42,778 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:42] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-16 00:08:42,997 - DEBUG - GET /static/js/access-init.js
+2026-06-16 00:08:42,997 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:42] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:43,079 - DEBUG - GET /static/js/main.js
+2026-06-16 00:08:43,080 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:43] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:43,679 - DEBUG - GET /static/js/permission-manager.js
+2026-06-16 00:08:43,680 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:43] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:43,682 - DEBUG - GET /static/js/catalog.js
+2026-06-16 00:08:43,682 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:43] "GET /static/js/catalog.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:47,687 - DEBUG - GET /actions.html
+2026-06-16 00:08:47,687 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:47] "GET /actions.html HTTP/1.1" 200 -
+
+2026-06-16 00:08:48,004 - DEBUG - GET /static/css/style.css
+2026-06-16 00:08:48,004 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:48] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-16 00:08:48,052 - DEBUG - GET /static/js/access-init.js
+2026-06-16 00:08:48,053 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:48] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:48,055 - DEBUG - GET /static/js/main.js
+2026-06-16 00:08:48,055 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:48] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:48,056 - DEBUG - GET /static/js/actions-page-constructor.js
+2026-06-16 00:08:48,057 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:48] "GET /static/js/actions-page-constructor.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:48,377 - DEBUG - GET /static/js/permission-manager.js
+2026-06-16 00:08:48,377 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:48] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:48,379 - DEBUG - GET /static/js/catalog.js
+2026-06-16 00:08:48,379 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:48] "GET /static/js/catalog.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:51,487 - DEBUG - GET /catalog.html
+2026-06-16 00:08:51,488 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:51] "GET /catalog.html HTTP/1.1" 200 -
+
+2026-06-16 00:08:51,636 - DEBUG - GET /static/css/style.css
+2026-06-16 00:08:51,636 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:51] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-16 00:08:51,751 - DEBUG - GET /static/js/access-init.js
+2026-06-16 00:08:51,752 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:51] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:51,849 - DEBUG - GET /static/js/main.js
+2026-06-16 00:08:51,850 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:51] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:51,851 - DEBUG - GET /static/js/catalog.js
+2026-06-16 00:08:51,852 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:51] "GET /static/js/catalog.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:51,853 - DEBUG - GET /static/js/permission-manager.js
+2026-06-16 00:08:51,853 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:51] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:51,854 - DEBUG - GET /static/js/catalog-page-constructor.js
+2026-06-16 00:08:51,855 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:51] "GET /static/js/catalog-page-constructor.js HTTP/1.1" 200 -
+
+2026-06-16 00:08:52,123 - DEBUG - GET /get-news
+2026-06-16 00:08:52,171 - ERROR - Критическая ошибка /get-news: '<' not supported between instances of 'int' and 'str'
+2026-06-16 00:08:52,172 - INFO - 127.0.0.1 - - [16/Jun/2026 00:08:52] "GET /get-news HTTP/1.1" 500 -
+
+2026-06-16 00:12:24,093 - INFO - 127.0.0.1 - - [16/Jun/2026 00:12:24] "POST /save-news HTTP/1.1" 400 -
+
+2026-06-16 00:12:27,411 - INFO - 127.0.0.1 - - [16/Jun/2026 00:12:27] "POST /save-news HTTP/1.1" 400 -
+
+2026-06-16 00:14:00,153 - DEBUG - GET /catalog.html
+2026-06-16 00:14:00,154 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /catalog.html HTTP/1.1" 200 -
+
+2026-06-16 00:14:00,210 - DEBUG - GET /.well-known/appspecific/com.chrome.devtools.json
+2026-06-16 00:14:00,210 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+
+2026-06-16 00:14:00,416 - DEBUG - GET /static/css/style.css
+2026-06-16 00:14:00,417 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /static/css/style.css HTTP/1.1" 200 -
+
+2026-06-16 00:14:00,549 - DEBUG - GET /static/css/news.css
+2026-06-16 00:14:00,550 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /static/css/news.css HTTP/1.1" 200 -
+
+2026-06-16 00:14:00,553 - DEBUG - GET /static/css/news-form.css
+2026-06-16 00:14:00,554 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /static/css/news-form.css HTTP/1.1" 200 -
+
+2026-06-16 00:14:00,555 - DEBUG - GET /static/js/access-init.js
+2026-06-16 00:14:00,555 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /static/js/access-init.js HTTP/1.1" 200 -
+
+2026-06-16 00:14:00,556 - DEBUG - GET /static/js/main.js
+2026-06-16 00:14:00,556 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /static/js/main.js HTTP/1.1" 200 -
+
+2026-06-16 00:14:00,558 - DEBUG - GET /static/js/catalog.js
+2026-06-16 00:14:00,558 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /static/js/catalog.js HTTP/1.1" 200 -
+
+2026-06-16 00:14:00,741 - DEBUG - GET /static/js/catalog-page-constructor.js
+2026-06-16 00:14:00,742 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /static/js/catalog-page-constructor.js HTTP/1.1" 200 -
+
+2026-06-16 00:14:00,881 - DEBUG - GET /images/bg.jpg
+2026-06-16 00:14:00,881 - DEBUG - serve_images: filename=bg.jpg, path=F:\I0\002MySiS\MySite\images\bg.jpg, exists=True
+2026-06-16 00:14:00,882 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /images/bg.jpg HTTP/1.1" 200 -
+
+2026-06-16 00:14:00,895 - DEBUG - GET /static/js/permission-manager.js
+2026-06-16 00:14:00,895 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /static/js/permission-manager.js HTTP/1.1" 200 -
+
+2026-06-16 00:14:00,897 - DEBUG - GET /static/js/news-manager.js
+2026-06-16 00:14:00,897 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /static/js/news-manager.js HTTP/1.1" 200 -
+
+2026-06-16 00:14:00,898 - DEBUG - GET /static/js/logger.js
+2026-06-16 00:14:00,899 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /static/js/logger.js HTTP/1.1" 200 -
+
+2026-06-16 00:14:00,915 - DEBUG - GET /static/js/news-form.js
+2026-06-16 00:14:00,916 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:00] "GET /static/js/news-form.js HTTP/1.1" 200 -
+
+2026-06-16 00:14:01,066 - DEBUG - GET /static/js/news-page-constructor.js
+2026-06-16 00:14:01,067 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:01] "GET /static/js/news-page-constructor.js HTTP/1.1" 200 -
+
+2026-06-16 00:14:01,206 - DEBUG - GET /static/js/access-levels.js
+2026-06-16 00:14:01,207 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:01] "GET /static/js/access-levels.js HTTP/1.1" 200 -
+
+2026-06-16 00:14:01,221 - DEBUG - GET /images/logo.png
+2026-06-16 00:14:01,222 - DEBUG - serve_images: filename=logo.png, path=F:\I0\002MySiS\MySite\images\logo.png, exists=True
+2026-06-16 00:14:01,222 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:01] "GET /images/logo.png HTTP/1.1" 200 -
+
+2026-06-16 00:14:01,564 - DEBUG - GET /get-news
+2026-06-16 00:14:01,567 - ERROR - Критическая ошибка /get-news: '<' not supported between instances of 'int' and 'str'
+2026-06-16 00:14:01,567 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:01] "GET /get-news HTTP/1.1" 500 -
+
+2026-06-16 00:14:01,568 - DEBUG - GET /favicon.ico
+2026-06-16 00:14:01,568 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:01] "GET /favicon.ico HTTP/1.1" 404 -
+
+2026-06-16 00:14:48,296 - INFO - 127.0.0.1 - - [16/Jun/2026 00:14:48] "POST /save-news HTTP/1.1" 400 -
+
+2026-06-16 00:22:34,604 - INFO - [OK] Сервер запущен на порту 8000

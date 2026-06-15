@@ -4,7 +4,7 @@
  * Работает с существующим .ticker-container из index.html
  */
 
-class NewsPageConstructor {
+export class NewsPageConstructor {
     constructor(options = {}) {
         this.cardConstructor = options.cardConstructor || null;
         this.newsContainer = options.newsContainer || null;
@@ -348,9 +348,4 @@ class NewsPageConstructor {
             }, 300);
         }
     }
-}
-
-// Экспорт для использования в других модулях
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = NewsPageConstructor;
 }

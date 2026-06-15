@@ -16,6 +16,7 @@ export class CatalogManager {
         this.setupTabs();
         this.setupFormHandlers();
         this.renderProducts();
+        this.setupAddButton();
     }
 
     // Рендеринг товаров
@@ -94,6 +95,16 @@ export class CatalogManager {
                 e.preventDefault();
                 await this.handleNewsSubmit(e.target);
             });
+            
+            // Обработка выбора файла для новости
+            const newsImageInput = document.getElementById('image');
+            const newsUploadLabel = newsForm.querySelector('.file-upload-label span:last-child');
+            if (newsImageInput && newsUploadLabel) {
+                newsImageInput.addEventListener('change', () => {
+                    const file = newsImageInput.files[0];
+                    newsUploadLabel.textContent = file ? file.name : 'Выберите файл для иллюстрации...';
+                });
+            }
         }
 
         if (productForm) {
@@ -101,6 +112,16 @@ export class CatalogManager {
                 e.preventDefault();
                 await this.handleProductSubmit(e.target);
             });
+            
+            // Обработка выбора файла для товара
+            const productImageInput = document.getElementById('productImage');
+            const productUploadLabel = productForm.querySelector('.file-upload-label span:last-child');
+            if (productImageInput && productUploadLabel) {
+                productImageInput.addEventListener('change', () => {
+                    const file = productImageInput.files[0];
+                    productUploadLabel.textContent = file ? file.name : 'Выберите файл для иллюстрации...';
+                });
+            }
         }
 
         // Кнопка "Отмена" - закрывает модальное окно
@@ -154,6 +175,41 @@ export class CatalogManager {
         });
     }
 
+    // Настройка кнопки "Добавить лот"
+    setupAddButton() {
+        const addBtn = document.querySelector('.add-news-btn');
+        if (!addBtn) return;
+
+        addBtn.addEventListener('click', () => {
+            console.log('[CatalogManager] Клик по кнопке "Добавить лот"');
+            this.openModal('addNewsModal');
+            // Устанавливаем активной вкладку "Товары"
+            this.switchToProductTab();
+        });
+    }
+
+    // Переключение на вкладку "Товары"
+    switchToProductTab() {
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            if (btn.dataset.tab === 'products') {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        tabContents.forEach(c => {
+            if (c.id === 'tab-products') {
+                c.classList.add('active');
+            } else {
+                c.classList.remove('active');
+            }
+        });
+    }
+
     // Обработка формы новостей
     async handleNewsSubmit(form) {
         try {
@@ -189,20 +245,32 @@ export class CatalogManager {
     // Обработка формы товаров
     async handleProductSubmit(form) {
         try {
-            const formData = new FormData(form);
-            
-            // Валидация
-            const productName = formData.get('productName')?.trim();
-            const productPrice = formData.get('productPrice')?.trim();
-            const productDescription = formData.get('productDescription')?.trim();
+            // Собираем данные вручную, чтобы корректно обработать файл
+            const productName = document.getElementById('productName')?.value?.trim();
+            const productPrice = document.getElementById('productPrice')?.value?.trim();
+            const productDescription = document.getElementById('productDescription')?.value?.trim();
+            const productImageFile = document.getElementById('productImage')?.files[0];
 
+            // Валидация
             if (!productName || !productPrice || !productDescription) {
                 this.newsManager.showError('Заполните все поля формы товара');
                 return;
             }
 
-            // Добавляем тип лота
+            // Формируем FormData вручную
+            const formData = new FormData();
+            formData.append('title', productName);
+            formData.append('preview', productDescription);
+            formData.append('content', productDescription);
             formData.append('lotType', 'product');
+            
+            // Добавляем цену
+            formData.append('price', productPrice);
+            
+            // Добавляем изображение если оно есть
+            if (productImageFile) {
+                formData.append('image', productImageFile);
+            }
 
             const result = await this.newsManager.saveNews(formData);
             
