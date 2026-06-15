@@ -1,5 +1,69 @@
-{"text": "// catalog.js - Работа с каталогом товаров\nimport { NewsManager } from './news-manager.js';\nimport { Logger } from './logger.js';\n\nexport class CatalogManager {\n    constructor(newsManager) {\n        console.log('[CatalogManager] Инициализация');\n        if (!newsManager) {\n            throw new Error('NewsManager не передан в CatalogManager');\n        }\n        this.newsManager = newsManager;\n        this.init();\n    }\n\n    init() {\n        this.setupTabs();\n        this.setupFormHandlers();\n        this.renderProducts();\n    }\n\n    // Рендеринг товаров\n    async renderProducts() {\n        const newsGrid = document.querySelector('.news-grid');\n        if (!newsGrid) return;\n\n        try {\n            const res = await fetch('/get-news');\n            if (!res.ok) throw new Error('Не удалось загрузить товары');\n            const data = await res.json();\n\n            newsGrid.innerHTML = '';\n            const fragment = document.createDocumentFragment();\n\n            data.news.forEach((item, index) => {\n                // Если это товар (lotType === 'product')\n                if (item.lotType === 'product' || item.price) {\n                    const card = document.createElement('div');\n                    card.classList.add('catalog-card');\n                    card.dataset.id = item.id;\n\n                    const imageHtml = item.image ? \n                        `<img src=\"/images/img_n/${item.image}\" alt=\"${this.escapeHtml(item.title)}\" class=\"catalog-image\">` : \n                        '<div class=\"catalog-no-image\">Нет изображения</div>';\n\n                    card.innerHTML = `\n                        <div class=\"catalog-card-inner\">\n                            ${imageHtml}\n                        </div>\n                        <div class=\"catalog-card-content\">\n                            <h3 class=\"catalog-card-title\">${this.escapeHtml(item.title)}</h3>\n                            <div class=\"catalog-card-price\">${item.price ? item.price + ' ₽' : 'Цена не указана'}</div>\n                            <p class=\"catalog-card-description\">${this.escapeHtml(item.preview || item.content || '')}</p>\n                        </div>\n                    `;\n\n                    fragment.appendChild(card);\n                }\n            });\n\n            newsGrid.appendChild(fragment);\n            console.log('[CatalogManager] Товары отрендерены');\n        } catch (error) {\n            Logger.error('[CatalogManager] Ошибка рендеринга товаров', error);\n        }\n    }"}
-    
+// catalog.js - Работа с каталогом товаров
+import { NewsManager } from './news-manager.js';
+import { Logger } from './logger.js';
+
+export class CatalogManager {
+    constructor(newsManager) {
+        console.log('[CatalogManager] Инициализация');
+        if (!newsManager) {
+            throw new Error('NewsManager не передан в CatalogManager');
+        }
+        this.newsManager = newsManager;
+        this.init();
+    }
+
+    init() {
+        this.setupTabs();
+        this.setupFormHandlers();
+        this.renderProducts();
+    }
+
+    // Рендеринг товаров
+    async renderProducts() {
+        const newsGrid = document.querySelector('.news-grid');
+        if (!newsGrid) return;
+
+        try {
+            const res = await fetch('/get-news');
+            if (!res.ok) throw new Error('Не удалось загрузить товары');
+            const data = await res.json();
+
+            newsGrid.innerHTML = '';
+            const fragment = document.createDocumentFragment();
+
+            data.news.forEach((item, index) => {
+                // Если это товар (lotType === 'product')
+                if (item.lotType === 'product' || item.price) {
+                    const card = document.createElement('div');
+                    card.classList.add('catalog-card');
+                    card.dataset.id = item.id;
+
+                    const imageHtml = item.image ? 
+                        `<img src="/images/img_n/${item.image}" alt="${this.escapeHtml(item.title)}" class="catalog-image">` : 
+                        '<div class="catalog-no-image">Нет изображения</div>';
+
+                    card.innerHTML = `
+                        <div class="catalog-card-inner">
+                            ${imageHtml}
+                        </div>
+                        <div class="catalog-card-content">
+                            <h3 class="catalog-card-title">${this.escapeHtml(item.title)}</h3>
+                            <div class="catalog-card-price">${item.price ? item.price + ' ₽' : 'Цена не указана'}</div>
+                            <p class="catalog-card-description">${this.escapeHtml(item.preview || item.content || '')}</p>
+                        </div>
+                    `;
+
+                    fragment.appendChild(card);
+                }
+            });
+
+            newsGrid.appendChild(fragment);
+            console.log('[CatalogManager] Товары отрендерены');
+        } catch (error) {
+            Logger.error('[CatalogManager] Ошибка рендеринга товаров', error);
+        }
+    }
+
     // Настройка переключения закладок
     setupTabs() {
         const tabBtns = document.querySelectorAll('.tab-btn');
@@ -163,6 +227,13 @@
         uploadLabels.forEach(label => {
             label.textContent = 'Выберите файл для иллюстрации...';
         });
+    }
+
+    // Экранирование HTML
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 }
 
