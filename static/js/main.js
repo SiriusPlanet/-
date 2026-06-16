@@ -4,7 +4,6 @@
 import { Logger } from './logger.js';
 import { NewsManager } from './news-manager.js';
 import { NewsForm } from './news-form.js';
-import { CatalogManager } from './catalog.js';
 
 class MainApp {
     constructor() {

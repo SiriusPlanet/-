@@ -44,6 +44,14 @@
         "GetCubeArtifacts",
         "GetCubeLogs"
       ]
+    },
+    "memory": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
     }
   }
 }
