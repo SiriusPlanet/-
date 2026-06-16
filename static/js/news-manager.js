@@ -132,7 +132,8 @@ export class NewsManager {
 
         container.innerHTML = '';
 
-        const visibleNews = this.newsList.slice(0, this.newsList.length);
+        // Показываем только новости (lotType === 'news'), товары идут в каталог
+        const visibleNews = this.newsList.filter(item => item.lotType === 'news');
         
         const fragment = document.createDocumentFragment();
         

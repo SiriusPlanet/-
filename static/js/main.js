@@ -64,14 +64,16 @@ class MainApp {
         
         this.newsManager = new NewsManager(this.pm);
         
-        // Определяем тип страницы по наличию catalog.js
-        try {
+        // Определяем тип страницы: catalog.html имеет .tabs-container, news.html — нет
+        const isCatalogPage = document.querySelector('.tabs-container') !== null;
+        
+        if (isCatalogPage) {
+            // Страница каталога — используем CatalogManager
             const catalogModule = await import('./catalog.js');
             this.catalogManager = new catalogModule.CatalogManager(this.newsManager);
             console.log('[MainApp] CatalogManager инициализирован');
-        } catch (e) {
-            console.log('[MainApp] catalog.js не найден или не загружен');
-            this.newsManager = new NewsManager(this.pm);
+        } else {
+            // Страница новостей — используем NewsManager + NewsForm
             await this.newsManager.loadNews();
             this.newsForm = new NewsForm(this.newsManager);
             this.newsForm.init();

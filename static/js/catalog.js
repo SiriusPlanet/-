@@ -34,7 +34,7 @@ export class CatalogManager {
 
             data.news.forEach((item) => {
                 // Если это товар (lotType === 'product') И без скидки (скидочные уходят в Акции)
-                if ((item.lotType === 'product' || item.price) && !(item.discount && item.discount > 0)) {
+                if (item.lotType === 'product' && !(item.discount && item.discount > 0)) {
                     const card = this.createProductCard(item);
                     fragment.appendChild(card);
                 }

@@ -89,7 +89,9 @@ export class NewsPageConstructor {
             if (!response.ok) {
                 throw new Error(`Failed to load news: ${response.statusText}`);
             }
-            const news = await response.json();
+            const data = await response.json();
+            // Показываем только записи с lotType === 'news' (или без lotType — для обратной совместимости)
+            const news = (data.news || []).filter(n => n.lotType === 'news' || !n.lotType);
             console.log('News loaded:', news);
             return news;
         } catch (error) {

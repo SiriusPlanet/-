@@ -25,7 +25,7 @@ export class CatalogPageConstructor {
             if (!res.ok) throw new Error('Ошибка загрузки');
             const data = await res.json();
             // Фильтруем только товары
-            return (data.news || []).filter(n => n.lotType === 'product' || n.price);
+            return (data.news || []).filter(n => n.lotType === 'product');
         } catch (e) {
             console.error('[CatalogPageConstructor] Ошибка загрузки:', e);
             return [];
