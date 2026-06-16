@@ -116,6 +116,7 @@ export class NewsForm {
             formData.append('date', date);
             formData.append('preview', preview);
             formData.append('content', content);
+            formData.append('lotType', 'news');
             if (imageFile) {
                 formData.append('image', imageFile);
             }

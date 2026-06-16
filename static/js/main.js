@@ -38,7 +38,6 @@ class MainApp {
             }
 
             await this.initComponents();
-            this.setupFormHandlers();
             this.setupScrollHandler();
             this.setupGlobalHandlers();
             Logger.log('[MainApp] Приложение успешно инициализировано');
@@ -113,57 +112,9 @@ class MainApp {
         window.addEventListener('error', this.handleError.bind(this));
     }
 
-    setupFormHandlers() {
-        const form = document.getElementById('newsForm');
-        if (!form) {
-            console.log('[MainApp] Форма #newsForm не найдена');
-            return;
-        }
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            await this.handleFormSubmit(e.target);
-        });
-    }
-
-    async handleFormSubmit(form) {
-        try {
-            if (!this.pm || !this.pm.hasPermission()) {
-                throw new Error('Нет прав доступа');
-            }
-
-            const formData = new FormData(form);
-            const isValid = this.validateForm(formData);
-            
-            if (!isValid) {
-                this.newsManager.showError('Заполните все поля');
-                return;
-            }
-
-            const response = await this.newsManager.saveNews(formData);
-            if (response.success) {
-                this.newsManager.showToast('Хроно-запись создана');
-                await this.newsManager.loadNews();
-                form.reset();
-                this.closeModal('addNewsModal');
-            } else {
-                this.newsManager.showError(response.error);
-            }
-        } catch (error) {
-            Logger.error('[MainApp] Ошибка отправки формы', error);
-            if (this.newsManager) {
-                this.newsManager.showError(error.message || 'Ошибка отправки');
-            }
-        }
-    }
-
-    validateForm(formData) {
-        const title = formData.get('title')?.trim();
-        const date = formData.get('date')?.trim();
-        const preview = formData.get('preview')?.trim();
-        const content = formData.get('content')?.trim();
-
-        return !!(title && date && preview && content);
-    }
+    // Форма теперь обрабатывается в news-form.js и catalog.js
+    // setupFormHandlers, handleFormSubmit, validateForm — удалены
+    // чтобы не было дублирования отправки
 
     toggleModal(modalId) {
         const modal = document.getElementById(modalId);

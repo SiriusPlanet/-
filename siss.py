@@ -228,11 +228,11 @@ class SimpleHandler(BaseHTTPRequestHandler):
 
                 if lot_type == 'product':
                     # Обработка товара
-                    title = data.get('productName', '').strip()
-                    content = data.get('productDescription', '').strip()
-                    price = data.get('productPrice', '').strip()
-                    preview = content[:100] + ("..." if len(content) > 100 else "") if content else ""
-                    date = datetime.now().strftime('%Y-%m-%d')
+                    title = data.get('title', '').strip()
+                    content = data.get('content', '').strip()
+                    price = data.get('price', '').strip()
+                    preview = data.get('preview', '').strip() or (content[:100] + ("..." if len(content) > 100 else "") if content else "")
+                    date = data.get('date', '').strip() or datetime.now().strftime('%Y-%m-%d')
                     discount = ''
                 else:
                     # Обработка новости
@@ -274,7 +274,8 @@ class SimpleHandler(BaseHTTPRequestHandler):
                     "content": content,
                     "image": image_path or "400.png",
                     "discount": int(discount) if discount and discount.isdigit() else 0,
-                    "lotType": lot_type
+                    "lotType": lot_type,
+                    "price": price if lot_type == 'product' and price else ''
                 }
 
                 json_path = os.path.join(PROJECT_ROOT, 'data', 'news', f"{news_id}.json")
@@ -497,7 +498,9 @@ class SimpleHandler(BaseHTTPRequestHandler):
                             news = json.load(f)
                             if not isinstance(news, dict) or not all(k in news for k in ["title", "date", "preview", "content", "image"]):
                                 raise ValueError("Неверная структура JSON")
-                            news["lotType"] = "product" if "price" in news else "news"
+                            # Определяем тип: товар если price не пустой, иначе новость
+                            has_price = news.get("price")
+                            news["lotType"] = "product" if has_price else "news"
                             news_list.append(news)
                 except Exception as e:
                     logging.error(f"Ошибка обработки {file}: {e}")
