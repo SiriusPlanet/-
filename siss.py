@@ -202,9 +202,9 @@ class SimpleHandler(BaseHTTPRequestHandler):
                         filename = None
 
                         for line in header.split('\r\n'):
-                            if line.startswith('name='):
+                            if 'name="' in line:
                                 name = line.split('name="')[1].split('"')[0]
-                            if line.startswith('filename='):
+                            if 'filename="' in line:
                                 filename = line.split('filename="')[1].split('"')[0]
 
                         if not name:
@@ -505,7 +505,8 @@ class SimpleHandler(BaseHTTPRequestHandler):
                 except Exception as e:
                     logging.error(f"Ошибка обработки {file}: {e}")
 
-            news_list.sort(key=lambda x: x.get('id', 0), reverse=True)
+            # Сортировка: приводим id к строке для безопасного сравнения
+            news_list.sort(key=lambda x: str(x.get('id', 0)), reverse=True)
 
             self.send_response(200)
             self.send_header('Access-Control-Allow-Origin', '*')
