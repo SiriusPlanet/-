@@ -1,0 +1,24 @@
+# Логи сервера
+server.log
+server_output.log
+
+# Кэш Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Планы гигакода (не часть проекта)
+.gigacode/
+
+# Временные файлы
+temp_prev.py
+test_server.py
+*.bat
+start-server.bat
+
+# Файлы VS Code (кроме settings.json)
+.vscode/*.json
+
+# Системные файлы
+Thumbs.db
+.DS_Store
