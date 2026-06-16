@@ -45,7 +45,7 @@ class MainApp {
             this.container = document.querySelector('.news-grid');
         } else if (path.includes('catalog.html')) {
             this.currentPage = 'catalog';
-            this.container = document.querySelector('.news-grid');
+            this.container = document.querySelector('.products-grid');
         } else if (path.includes('actions.html')) {
             this.currentPage = 'actions';
             this.container = document.querySelector('.products-grid');
