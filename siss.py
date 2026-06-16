@@ -495,19 +495,27 @@ class SimpleHandler(BaseHTTPRequestHandler):
                         if file.endswith('.txt'):
                             content = f.read()
                             news_list.append({
+                                "id": f"txt-{int(time.time() * 1000)}",
                                 "title": "Новая хронозапись",
                                 "date": datetime.now().strftime('%Y-%m-%d'),
                                 "preview": content[:100],
                                 "content": content,
-                                "image": "400.png"
+                                "image": "400.png",
+                                "lotType": "news",
+                                "price": "",
+                                "discount": 0
                             })
                         else:
                             news = json.load(f)
                             if not isinstance(news, dict) or not all(k in news for k in ["title", "date", "preview", "content", "image"]):
                                 raise ValueError("Неверная структура JSON")
-                            # Определяем тип: товар если price не пустой, иначе новость
-                            has_price = news.get("price")
-                            news["lotType"] = "product" if has_price else "news"
+                            # Нормализация полей для старых записей
+                            if "lotType" not in news:
+                                news["lotType"] = "news"
+                            if "price" not in news:
+                                news["price"] = ""
+                            if "discount" not in news:
+                                news["discount"] = 0
                             news_list.append(news)
                 except Exception as e:
                     logging.error(f"Ошибка обработки {file}: {e}")

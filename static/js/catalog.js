@@ -388,7 +388,7 @@ export class CatalogManager {
             if (result.success) {
                 this.newsManager.showToast('Лот сохранен');
                 this.closeModal('addNewsModal');
-                await this.newsManager.loadNews();
+                await this.renderProducts();
                 form.reset();
                 this.resetUploadLabels(form);
             } else {
