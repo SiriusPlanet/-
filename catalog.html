@@ -1,4 +1,4 @@
-<!-- catalog.html - Страница каталога товаров -->
+<!-- catalog.html — упрощённая версия, форма встроена, скрипты только main.js -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -34,7 +34,6 @@
             opacity: 1;
             transition: opacity 0.8s ease-out;
 
-            /* Шум — как сквозь тряпку */
             --noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             background-image: var(--noise);
             background-blend-mode: overlay;
@@ -45,7 +44,6 @@
             pointer-events: none;
         }
 
-        /* --- Кнопка — только если нет доступа --- */
         .access-button {
             position: fixed;
             top: 50%;
@@ -79,63 +77,21 @@
             transform: scale(0.98);
         }
 
-        /* --- Блокировка контента до доступа --- */
         body:not(.access-granted) header,
         body:not(.access-granted) main,
         body:not(.access-granted) footer {
             filter: blur(8px) brightness(0.2);
             pointer-events: none;
         }
-
-        /* === СТИЛИ ДЛЯ ЗАКЛАДОК В ФОРМЕ === */
-        .tabs-container {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 16px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        .tab-btn {
-            padding: 10px 20px;
-            background: transparent;
-            border: none;
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #7f8c8d;
-            transition: all 0.2s;
-            border-radius: 4px 4px 0 0;
-        }
-
-        .tab-btn:hover {
-            color: #3498db;
-            background: rgba(52, 152, 219, 0.05);
-        }
-
-        .tab-btn.active {
-            color: #3498db;
-            border-bottom-color: #3498db;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
     </style>
 </head>
 <body>
-    <!-- Затемнение -->
     <div id="access-overlay"></div>
     
-    <!-- Панель доступа — появляется только если нет прав -->
     <div class="access-button">
         <button id="fileAccessButton">Получить доступ к файлам</button>
     </div>
-    <!-- Шапка -->
+
     <div class="header-group">
         <header class="site-header">
             <a href="index.html" class="logo-link">
@@ -157,7 +113,6 @@
                 <a href="login.html">Клиентам</a>
             </div>
         </header>
-    <!-- Панель каталога -->
         <div class="news-header-panel" id="newsHeaderPanel">
             <div class="header-grid">
                 <h1>Каталог товаров</h1>
@@ -166,19 +121,19 @@
             </div>
         </div>
     </div>
-    <!-- Контейнер товаров -->
+
     <main>
         <section class="news-container">
             <div class="news-grid"></div>
         </section>
     </main>
 
-    <!-- Модальное окно для ПРОСМОТРА новости/товара -->
+    <!-- Модальное окно для ПРОСМОТРА -->
     <div id="viewNewsModal" class="modal hidden">
         <div class="modal-content"></div>
     </div>
 
-    <!-- Модальное окно для ДОБАВЛЕНИЯ (с закладками) -->
+    <!-- Модальное окно для ДОБАВЛЕНИЯ -->
     <div id="addNewsModal" class="modal hidden">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -186,54 +141,25 @@
                     <h2>Добавление лота</h2>
                 </div>
                 <div class="modal-body">
-                    <!-- Закладки -->
-                    <div class="tabs-container">
-                        <button class="tab-btn active" data-tab="news">Новости</button>
-                        <button class="tab-btn" data-tab="products">Товары</button>
-                    </div>
-                    
-                    <!-- Вкладка Новости -->
-                    <div class="tab-content active" id="tab-news">
-                        <form id="newsForm" class="modal-form">
-                            <label for="title">Заголовок</label>
-                            <div class="file-upload-wrapper">
-                                <label for="image" class="file-upload-label">
-                                    <span>📷</span>
-                                    <span>Выберите файл для иллюстрации...</span>
-                                </label>
-                                <input type="file" id="image" accept="image/*" style="display: none" />
-                            </div>
-                            <input type="text" id="title" placeholder="Заголовок" required class="modal-input" />
-                            <input type="date" id="date" required class="modal-input" />
-                            <textarea id="preview" placeholder="Краткое описание" required class="modal-textarea" rows="4"></textarea>
-                            <textarea id="content" placeholder="Полный текст" required class="modal-textarea" rows="6"></textarea>
-                            <div class="modal-actions">
-                                <button type="submit" class="btn-submit">Сохранить</button>
-                                <button type="button" class="cancel-btn">Отмена</button>
-                            </div>
-                        </form>
-                    </div>
-                    
-                    <!-- Вкладка Товары -->
-                    <div class="tab-content" id="tab-products">
-                        <form id="productForm" class="modal-form">
-                            <label for="productImage">Изображение</label>
-                            <div class="file-upload-wrapper">
-                                <label for="productImage" class="file-upload-label">
-                                    <span>📷</span>
-                                    <span>Выберите файл для иллюстрации...</span>
-                                </label>
-                                <input type="file" id="productImage" accept="image/*" style="display: none" />
-                            </div>
-                            <input type="text" id="productName" placeholder="Название товара" required class="modal-input" />
-                            <input type="number" id="productPrice" placeholder="Цена" required class="modal-input" />
-                            <textarea id="productDescription" placeholder="Описание товара" required class="modal-textarea" rows="4"></textarea>
-                            <div class="modal-actions">
-                                <button type="submit" class="btn-submit">Сохранить лот</button>
-                                <button type="button" class="cancel-btn">Отмена</button>
-                            </div>
-                        </form>
-                    </div>
+                    <form id="newsForm" class="modal-form">
+                        <label for="title">Заголовок</label>
+                        <div class="file-upload-wrapper">
+                            <label for="image" class="file-upload-label">
+                                <span>📷</span>
+                                <span>Выберите файл для иллюстрации...</span>
+                            </label>
+                            <input type="file" id="image" accept="image/*" style="display: none" />
+                        </div>
+                        <input type="text" id="title" placeholder="Заголовок" required class="modal-input" />
+                        <input type="date" id="date" class="modal-input" />
+                        <input type="number" id="price" placeholder="Цена (только для товаров)" class="modal-input" />
+                        <textarea id="preview" placeholder="Краткое описание" class="modal-textarea" rows="4"></textarea>
+                        <textarea id="content" placeholder="Полный текст" class="modal-textarea" rows="6"></textarea>
+                        <div class="modal-actions">
+                            <button type="submit" class="btn-submit">Сохранить</button>
+                            <button type="button" class="cancel-btn">Отмена</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -241,9 +167,7 @@
 
     <!-- Основной скрипт -->
     <script type="module" src="./static/js/main.js"></script>
-    <script type="module" src="./static/js/catalog.js"></script>
     
-    <!-- Футер (остался на месте) -->
     <footer class="site-footer">
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
         <ul class="footer-links">

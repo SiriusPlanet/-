@@ -1,181 +1,208 @@
-// static/js/main.js - Исправленная версия
-// Работает на всех страницах без ошибок
+// static/js/main.js — упрощённая версия
+// Инициализирует Publisher для текущей страницы + обработку формы
 
-import { Logger } from './logger.js';
-import { NewsManager } from './news-manager.js';
-import { NewsForm } from './news-form.js';
+import { Publisher } from './publisher.js';
 
 class MainApp {
     constructor() {
         this.pm = null;
-        this.newsManager = null;
-        this.newsForm = null;
-        this.newsHeaderPanel = null;
-        this.catalogManager = null;
-        
-        console.log('[MainApp] Конструктор вызван, pm будет получен из window.permissionManager');
+        this.publisher = null;
+        this.currentPage = null;
+        this.container = null;
     }
 
     async init() {
         try {
-            // Ждем глобальной инициализации системы доступа
-            if (!window.__globalAccessPromise) {
-                Logger.warn('[MainApp] __globalAccessPromise не найден. Проверьте access-init.js');
-            }
-            
-            // Ждем разрешения или таймаута (чтобы не висеть вечно)
-            try {
-                await Promise.race([
-                    window.__globalAccessPromise?.then(pm => {
-                        console.log('[MainApp] Система доступа инициализирована');
-                        this.pm = pm;
-                    }),
-                    new Promise(resolve => setTimeout(resolve, 2000)) // 2 сек таймаут
-                ]);
-            } catch (e) {
-                console.warn('[MainApp] Ошибка ожидания доступа:', e);
+            // Ждём глобальной инициализации системы доступа
+            if (window.__globalAccessPromise) {
+                try {
+                    await Promise.race([
+                        window.__globalAccessPromise.then(pm => {
+                            this.pm = pm;
+                        }),
+                        new Promise(resolve => setTimeout(resolve, 2000))
+                    ]);
+                } catch (e) {
+                    console.warn('[MainApp] Ошибка ожидания доступа:', e);
+                }
             }
 
-            await this.initComponents();
+            this.detectPage();
+            await this.initPublisher();
+            this.setupFormHandler();
+            this.setupAddButton();
             this.setupScrollHandler();
-            this.setupGlobalHandlers();
-            Logger.log('[MainApp] Приложение успешно инициализировано');
+            console.log('[MainApp] Инициализирован');
         } catch (error) {
-            Logger.error('[MainApp] Ошибка инициализации', error);
+            console.error('[MainApp] Ошибка инициализации:', error);
         }
     }
 
-    async initComponents() {
+    detectPage() {
+        const path = window.location.pathname;
+        if (path.includes('news.html')) {
+            this.currentPage = 'news';
+            this.container = document.querySelector('.news-grid');
+        } else if (path.includes('catalog.html')) {
+            this.currentPage = 'catalog';
+            this.container = document.querySelector('.news-grid');
+        } else if (path.includes('actions.html')) {
+            this.currentPage = 'actions';
+            this.container = document.querySelector('.products-grid');
+        }
+    }
+
+    async initPublisher() {
+        if (!this.currentPage || !this.container) {
+            console.log('[MainApp] Не страница с лотами, пропускаем');
+            return;
+        }
+
+        this.publisher = new Publisher();
+        await this.publisher.publish(this.currentPage, this.container);
+    }
+
+    setupAddButton() {
         const addBtn = document.querySelector('.add-news-btn');
         const modal = document.getElementById('addNewsModal');
-        
-        if (!addBtn || !modal) {
-            console.log('[MainApp] Это не страница новостей/каталога, пропускаем инициализацию компонентов');
+        if (!addBtn || !modal) return;
+
+        addBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            modal.classList.add('is-visible');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Закрытие по кнопке отмена
+        const cancelBtn = modal.querySelector('.cancel-btn');
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', () => this.closeModal(modal));
+        }
+
+        // Закрытие по клику вне модалки
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) this.closeModal(modal);
+        });
+
+        // Закрытие по Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                this.closeModal(modal);
+            }
+        });
+    }
+
+    closeModal(modal) {
+        modal.classList.remove('is-visible');
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+        const form = modal.querySelector('form');
+        if (form) form.reset();
+    }
+
+    setupFormHandler() {
+        const form = document.getElementById('newsForm');
+        if (!form) return;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await this.handleSubmit(form);
+        });
+
+        // Обновление текста при выборе файла
+        const imageInput = document.getElementById('image');
+        const uploadLabel = document.querySelector('.file-upload-label span:last-child');
+        if (imageInput && uploadLabel) {
+            imageInput.addEventListener('change', () => {
+                uploadLabel.textContent = imageInput.files[0]
+                    ? imageInput.files[0].name
+                    : 'Выберите файл для иллюстрации...';
+            });
+        }
+    }
+
+    async handleSubmit(form) {
+        const title = document.getElementById('title')?.value?.trim();
+        const content = document.getElementById('content')?.value?.trim();
+
+        if (!title || !content) {
+            this.showError('Заполните заголовок и полный текст');
             return;
         }
-        
-        console.log('[MainApp] Инициализация компонентов...');
-        
-        if (!this.pm) {
-            Logger.error('[MainApp] PermissionManager не передан в компоненты');
-            return;
-        }
-        
-        this.newsManager = new NewsManager(this.pm);
-        
-        // Определяем тип страницы: catalog.html имеет .tabs-container, news.html — нет
-        const isCatalogPage = document.querySelector('.tabs-container') !== null;
-        
-        if (isCatalogPage) {
-            // Страница каталога — используем CatalogManager
-            const catalogModule = await import('./catalog.js');
-            this.catalogManager = new catalogModule.CatalogManager(this.newsManager);
-            console.log('[MainApp] CatalogManager инициализирован');
-        } else {
-            // Страница новостей — используем NewsManager + NewsForm
-            await this.newsManager.loadNews();
-            this.newsForm = new NewsForm(this.newsManager);
-            this.newsForm.init();
-            console.log('[MainApp] NewsForm инициализирован');
+
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('date', document.getElementById('date')?.value || '');
+        formData.append('preview', document.getElementById('preview')?.value || '');
+        formData.append('content', content);
+        formData.append('price', document.getElementById('price')?.value || '');
+        formData.append('lotType', this.currentPage === 'catalog' ? 'product' : 'news');
+
+        const imageFile = document.getElementById('image')?.files[0];
+        if (imageFile) formData.append('image', imageFile);
+
+        try {
+            const res = await fetch('/save-news', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!res.ok) throw new Error('Ошибка сохранения');
+            const result = await res.json();
+
+            if (result.success) {
+                this.showToast('Запись сохранена');
+                this.closeModal(document.getElementById('addNewsModal'));
+                form.reset();
+                // Перепубликуем
+                if (this.publisher && this.currentPage && this.container) {
+                    await this.publisher.publish(this.currentPage, this.container);
+                }
+            } else {
+                this.showError(result.error || 'Ошибка сохранения');
+            }
+        } catch (e) {
+            console.error('[MainApp] Ошибка сохранения:', e);
+            this.showError('Ошибка при сохранении');
         }
     }
 
     setupScrollHandler() {
-        const scrollThreshold = 5;
+        const panel = document.querySelector('.news-header-panel');
+        if (!panel) return;
+
         let lastScrollTop = 0;
-        
-        this.newsHeaderPanel = document.querySelector('.news-header-panel');
-        if (!this.newsHeaderPanel) {
-            console.log('[MainApp] Панель .news-header-panel не найдена');
-            return;
-        }
-        
-        const handleScroll = () => {
+        const threshold = 5;
+
+        window.addEventListener('scroll', () => {
             const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (currentScrollTop > lastScrollTop && currentScrollTop > scrollThreshold) {
-                // Скролл вниз - скрываем панель
-                this.newsHeaderPanel.classList.add('hidden');
+            if (currentScrollTop > lastScrollTop && currentScrollTop > threshold) {
+                panel.classList.add('hidden');
             } else {
-                // Скролл вверх - показываем панель
-                this.newsHeaderPanel.classList.remove('hidden');
+                panel.classList.remove('hidden');
             }
-            
             lastScrollTop = currentScrollTop;
-        };
-        
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        console.log('[MainApp] Слушатель скролла установлен');
+        }, { passive: true });
     }
 
-    setupGlobalHandlers() {
-        document.addEventListener('keydown', this.handleEscape.bind(this));
-        window.addEventListener('error', this.handleError.bind(this));
+    showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification success';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
     }
 
-    // Форма теперь обрабатывается в news-form.js и catalog.js
-    // setupFormHandlers, handleFormSubmit, validateForm — удалены
-    // чтобы не было дублирования отправки
-
-    toggleModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.toggle('hidden');
-            modal.classList.toggle('is-visible');
-        }
+    showError(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification error';
+        toast.textContent = '❌ ' + message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 4000);
     }
-
-    closeModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('is-visible');
-        }
-    }
-
-    handleEscape(e) {
-        if (e.key === 'Escape') {
-            this.closeAllModals();
-        }
-    }
-
-    closeAllModals() {
-        ['viewNewsModal', 'addNewsModal'].forEach(id => {
-            this.closeModal(id);
-        });
-    }
-
-    handleError(error) {
-        Logger.error('[MainApp] Глобальная ошибка', error);
-        if (this.newsManager) {
-            this.newsManager.showError(error.message);
-        }
-    }
-}
-
-window.openNews = (id) => {
-    const modal = document.getElementById('viewNewsModal');
-    if (!modal) return;
-    modal.classList.remove('hidden');
-    modal.classList.add('is-visible');
-};
-
-// Ждем инициализации access-init.js
-if (window.__globalAccessPromise) {
-    window.__globalAccessPromise.then(() => {
-        console.log('[MainApp] access-init.js завершен, продолжаем инициализацию');
-    });
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        console.log('[MainApp] Ожидание инициализации PermissionManager...');
-        const pm = window.permissionManager;
-        console.log('[MainApp] PermissionManager получен:', pm ? 'OK' : 'null (будет получен из access-init.js)');
-        
-        const app = new MainApp();
-        await app.init();
-    } catch (error) {
-        console.error('[MainApp] Критическая ошибка при инициализации:', error);
-    }
+    const app = new MainApp();
+    await app.init();
 });

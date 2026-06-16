@@ -1,4 +1,4 @@
-<!-- news.html -->
+<!-- news.html — упрощённая версия, форма встроена, скрипты только main.js -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -139,41 +139,39 @@
         <div class="modal-content"></div>
     </div>
 
-    <!-- Модальное окно для ДОБАВЛЕНИЯ новости -->
+    <!-- Модальное окно для ДОБАВЛЕНИЯ -->
     <div id="addNewsModal" class="modal hidden">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2>Целевое событие в линейном времени</h2>
-                    "<small class="warning">ВНИМАНИЕ: имплантация в прошлое относительно нынешних координат может иметь каскадные последствия!</small> <!-- мелким шрифтом, цвет запёкшейся крови -->"
+                    <small class="warning">ВНИМАНИЕ: имплантация в прошлое относительно нынешних координат может иметь каскадные последствия!</small>
                 </div>
-                    <div class="modal-body">
-                        <form id="newsForm" class="modal-form">
-                            <label for="title"><!-- Целевое событие в линейном времени --></label><!-- Целевое событие в линейном времени -->
-                            <div class="file-upload-wrapper">
-                                <label for="image" class="file-upload-label" >
-                                    <span>📷</span>
-                                    <span>Выберите файл для иллюстрации...</span>
-                                </label>
-                                <input type="file" id="image" accept="image/*" style="display: none" />
-                            </div>
-                            <input type="text" id="title" placeholder="Заголовок" required class="modal-input" />
-                            <input type="date" id="date" required class="modal-input" />
-                            <textarea id="preview" placeholder="Краткое описание" required class="modal-textarea" rows="4"></textarea>
-                            <textarea id="content" placeholder="Полный текст" required class="modal-textarea" rows="6"></textarea>
-                            <div class="modal-actions">
-                                <button type="submit" class="btn-submit">Имплантировать</button>
-                                <!-- <button type="button" class="cancel-btn">Рассчитать вероятности</button> пока не раелизовано (нужен 1ый уровень авторизации)-->
-                                <button type="button" class="cancel-btn">Отмена</button><!-- кнопки - только обводка, заполнение цветом при наведении -->
-                            </div>
-                        </form>
-                    </div>
+                <div class="modal-body">
+                    <form id="newsForm" class="modal-form">
+                        <div class="file-upload-wrapper">
+                            <label for="image" class="file-upload-label">
+                                <span>📷</span>
+                                <span>Выберите файл для иллюстрации...</span>
+                            </label>
+                            <input type="file" id="image" accept="image/*" style="display: none" />
+                        </div>
+                        <input type="text" id="title" placeholder="Заголовок" required class="modal-input" />
+                        <input type="date" id="date" class="modal-input" />
+                        <input type="number" id="price" placeholder="Цена (только для товаров)" class="modal-input" />
+                        <textarea id="preview" placeholder="Краткое описание" class="modal-textarea" rows="4"></textarea>
+                        <textarea id="content" placeholder="Полный текст" class="modal-textarea" rows="6"></textarea>
+                        <div class="modal-actions">
+                            <button type="submit" class="btn-submit">Имплантировать</button>
+                            <button type="button" class="cancel-btn">Отмена</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Основной скрипт - ЗАГРУЖАЕТСЯ ПОСЛЕ access-init.js -->
+    <!-- Основной скрипт -->
     <script type="module" src="./static/js/main.js"></script>
 
     <!-- Футер (остался на месте) -->

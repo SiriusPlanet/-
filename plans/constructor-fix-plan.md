@@ -1,117 +1,168 @@
-# План: Исправление логики конструкторов по lotType
+# План: Один конструктор, один публикатор
 
-## Проблема
+## Ключевая идея
 
-Сейчас API `/get-news` отдаёт **все** записи из `data/news/` без фильтрации. Конструкторы на клиенте вынуждены фильтровать вручную, а `NewsManager` на `news.html` вообще не фильтрует — показывает товары вместо новостей.
+> Поставил скидку через `%` → лот сам улетает на страницу акций.
+> Никаких лишних действий, никаких рассчётов. Просто фильтр `discount > 0`.
 
-## Архитектура
+## Суть
 
-```
-/get-news (сервер) → все JSON из data/news/
-    │
-    ├── news.html → NewsManager (main.js) → рендерит ВСЁ (нет фильтра) ❌
-    │                NewsForm → отправляет lotType='news' ✅
-    │
-    ├── catalog.html → CatalogManager (catalog.js) → фильтр: lotType==='product' || price
-    │                   CatalogPageConstructor → фильтр: lotType==='product' || price
-    │                   CatalogForm → отправляет lotType='product' ✅
-    │
-    └── actions.html → ActionsPageConstructor → фильтр: discount > 0
-```
+Всё — **один лот**. У лота есть поля: title, preview, content, image, price, discount, lotType.
 
-## Текущее состояние полей lotType в data/news/
+- `lotType === 'news'` → новость
+- `lotType === 'product'` → товар
 
-Все файлы имеют `"lotType": "product"` — это товары. Новостей с `lotType: "news"` нет.
-
-## План изменений
-
-### 1. NewsManager.renderNews() — фильтр по lotType === 'news'
-
-**Файл:** `static/js/news-manager.js` (строка ~129-176)
-
-Сейчас `renderNews()` рендерит **все** записи из `this.newsList`. Нужно добавить фильтр:
-
-```js
-const visibleNews = this.newsList.filter(item => item.lotType === 'news');
-```
-
-Это единственное изменение — никаких лишних проверок. Конструктор сам решает, что показывать.
-
-### 2. CatalogManager.renderProducts() — фильтр остаётся, но уточнить
-
-**Файл:** `static/js/catalog.js` (строка ~35-37)
-
-Сейчас фильтр: `(item.lotType === 'product' || item.price) && !(item.discount && item.discount > 0)`
-
-Вторая часть `&& !(item.discount...)` — это чтобы товары со скидкой уходили в Акции. Это логично. Оставляем как есть, но убираем `|| item.price` — если у товара нет `lotType === 'product'`, но есть цена — это всё равно не товар. Лишняя проверка.
-
-Новый фильтр:
-```js
-if (item.lotType === 'product' && !(item.discount && item.discount > 0))
-```
-
-### 3. CatalogPageConstructor — синхронизировать фильтр
-
-**Файл:** `static/js/catalog-page-constructor.js` (строка ~28)
-
-Сейчас: `n => n.lotType === 'product' || n.price`
-
-Изменить на:
-```js
-n => n.lotType === 'product'
-```
-
-### 4. NewsPageConstructor — добавить фильтр по lotType === 'news'
-
-**Файл:** `static/js/news-page-constructor.js` (строка ~86-99)
-
-Сейчас `loadNews()` загружает все новости без фильтра. Нужно добавить фильтр:
-
-```js
-const news = await response.json();
-return (news.news || []).filter(n => n.lotType === 'news' || !n.lotType);
-```
-
-`|| !n.lotType` — для обратной совместимости со старыми записями без поля lotType.
-
-### 5. Создать тестовую новость
-
-Создать JSON-файл `data/news/test-news-001.json` с `lotType: "news"` для проверки.
-
-## Что НЕ нужно менять
-
-- **`lotType` → `cardType`** — переименование не требуется, это не влияет на скорость
-- **Сервер `siss.py`** — `/get-news` и `/save-news` работают корректно
-- **Формы** — `news-form.js` уже отправляет `lotType: 'news'`, `catalog.js` — `lotType: 'product'`
-- **`ActionsPageConstructor`** — фильтр по `discount > 0` корректен
-- **Шаблоны** — `card-template.html` и `news-card.html` не требуют изменений
-
-## Схема взаимодействия после исправлений
+## Архитектура (простая)
 
 ```mermaid
-flowchart TD
-    API["/get-news"] -->|Все записи| NM[NewsManager]
-    API -->|Все записи| CM[CatalogManager]
-    API -->|Все записи| CPC[CatalogPageConstructor]
-    API -->|Все записи| NPC[NewsPageConstructor]
-
-    NM -->|Фильтр: lotType==='news'| NewsGrid[news.html .news-grid]
-    NPC -->|Фильтр: lotType==='news'| NewsGrid
-
-    CM -->|Фильтр: lotType==='product' && !discount| CatGrid[catalog.html .news-grid]
-    CPC -->|Фильтр: lotType==='product'| CatGrid
-
-    subgraph "Формы"
-        NF[news-form.js] -->|lotType='news'| API
-        CF[catalog.js form] -->|lotType='product'| API
+flowchart LR
+    subgraph "Один конструктор карточек"
+        CC[CardConstructor]
     end
+    
+    subgraph "Один публикатор"
+        Pub[Publisher]
+    end
+
+    subgraph "Страницы"
+        N[news.html]
+        C[catalog.html]
+        A[actions.html]
+    end
+
+    CC -->|собирает HTML-карточку| Pub
+    Pub -->|lotType=news| N
+    Pub -->|lotType=product && !discount| C
+    Pub -->|discount>0| A
 ```
+
+## Правила публикации
+
+| Если | То на страницу |
+|------|---------------|
+| `lotType === 'news'` | `news.html` |
+| `lotType === 'product'` и `discount` нет или 0 | `catalog.html` |
+| `discount > 0` (любой lotType) | `actions.html` |
+
+Один лот может попасть на две страницы: например, товар со скидкой — и в каталог, и в акции.
+
+## Кнопки на карточке (только для админа, уровень >= 3)
+
+```
+┌─────────────────────┐
+│ [Del]    Заголовок  │
+│          Цена       │
+│          Описание   │
+│                [%]  │
+└─────────────────────┘
+```
+
+- **`Del`** — слева сверху, полупрозрачная, удаляет лот
+- **`%`** — справа сверху, полупрозрачная, открывает панель скидки (только для товаров)
+
+Обе кнопки одинакового стиля: круглая, 32px, фон rgba(0,0,0,0.5), opacity 0.6, при наведении opacity 1.
+
+## Что делаем
+
+### 1. Создаём `static/js/card-constructor.js` — ЕДИНСТВЕННЫЙ конструктор
+
+```js
+class CardConstructor {
+    // Собирает HTML-карточку из данных лота
+    // Принимает: { id, title, preview, content, image, price, discount, lotType }
+    // Возвращает: HTMLElement .catalog-card
+    
+    createCard(item) { ... }
+    
+    // Внутри:
+    // - изображение (или заглушка)
+    // - заголовок
+    // - цена (если есть)
+    // - описание (preview)
+    // - бейдж скидки (если discount > 0)
+    // - кнопка Del (если админ)
+    // - кнопка % (если админ и lotType === 'product')
+}
+```
+
+### 2. Создаём `static/js/publisher.js` — ЕДИНСТВЕННЫЙ публикатор
+
+```js
+class Publisher {
+    // Загружает все лоты с /get-news
+    // Раскладывает по страницам через data-атрибуты
+    
+    async publish() {
+        const data = await fetch('/get-news');
+        // Для каждой страницы:
+        //   фильтрует лоты по правилам
+        //   создаёт карточки через CardConstructor
+        //   вставляет в контейнер
+    }
+}
+```
+
+Каждая страница вызывает `Publisher` и говорит, какой контейнер заполнять.
+
+### 3. Удаляем мусор
+
+Удалить файлы (они больше не нужны):
+- `static/js/news-manager.js`
+- `static/js/news-form.js`
+- `static/js/news-page-constructor.js`
+- `static/js/news-card-constructor.js`
+- `static/js/news-template-engine.js`
+- `static/js/catalog.js`
+- `static/js/catalog-page-constructor.js`
+- `static/js/actions-page-constructor.js`
+
+### 4. Упрощаем `main.js`
+
+`main.js` больше не импортирует кучу классов. Просто:
+- Ждёт доступ
+- Вызывает `Publisher.publish()` для текущей страницы
+
+### 5. Одна форма
+
+Форма одна (`#newsForm`), поля:
+- Заголовок (обязательно)
+- Дата
+- Краткое описание
+- Полный текст
+- Цена (только для товаров)
+- Изображение
+- Тип лота (определяется по странице: news.html → news, catalog.html → product)
+
+### 6. CSS
+
+Стили для `.delete-btn` — такие же, как `.discount-btn`, только слева и с красным при наведении.
+
+## Файлы для изменений
+
+| Файл | Действие |
+|------|----------|
+| `static/js/card-constructor.js` | ✨ Создать |
+| `static/js/publisher.js` | ✨ Создать |
+| `static/js/news-manager.js` | 🗑️ Удалить |
+| `static/js/news-form.js` | 🗑️ Удалить |
+| `static/js/news-page-constructor.js` | 🗑️ Удалить |
+| `static/js/news-card-constructor.js` | 🗑️ Удалить |
+| `static/js/news-template-engine.js` | 🗑️ Удалить |
+| `static/js/catalog.js` | 🗑️ Удалить |
+| `static/js/catalog-page-constructor.js` | 🗑️ Удалить |
+| `static/js/actions-page-constructor.js` | 🗑️ Удалить |
+| `static/js/main.js` | ✏️ Упростить |
+| `static/css/news.css` | ✏️ Добавить .delete-btn |
+| `news.html` | ✏️ Убрать мёртвые скрипты |
+| `catalog.html` | ✏️ Убрать мёртвые скрипты |
+| `actions.html` | ✏️ Убрать мёртвые скрипты |
 
 ## Порядок выполнения
 
-1. Создать тестовую новость `test-news-001.json` с `lotType: 'news'`
-2. Исправить `NewsManager.renderNews()` — добавить фильтр `lotType === 'news'`
-3. Исправить `CatalogManager.renderProducts()` — убрать `|| item.price`
-4. Исправить `CatalogPageConstructor.loadNews()` — убрать `|| n.price`
-5. Исправить `NewsPageConstructor.loadNews()` — добавить фильтр `lotType === 'news'`
-6. Проверить: `news.html` показывает только новости, `catalog.html` — только товары
+1. Создать `card-constructor.js`
+2. Создать `publisher.js`
+3. Упростить `main.js`
+4. Обновить CSS (стили .delete-btn)
+5. Обновить HTML-страницы (подключить новые скрипты, убрать старые)
+6. Удалить мёртвые файлы
+7. Проверить все три страницы
