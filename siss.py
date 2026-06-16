@@ -321,6 +321,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
         self.end_headers()
         response = {
             "access": True,
+            "level": 3,
             "user": "local-user",
             "timestamp": datetime.now().isoformat()
         }
