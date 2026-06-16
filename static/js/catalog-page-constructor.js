@@ -1,51 +1,39 @@
 /**
  * Catalog Page Constructor
- * Рендерит страницу каталога товаров, фильтруя только товары (category === 'Товары' ИЛИ category === undefined)
+ * Рендерит страницу каталога товаров, используя /get-news API
+ * Фильтрует товары по lotType === 'product' или наличию price
  */
 
-import { NewsPageConstructor } from './news-page-constructor.js';
-
-export class CatalogPageConstructor extends NewsPageConstructor {
+export class CatalogPageConstructor {
     constructor() {
-        super({
-            containerSelector: '.news-grid',
-            tickerContainerSelector: null // на странице каталога нет бегущей строки
-        });
+        this.newsContainer = null;
     }
 
     init() {
         console.log('[CatalogPageConstructor] Инициализация');
-
-        // Ищем контейнер .news-grid
         this.newsContainer = document.querySelector('.news-grid');
         if (!this.newsContainer) {
             console.error('[CatalogPageConstructor] .news-grid not found');
             return;
         }
         console.log('[CatalogPageConstructor] .news-grid found');
-
-        // Находим существующий контейнер для бегущей строки (не нужен на этой странице)
-        this.tickerContainer = null;
     }
 
     async loadNews() {
-        const news = await super.loadNews();
-        
-        // Фильтруем только товары (category === 'Товары' ИЛИ category === undefined)
-        this.newsList = news.filter(
-            n => n.category === 'Товары' || !n.category
-        );
-        console.log(`[CatalogPageConstructor] Загружено ${this.newsList.length} товаров из ${news.length} новостей`);
-        return this.newsList;
+        try {
+            const res = await fetch('/get-news');
+            if (!res.ok) throw new Error('Ошибка загрузки');
+            const data = await res.json();
+            // Фильтруем только товары
+            return (data.news || []).filter(n => n.lotType === 'product' || n.price);
+        } catch (e) {
+            console.error('[CatalogPageConstructor] Ошибка загрузки:', e);
+            return [];
+        }
     }
 
     async render(newsArray = []) {
-        if (!this.newsContainer) {
-            console.error('[CatalogPageConstructor] News container not initialized');
-            return;
-        }
-
-        // Очищаем контейнер
+        if (!this.newsContainer) return;
         this.newsContainer.innerHTML = '';
 
         if (newsArray.length === 0) {
@@ -53,19 +41,33 @@ export class CatalogPageConstructor extends NewsPageConstructor {
             return;
         }
 
-        // Рендерим карточки
-        newsArray.forEach((news, index) => {
-            const card = this.createCardElement(news, index);
+        newsArray.forEach((news) => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.dataset.id = news.id;
+
+            const imgSrc = news.image ? `/images/img_n/${news.image}` : '/images/img_n/400.png';
+            const priceHtml = news.price ? `${news.price} ₽` : 'Цена не указана';
+
+            card.innerHTML = `
+                <div class="product-card-image">
+                    <img src="${imgSrc}" alt="${this.escapeHtml(news.title || '')}" loading="lazy">
+                </div>
+                <div class="product-card-body">
+                    <h3 class="product-card-title">${this.escapeHtml(news.title || '')}</h3>
+                    <div class="product-card-price">${priceHtml}</div>
+                    <p class="product-card-description">${this.escapeHtml(news.preview || news.content || '')}</p>
+                </div>
+            `;
+
             this.newsContainer.appendChild(card);
         });
     }
 
-    createCardElement(news, index) {
-        // Создаем карточку как product-card (а не news-card)
-        const card = super.createCardElement(news, index);
-        card.classList.remove('news-card');
-        card.classList.add('product-card');
-        return card;
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 }
 
@@ -73,5 +75,5 @@ export class CatalogPageConstructor extends NewsPageConstructor {
 document.addEventListener('DOMContentLoaded', () => {
     const constructor = new CatalogPageConstructor();
     constructor.init();
-    constructor.render();
+    constructor.loadNews().then(news => constructor.render(news));
 });

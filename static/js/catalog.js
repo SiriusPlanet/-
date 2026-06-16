@@ -32,37 +32,148 @@ export class CatalogManager {
             newsGrid.innerHTML = '';
             const fragment = document.createDocumentFragment();
 
-            data.news.forEach((item, index) => {
-                // Если это товар (lotType === 'product')
-                if (item.lotType === 'product' || item.price) {
-                    const card = document.createElement('div');
-                    card.classList.add('catalog-card');
-                    card.dataset.id = item.id;
-
-                    const imageHtml = item.image ? 
-                        `<img src="/images/img_n/${item.image}" alt="${this.escapeHtml(item.title)}" class="catalog-image">` : 
-                        '<div class="catalog-no-image">Нет изображения</div>';
-
-                    card.innerHTML = `
-                        <div class="catalog-card-inner">
-                            ${imageHtml}
-                        </div>
-                        <div class="catalog-card-content">
-                            <h3 class="catalog-card-title">${this.escapeHtml(item.title)}</h3>
-                            <div class="catalog-card-price">${item.price ? item.price + ' ₽' : 'Цена не указана'}</div>
-                            <p class="catalog-card-description">${this.escapeHtml(item.preview || item.content || '')}</p>
-                        </div>
-                    `;
-
+            data.news.forEach((item) => {
+                // Если это товар (lotType === 'product') И без скидки (скидочные уходят в Акции)
+                if ((item.lotType === 'product' || item.price) && !(item.discount && item.discount > 0)) {
+                    const card = this.createProductCard(item);
                     fragment.appendChild(card);
                 }
             });
 
             newsGrid.appendChild(fragment);
+            this.setupDiscountButtons();
             console.log('[CatalogManager] Товары отрендерены');
         } catch (error) {
             Logger.error('[CatalogManager] Ошибка рендеринга товаров', error);
         }
+    }
+
+    // Создание карточки товара
+    createProductCard(item) {
+        const card = document.createElement('div');
+        card.classList.add('catalog-card');
+        card.dataset.id = item.id;
+
+        const imageHtml = item.image ?
+            `<img src="/images/img_n/${item.image}" alt="${this.escapeHtml(item.title)}" class="catalog-image">` :
+            '<div class="catalog-no-image">Нет изображения</div>';
+
+        // Бейдж скидки, если есть
+        const badgeHtml = (item.discount && item.discount > 0)
+            ? `<div class="discount-badge"><div class="discount-badge-inner"><span class="discount-badge-text">${item.discount}</span></div></div>`
+            : '';
+
+        card.innerHTML = `
+            <div class="catalog-card-inner">
+                ${imageHtml}
+            </div>
+            <div class="catalog-card-content">
+                <h3 class="catalog-card-title">${this.escapeHtml(item.title)}</h3>
+                <div class="catalog-card-price">${item.price ? item.price + ' ₽' : 'Цена не указана'}</div>
+                <p class="catalog-card-description">${this.escapeHtml(item.preview || item.content || '')}</p>
+            </div>
+            <button class="discount-btn" data-id="${item.id}" data-discount="${item.discount || 0}" title="Установить скидку">%</button>
+            ${badgeHtml}
+        `;
+
+        return card;
+    }
+
+    // Настройка кнопок скидки
+    setupDiscountButtons() {
+        document.querySelectorAll('.discount-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const card = btn.closest('.catalog-card');
+                // Закрываем другие открытые панели
+                document.querySelectorAll('.discount-panel').forEach(p => p.remove());
+                this.showDiscountPanel(btn, card);
+            });
+        });
+    }
+
+    // Показать панель управления скидкой
+    showDiscountPanel(btn, card) {
+        const itemId = btn.dataset.id;
+        const currentDiscount = parseInt(btn.dataset.discount) || 0;
+
+        // Убираем кнопку %, пока панель открыта
+        btn.style.display = 'none';
+
+        const panel = document.createElement('div');
+        panel.className = 'discount-panel';
+        panel.innerHTML = `
+            <label>Скидка %</label>
+            <input type="range" min="0" max="100" value="${currentDiscount}" class="discount-slider">
+            <input type="number" min="0" max="100" value="${currentDiscount}" class="discount-value-input">
+            <div class="discount-actions">
+                <button class="discount-save-btn">Сохранить</button>
+                <button class="discount-cancel-btn">Отмена</button>
+            </div>
+        `;
+
+        card.appendChild(panel);
+
+        const slider = panel.querySelector('.discount-slider');
+        const numInput = panel.querySelector('.discount-value-input');
+
+        // Синхронизация ползунка и поля ввода
+        slider.addEventListener('input', () => {
+            numInput.value = slider.value;
+        });
+        numInput.addEventListener('input', () => {
+            slider.value = numInput.value;
+        });
+
+        // Сохранение
+        panel.querySelector('.discount-save-btn').addEventListener('click', async () => {
+            const discount = parseInt(numInput.value) || 0;
+            await this.saveDiscount(itemId, discount, btn, panel, card);
+        });
+
+        // Отмена
+        panel.querySelector('.discount-cancel-btn').addEventListener('click', () => {
+            this.closeDiscountPanel(btn, panel);
+        });
+
+        // Закрыть по клику вне панели
+        const closeHandler = (e) => {
+            if (!panel.contains(e.target) && e.target !== btn) {
+                this.closeDiscountPanel(btn, panel);
+                document.removeEventListener('click', closeHandler);
+            }
+        };
+        setTimeout(() => document.addEventListener('click', closeHandler), 100);
+    }
+
+    // Сохранение скидки
+    async saveDiscount(itemId, discount, btn, panel, card) {
+        try {
+            const res = await fetch('/api/update-news', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: itemId, discount: discount })
+            });
+
+            const result = await res.json();
+            if (result.success) {
+                this.newsManager.showToast(discount > 0 ? `Скидка ${discount}% установлена` : 'Скидка удалена');
+                this.closeDiscountPanel(btn, panel);
+                // Перерендериваем каталог (товар со скидкой уйдёт в Акции)
+                await this.renderProducts();
+            } else {
+                this.newsManager.showError('Ошибка сохранения скидки');
+            }
+        } catch (error) {
+            Logger.error('[CatalogManager] Ошибка сохранения скидки', error);
+            this.newsManager.showError('Ошибка при сохранении скидки');
+        }
+    }
+
+    // Закрыть панель скидки
+    closeDiscountPanel(btn, panel) {
+        panel.remove();
+        btn.style.display = '';
     }
 
     // Настройка переключения закладок

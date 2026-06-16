@@ -1,42 +1,42 @@
 /**
  * Actions Page Constructor
- * Рендерит страницу акций, фильтруя только акции (category === 'Акции' ИЛИ есть поле discount)
+ * Рендерит страницу акций, загружая данные из /get-news
+ * Показывает товары со скидкой (discount > 0) и новости с category === 'Акции'
  */
 
-import { NewsPageConstructor } from './news-page-constructor.js';
-
-export class ActionsPageConstructor extends NewsPageConstructor {
+export class ActionsPageConstructor {
     constructor() {
-        super({
-            containerSelector: '.products-grid',
-            tickerContainerSelector: null // на странице акций нет бегущей строки
-        });
+        this.newsContainer = null;
+        this.newsList = [];
     }
 
     init() {
         console.log('[ActionsPageConstructor] Инициализация');
-
-        // Ищем контейнер .products-grid
         this.newsContainer = document.querySelector('.products-grid');
         if (!this.newsContainer) {
             console.error('[ActionsPageConstructor] .products-grid not found');
             return;
         }
         console.log('[ActionsPageConstructor] .products-grid found');
-
-        // Находим существующий контейнер для бегущей строки (не нужен на этой странице)
-        this.tickerContainer = null;
     }
 
     async loadNews() {
-        const news = await super.loadNews();
-        
-        // Фильтруем только акции (category === 'Акции' ИЛИ есть поле discount)
-        this.newsList = news.filter(
-            n => n.category === 'Акции' || (n.discount && n.discount > 0)
-        );
-        console.log(`[ActionsPageConstructor] Загружено ${this.newsList.length} акций из ${news.length} новостей`);
-        return this.newsList;
+        try {
+            const res = await fetch('/get-news');
+            if (!res.ok) throw new Error('Не удалось загрузить данные');
+            const data = await res.json();
+
+            // Фильтруем: category === 'Акции' ИЛИ discount > 0
+            this.newsList = (data.news || []).filter(
+                n => n.category === 'Акции' || (n.discount && parseInt(n.discount) > 0)
+            );
+            console.log(`[ActionsPageConstructor] Загружено ${this.newsList.length} акций из ${data.news?.length || 0} элементов`);
+            return this.newsList;
+        } catch (error) {
+            console.error('[ActionsPageConstructor] Ошибка загрузки:', error);
+            this.newsList = [];
+            return [];
+        }
     }
 
     async render(newsArray = []) {
@@ -45,27 +45,63 @@ export class ActionsPageConstructor extends NewsPageConstructor {
             return;
         }
 
-        // Очищаем контейнер
         this.newsContainer.innerHTML = '';
 
-        if (newsArray.length === 0) {
-            this.newsContainer.innerHTML = '<p style="color: white; text-align: center;">Нет доступных акций</p>';
+        const items = newsArray.length > 0 ? newsArray : this.newsList;
+
+        if (items.length === 0) {
+            this.newsContainer.innerHTML = '<p style="color: white; text-align: center; padding: 40px;">Нет доступных акций</p>';
             return;
         }
 
-        // Рендерим карточки
-        newsArray.forEach((news, index) => {
-            const card = this.createCardElement(news, index);
-            this.newsContainer.appendChild(card);
+        const fragment = document.createDocumentFragment();
+
+        items.forEach((item) => {
+            const card = this.createCardElement(item);
+            fragment.appendChild(card);
         });
+
+        this.newsContainer.appendChild(fragment);
     }
 
-    createCardElement(news, index) {
-        // Создаем карточку как product-card (а не news-card)
-        const card = super.createCardElement(news, index);
-        card.classList.remove('news-card');
-        card.classList.add('product-card');
+    createCardElement(item) {
+        const card = document.createElement('div');
+        card.classList.add('catalog-card');
+        card.dataset.id = item.id;
+
+        const imageHtml = item.image
+            ? `<img src="/images/img_n/${item.image}" alt="${this.escapeHtml(item.title || '')}" class="catalog-image">`
+            : '<div class="catalog-no-image">Нет изображения</div>';
+
+        // Бейдж скидки
+        const discount = item.discount ? parseInt(item.discount) : 0;
+        const badgeHtml = discount > 0
+            ? `<div class="discount-badge"><div class="discount-badge-inner"><span class="discount-badge-text">${discount}</span></div></div>`
+            : '';
+
+        // Если есть цена — показываем как товар, иначе как новость
+        const hasPrice = item.price && parseFloat(item.price) > 0;
+
+        card.innerHTML = `
+            <div class="catalog-card-inner">
+                ${imageHtml}
+            </div>
+            <div class="catalog-card-content">
+                <h3 class="catalog-card-title">${this.escapeHtml(item.title || 'Акция')}</h3>
+                ${hasPrice ? `<div class="catalog-card-price">${item.price} ₽</div>` : ''}
+                <p class="catalog-card-description">${this.escapeHtml(item.preview || item.content || '')}</p>
+            </div>
+            ${badgeHtml}
+        `;
+
         return card;
+    }
+
+    escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 }
 
@@ -73,5 +109,8 @@ export class ActionsPageConstructor extends NewsPageConstructor {
 document.addEventListener('DOMContentLoaded', () => {
     const constructor = new ActionsPageConstructor();
     constructor.init();
-    constructor.render();
+    // Загружаем и рендерим
+    constructor.loadNews().then(news => {
+        constructor.render(news);
+    });
 });

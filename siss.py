@@ -454,6 +454,13 @@ class SimpleHandler(BaseHTTPRequestHandler):
             news['preview'] = data.get('preview', news['preview'])
             news['content'] = data.get('content', news['content'])
 
+            # Обновляем скидку, если передана
+            if 'discount' in data:
+                try:
+                    news['discount'] = int(data['discount'])
+                except (ValueError, TypeError):
+                    news['discount'] = 0
+
             # Если загружено новое изображение
             if 'image' in data and data['image']:
                 image_filename = news.get('image')
