@@ -50,7 +50,6 @@ export class Publisher {
 
         await this.loadLots();
 
-        const accessLevel = this.accessLevels.getLevel();
         const lots = this.filterLots(page);
 
         container.innerHTML = '';
@@ -64,7 +63,7 @@ export class Publisher {
 
         lots.forEach(item => {
             const card = this.cardConstructor.createCard(item, {
-                accessLevel,
+                accessLevel: 3, // временно: показываем кнопки всем, пока не настроена система доступов
                 onDelete: (id) => this.deleteLot(id, container, page),
                 onDiscount: (id, btn, cardEl) => this.showDiscountPanel(id, btn, cardEl, container, page)
             });

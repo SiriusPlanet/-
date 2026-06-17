@@ -204,3 +204,47 @@
     line-height: 1.2;
     margin-top: 0.25rem;
 }
+
+/* === ТАБЫ: Новость / Товар === */
+.form-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 16px;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 2px solid #3498db;
+    background: #f0f8ff;
+}
+
+.form-tab {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    color: #7f8c8d;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.form-tab:hover {
+    background: rgba(52, 152, 219, 0.08);
+    color: #2c3e50;
+}
+
+.form-tab.active {
+    background: #3498db;
+    color: #fff;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Группа полей — для скрытия/показа */
+.field-group {
+    transition: all 0.2s ease;
+}
+
+.field-group.hidden {
+    display: none;
+}

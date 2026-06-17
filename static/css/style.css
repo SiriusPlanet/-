@@ -19,95 +19,12 @@ body {
 
 }
 
-/* --- Глобальное затемнение (TVA Access Layer) --- */
+/* --- Система доступа — временно отключена --- */
 #access-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        circle at 50% 50%,
-        rgba(0, 40, 20, 0.94),
-        rgba(0, 25, 15, 0.98)
-    );
-    z-index: 9998;
-    pointer-events: auto;
-    opacity: 1;
-    transition: opacity 0.8s ease-out;
-    animation: noiseFade 2s ease-in-out;
-}
-
-#access-overlay::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    background-blend-mode: overlay;
-    pointer-events: none;
-}
-
-.access-granted #access-overlay {
-    display: none !important;
-    pointer-events: none !important;
-}
-
-.access-granted .access-button {
     display: none !important;
 }
-
-@keyframes noiseFade {
-    from {
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    }
-    to {
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.3' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    }
-}
-
-/* --- Кнопка доступа к файлам --- */
 .access-button {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    text-align: center;
-    width: min(300px, 90vw);
-}
-
-#fileAccessButton {
-    width: 100%;
-    padding: 1.2em 1.5em;
-    font-size: 1.125rem;
-    font-weight: bold;
-    color: #00ffaa;
-    background: transparent;
-    border: 0.125rem solid #00ffaa;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    box-shadow: 0 0 0.9375rem rgba(0, 255, 170, 0.4);
-    transition: all 0.3s ease;
-}
-
-#fileAccessButton:hover {
-    background: rgba(0, 255, 170, 0.1);
-    box-shadow: 0 0 1.5625rem rgba(0, 255, 170, 0.6);
-    transform: scale(1.05);
-}
-
-#fileAccessButton:active {
-    transform: scale(0.98);
-}
-
-/* --- Блокировка контента до доступа --- */
-body:not(.access-granted) header,
-body:not(.access-granted) main,
-body:not(.access-granted) footer,
-body:not(.access-granted) .main-nav a,
-body:not(.access-granted) .product-card {
-    filter: blur(0.5rem) brightness(0.2);
-    pointer-events: none;
+    display: none !important;
 }
 
 /* === Единый стиль для всех карточек и блоков (кроме шапок) === */
@@ -883,4 +800,4 @@ main > section,
     width: auto;
     display: block;
 }  
-/* === ����� ��� �������� � ��� (���������� ��������) === */ 
+/* === ����� ��� �������� � ��� (���������� ��������) === */ 

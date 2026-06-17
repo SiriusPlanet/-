@@ -143,50 +143,11 @@ export class PermissionManager {
         // Инициализируем DOM элементы
         this.initElements();
 
-        // 1. Быстрая проверка (2мс) — есть ли разрешение?
-        if (this.hasGrantedPermission()) {
-            console.log('✅ Разрешение уже дано - продолжаем работу');
-            this.hideOverlay();
-            document.body.classList.add('access-granted');
-            return;
-        }
-
-        // 2. Быстрая проверка кэша — результат проверки localhost уже есть?
-        const cachedHasAccess = localStorage.getItem('localhost_has_access');
-        if (cachedHasAccess === 'true') {
-            console.log('✅ Кэш: доступ к localhost есть — продолжаем работу');
-            this.hasLocalhostAccess = true;
-            this.hideOverlay();
-            document.body.classList.add('access-granted');
-            return;
-        }
-
-        // Если кэша нет, проверяем localhost
-        // Проверка может быть быстрой (2мс) или медленной (2сек таймаут)
-        // Завеса показывается только если доступа НЕТ
-        this.hasLocalhostAccess = await this.checkLocalhostAccess();
-
-        // Если доступа нет — показываем завесу
-        if (!this.hasLocalhostAccess) {
-            console.log('❌ Доступ к localhost отсутствует — показываем завесу');
-            this.showOverlay();
-
-            // ВЕШАЕМ СОБЫТИЕ НА КНОПКУ
-            if (this.button) {
-                this.button.addEventListener('click', async () => {
-                    console.log('🎉 Обнаружено нажатие на кнопку "Дать доступ"');
-                    const hasAccess = await this.requestAccess();
-                    // requestAccess уже вызывает grantPermission(), не нужно повторно
-                });
-                console.log('✅ Событие click на кнопке "Дать доступ" зарегистрировано');
-            } else {
-                console.warn('⚠️ Кнопка #fileAccessButton не найдена');
-            }
-        } else {
-            // Если доступ есть, сразу скрываем завесу и добавляем класс
-            console.log('✅ Доступ к localhost есть — продолжаем работу');
-            this.hideOverlay();
-            document.body.classList.add('access-granted');
-        }
+        // ВРЕМЕННО: система доступа отключена, весь функционал виден всем
+        console.log('⚠️ Система доступа временно отключена — весь функционал виден');
+        this.hideOverlay();
+        document.body.classList.add('access-granted');
+        this.hasLocalhostAccess = true;
+        this.grantPermission();
     }
 }

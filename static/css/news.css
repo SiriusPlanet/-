@@ -59,7 +59,6 @@
     background: white;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    overflow: hidden;
     position: relative;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -115,36 +114,6 @@
     color: #666;
     line-height: 1.6;
     margin: 0;
-}
-
-/* === Кнопка скидки "%" на карточке === */
-.discount-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    opacity: 0.6;
-    line-height: 1;
-}
-
-.discount-btn:hover {
-    opacity: 1;
-    background: rgba(0, 0, 0, 0.7);
-    border-color: rgba(255, 255, 255, 0.6);
-    transform: scale(1.1);
 }
 
 /* === Панель управления скидкой === */
@@ -289,49 +258,56 @@
 }
 
 /* === Единый стиль для кнопок управления (Del и %) === */
-.ctrl-btn {
+.catalog-card .ctrl-btn {
     position: absolute;
     top: 8px;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.85);
     color: #fff;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    font-size: 11px;
+    border: 3px solid #ffffff;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
-    z-index: 10;
+    z-index: 20;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.6;
+    opacity: 1;
     transition: all 0.2s ease;
     line-height: 1;
     padding: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
-.ctrl-btn:hover {
+.catalog-card .ctrl-btn:hover {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
 /* Кнопка Del — слева сверху */
-.del-btn {
+.catalog-card .del-btn {
     left: 8px;
+    background: #cc0000;
+    border-color: #ff6666;
 }
 
-.del-btn:hover {
-    background: rgba(200, 0, 0, 0.8);
-    border-color: rgba(255, 100, 100, 0.6);
+.catalog-card .del-btn:hover {
+    background: #ff0000;
+    border-color: #ff9999;
+    transform: scale(1.15);
 }
 
-/* Кнопка % — справа сверху (переопределяем старый .discount-btn) */
-.discount-btn {
+/* Кнопка % — справа сверху */
+.catalog-card .discount-btn {
     right: 8px;
+    background: #0055aa;
+    border-color: #66bbff;
 }
 
-.discount-btn:hover {
-    background: rgba(0, 0, 0, 0.7);
-    border-color: rgba(255, 255, 255, 0.6);
+.catalog-card .discount-btn:hover {
+    background: #0077dd;
+    border-color: #99ddff;
+    transform: scale(1.15);
 }

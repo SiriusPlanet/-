@@ -100,9 +100,56 @@ class MainApp {
         if (form) form.reset();
     }
 
+    setupFormTabs() {
+        const tabs = document.querySelectorAll('.form-tab');
+        if (!tabs.length) return;
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Переключаем активный таб
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Показываем/скрываем поля в зависимости от типа
+                const lotType = tab.dataset.lottype;
+                const isProduct = lotType === 'product';
+
+                // Цена — только для товара
+                const priceGroup = document.getElementById('priceGroup');
+                if (priceGroup) priceGroup.classList.toggle('hidden', !isProduct);
+
+                // Дата — только для новости
+                const dateGroup = document.getElementById('dateGroup');
+                if (dateGroup) dateGroup.classList.toggle('hidden', isProduct);
+            });
+        });
+    }
+
+    getActiveLotType() {
+        const activeTab = document.querySelector('.form-tab.active');
+        return activeTab ? activeTab.dataset.lottype : 'news';
+    }
+
     setupFormHandler() {
         const form = document.getElementById('newsForm');
         if (!form) return;
+
+        // Инициализация табов
+        this.setupFormTabs();
+
+        // По умолчанию: на странице каталога активен "Товар", иначе "Новость"
+        const defaultLotType = this.currentPage === 'catalog' ? 'product' : 'news';
+        const defaultTab = document.querySelector(`.form-tab[data-lottype="${defaultLotType}"]`);
+        if (defaultTab) {
+            document.querySelectorAll('.form-tab').forEach(t => t.classList.remove('active'));
+            defaultTab.classList.add('active');
+            // Показываем/скрываем поля
+            const isProduct = defaultLotType === 'product';
+            const priceGroup = document.getElementById('priceGroup');
+            if (priceGroup) priceGroup.classList.toggle('hidden', !isProduct);
+            const dateGroup = document.getElementById('dateGroup');
+            if (dateGroup) dateGroup.classList.toggle('hidden', isProduct);
+        }
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -136,7 +183,7 @@ class MainApp {
         formData.append('preview', document.getElementById('preview')?.value || '');
         formData.append('content', content);
         formData.append('price', document.getElementById('price')?.value || '');
-        formData.append('lotType', this.currentPage === 'catalog' ? 'product' : 'news');
+        formData.append('lotType', this.getActiveLotType());
 
         const imageFile = document.getElementById('image')?.files[0];
         if (imageFile) formData.append('image', imageFile);

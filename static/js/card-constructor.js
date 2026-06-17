@@ -51,15 +51,15 @@ export class CardConstructor {
             ? `<div class="discount-badge"><div class="discount-badge-inner"><span class="discount-badge-text">${discount}</span></div></div>`
             : '';
 
-        // Кнопка Del — для админа (уровень >= 3)
-        const delBtnHtml = accessLevel >= 3
-            ? `<button class="ctrl-btn del-btn" data-id="${item.id}" title="Удалить">Del</button>`
-            : '';
+        // Кнопка Del — видна всем (временно, пока не настроена система доступов)
+        const delBtnHtml = `<button class="ctrl-btn del-btn" data-id="${item.id}" title="Удалить">Del</button>`;
 
-        // Кнопка % — для админа, только для товаров
-        const discountBtnHtml = (accessLevel >= 3 && item.lotType === 'product')
+        // Кнопка % — видна всем, только для товаров (временно, пока не настроена система доступов)
+        const discountBtnHtml = item.lotType === 'product'
             ? `<button class="ctrl-btn discount-btn" data-id="${item.id}" data-discount="${discount}" title="Установить скидку">%</button>`
             : '';
+
+        console.log(`[CardConstructor] lotType=${item.lotType}, delBtn=${!!delBtnHtml}, discountBtn=${!!discountBtnHtml}`);
 
         card.innerHTML = `
             <div class="catalog-card-inner">
@@ -75,23 +75,21 @@ export class CardConstructor {
             ${discountBtnHtml}
         `;
 
-        // Навешиваем обработчики
-        if (accessLevel >= 3) {
-            const delBtn = card.querySelector('.del-btn');
-            if (delBtn && onDelete) {
-                delBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    onDelete(item.id);
-                });
-            }
+        // Навешиваем обработчики — видно всем (временно, пока не настроена система доступов)
+        const delBtn = card.querySelector('.del-btn');
+        if (delBtn && onDelete) {
+            delBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                onDelete(item.id);
+            });
+        }
 
-            const dscBtn = card.querySelector('.discount-btn');
-            if (dscBtn && onDiscount) {
-                dscBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    onDiscount(item.id, dscBtn, card);
-                });
-            }
+        const dscBtn = card.querySelector('.discount-btn');
+        if (dscBtn && onDiscount) {
+            dscBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                onDiscount(item.id, dscBtn, card);
+            });
         }
 
         return card;
