@@ -41,12 +41,26 @@ export class CardConstructor {
 
         const title = this.escapeHtml(item.title || '');
         const desc = this.escapeHtml(item.preview || item.content || '');
-        const priceHtml = item.price
-            ? `<div class="catalog-card-price">${this.escapeHtml(item.price)} ₽</div>`
-            : '';
+        const discount = parseInt(item.discount) || 0;
+
+        // Цена: если есть скидка — показываем старую цену зачёркнутой и новую справа
+        let priceHtml = '';
+        if (item.price) {
+            const originalPrice = parseFloat(item.price);
+            if (discount > 0) {
+                const discountedPrice = (originalPrice * (100 - discount) / 100).toFixed(2);
+                priceHtml = `
+                    <div class="catalog-card-price">
+                        <span class="old-price">${this.escapeHtml(item.price)} ₽</span>
+                        <span class="new-price">${discountedPrice} ₽</span>
+                    </div>
+                `;
+            } else {
+                priceHtml = `<div class="catalog-card-price">${this.escapeHtml(item.price)} ₽</div>`;
+            }
+        }
 
         // Бейдж скидки (угловой, слева сверху)
-        const discount = parseInt(item.discount) || 0;
         const badgeHtml = discount > 0
             ? `<div class="discount-badge"><div class="discount-badge-inner"><span class="discount-badge-text">${discount}</span></div></div>`
             : '';
@@ -56,7 +70,12 @@ export class CardConstructor {
 
         // Кнопка % — видна всем, только для товаров (временно, пока не настроена система доступов)
         const discountBtnHtml = item.lotType === 'product'
-            ? `<button class="ctrl-btn discount-btn" data-id="${item.id}" data-discount="${discount}" title="Установить скидку">%</button>`
+            ? `<button class="ctrl-btn discount-btn" data-id="${item.id}" data-discount="${discount}" data-price="${item.price || ''}" title="Установить скидку">%</button>`
+            : '';
+
+        // Кнопка "В корзину" — только для товаров, выровнена вправо
+        const cartBtnHtml = item.lotType === 'product'
+            ? `<button class="cart-btn" data-id="${item.id}" title="Добавить в корзину">В корзину</button>`
             : '';
 
         console.log(`[CardConstructor] lotType=${item.lotType}, delBtn=${!!delBtnHtml}, discountBtn=${!!discountBtnHtml}`);
@@ -69,6 +88,7 @@ export class CardConstructor {
                 <h3 class="catalog-card-title">${title}</h3>
                 ${priceHtml}
                 <p class="catalog-card-description">${desc}</p>
+                ${cartBtnHtml}
             </div>
             ${badgeHtml}
             ${delBtnHtml}
@@ -92,7 +112,70 @@ export class CardConstructor {
             });
         }
 
+        // Обработчик кнопки "В корзину"
+        const cartBtn = card.querySelector('.cart-btn');
+        if (cartBtn) {
+            cartBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.addToCart(item);
+            });
+        }
+
         return card;
+    }
+
+    /**
+     * Добавляет товар в корзину (localStorage)
+     */
+    addToCart(item) {
+        const discount = parseInt(item.discount) || 0;
+        const originalPrice = parseFloat(item.price) || 0;
+        const finalPrice = discount > 0
+            ? (originalPrice * (100 - discount) / 100)
+            : originalPrice;
+
+        const cartItem = {
+            id: item.id,
+            title: item.title,
+            price: finalPrice.toFixed(2),
+            originalPrice: originalPrice.toFixed(2),
+            discount: discount,
+            image: item.image || '',
+            quantity: 1
+        };
+
+        // Получаем текущую корзину из localStorage
+        let cart = [];
+        try {
+            const stored = localStorage.getItem('mySiteCart');
+            if (stored) cart = JSON.parse(stored);
+        } catch (e) {
+            cart = [];
+        }
+
+        // Проверяем, есть ли уже такой товар
+        const existing = cart.find(c => c.id === item.id);
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push(cartItem);
+        }
+
+        localStorage.setItem('mySiteCart', JSON.stringify(cart));
+
+        // Показываем уведомление
+        this.showCartToast(`«${item.title}» добавлен в корзину`);
+    }
+
+    /**
+     * Показывает toast-уведомление о добавлении в корзину
+     */
+    showCartToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification success';
+        toast.textContent = '🛒 ' + message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
     }
 
     /**

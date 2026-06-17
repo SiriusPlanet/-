@@ -167,7 +167,7 @@ export class Publisher {
     }
 
     /**
-     * Сохраняет скидку
+     * Сохраняет скидку и обновляет цену на карточке без перезагрузки страницы
      */
     async saveDiscount(itemId, discount, btn, panel, container, page) {
         try {
@@ -181,14 +181,64 @@ export class Publisher {
             if (result.success) {
                 this.showToast(discount > 0 ? `Скидка ${discount}% установлена` : 'Скидка удалена');
                 this.closeDiscountPanel(btn, panel);
-                // Перепубликуем — лот со скидкой уйдёт в акции, без скидки вернётся в каталог
-                await this.publish(page, container);
+
+                // Обновляем цену на карточке на месте
+                const card = btn.closest('.catalog-card');
+                if (card) {
+                    this.updateCardPrice(card, discount);
+                }
+
+                // Обновляем data-discount на кнопке
+                btn.dataset.discount = discount;
             } else {
                 this.showError('Ошибка сохранения скидки');
             }
         } catch (e) {
             console.error('[Publisher] Ошибка сохранения скидки:', e);
             this.showError('Ошибка при сохранении скидки');
+        }
+    }
+
+    /**
+     * Обновляет отображение цены на карточке при изменении скидки
+     */
+    updateCardPrice(card, discount) {
+        const priceEl = card.querySelector('.catalog-card-price');
+        if (!priceEl) return;
+
+        // Берём оригинальную цену из data-price на кнопке %
+        const discountBtn = card.querySelector('.discount-btn');
+        if (!discountBtn) return;
+
+        const originalPrice = parseFloat(discountBtn.dataset.price);
+        if (!originalPrice) return;
+
+        discount = parseInt(discount) || 0;
+
+        if (discount > 0) {
+            const discountedPrice = (originalPrice * (100 - discount) / 100).toFixed(2);
+            priceEl.innerHTML = `
+                <span class="old-price">${originalPrice.toFixed(2)} ₽</span>
+                <span class="new-price">${discountedPrice} ₽</span>
+            `;
+        } else {
+            priceEl.innerHTML = `${originalPrice.toFixed(2)} ₽`;
+        }
+
+        // Обновляем/добавляем бейдж скидки
+        let badge = card.querySelector('.discount-badge');
+        if (discount > 0) {
+            if (!badge) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'discount-badge';
+                wrapper.innerHTML = `<div class="discount-badge-inner"><span class="discount-badge-text">${discount}</span></div>`;
+                card.appendChild(wrapper);
+            } else {
+                const textEl = badge.querySelector('.discount-badge-text');
+                if (textEl) textEl.textContent = discount;
+            }
+        } else {
+            if (badge) badge.remove();
         }
     }
 
