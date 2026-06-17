@@ -1073,8 +1073,8 @@
 /* --- Поле секции .catalog на index.html: внешний кант --- */
 .index-catalog {
     position: relative;
-    margin: 40px 24px 60px;
-    padding: 52px 32px 44px;
+    margin: 60px 24px 60px;
+    padding: 0 32px 44px;
     background:
         linear-gradient(135deg, #fcf9f5 0%, #f8f3ec 40%, #f5f0ea 100%);
     border: 2px solid #c0a060;
@@ -1132,8 +1132,9 @@
     position: relative;
     display: inline-block;
     left: 50%;
-    transform: translateX(-50%) rotate(-1.5deg);
-    margin: 0 0 36px;
+    transform: translateX(-50%) rotate(-0.5deg);
+    /* Верхняя граница секции проходит по центру текста */
+    margin: -22px 0 36px;
     padding: 16px 56px 14px;
     background: linear-gradient(160deg, #2c3e50 0%, #1a252f 50%, #0f1a22 100%);
     color: #f5f0ea;
@@ -1159,83 +1160,88 @@
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
-/* "Лента" бантика слева — выступающий слой */
+/* "Лента" бантика слева — ступенька 1 (самая высокая) */
 .index-catalog .catalog-title-bow::before {
     content: '';
     position: absolute;
-    top: 6px;
+    top: -8px;
     left: -18px;
     width: 32px;
-    height: calc(100% - 12px);
+    height: calc(100% + 16px);
     background: linear-gradient(180deg, #d4b06a 0%, #c0a060 40%, #a88840 100%);
-    transform: skewX(-12deg) rotate(-3deg);
+    transform: skewX(-10deg) rotate(-2deg);
     z-index: -1;
     box-shadow: -3px 3px 8px rgba(0,0,0,0.2);
     border-radius: 2px 0 0 2px;
     border-left: 1px solid rgba(255,255,255,0.15);
 }
 
-/* "Лента" бантика справа — выступающий слой */
-.index-catalog .catalog-title-bow::after {
-    content: '';
+/* Левая "панта" — ступенька 2 */
+.index-catalog .catalog-title-bow .bow-tab-left {
     position: absolute;
-    top: -4px;
-    right: -16px;
-    width: 30px;
-    height: calc(100% + 2px);
-    background: linear-gradient(180deg, #e0c080 0%, #c8a850 40%, #b09040 100%);
-    transform: skewX(10deg) rotate(4deg);
-    z-index: -1;
-    box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
-    border-radius: 0 2px 2px 0;
-    border-right: 1px solid rgba(255,255,255,0.15);
-}
-
-/* Дополнительный нижний подлой — "пант на канте" */
-.index-catalog .catalog-title-bow .bow-underskirt {
-    position: absolute;
-    bottom: -8px;
-    left: 8px;
-    right: 8px;
-    height: 14px;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(192, 160, 96, 0.2) 10%,
-        rgba(192, 160, 96, 0.5) 30%,
-        rgba(192, 160, 96, 0.6) 50%,
-        rgba(192, 160, 96, 0.5) 70%,
-        rgba(192, 160, 96, 0.2) 90%,
-        transparent 100%
-    );
-    transform: perspective(40px) rotateX(10deg);
-    z-index: -1;
-    border-radius: 0 0 50% 50% / 0 0 100% 100%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Маленькие декоративные "панты" по бокам заголовка */
-.index-catalog .catalog-title-bow .bow-tab-left,
-.index-catalog .catalog-title-bow .bow-tab-right {
-    position: absolute;
-    top: 50%;
+    top: 2px;
+    left: -26px;
     width: 20px;
     height: 20px;
     background: radial-gradient(circle at 40% 40%, #d4b06a 0%, #c0a060 30%, #a08030 100%);
     border-radius: 3px;
     z-index: -1;
     border: 1px solid rgba(255,255,255,0.15);
-}
-
-.index-catalog .catalog-title-bow .bow-tab-left {
-    left: -26px;
-    transform: translateY(-50%) rotate(25deg) skewX(-8deg);
+    transform: rotate(20deg) skewX(-6deg);
     box-shadow: -2px 2px 6px rgba(0,0,0,0.15);
 }
 
+/* Нижний подлой — ступенька 3 (центр, базовый уровень) */
+.index-catalog .catalog-title-bow .bow-underskirt {
+    position: absolute;
+    bottom: -8px;
+    left: 6px;
+    right: 6px;
+    height: 14px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(192, 160, 96, 0.25) 10%,
+        rgba(192, 160, 96, 0.55) 30%,
+        rgba(192, 160, 96, 0.65) 50%,
+        rgba(192, 160, 96, 0.55) 70%,
+        rgba(192, 160, 96, 0.25) 90%,
+        transparent 100%
+    );
+    transform: perspective(40px) rotateX(8deg);
+    z-index: -1;
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Правая "панта" — ступенька 4 */
 .index-catalog .catalog-title-bow .bow-tab-right {
+    position: absolute;
+    top: 8px;
     right: -26px;
-    transform: translateY(-50%) rotate(-20deg) skewX(8deg);
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle at 40% 40%, #d4b06a 0%, #c0a060 30%, #a08030 100%);
+    border-radius: 3px;
+    z-index: -1;
+    border: 1px solid rgba(255,255,255,0.15);
+    transform: rotate(-20deg) skewX(6deg);
     box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+}
+
+/* "Лента" бантика справа — ступенька 5 (самая нижняя) */
+.index-catalog .catalog-title-bow::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    right: -18px;
+    width: 32px;
+    height: calc(100% - 2px);
+    background: linear-gradient(180deg, #e0c080 0%, #c8a850 40%, #b09040 100%);
+    transform: skewX(10deg) rotate(2deg);
+    z-index: -1;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+    border-radius: 0 2px 2px 0;
+    border-right: 1px solid rgba(255,255,255,0.15);
 }
 
 /* Сетка товаров внутри секции */

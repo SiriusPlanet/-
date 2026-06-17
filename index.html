@@ -65,11 +65,8 @@
         <section class="hero">
             <h2>Добро пожаловать в мир воспоминаний!</h2>
             <p>Времена уходят, воспоминания остаются...</p>
-            <p>Мы не продаём предметы. Мы продаём <strong>воспоминания</strong> о них.</p>
-            <p>Каждый предмет может быть отозван в любой момент — это не баг, это фича.
-            Если вы помните свою покупку — претензий нет.
-            Если не помните — тем более.</p>
-            <p><em>P.S. Камень Времени в наличии не появлялся. Никогда. И не появится. Спросите у Таноса.</em></p>
+
+
         </section>
         
         <section class="catalog index-catalog">
@@ -81,11 +78,52 @@
             </h2>
             <div class="products-grid" id="topLotsContainer"></div>
             <p class="catalog-footnote" style="text-align: center; color: #888; font-size: 13px; margin-top: 16px; font-style: italic;">
-                ⚠️ Все предметы могут быть отозваны в любой момент без объяснения причин.
-                Если вы помните этот предмет — претензий нет. Если не помните — тем более.
+                ⚠️ Все предметы могут исчезнуть в любой момент.
+                Если вы помните что они были — значит всё ок.
             </p>
         </section>
     </main>
+
+    <!-- Модальное окно детального просмотра -->
+    <div id="detailModal" class="modal hidden">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Загрузка...</h2>
+                    <button class="modal-close-btn" id="detailModalClose" title="Закрыть">✕</button>
+                </div>
+                <div class="modal-body">
+                    <img src="" alt="" class="detail-image" loading="lazy">
+                    <div class="detail-price"></div>
+                    <div class="detail-description"></div>
+                    <div class="detail-context"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="cart-btn">🛒 В корзину</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипт для закрытия модалки детального просмотра -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const detailModal = document.getElementById('detailModal');
+            const closeBtn = document.getElementById('detailModalClose');
+            
+            if (detailModal && closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    detailModal.classList.add('hidden');
+                });
+                
+                detailModal.addEventListener('click', (e) => {
+                    if (e.target === detailModal) {
+                        detailModal.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
     
     <footer class="site-footer">
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
