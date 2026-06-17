@@ -293,6 +293,8 @@ class SimpleHandler(BaseHTTPRequestHandler):
                 print(f"[ERROR] /save-news error: {e}")
                 self.send_json_response(False, str(e))
 
+        elif self.path == '/api/update-news':
+            return self.handle_api_update_news()
         elif self.path == '/api/delete-news':
             return self.handle_api_delete_news()
         else:
@@ -426,11 +428,56 @@ class SimpleHandler(BaseHTTPRequestHandler):
             self.send_error_utf8(500, "Ошибка сервера")
 
     def handle_api_update_news(self):
-        """Обновление новости по ID"""
+        """Обновление новости по ID. Поддерживает JSON (скидка) и multipart (форма редактирования)"""
         try:
+            content_type = self.headers.get('Content-Type', '')
             length = int(self.headers.get('Content-Length', 0))
             raw_data = self.rfile.read(length)
-            data = json.loads(raw_data.decode('utf-8'))
+
+            # Определяем формат по Content-Type
+            if 'multipart/form-data' in content_type:
+                # Парсим multipart (как в /save-news)
+                boundary = None
+                if 'boundary=' in content_type:
+                    boundary = content_type.split('boundary=')[1].strip()
+                    if boundary.startswith('"') and boundary.endswith('"'):
+                        boundary = boundary[1:-1]
+                if not boundary:
+                    boundary = '----WebKitFormBoundary7MA4YWxkTrZu0gW'
+
+                boundary_bytes = boundary.encode()
+                parts = raw_data.split(b'--' + boundary_bytes)
+                data = {}
+                files = {}
+
+                for part in parts:
+                    if b'\r\n\r\n' not in part or b'Content-Disposition' not in part:
+                        continue
+                    try:
+                        header_end = part.index(b'\r\n\r\n')
+                        header = part[:header_end].decode('utf-8', errors='ignore')
+                        body = part[header_end + 4:-2]
+
+                        name = None
+                        filename = None
+                        for line in header.split('\r\n'):
+                            if 'name="' in line:
+                                name = line.split('name="')[1].split('"')[0]
+                            if 'filename="' in line:
+                                filename = line.split('filename="')[1].split('"')[0]
+
+                        if not name:
+                            continue
+                        if filename:
+                            files[name] = {'filename': filename, 'content': body}
+                        else:
+                            data[name] = body.decode('utf-8')
+                    except Exception:
+                        continue
+            else:
+                # JSON (например, вызов из saveDiscount)
+                data = json.loads(raw_data.decode('utf-8'))
+                files = {}
 
             news_id = data.get('id')
             if not news_id:
@@ -452,11 +499,19 @@ class SimpleHandler(BaseHTTPRequestHandler):
             with open(file_path, 'r', encoding='utf-8') as f:
                 news = json.load(f)
 
-            # Обновляем поля
-            news['title'] = data.get('title', news['title'])
-            news['date'] = data.get('date', news['date'])
-            news['preview'] = data.get('preview', news['preview'])
-            news['content'] = data.get('content', news['content'])
+            # Обновляем поля (из multipart или JSON)
+            if 'title' in data:
+                news['title'] = data['title']
+            if 'date' in data:
+                news['date'] = data['date']
+            if 'preview' in data:
+                news['preview'] = data['preview']
+            if 'content' in data:
+                news['content'] = data['content']
+            if 'price' in data:
+                news['price'] = data['price']
+            if 'lotType' in data:
+                news['lotType'] = data['lotType']
 
             # Обновляем скидку, если передана
             if 'discount' in data:
@@ -465,15 +520,23 @@ class SimpleHandler(BaseHTTPRequestHandler):
                 except (ValueError, TypeError):
                     news['discount'] = 0
 
-            # Если загружено новое изображение
-            if 'image' in data and data['image']:
-                image_filename = news.get('image')
-                if image_filename and image_filename != data['image']:
-                    old_img_path = PathsHelper.get_image_path(image_filename)
+            # Если загружено новое изображение (multipart)
+            image_file = files.get('image')
+            if image_file and image_file['content']:
+                # Удаляем старое изображение
+                old_image = news.get('image')
+                if old_image and old_image != '400.png':
+                    old_img_path = PathsHelper.get_image_path(old_image)
                     if os.path.exists(old_img_path):
                         os.remove(old_img_path)
 
-                news['image'] = data['image']
+                # Сохраняем новое
+                img_name = f"{news_id}.jpg"
+                img_path = PathsHelper.get_image_path(img_name)
+                os.makedirs(os.path.dirname(img_path), exist_ok=True)
+                with open(img_path, 'wb') as f:
+                    f.write(image_file['content'])
+                news['image'] = img_name
 
             with open(file_path, 'w', encoding='utf-8') as f:
                 json.dump(news, f, ensure_ascii=False, indent=2)

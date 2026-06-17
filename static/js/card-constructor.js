@@ -23,7 +23,7 @@ export class CardConstructor {
      * @returns {HTMLElement} - элемент .catalog-card
      */
     createCard(item, options = {}) {
-        const { accessLevel = 0, onDelete, onDiscount } = options;
+        const { accessLevel = 0, onDelete, onDiscount, onEdit } = options;
         const card = document.createElement('div');
         card.classList.add('catalog-card');
         card.dataset.id = item.id;
@@ -68,6 +68,9 @@ export class CardConstructor {
         // Кнопка Del — видна всем (временно, пока не настроена система доступов)
         const delBtnHtml = `<button class="ctrl-btn del-btn" data-id="${item.id}" title="Удалить">Del</button>`;
 
+        // Кнопка re: — редактирование лота
+        const editBtnHtml = `<button class="ctrl-btn edit-btn" data-id="${item.id}" title="Редактировать">re:</button>`;
+
         // Кнопка % — видна всем, только для товаров (временно, пока не настроена система доступов)
         const discountBtnHtml = item.lotType === 'product'
             ? `<button class="ctrl-btn discount-btn" data-id="${item.id}" data-discount="${discount}" data-price="${item.price || ''}" title="Установить скидку">%</button>`
@@ -85,6 +88,7 @@ export class CardConstructor {
                 <img src="${imgSrc}" alt="${title}" class="catalog-image" loading="lazy">
                 ${badgeHtml}
                 ${delBtnHtml}
+                ${editBtnHtml}
                 ${discountBtnHtml}
             </div>
             <div class="catalog-card-content">
@@ -101,6 +105,15 @@ export class CardConstructor {
             delBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 onDelete(item.id);
+            });
+        }
+
+        // Обработчик кнопки re:
+        const editBtn = card.querySelector('.edit-btn');
+        if (editBtn && onEdit) {
+            editBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                onEdit(item);
             });
         }
 

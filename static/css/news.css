@@ -71,7 +71,7 @@
 .catalog-card-inner {
     position: relative;
     width: 100%;
-    height: 200px;
+    min-height: 200px;
     overflow: hidden;
     background: #f0f0f0;
 }
@@ -335,6 +335,25 @@
     transform: scale(1.15);
 }
 
+/* Кнопка re: — редактирование, справа от Del */
+.catalog-card .edit-btn {
+    left: 56px;  /* 8px (отступ) + 44px (Del) + 4px (gap) */
+    bottom: 8px;
+    top: auto;
+    width: 30px;
+    height: 30px;
+    background: #555;
+    border-color: #aaa;
+    font-size: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.catalog-card .edit-btn:hover {
+    background: #777;
+    border-color: #ccc;
+    transform: scale(1.15);
+}
+
 /* === Кнопка "В корзину" — стилизована как кнопка "Клиентам" в шапке === */
 .catalog-card .cart-btn {
     display: block;
@@ -370,4 +389,263 @@
     background: #0077dd;
     border-color: #99ddff;
     transform: scale(1.15);
+}
+
+/* ============================================================
+   МОДАЛЬНОЕ ОКНО — СТИЛИ ФОРМЫ (перенесено из news-form.css)
+   ============================================================ */
+
+/* Контейнер модалки — оверлей */
+#addNewsModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+#addNewsModal.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#addNewsModal.hidden {
+    display: none !important;
+}
+
+/* Диалог */
+#addNewsModal .modal-dialog {
+    width: min(80vw, 560px);
+    max-height: min(80vh, 90%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Контент */
+#addNewsModal .modal-content {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Шапка */
+#addNewsModal .modal-header {
+    text-align: center;
+    padding: 20px 24px 12px;
+    border-bottom: 1px solid #e8e8e8;
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+}
+
+#addNewsModal .modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+#addNewsModal .modal-header .warning {
+    display: block;
+    font-size: 0.75rem;
+    color: #8b0000;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-top: 6px;
+}
+
+/* Тело формы */
+#addNewsModal .modal-body {
+    padding: 20px 28px;
+    overflow-y: auto;
+    max-height: 60vh;
+}
+
+/* Акции с кнопками */
+#addNewsModal .modal-actions {
+    padding: 13px 28px;
+    border-top: 1px solid #e8e8e8;
+    background: #fafafa;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* Поля ввода */
+#addNewsModal .modal-input,
+#addNewsModal .modal-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #3498db;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    background: #fff;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin: 8px 0;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#addNewsModal .modal-input:focus,
+#addNewsModal .modal-textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15), 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#addNewsModal textarea#preview {
+    min-height: 2.5em;
+    resize: vertical;
+}
+
+#addNewsModal textarea#content {
+    min-height: 5em;
+    resize: vertical;
+}
+
+/* Лейблы */
+#addNewsModal label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+    color: #34495e;
+    font-size: 1rem;
+}
+
+/* Кнопки */
+#addNewsModal .btn-submit,
+#addNewsModal .cancel-btn {
+    padding: 10px 24px;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+    border: 2px solid #3498db;
+    font-size: 1rem;
+}
+
+#addNewsModal .btn-submit {
+    background: transparent;
+    color: #3498db;
+}
+
+#addNewsModal .btn-submit:hover {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 6px 16px rgba(52, 152, 219, 0.3);
+}
+
+#addNewsModal .cancel-btn {
+    background: transparent;
+    color: #7f8c8d;
+    border-color: #7f8c8d;
+}
+
+#addNewsModal .cancel-btn:hover {
+    border-color: #3498db;
+    color: #3498db;
+    background: rgba(52, 152, 219, 0.05);
+}
+
+/* === ТАБЫ: Новость / Товар === */
+#addNewsModal .form-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 16px;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 2px solid #3498db;
+    background: #f0f8ff;
+}
+
+#addNewsModal .form-tab {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    color: #7f8c8d;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+#addNewsModal .form-tab:hover {
+    background: rgba(52, 152, 219, 0.08);
+    color: #2c3e50;
+}
+
+#addNewsModal .form-tab.active {
+    background: #3498db;
+    color: #fff;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* ⚠️ Индикатор на табе — исходный тип лота при редактировании */
+#addNewsModal .form-tab.has-warning::after {
+    content: ' ⚠️';
+    font-size: 14px;
+}
+
+/* === Файл-аплоад === */
+#addNewsModal .file-upload-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 8px 0;
+}
+
+#addNewsModal .file-upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: transparent;
+    border: 2px solid #3498db;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #3498db;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#addNewsModal .file-upload-label:hover {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 6px 16px rgba(52, 152, 219, 0.3);
+}
+
+#addNewsModal .file-upload-label span {
+    font-size: 1.2rem;
+}
+
+#addNewsModal .file-upload-label span:last-child {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #3498db;
+    transition: color 0.2s;
+}
+
+#addNewsModal .file-upload-label:hover span:last-child {
+    color: white;
+}
+
+/* Группа полей */
+#addNewsModal .field-group {
+    transition: all 0.2s ease;
+}
+
+#addNewsModal .field-group.hidden {
+    display: none;
 }

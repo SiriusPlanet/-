@@ -96,8 +96,24 @@ class MainApp {
         modal.classList.remove('is-visible');
         modal.classList.add('hidden');
         document.body.style.overflow = '';
+
+        // Сброс формы
         const form = modal.querySelector('form');
-        if (form) form.reset();
+        if (form) {
+            form.reset();
+            delete form.dataset.editId;
+            delete form.dataset.originalLotType;
+        }
+
+        // Сброс кнопки сабмита
+        const submitBtn = modal.querySelector('.btn-submit');
+        if (submitBtn) submitBtn.textContent = 'Имплантировать';
+
+        // Снять ⚠️ с табов
+        document.querySelectorAll('.form-tab').forEach(t => {
+            t.classList.remove('has-warning');
+            t.removeAttribute('title');
+        });
     }
 
     setupFormTabs() {
@@ -169,6 +185,18 @@ class MainApp {
     }
 
     async handleSubmit(form) {
+        const editId = form.dataset.editId;
+        const originalLotType = form.dataset.originalLotType;
+        const newLotType = this.getActiveLotType();
+
+        // Предупреждение при смене типа лота в режиме редактирования
+        if (editId && originalLotType && originalLotType !== newLotType) {
+            const typeNames = { news: 'новость', product: 'товар' };
+            if (!confirm(`Вы меняете тип лота с «${typeNames[originalLotType] || originalLotType}» на «${typeNames[newLotType] || newLotType}». Продолжить?`)) {
+                return;
+            }
+        }
+
         const title = document.getElementById('title')?.value?.trim();
         const content = document.getElementById('content')?.value?.trim();
 
@@ -183,24 +211,33 @@ class MainApp {
         formData.append('preview', document.getElementById('preview')?.value || '');
         formData.append('content', content);
         formData.append('price', document.getElementById('price')?.value || '');
-        formData.append('lotType', this.getActiveLotType());
+        formData.append('lotType', newLotType);
 
         const imageFile = document.getElementById('image')?.files[0];
         if (imageFile) formData.append('image', imageFile);
 
         try {
-            const res = await fetch('/save-news', {
-                method: 'POST',
-                body: formData
-            });
+            let url, options;
+
+            if (editId) {
+                // Режим редактирования
+                formData.append('id', editId);
+                url = '/api/update-news';
+                options = { method: 'POST', body: formData };
+            } else {
+                // Режим создания
+                url = '/save-news';
+                options = { method: 'POST', body: formData };
+            }
+
+            const res = await fetch(url, options);
 
             if (!res.ok) throw new Error('Ошибка сохранения');
             const result = await res.json();
 
             if (result.success) {
-                this.showToast('Запись сохранена');
+                this.showToast(editId ? 'Запись обновлена' : 'Запись сохранена');
                 this.closeModal(document.getElementById('addNewsModal'));
-                form.reset();
                 // Перепубликуем
                 if (this.publisher && this.currentPage && this.container) {
                     await this.publisher.publish(this.currentPage, this.container);

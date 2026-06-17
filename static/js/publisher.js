@@ -65,7 +65,8 @@ export class Publisher {
             const card = this.cardConstructor.createCard(item, {
                 accessLevel: 3, // временно: показываем кнопки всем, пока не настроена система доступов
                 onDelete: (id) => this.deleteLot(id, container, page),
-                onDiscount: (id, btn, cardEl) => this.showDiscountPanel(id, btn, cardEl, container, page)
+                onDiscount: (id, btn, cardEl) => this.showDiscountPanel(id, btn, cardEl, container, page),
+                onEdit: (item) => this.editLot(item, container, page)
             });
             fragment.appendChild(card);
         });
@@ -113,6 +114,60 @@ export class Publisher {
             console.error('[Publisher] Ошибка удаления:', e);
             this.showError('Ошибка при удалении');
         }
+    }
+
+    /**
+     * Открывает модалку редактирования лота с предзаполненными данными
+     */
+    editLot(item, container, page) {
+        const modal = document.getElementById('addNewsModal');
+        if (!modal) return;
+
+        // Заполняем поля формы
+        document.getElementById('title').value = item.title || '';
+        document.getElementById('date').value = item.date || '';
+        document.getElementById('preview').value = item.preview || '';
+        document.getElementById('content').value = item.content || '';
+        document.getElementById('price').value = item.price || '';
+
+        // Устанавливаем активный таб по типу лота
+        const lotType = item.lotType || 'news';
+        document.querySelectorAll('.form-tab').forEach(t => {
+            t.classList.toggle('active', t.dataset.lottype === lotType);
+        });
+
+        // Показываем/скрываем поля цены/даты
+        const isProduct = lotType === 'product';
+        const priceGroup = document.getElementById('priceGroup');
+        if (priceGroup) priceGroup.classList.toggle('hidden', !isProduct);
+        const dateGroup = document.getElementById('dateGroup');
+        if (dateGroup) dateGroup.classList.toggle('hidden', isProduct);
+
+        // Сохраняем ID редактируемого лота и исходный тип
+        const form = document.getElementById('newsForm');
+        form.dataset.editId = item.id;
+        form.dataset.originalLotType = item.lotType || 'news';
+
+        // ⚠️ Индикатор на табе с исходным типом
+        document.querySelectorAll('.form-tab').forEach(t => {
+            t.classList.remove('has-warning');
+            t.removeAttribute('title');
+        });
+        const originalTab = document.querySelector(`.form-tab[data-lottype="${item.lotType || 'news'}"]`);
+        if (originalTab) {
+            originalTab.classList.add('has-warning');
+            const typeNames = { news: 'новость', product: 'товар' };
+            originalTab.title = `Изначальный тип: ${typeNames[item.lotType] || item.lotType}`;
+        }
+
+        // Показываем модалку
+        modal.classList.remove('hidden');
+        modal.classList.add('is-visible');
+        document.body.style.overflow = 'hidden';
+
+        // Меняем текст кнопки сабмита
+        const submitBtn = modal.querySelector('.btn-submit');
+        if (submitBtn) submitBtn.textContent = 'Обновить';
     }
 
     /**
@@ -190,6 +245,9 @@ export class Publisher {
 
                 // Обновляем data-discount на кнопке
                 btn.dataset.discount = discount;
+
+                // Перепубликуем текущую страницу, чтобы акции обновились
+                await this.publish(page, container);
             } else {
                 this.showError('Ошибка сохранения скидки');
             }
