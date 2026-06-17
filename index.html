@@ -12,6 +12,7 @@
     
     <!-- Основные стили -->
     <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/news.css">
     
     <!-- Основной скрипт -->
     <script type="module" src="static/js/main.js"></script>
@@ -64,33 +65,25 @@
         <section class="hero">
             <h2>Добро пожаловать в мир воспоминаний!</h2>
             <p>Времена уходят, воспоминания остаются...</p>
+            <p>Мы не продаём предметы. Мы продаём <strong>воспоминания</strong> о них.</p>
+            <p>Каждый предмет может быть отозван в любой момент — это не баг, это фича.
+            Если вы помните свою покупку — претензий нет.
+            Если не помните — тем более.</p>
+            <p><em>P.S. Камень Времени в наличии не появлялся. Никогда. И не появится. Спросите у Таноса.</em></p>
         </section>
         
-        <section class="catalog">
-            <h2>Тор 3</h2>
-            <div class="products-grid">
-                <div class="product-card" itemscope itemtype="https://schema.org/Product">
-                    <img src="images/1.png" alt="Сувенирная рука солдата, исторический артефакт" width="200" height="200">
-                    <h3 itemprop="name">Рука солдата</h3>
-                    <p itemprop="description">Оригинал.</p>
-                    <p>(без камней)</p>
-                    <p class="price"><span itemprop="price">2500000 руб.</span></p>
-                </div>
-                <div class="product-card" itemscope itemtype="https://schema.org/Product">
-                    <img src="images/2.png" alt="Перчатка Таноса с камнями бесконечности" width="200" height="200">
-                    <h3 itemprop="name">Перчатка Таноса</h3>
-                    <p itemprop="description">Оригинал. Со всеми камнями.</p>
-                    <p>(кроме камня времени)</p>
-                    <p class="price"><span itemprop="price">4000000 руб.</span></p>
-                </div>
-                <div class="product-card" itemscope itemtype="https://schema.org/Product">
-                    <img src="images/3.png" alt="Камни бесконечности в подарочной упаковке" width="200" height="200">
-                    <h3 itemprop="name">Камни бесконечности</h3>
-                    <p itemprop="description">Любой камень в подарочной упаковке.</p>
-                    <p>(кроме камня времени)</p>
-                    <p class="price"><span itemprop="price">1800000 руб.</span></p>
-                </div>
-            </div>
+        <section class="catalog index-catalog">
+            <h2 class="catalog-title-bow">
+                Топ 3
+                <span class="bow-underskirt"></span>
+                <span class="bow-tab-left"></span>
+                <span class="bow-tab-right"></span>
+            </h2>
+            <div class="products-grid" id="topLotsContainer"></div>
+            <p class="catalog-footnote" style="text-align: center; color: #888; font-size: 13px; margin-top: 16px; font-style: italic;">
+                ⚠️ Все предметы могут быть отозваны в любой момент без объяснения причин.
+                Если вы помните этот предмет — претензий нет. Если не помните — тем более.
+            </p>
         </section>
     </main>
     

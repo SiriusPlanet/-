@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Реквизиты магазина воспоминаний — счёт вне временного потока">
+    <title>Реквизиты - Магазин воспоминаний</title>
+    
+    <!-- Система доступа - ЗАГРУЖАЕТСЯ ПЕРВОЙ -->
+    <script type="module" src="static/js/access-init.js"></script>
+    
+    <link rel="stylesheet" href="static/css/style.css">
+    <script type="module" src="static/js/main.js"></script>
+    
+    <style>
+        /* --- Система доступа — временно отключена, весь функционал виден --- */
+        #access-overlay {
+            display: none !important;
+        }
+        .access-button {
+            display: none !important;
+        }
+        
+        .requisites-section {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .requisites-section h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .requisites-section .subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+        
+        .req-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .req-card h3 {
+            margin: 0 0 16px;
+            font-size: 18px;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .req-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f5f5;
+            font-size: 14px;
+        }
+        
+        .req-row:last-child {
+            border-bottom: none;
+        }
+        
+        .req-row .label {
+            color: #888;
+            font-weight: 500;
+        }
+        
+        .req-row .value {
+            color: #333;
+            font-weight: 600;
+            text-align: right;
+            max-width: 60%;
+        }
+        
+        .req-note {
+            background: #f8f9fa;
+            border-left: 3px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 24px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .req-note strong {
+            color: #2c3e50;
+        }
+        
+        .req-note .warning {
+            color: #8b0000;
+            font-weight: 600;
+        }
+        
+        .req-note .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Затемнение -->
+    <div id="access-overlay"></div>
+    
+    <!-- Панель доступа -->
+    <div class="access-button">
+        <button id="fileAccessButton">Получить доступ к файлам</button>
+    </div>
+    
+    <!-- Остальной контент -->
+    <header class="site-header">
+        <a href="index.html" class="logo-link">
+            <img src="images/logo.png" alt="Логотип магазина воспоминаний" class="logo">
+            <span class="site-title"></span>
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="actions.html">Акции</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="requisites.html">Реквизиты</a></li>
+            </ul>
+        </nav>
+        <div class="auth-link">
+            <a href="login.html">Клиентам</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="requisites-section">
+            <h1>Реквизиты для оплаты</h1>
+            <p class="subtitle">Счёт открыт вне временного потока. Списание происходит в момент воспоминания.</p>
+            
+            <div class="req-card">
+                <h3>🏦 Банковские реквизиты</h3>
+                <div class="req-row">
+                    <span class="label">Получатель</span>
+                    <span class="value">ООО «Хроно-Архив TVA»</span>
+                </div>
+                <div class="req-row">
+                    <span class="label">ИНН</span>
+                    <span class="value">7707 0707 0707</span>
+                </div>
+                <div class="req-row">
+                    <span class="label">КПП</span>
+                    <span class="value">7707 0707 001</span>
+                </div>
+                <div class="req-row">
+                    <span class="label">ОГРН</span>
+                    <span class="value">1227700070707</span>
+                </div>
+                <div class="req-row">
+                    <span class="label">Расчётный счёт</span>
+                    <span class="value">40707 810 7 0000 0000707</span>
+                </div>
+                <div class="req-row">
+                    <span class="label">Банк</span>
+                    <span class="value">АО «Банк Вневременных Расчётов»</span>
+                </div>
+                <div class="req-row">
+                    <span class="label">БИК</span>
+                    <span class="value">044707707</span>
+                </div>
+                <div class="req-row">
+                    <span class="label">Корр. счёт</span>
+                    <span class="value">30107 810 7 0000 0000707</span>
+                </div>
+            </div>
+            
+            <div class="req-card">
+                <h3>💳 Оплата криптовалютой</h3>
+                <div class="req-row">
+                    <span class="label">Bitcoin (BTC)</span>
+                    <span class="value" style="font-size: 12px; word-break: break-all;">bc1q7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7</span>
+                </div>
+                <div class="req-row">
+                    <span class="label">Ethereum (ETH)</span>
+                    <span class="value" style="font-size: 12px; word-break: break-all;">0x7070707070707070707070707070707070707070</span>
+                </div>
+                <div class="req-row">
+                    <span class="label">Камень Времени (TVA)</span>
+                    <span class="value" style="color: #8b0000; font-style: italic;">Не принимается. Никогда. Мы серьёзно.</span>
+                </div>
+            </div>
+            
+            <div class="req-card">
+                <h3>📋 Юридическая информация</h3>
+                <div class="req-row">
+                    <span class="label">Юридический адрес</span>
+                    <span class="value">г. Москва, ул. Ткацкая, д. 7, стр. 7, офис 707</span>
+                </div>
+                <div class="req-row">
+                    <span class="label">Фактический адрес</span>
+                    <span class="value">Пересечение улицы Вечности и проспекта Забвения</span>
+                </div>
+                <div class="req-row">
+                    <span class="label">Временная зона</span>
+                    <span class="value">UTC+0 / Вневременная / Любая, которую вы помните</span>
+                </div>
+                <div class="req-row">
+                    <span class="label">Режим работы</span>
+                    <span class="value">Пн-Пт: 07:07 — 19:07 (по времени Гринвича)</span>
+                </div>
+                <div class="req-row">
+                    <span class="label">Перерыв</span>
+                    <span class="value">С 07:07:07 до 07:07:08 (минута вневременного молчания)</span>
+                </div>
+            </div>
+            
+            <div class="req-note">
+                <p><strong>📜 Важное уведомление об оплате:</strong></p>
+                <p>Согласно Положению о вневременной торговле (п. 3, ст. 7), оплата считается совершённой в момент, когда <strong>вы помните</strong>, что оплатили. Если вы не помните — проверьте историю операций. Если истории нет — значит, вы либо не платили, либо платили в другой временной линии. В любом случае, претензий нет.</p>
+                <p><span class="warning">⚠️ Внимание:</span> Переводы в <span class="highlight">Камень Времени</span> блокируются автоматически на уровне межпространственного межсетевого экрана. Мы не принимаем Камень Времени. Мы не храним Камень Времени. Мы не знаем, где Камень Времени. Если у вас есть Камень Времени — положите на место, пока Танос не заметил.</p>
+                <p style="margin-top: 12px; color: #8b0000; font-weight: 600;">⚖️ Если помните — претензий нет. Если не помните — тем более.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
+        <ul class="footer-links">
+            <li><a href="privacy.html">Политика конфиденциальности</a></li>
+            <li><a href="delivery.html">Доставка и оплата</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

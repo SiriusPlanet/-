@@ -40,7 +40,10 @@ class MainApp {
 
     detectPage() {
         const path = window.location.pathname;
-        if (path.includes('news.html')) {
+        if (path.endsWith('index.html') || path === '/' || path === '') {
+            this.currentPage = 'index';
+            this.container = document.getElementById('topLotsContainer');
+        } else if (path.includes('news.html')) {
             this.currentPage = 'news';
             this.container = document.querySelector('.news-grid');
         } else if (path.includes('catalog.html')) {
@@ -59,7 +62,13 @@ class MainApp {
         }
 
         this.publisher = new Publisher();
-        await this.publisher.publish(this.currentPage, this.container);
+
+        // Для index.html используем компактные карточки
+        const options = this.currentPage === 'index'
+            ? { cardClass: 'card-compact' }
+            : {};
+
+        await this.publisher.publish(this.currentPage, this.container, options);
     }
 
     setupAddButton() {

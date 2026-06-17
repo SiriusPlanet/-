@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Сувенирный магазин с уникальными подарками и воспоминаниями на любой вкус">
-    <title>Сувенирный магазин</title>
+    <meta name="description" content="Контакты магазина воспоминаний — связь с вневременным отделом">
+    <title>Контакты - Магазин воспоминаний</title>
     
     <!-- Система доступа - ЗАГРУЖАЕТСЯ ПЕРВОЙ -->
     <script type="module" src="static/js/access-init.js"></script>
@@ -19,6 +19,73 @@
         }
         .access-button {
             display: none !important;
+        }
+        
+        .contacts-section {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .contacts-section h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .contacts-section .subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-card h3 {
+            margin: 0 0 12px;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+        
+        .contact-card p {
+            margin: 6px 0;
+            color: #555;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        
+        .contact-card .hint {
+            color: #8b0000;
+            font-weight: 600;
+            font-size: 13px;
+            margin-top: 12px;
+        }
+        
+        .contact-card .label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .memory-disclaimer {
+            background: #f8f9fa;
+            border-left: 3px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 24px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .memory-disclaimer strong {
+            color: #2c3e50;
         }
     </style>
 </head>
@@ -54,11 +121,49 @@
     </header>
 
     <main>
-        <!-- Здесь будет контент страницы -->
+        <section class="contacts-section">
+            <h1>Связь с вневременным отделом</h1>
+            <p class="subtitle">Если вы помните — пишите. Если нет — тем более.</p>
+            
+            <div class="contact-card">
+                <h3>📍 Адрес приёмной</h3>
+                <p><span class="label">Локация:</span> Пересечение улицы Вечности и проспекта Забвения, строение 7</p>
+                <p><span class="label">Ориентир:</span> Третья дверь слева после Врат Санктума. Если видите зелёную неоновую вывеску «TVA» — вы пришли.</p>
+                <p><span class="label">Часы приёма:</span> Вневременные. Мы работаем, пока вы помните, что мы существуем.</p>
+                <p class="hint">⚠️ Если вы не можете найти здание — проверьте, не отозвали ли вашу временную линию.</p>
+            </div>
+            
+            <div class="contact-card">
+                <h3>📧 Электронная почта</h3>
+                <p><span class="label">Основной ящик:</span> memories@chrono-archive.tva</p>
+                <p><span class="label">Для жалоб на квантовую нестабильность:</span> quantum-complaints@chrono-archive.tva</p>
+                <p><span class="label">Для возврата воспоминаний:</span> return@memory-shop.tva</p>
+                <p class="hint">📬 Письма могут задерживаться из-за временных аномалий. Если вы отправили письмо в прошлом, а оно пришло в будущем — это нормально.</p>
+            </div>
+            
+            <div class="contact-card">
+                <h3>📞 Телефон доверия</h3>
+                <p><span class="label">Горячая линия:</span> +7 (999) 000-70-70</p>
+                <p><span class="label">Линия для тех, кто помнит:</span> +7 (999) 000-80-80</p>
+                <p><span class="label">Линия для тех, кто не помнит:</span> наберите любой номер — если не помните, какая разница?</p>
+                <p class="hint">📞 Звонки тарифицируются по тарифу «Воспоминание». Если вы забыли, что звонили — звонок бесплатный.</p>
+            </div>
+            
+            <div class="memory-disclaimer">
+                <p><strong>📜 Важное уведомление:</strong></p>
+                <p>Согласно Положению о вневременной торговле (п. 3, ст. 7), все обращения рассматриваются в порядке живой очереди воспоминаний. Если вы помните, что обращались к нам — мы обязательно ответим. Если не помните — тем более, значит ответ уже пришёл, просто вы его забыли.</p>
+                <p>По всем вопросам, связанным с <strong>локальной квантовой нестабильностью</strong> предметов, обращаться в отдел временных аномалий. Камень Времени к нам не поступал, не поступает и поступать не будет. Да, мы знаем, что он существует. Нет, мы не знаем, где он. Да, мы проверяли склад.</p>
+                <p style="margin-top: 12px; color: #8b0000; font-weight: 600;">⚖️ Если помните — претензий нет. Если не помните — тем более.</p>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <p>© 2024 Мой сайт</p>
+    <footer class="site-footer">
+        <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
+        <ul class="footer-links">
+            <li><a href="privacy.html">Политика конфиденциальности</a></li>
+            <li><a href="delivery.html">Доставка и оплата</a></li>
+        </ul>
     </footer>
 </body>
 </html>

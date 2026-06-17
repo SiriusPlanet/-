@@ -56,6 +56,10 @@
                 <div class="last-update update-date">—</div>
                 <button class="add-news-btn">Добавить лот</button>
             </div>
+            <p style="margin: 8px 20px 0; font-size: 13px; color: #8b0000; font-style: italic; text-align: center;">
+                ⚠️ Скидки на воспоминания. Акция может быть отозвана в любой момент.
+                Если вы помните эту акцию — претензий нет. Если не помните — тем более.
+            </p>
         </div>
     </div>
 
@@ -79,6 +83,11 @@
                 </div>
                 <div class="modal-body">
                     <form id="newsForm" class="modal-form">
+                        <div class="form-tabs">
+                            <button type="button" class="form-tab active" data-lottype="news">📰 Новость</button>
+                            <button type="button" class="form-tab" data-lottype="product">🏷️ Товар</button>
+                        </div>
+
                         <div class="file-upload-wrapper">
                             <label for="image" class="file-upload-label">
                                 <span>📷</span>
@@ -87,8 +96,12 @@
                             <input type="file" id="image" accept="image/*" style="display: none" />
                         </div>
                         <input type="text" id="title" placeholder="Заголовок" required class="modal-input" />
-                        <input type="date" id="date" class="modal-input" />
-                        <input type="number" id="price" placeholder="Цена (только для товаров)" class="modal-input" />
+                        <div class="field-group field-group-date" id="dateGroup">
+                            <input type="date" id="date" class="modal-input" />
+                        </div>
+                        <div class="field-group field-group-price" id="priceGroup">
+                            <input type="number" id="price" placeholder="Цена" class="modal-input" />
+                        </div>
                         <textarea id="preview" placeholder="Краткое описание" class="modal-textarea" rows="4"></textarea>
                         <textarea id="content" placeholder="Полный текст" class="modal-textarea" rows="6"></textarea>
                         <div class="modal-actions">
@@ -101,6 +114,9 @@
         </div>
     </div>
 
+    <!-- Основной скрипт -->
+    <script type="module" src="static/js/main.js"></script>
+
     <footer class="site-footer">
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
         <ul class="footer-links">
@@ -108,8 +124,5 @@
             <li><a href="delivery.html">Доставка и оплата</a></li>
         </ul>
     </footer>
-
-    <!-- Основной скрипт -->
-    <script type="module" src="static/js/main.js"></script>
 </body>
 </html>

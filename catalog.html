@@ -62,6 +62,18 @@
         <section class="catalog">
             <div class="products-grid"></div>
         </section>
+
+        <!-- Подкаталог реакторов Тони Старка -->
+        <section class="reactor-subcatalog" id="reactorSubcatalog">
+            <div class="reactor-trigger" id="reactorTrigger">
+                <img src="images/90.png" alt="Реакторы Тони Старка" loading="lazy">
+                <div class="reactor-caption">⚡ Реакторы Тони Старка в ассортименте</div>
+                <div class="pin-indicator">📌</div>
+            </div>
+            <div class="reactor-grid" id="reactorGrid">
+                <!-- Карточки будут созданы через CardConstructor -->
+            </div>
+        </section>
     </main>
 
     <!-- Модальное окно для ПРОСМОТРА -->
@@ -110,8 +122,130 @@
         </div>
     </div>
 
+    <!-- Модальное окно детального просмотра товара -->
+    <div id="detailModal" class="modal hidden">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Загрузка...</h2>
+                    <button class="modal-close-btn" id="detailModalClose" title="Закрыть">✕</button>
+                </div>
+                <div class="modal-body">
+                    <img src="" alt="" class="detail-image" loading="lazy">
+                    <div class="detail-price"></div>
+                    <div class="detail-description"></div>
+                    <div class="detail-context"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="cart-btn">🛒 В корзину</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Основной скрипт -->
     <script type="module" src="./static/js/main.js"></script>
+    
+    <!-- Скрипт для закрытия модалки детального просмотра -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const detailModal = document.getElementById('detailModal');
+            const closeBtn = document.getElementById('detailModalClose');
+            
+            if (detailModal && closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    detailModal.classList.remove('is-visible');
+                    setTimeout(() => {
+                        detailModal.classList.add('hidden');
+                    }, 300);
+                });
+                
+                // Закрытие по клику на оверлей
+                detailModal.addEventListener('click', (e) => {
+                    if (e.target === detailModal) {
+                        detailModal.classList.remove('is-visible');
+                        setTimeout(() => {
+                            detailModal.classList.add('hidden');
+                        }, 300);
+                    }
+                });
+                
+                // Закрытие по Escape
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && detailModal.classList.contains('is-visible')) {
+                        detailModal.classList.remove('is-visible');
+                        setTimeout(() => {
+                            detailModal.classList.add('hidden');
+                        }, 300);
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Скрипт для подкаталога реакторов Тони Старка -->
+    <script type="module">
+        import { Publisher } from './static/js/publisher.js';
+        import { CardConstructor } from './static/js/card-constructor.js';
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const subcatalog = document.getElementById('reactorSubcatalog');
+            const trigger = document.getElementById('reactorTrigger');
+            const grid = document.getElementById('reactorGrid');
+            
+            if (!subcatalog || !trigger || !grid) return;
+            
+            let isPinned = false;
+            
+            // Hover — открыть
+            trigger.addEventListener('mouseenter', () => {
+                if (!isPinned) subcatalog.classList.add('is-open');
+            });
+            
+            // Убрали мышь — закрыть (если не pinned)
+            subcatalog.addEventListener('mouseleave', () => {
+                if (!isPinned) subcatalog.classList.remove('is-open');
+            });
+            
+            // Клик — toggle pin
+            trigger.addEventListener('click', () => {
+                isPinned = !isPinned;
+                subcatalog.classList.toggle('is-pinned', isPinned);
+                if (isPinned) {
+                    subcatalog.classList.add('is-open');
+                } else {
+                    subcatalog.classList.remove('is-open');
+                }
+            });
+            
+            // Загружаем карточки реакторов через CardConstructor
+            const reactorIds = [
+                '1781620659290', // Mark I
+                '1781689109033', // Mark II
+                '1781688836320', // Mark III
+                '1781688934051'  // Промышленный
+            ];
+            
+            try {
+                const publisher = new Publisher();
+                const constructor = new CardConstructor();
+                
+                // Загружаем все лоты
+                const allItems = await publisher.loadLots();
+                
+                // Фильтруем по ID
+                const reactors = allItems.filter(item => reactorIds.includes(String(item.id)));
+                
+                reactors.forEach(item => {
+                    const card = constructor.createCard(item, { accessLevel: 0 });
+                    grid.appendChild(card);
+                });
+            } catch (err) {
+                console.warn('[ReactorSubcatalog] Не удалось загрузить реакторы:', err);
+                grid.innerHTML = '<p style="color:#999;text-align:center;padding:20px;">Реакторы временно недоступны</p>';
+            }
+        });
+    </script>
     
     <footer class="site-footer">
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>

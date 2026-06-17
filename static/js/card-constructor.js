@@ -6,10 +6,11 @@
  * - изображение (или заглушку)
  * - заголовок
  * - цену (если есть)
- * - описание (preview)
  * - бейдж скидки (если discount > 0)
  * - кнопку Del (для админа)
  * - кнопку % (для админа, только у товаров)
+ * - кнопку "Узнать больше..." (detail-btn)
+ * - круглую кнопку корзины 🛒 (cart-icon-btn, только для товаров)
  */
 
 export class CardConstructor {
@@ -56,7 +57,7 @@ export class CardConstructor {
                     </div>
                 `;
             } else {
-                priceHtml = `<div class="catalog-card-price">${this.escapeHtml(item.price)} ₽</div>`;
+                priceHtml = `<div class="catalog-card-price"><span>${this.escapeHtml(item.price)} ₽</span></div>`;
             }
         }
 
@@ -76,9 +77,12 @@ export class CardConstructor {
             ? `<button class="ctrl-btn discount-btn" data-id="${item.id}" data-discount="${discount}" data-price="${item.price || ''}" title="Установить скидку">%</button>`
             : '';
 
-        // Кнопка "В корзину" — только для товаров, выровнена вправо
-        const cartBtnHtml = item.lotType === 'product'
-            ? `<button class="cart-btn" data-id="${item.id}" title="Добавить в корзину">В корзину</button>`
+        // Кнопка "Узнать больше..." — для всех типов лотов
+        const detailBtnHtml = `<button class="detail-btn" data-id="${item.id}" title="Подробнее">Узнать больше...</button>`;
+
+        // Круглая кнопка корзины 🛒 — только для товаров
+        const cartIconHtml = item.lotType === 'product'
+            ? `<button class="cart-icon-btn" data-id="${item.id}" title="Добавить в корзину">🛒</button>`
             : '';
 
         console.log(`[CardConstructor] lotType=${item.lotType}, delBtn=${!!delBtnHtml}, discountBtn=${!!discountBtnHtml}`);
@@ -94,8 +98,10 @@ export class CardConstructor {
             <div class="catalog-card-content">
                 <h3 class="catalog-card-title">${title}</h3>
                 ${priceHtml}
-                <p class="catalog-card-description">${desc}</p>
-                ${cartBtnHtml}
+                <div class="catalog-card-footer">
+                    ${detailBtnHtml}
+                    ${cartIconHtml}
+                </div>
             </div>
         `;
 
@@ -125,16 +131,151 @@ export class CardConstructor {
             });
         }
 
-        // Обработчик кнопки "В корзину"
-        const cartBtn = card.querySelector('.cart-btn');
-        if (cartBtn) {
-            cartBtn.addEventListener('click', (e) => {
+        // Обработчик кнопки "Узнать больше..."
+        const detailBtn = card.querySelector('.detail-btn');
+        if (detailBtn) {
+            detailBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.openDetailModal(item);
+            });
+        }
+
+        // Обработчик круглой кнопки корзины
+        const cartIcon = card.querySelector('.cart-icon-btn');
+        if (cartIcon) {
+            cartIcon.addEventListener('click', (e) => {
                 e.stopPropagation();
                 this.addToCart(item);
             });
         }
 
         return card;
+    }
+
+    /**
+     * Открывает модальное окно с детальной информацией о товаре
+     * @param {Object} item - данные лота
+     */
+    openDetailModal(item) {
+        const modal = document.getElementById('detailModal');
+        if (!modal) {
+            console.warn('[CardConstructor] #detailModal не найден в DOM');
+            return;
+        }
+
+        const title = this.escapeHtml(item.title || '');
+        const desc = this.escapeHtml(item.preview || item.content || '');
+        const content = this.escapeHtml(item.content || '');
+        const discount = parseInt(item.discount) || 0;
+
+        // Нормализуем путь к изображению
+        let imgSrc = '/images/img_n/400.png';
+        if (item.image) {
+            if (item.image.startsWith('images/') || item.image.startsWith('/images/')) {
+                imgSrc = item.image.startsWith('/') ? item.image : '/' + item.image;
+            } else {
+                imgSrc = `/images/img_n/${item.image}`;
+            }
+        }
+
+        // Цена
+        let priceHtml = '';
+        if (item.price) {
+            const originalPrice = parseFloat(item.price);
+            if (discount > 0) {
+                const discountedPrice = (originalPrice * (100 - discount) / 100).toFixed(2);
+                priceHtml = `
+                    <div class="detail-price">
+                        <span class="old-price">${this.escapeHtml(item.price)} ₽</span>
+                        <span class="new-price">${discountedPrice} ₽</span>
+                    </div>
+                `;
+            } else {
+                priceHtml = `<div class="detail-price">${this.escapeHtml(item.price)} ₽</div>`;
+            }
+        }
+
+        // Полное описание (content) + preview отдельно
+        const fullDesc = content || 'Описание отсутствует';
+
+        // Контекст вселенной (для товаров)
+        const contextHtml = item.lotType === 'product' ? `
+            <div class="detail-context">
+                <p>🕰️ Данный предмет подвержен <strong>локальной квантовой нестабильности</strong>.
+                Это означает, что его временная линия может быть отозвана в любой момент
+                без предварительного уведомления.</p>
+                <p>📜 Согласно Положению о вневременной торговле (п. 3, ст. 7),
+                приобретается не сам предмет, а <strong>воспоминание</strong> о нём.
+                Если вы помните этот предмет — претензий нет.
+                Если не помните — тем более.</p>
+                <p class="hint">⚖️ Юридическая лазейка сохранена.</p>
+            </div>
+        ` : '';
+
+        // Заполняем модалку
+        const headerEl = modal.querySelector('.modal-header h2');
+        const bodyEl = modal.querySelector('.modal-body');
+        const footerEl = modal.querySelector('.modal-footer');
+
+        if (headerEl) {
+            headerEl.textContent = title;
+        }
+
+        if (bodyEl) {
+            bodyEl.innerHTML = `
+                ${imgSrc ? `<img src="${imgSrc}" alt="${title}" class="detail-image" loading="lazy">` : ''}
+                ${priceHtml}
+                ${desc ? `<div class="detail-preview">${desc}</div>` : ''}
+                <div class="detail-description">${fullDesc}</div>
+                ${contextHtml}
+            `;
+        }
+
+        // Кнопка в футере — только для товаров
+        if (footerEl) {
+            const cartBtn = footerEl.querySelector('.cart-btn');
+            if (item.lotType === 'product') {
+                if (!cartBtn) {
+                    const btn = document.createElement('button');
+                    btn.className = 'cart-btn';
+                    btn.textContent = '🛒 В корзину';
+                    btn.addEventListener('click', () => {
+                        this.addToCart(item);
+                        this.closeDetailModal();
+                    });
+                    footerEl.appendChild(btn);
+                } else {
+                    cartBtn.style.display = '';
+                    cartBtn.onclick = null;
+                    cartBtn.addEventListener('click', () => {
+                        this.addToCart(item);
+                        this.closeDetailModal();
+                    });
+                }
+            } else {
+                if (cartBtn) cartBtn.style.display = 'none';
+            }
+        }
+
+        // Показываем модалку
+        modal.classList.remove('hidden');
+        // Небольшая задержка для срабатывания transition
+        requestAnimationFrame(() => {
+            modal.classList.add('is-visible');
+        });
+    }
+
+    /**
+     * Закрывает модальное окно детального просмотра
+     */
+    closeDetailModal() {
+        const modal = document.getElementById('detailModal');
+        if (!modal) return;
+        modal.classList.remove('is-visible');
+        // После завершения анимации скрываем
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
     }
 
     /**

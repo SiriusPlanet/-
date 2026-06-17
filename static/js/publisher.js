@@ -1,19 +1,27 @@
 /**
  * Publisher — единый публикатор лотов
  * Загружает все лоты с /get-news и раскладывает по страницам
- * 
+ *
  * Правила публикации:
  * - lotType === 'news' → news.html
- * - lotType === 'product' && !discount → catalog.html
+ * - lotType === 'product' → catalog.html (все товары, включая топ)
  * - discount > 0 (любой lotType) → actions.html
- * 
- * Один лот может попасть на несколько страниц (например, товар со скидкой — и в каталог, и в акции)
+ * - page === 'index' → только топ-лоты (Топ 3)
+ *
+ * Топ-лоты дублируются на index.html и catalog.html — это особенность,
+ * гарантирующая их присутствие на главной (юридическая лазейка сохранена).
  */
 
 import { CardConstructor } from './card-constructor.js';
 import { AccessLevels } from './access-levels.js';
 
 export class Publisher {
+    /**
+     * ID топ-лотов для index.html (Топ 3)
+     * Эти лоты показываются на главной и в каталоге одновременно
+     */
+    static TOP_LOT_IDS = ['1781000000001', '1781000000002', '1781000000003'];
+
     constructor() {
         this.cardConstructor = new CardConstructor();
         this.accessLevels = new AccessLevels();
@@ -39,10 +47,12 @@ export class Publisher {
 
     /**
      * Публикует лоты на текущую страницу
-     * @param {string} page - идентификатор страницы: 'news', 'catalog', 'actions'
+     * @param {string} page - идентификатор страницы: 'news', 'catalog', 'actions', 'index'
      * @param {HTMLElement} container - контейнер для карточек
+     * @param {Object} options - доп. опции
+     * @param {string} options.cardClass - CSS-класс для карточки (например, 'card-compact')
      */
-    async publish(page, container) {
+    async publish(page, container, options = {}) {
         if (!container) {
             console.error(`[Publisher] Контейнер для ${page} не найден`);
             return;
@@ -63,11 +73,15 @@ export class Publisher {
 
         lots.forEach(item => {
             const card = this.cardConstructor.createCard(item, {
-                accessLevel: 3, // временно: показываем кнопки всем, пока не настроена система доступов
+                accessLevel: 3,
                 onDelete: (id) => this.deleteLot(id, container, page),
                 onDiscount: (id, btn, cardEl) => this.showDiscountPanel(id, btn, cardEl, container, page),
                 onEdit: (item) => this.editLot(item, container, page)
             });
+            // Добавляем CSS-класс для масштабирования, если передан
+            if (options.cardClass) {
+                card.classList.add(options.cardClass);
+            }
             fragment.appendChild(card);
         });
 
@@ -76,6 +90,7 @@ export class Publisher {
 
     /**
      * Фильтрует лоты для конкретной страницы
+     * @param {string} page - идентификатор страницы
      */
     filterLots(page) {
         switch (page) {
@@ -83,6 +98,11 @@ export class Publisher {
                 return this.allLots.filter(n => n.lotType === 'news');
             case 'catalog':
                 return this.allLots.filter(n => n.lotType === 'product');
+            case 'index':
+                // Только топ-лоты для главной
+                return this.allLots.filter(n =>
+                    Publisher.TOP_LOT_IDS.includes(n.id)
+                );
             case 'actions':
                 // В акции попадают только ТОВАРЫ со скидкой
                 return this.allLots.filter(n =>
