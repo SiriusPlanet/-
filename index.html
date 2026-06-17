@@ -66,7 +66,17 @@
             <h2>Добро пожаловать в мир воспоминаний!</h2>
             <p>Времена уходят, воспоминания остаются...</p>
 
-
+            <!-- Подкаталог реакторов Тони Старка -->
+            <section class="reactor-subcatalog" id="reactorSubcatalog">
+                <div class="reactor-trigger" id="reactorTrigger">
+                    <img src="images/90.png" alt="Реакторы Тони Старка" loading="lazy">
+                    <div class="reactor-caption">⚡ Реакторы Тони Старка в ассортименте</div>
+                    <div class="pin-indicator">📌</div>
+                </div>
+                <div class="reactor-grid" id="reactorGrid">
+                    <!-- Карточки будут созданы через CardConstructor -->
+                </div>
+            </section>
         </section>
         
         <section class="catalog index-catalog">
@@ -121,6 +131,62 @@
                         detailModal.classList.add('hidden');
                     }
                 });
+            }
+        });
+    </script>
+
+    <!-- Скрипт для подкаталога реакторов Тони Старка -->
+    <script type="module">
+        import { Publisher } from './static/js/publisher.js';
+        import { CardConstructor } from './static/js/card-constructor.js';
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const subcatalog = document.getElementById('reactorSubcatalog');
+            const trigger = document.getElementById('reactorTrigger');
+            const grid = document.getElementById('reactorGrid');
+            
+            if (!subcatalog || !trigger || !grid) return;
+            
+            let isPinned = false;
+            
+            trigger.addEventListener('mouseenter', () => {
+                if (!isPinned) subcatalog.classList.add('is-open');
+            });
+            
+            subcatalog.addEventListener('mouseleave', () => {
+                if (!isPinned) subcatalog.classList.remove('is-open');
+            });
+            
+            trigger.addEventListener('click', () => {
+                isPinned = !isPinned;
+                subcatalog.classList.toggle('is-pinned', isPinned);
+                if (isPinned) {
+                    subcatalog.classList.add('is-open');
+                } else {
+                    subcatalog.classList.remove('is-open');
+                }
+            });
+            
+            const reactorIds = [
+                '1781620659290',
+                '1781689109033',
+                '1781688836320',
+                '1781688934051'
+            ];
+            
+            try {
+                const publisher = new Publisher();
+                const constructor = new CardConstructor();
+                const allItems = await publisher.loadLots();
+                const reactors = allItems.filter(item => reactorIds.includes(String(item.id)));
+                
+                reactors.forEach(item => {
+                    const card = constructor.createCard(item, { accessLevel: 0 });
+                    grid.appendChild(card);
+                });
+            } catch (err) {
+                console.warn('[ReactorSubcatalog] Не удалось загрузить реакторы:', err);
+                grid.innerHTML = '<p style="color:#999;text-align:center;padding:20px;">Реакторы временно недоступны</p>';
             }
         });
     </script>
