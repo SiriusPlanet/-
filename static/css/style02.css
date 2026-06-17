@@ -34,6 +34,7 @@ body {
 
 /* === Глобальный оверлей === */
 #access-overlay {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;

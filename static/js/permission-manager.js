@@ -143,11 +143,25 @@ export class PermissionManager {
         // Инициализируем DOM элементы
         this.initElements();
 
-        // ВРЕМЕННО: система доступа отключена, весь функционал виден всем
-        console.log('⚠️ Система доступа временно отключена — весь функционал виден');
-        this.hideOverlay();
-        document.body.classList.add('access-granted');
-        this.hasLocalhostAccess = true;
-        this.grantPermission();
+        // Проверяем, есть ли уже сохранённое разрешение
+        if (this.hasGrantedPermission()) {
+            console.log('✅ Разрешение уже дано — скрываем завесу');
+            this.hideOverlay();
+            document.body.classList.add('access-granted');
+            this.hasLocalhostAccess = true;
+            return;
+        }
+
+        // Быстрая проверка доступа к localhost (2-6 мс)
+        const hasAccess = await this.checkLocalhostAccess();
+
+        if (hasAccess) {
+            console.log('✅ Доступ к localhost подтверждён');
+            this.grantPermission();
+            document.body.classList.add('access-granted');
+        } else {
+            console.log('⚠️ Нет доступа к localhost — показываем завесу');
+            this.showOverlay();
+        }
     }
 }

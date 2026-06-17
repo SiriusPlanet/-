@@ -60,9 +60,9 @@ export class CardConstructor {
             }
         }
 
-        // Бейдж скидки (угловой, слева сверху)
+        // Бейдж скидки — круг с радиальным градиентом, центр в левом верхнем углу
         const badgeHtml = discount > 0
-            ? `<div class="discount-badge"><div class="discount-badge-inner"><span class="discount-badge-text">${discount}</span></div></div>`
+            ? `<div class="discount-badge"><span class="discount-badge-text">${discount}<small>%</small></span></div>`
             : '';
 
         // Кнопка Del — видна всем (временно, пока не настроена система доступов)
@@ -83,6 +83,9 @@ export class CardConstructor {
         card.innerHTML = `
             <div class="catalog-card-inner">
                 <img src="${imgSrc}" alt="${title}" class="catalog-image" loading="lazy">
+                ${badgeHtml}
+                ${delBtnHtml}
+                ${discountBtnHtml}
             </div>
             <div class="catalog-card-content">
                 <h3 class="catalog-card-title">${title}</h3>
@@ -90,9 +93,6 @@ export class CardConstructor {
                 <p class="catalog-card-description">${desc}</p>
                 ${cartBtnHtml}
             </div>
-            ${badgeHtml}
-            ${delBtnHtml}
-            ${discountBtnHtml}
         `;
 
         // Навешиваем обработчики — видно всем (временно, пока не настроена система доступов)

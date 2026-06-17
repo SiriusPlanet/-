@@ -293,6 +293,8 @@ class SimpleHandler(BaseHTTPRequestHandler):
                 print(f"[ERROR] /save-news error: {e}")
                 self.send_json_response(False, str(e))
 
+        elif self.path == '/api/delete-news':
+            return self.handle_api_delete_news()
         else:
             self.send_error_utf8(404, "Неизвестный POST-эндпоинт")
 
@@ -401,14 +403,15 @@ class SimpleHandler(BaseHTTPRequestHandler):
             if not json_file:
                 return self.send_json_response(False, "Новость не найдена")
 
-            # Удаляем JSON файл
+            # Читаем JSON перед удалением
             file_path = os.path.join(news_dir, json_file)
-            os.remove(file_path)
-
-            # Удаляем изображение, если есть
             with open(file_path, 'r', encoding='utf-8') as f:
                 news = json.load(f)
 
+            # Удаляем JSON файл
+            os.remove(file_path)
+
+            # Удаляем изображение, если есть
             image_filename = news.get('image')
             if image_filename:
                 img_path = PathsHelper.get_image_path(image_filename)
