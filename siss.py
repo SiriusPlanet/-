@@ -125,6 +125,12 @@ class SimpleHandler(BaseHTTPRequestHandler):
             if self.path == '/api/login':
                 return self.handle_api_login()
 
+            if self.path == '/api/feedback':
+                return self.handle_api_feedback()
+
+            if self.path == '/api/register':
+                return self.handle_api_register()
+
             if self.path == '/api/delete-news':
                 return self.handle_api_delete_news()
 
@@ -297,6 +303,8 @@ class SimpleHandler(BaseHTTPRequestHandler):
             return self.handle_api_update_news()
         elif self.path == '/api/delete-news':
             return self.handle_api_delete_news()
+        elif self.path == '/api/register':
+            return self.handle_api_register()
         else:
             self.send_error_utf8(404, "Неизвестный POST-эндпоинт")
 
@@ -345,12 +353,28 @@ class SimpleHandler(BaseHTTPRequestHandler):
             # В продакшене используйте хеширование паролей!
             user_level = 0  # Гость по умолчанию
 
+            # Проверка встроенных учётных записей
             if username == 'admin' and password == 'admin123':
                 user_level = 3  # Администратор
             elif username == 'moderator' and password == 'mod123':
                 user_level = 2  # Модератор
             elif username == 'user' and password == 'user123':
                 user_level = 1  # Пользователь
+            else:
+                # Проверка зарегистрированных пользователей из data/users/
+                users_dir = os.path.join(PROJECT_ROOT, 'data', 'users')
+                if os.path.isdir(users_dir):
+                    for fname in os.listdir(users_dir):
+                        if fname.endswith('.json'):
+                            fpath = os.path.join(users_dir, fname)
+                            try:
+                                with open(fpath, 'r', encoding='utf-8') as f:
+                                    user_data = json.load(f)
+                                if user_data.get('username') == username and user_data.get('password') == password:
+                                    user_level = user_data.get('level', 1)
+                                    break
+                            except:
+                                continue
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -375,6 +399,106 @@ class SimpleHandler(BaseHTTPRequestHandler):
         except Exception as e:
             logging.error(f"Ошибка входа: {e}")
             self.send_error_utf8(500, "Ошибка сервера")
+
+    def handle_api_feedback(self):
+        """Обработка формы обратной связи"""
+        try:
+            length = int(self.headers.get('Content-Length', 0))
+            raw_data = self.rfile.read(length)
+            data = json.loads(raw_data.decode('utf-8'))
+
+            name = data.get('name', '').strip()
+            email = data.get('email', '').strip()
+            phone = data.get('phone', '').strip()
+            message = data.get('message', '').strip()
+
+            if not name or not email or not message:
+                return self.send_json_response(False, 'Заполните обязательные поля')
+
+            # Сохраняем в data/feedback/ с timestamp
+            feedback_dir = os.path.join(PROJECT_ROOT, 'data', 'feedback')
+            os.makedirs(feedback_dir, exist_ok=True)
+
+            feedback_id = int(time.time() * 1000)
+            feedback_data = {
+                "id": feedback_id,
+                "name": name,
+                "email": email,
+                "phone": phone,
+                "message": message,
+                "timestamp": datetime.now().isoformat()
+            }
+
+            file_path = os.path.join(feedback_dir, f"{feedback_id}.json")
+            with open(file_path, 'w', encoding='utf-8') as f:
+                json.dump(feedback_data, f, ensure_ascii=False, indent=2)
+
+            logging.info(f"[Feedback] Сообщение от {name} ({email}) сохранено: {file_path}")
+            self.send_json_response(True, 'Сообщение отправлено')
+
+        except Exception as e:
+            logging.error(f"Ошибка обработки feedback: {e}")
+            self.send_json_response(False, 'Ошибка сервера')
+
+    def handle_api_register(self):
+        """Регистрация нового пользователя"""
+        try:
+            length = int(self.headers.get('Content-Length', 0))
+            raw_data = self.rfile.read(length)
+            data = json.loads(raw_data.decode('utf-8'))
+
+            username = data.get('username', '').strip()
+            email = data.get('email', '').strip()
+            password = data.get('password', '').strip()
+
+            # Валидация
+            if not username or len(username) < 3:
+                return self.send_json_response(False, 'Имя пользователя должно быть не менее 3 символов')
+            if not email or '@' not in email:
+                return self.send_json_response(False, 'Введите корректный email')
+            if not password or len(password) < 6:
+                return self.send_json_response(False, 'Пароль должен быть не менее 6 символов')
+
+            # Директория для хранения пользователей
+            users_dir = os.path.join(PROJECT_ROOT, 'data', 'users')
+            os.makedirs(users_dir, exist_ok=True)
+
+            # Проверка на существующего пользователя
+            for fname in os.listdir(users_dir):
+                if fname.endswith('.json'):
+                    fpath = os.path.join(users_dir, fname)
+                    try:
+                        with open(fpath, 'r', encoding='utf-8') as f:
+                            existing = json.load(f)
+                        if existing.get('username') == username:
+                            return self.send_json_response(False, 'Пользователь с таким именем уже существует')
+                        if existing.get('email') == email:
+                            return self.send_json_response(False, 'Этот email уже зарегистрирован')
+                    except:
+                        continue
+
+            # ⚠️ ВРЕМЕННО: пароль хранится в открытом виде (демо-режим)
+            # В продакшене используйте хеширование!
+            user_id = int(time.time() * 1000)
+            user_data = {
+                "id": user_id,
+                "username": username,
+                "email": email,
+                "password": password,
+                "level": 1,  # Новый пользователь — уровень 1
+                "registered": datetime.now().isoformat()
+            }
+
+            file_path = os.path.join(users_dir, f"{user_id}.json")
+            with open(file_path, 'w', encoding='utf-8') as f:
+                json.dump(user_data, f, ensure_ascii=False, indent=2)
+
+            logging.info(f"[Register] Новый пользователь: {username} ({email}) — уровень 1")
+            self.send_json_response(True, 'Регистрация прошла успешно')
+
+        except Exception as e:
+            logging.error(f"Ошибка регистрации: {e}")
+            self.send_json_response(False, 'Ошибка сервера')
 
     def handle_api_delete_news(self):
         """Удаление новости по ID"""
@@ -587,8 +711,8 @@ class SimpleHandler(BaseHTTPRequestHandler):
                 except Exception as e:
                     logging.error(f"Ошибка обработки {file}: {e}")
 
-            # Сортировка: приводим id к строке для безопасного сравнения
-            news_list.sort(key=lambda x: str(x.get('id', 0)), reverse=True)
+            # Сортировка по дате (поле date, формат YYYY-MM-DD): чем новее дата — тем выше
+            news_list.sort(key=lambda x: x.get('date', '1970-01-01'), reverse=True)
 
             self.send_response(200)
             self.send_header('Access-Control-Allow-Origin', '*')

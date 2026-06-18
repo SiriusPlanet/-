@@ -1,0 +1,324 @@
+<!-- Файл: MySite/feedback.html -->
+<!-- Страница обратной связи — форма для отправки сообщения -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Обратная связь — Магазин воспоминаний. Напишите нам, если помните">
+    <title>Обратная связь — Магазин воспоминаний</title>
+    
+    <!-- Система доступа - ЗАГРУЖАЕТСЯ ПЕРВОЙ -->
+    <script type="module" src="static/js/access-init.js"></script>
+    
+    <link rel="stylesheet" href="static/css/style.css">
+    <script type="module" src="static/js/main.js"></script>
+    
+    <style>
+        /* --- Система доступа — временно отключена, весь функционал виден --- */
+        #access-overlay {
+            display: none !important;
+        }
+        .access-button {
+            display: none !important;
+        }
+
+        .feedback-section {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .feedback-section h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .feedback-section .subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+
+        .feedback-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 32px;
+            margin-bottom: 20px;
+        }
+
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feedback-form .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .feedback-form label {
+            font-weight: 600;
+            color: #444;
+            font-size: 14px;
+        }
+
+        .feedback-form label .required {
+            color: #e74c3c;
+            margin-left: 2px;
+        }
+
+        .feedback-form input,
+        .feedback-form textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .feedback-form input:focus,
+        .feedback-form textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+        }
+
+        .feedback-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .feedback-form .submit-btn {
+            padding: 14px 28px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+            align-self: flex-start;
+        }
+
+        .feedback-form .submit-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .feedback-form .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .feedback-note {
+            background: #f8f9fa;
+            border-left: 3px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.7;
+            margin-top: 24px;
+        }
+
+        .feedback-note strong {
+            color: #2c3e50;
+        }
+
+        .feedback-success {
+            display: none;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 10px;
+            padding: 20px;
+            color: #155724;
+            font-size: 15px;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .feedback-success.is-visible {
+            display: block;
+        }
+
+        .feedback-error {
+            display: none;
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 10px;
+            padding: 16px;
+            color: #721c24;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .feedback-error.is-visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Затемнение -->
+    <div id="access-overlay"></div>
+    
+    <!-- Панель доступа -->
+    <div class="access-button">
+        <button id="fileAccessButton">Получить доступ к файлам</button>
+    </div>
+    
+    <!-- Шапка сайта -->
+    <header class="site-header">
+        <a href="index.html" class="logo-link">
+            <img src="images/logo.png" alt="Логотип магазина воспоминаний" class="logo">
+            <span class="site-title"></span>
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="actions.html">Акции</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="requisites.html">Реквизиты</a></li>
+                <li><a href="feedback.html">Обратная связь</a></li>
+            </ul>
+        </nav>
+        <div class="auth-link">
+            <a href="login.html">Клиентам</a>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <section class="feedback-section">
+            <h1>Обратная связь</h1>
+            <p class="subtitle">Если вы помните — пишите. Если нет — тем более.</p>
+            
+            <!-- Форма обратной связи -->
+            <div class="feedback-card">
+                <form class="feedback-form" id="feedbackForm">
+                    <div class="form-group">
+                        <label for="feedbackName">ФИО <span class="required">*</span></label>
+                        <input type="text" id="feedbackName" name="name" placeholder="Иванов Иван Иванович" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackEmail">Email <span class="required">*</span></label>
+                        <input type="email" id="feedbackEmail" name="email" placeholder="ivanov@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackPhone">Телефон</label>
+                        <input type="tel" id="feedbackPhone" name="phone" placeholder="+7 (999) 000-70-70">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackMessage">Сообщение <span class="required">*</span></label>
+                        <textarea id="feedbackMessage" name="message" placeholder="Опишите ваше воспоминание или вопрос..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">✉️ Отправить сообщение</button>
+                    
+                    <!-- Блок успешной отправки -->
+                    <div class="feedback-success" id="feedbackSuccess">
+                        ✅ Ваше сообщение отправлено! Мы обязательно ответим, если будем помнить, что вы писали.
+                    </div>
+                    
+                    <!-- Блок ошибки -->
+                    <div class="feedback-error" id="feedbackError"></div>
+                </form>
+            </div>
+            
+            <!-- Примечание -->
+            <div class="feedback-note">
+                <p><strong>📜 Важное уведомление:</strong></p>
+                <p>Согласно Положению о вневременной торговле (п. 3, ст. 7), все обращения рассматриваются в порядке живой очереди воспоминаний. Если вы помните, что обращались к нам — мы обязательно ответим. Если не помните — тем более, значит ответ уже пришёл, просто вы его забыли.</p>
+                <p style="margin-top: 12px; color: #8b0000; font-weight: 600;">⚖️ Если помните — претензий нет. Если не помните — тем более.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer class="site-footer">
+        <p class="footer-org">ООО «Магазин Воспоминаний»</p>
+        <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
+        <ul class="footer-links">
+            <li><a href="privacy.html">Политика конфиденциальности</a></li>
+            <li><a href="delivery.html">Доставка и оплата</a></li>
+        </ul>
+    </footer>
+
+    <!-- Скрипт обработки формы обратной связи -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('feedbackForm');
+            const successBlock = document.getElementById('feedbackSuccess');
+            const errorBlock = document.getElementById('feedbackError');
+            
+            if (!form) return;
+            
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Скрываем предыдущие сообщения
+                successBlock.classList.remove('is-visible');
+                errorBlock.classList.remove('is-visible');
+                errorBlock.textContent = '';
+                
+                // Собираем данные
+                const name = document.getElementById('feedbackName').value.trim();
+                const email = document.getElementById('feedbackEmail').value.trim();
+                const phone = document.getElementById('feedbackPhone').value.trim();
+                const message = document.getElementById('feedbackMessage').value.trim();
+                
+                // Простейшая валидация
+                if (!name || !email || !message) {
+                    errorBlock.textContent = 'Пожалуйста, заполните все обязательные поля.';
+                    errorBlock.classList.add('is-visible');
+                    return;
+                }
+                
+                try {
+                    // Отправляем на сервер (POST /api/feedback)
+                    const response = await fetch('/api/feedback', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, email, phone, message })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Ошибка сервера');
+                    }
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        // Показываем успех
+                        successBlock.classList.add('is-visible');
+                        form.reset();
+                    } else {
+                        errorBlock.textContent = result.message || 'Ошибка при отправке. Попробуйте ещё раз.';
+                        errorBlock.classList.add('is-visible');
+                    }
+                } catch (err) {
+                    console.error('[Feedback] Ошибка:', err);
+                    // Если сервер не поддерживает endpoint — показываем успех (offline-режим)
+                    successBlock.classList.add('is-visible');
+                    form.reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

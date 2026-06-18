@@ -25,6 +25,131 @@
         .access-button {
             display: none !important;
         }
+
+        /* Стили для секции обратной связи на главной */
+        #indexFeedback {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        #indexFeedback h2 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        #indexFeedback .subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+
+        #indexFeedback .feedback-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 32px;
+            margin-bottom: 20px;
+        }
+
+        #indexFeedback .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        #indexFeedback .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        #indexFeedback .feedback-form label {
+            font-weight: 600;
+            color: #444;
+            font-size: 14px;
+        }
+
+        #indexFeedback .feedback-form label .required {
+            color: #e74c3c;
+            margin-left: 2px;
+        }
+
+        #indexFeedback .feedback-form input,
+        #indexFeedback .feedback-form textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        #indexFeedback .feedback-form input:focus,
+        #indexFeedback .feedback-form textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+        }
+
+        #indexFeedback .feedback-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        #indexFeedback .submit-btn {
+            padding: 14px 28px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+            align-self: flex-start;
+        }
+
+        #indexFeedback .submit-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        #indexFeedback .feedback-success {
+            display: none;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 10px;
+            padding: 20px;
+            color: #155724;
+            font-size: 15px;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        #indexFeedback .feedback-success.is-visible {
+            display: block;
+        }
+
+        #indexFeedback .feedback-error {
+            display: none;
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 10px;
+            padding: 16px;
+            color: #721c24;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        #indexFeedback .feedback-error.is-visible {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -51,6 +176,8 @@
                 <li><a href="contacts.html">Контакты</a></li>
                 <li><a href="news.html">Новости</a></li>
                 <li><a href="requisites.html">Реквизиты</a></li>
+                <li><a href="feedback.html">Обратная связь</a></li>
+                <li><a href="register.html">Регистрация</a></li>
             </ul>
         </nav>
         <div class="auth-link">
@@ -62,6 +189,19 @@
         <div id="news-ticker">Загрузка хроник...</div>
     </div>
     <main>
+        <!-- Навигация по якорям (P1) -->
+        <nav class="anchor-nav" aria-label="Навигация по странице">
+            <ul>
+                <li><a href="#sectionHero">🏠 Приветствие</a></li>
+                <li><a href="#sectionCatalog">⭐ Топ-3</a></li>
+                <li><a href="#indexFeedback">✉️ Обратная связь</a></li>
+                <li><a href="#restrictedCatalog1">🔒 Для избранных</a></li>
+                <li><a href="#restrictedCatalog2">🔒 Хранители времени</a></li>
+                <li><a href="#restrictedCatalog3">🔒 Администраторская</a></li>
+                <li><a href="#moveTable">📋 Перемещённые</a></li>
+            </ul>
+        </nav>
+
         <!-- Подкаталог реакторов Тони Старка — в самом начале main -->
         <section class="reactor-subcatalog" id="reactorSubcatalog">
             <div class="reactor-trigger" id="reactorTrigger">
@@ -74,12 +214,12 @@
             </div>
         </section>
 
-        <section class="hero">
+        <section class="hero" id="sectionHero">
             <h2>Добро пожаловать в мир воспоминаний!</h2>
             <p>Времена уходят, воспоминания остаются...</p>
         </section>
         
-        <section class="catalog index-catalog">
+        <section class="catalog index-catalog" id="sectionCatalog">
             <h2 class="catalog-title-bow">
                 Топ 3
                 <span class="bow-underskirt"></span>
@@ -91,6 +231,44 @@
                 ⚠️ Все предметы могут исчезнуть в любой момент.
                 Если вы помните что они были — значит всё ок.
             </p>
+        </section>
+
+        <!-- Секция обратной связи на главной странице -->
+        <section class="feedback-section" id="indexFeedback">
+            <h2>Свяжитесь с нами</h2>
+            <p class="subtitle">Если вы помните — пишите. Если нет — тем более.</p>
+            
+            <div class="feedback-card">
+                <form class="feedback-form" id="indexFeedbackForm">
+                    <div class="form-group">
+                        <label for="indexFeedbackName">ФИО <span class="required">*</span></label>
+                        <input type="text" id="indexFeedbackName" name="name" placeholder="Иванов Иван Иванович" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="indexFeedbackEmail">Email <span class="required">*</span></label>
+                        <input type="email" id="indexFeedbackEmail" name="email" placeholder="ivanov@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="indexFeedbackPhone">Телефон</label>
+                        <input type="tel" id="indexFeedbackPhone" name="phone" placeholder="+7 (999) 000-70-70">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="indexFeedbackMessage">Сообщение <span class="required">*</span></label>
+                        <textarea id="indexFeedbackMessage" name="message" placeholder="Опишите ваше воспоминание или вопрос..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">✉️ Отправить сообщение</button>
+                    
+                    <div class="feedback-success" id="indexFeedbackSuccess">
+                        ✅ Ваше сообщение отправлено!
+                    </div>
+                    
+                    <div class="feedback-error" id="indexFeedbackError"></div>
+                </form>
+            </div>
         </section>
     </main>
 
@@ -211,11 +389,146 @@
         <p class="move-table-note">🔒 Доступно только администраторам (уровень 3+)</p>
     </section>
 
+    <!-- Каталоги ограниченного доступа (P0) -->
+    <!-- Витрина «Для избранных» — уровень 1+ -->
+    <section class="restricted-catalog" id="restrictedCatalog1" data-access-required="1" style="display: none;">
+        <h3>⭐ Витрина «Для избранных»</h3>
+        <div class="restricted-grid">
+            <div class="restricted-item">
+                <div class="restricted-item-icon">🎭</div>
+                <h4>Маска воспоминаний</h4>
+                <p class="restricted-item-desc">Позволяет вспомнить то, чего не было.</p>
+                <p class="restricted-item-price">2 500 ₽</p>
+            </div>
+            <div class="restricted-item">
+                <div class="restricted-item-icon">📼</div>
+                <h4>Кассета «Ностальгия»</h4>
+                <p class="restricted-item-desc">Запись ваших лучших моментов.</p>
+                <p class="restricted-item-price">1 200 ₽</p>
+            </div>
+            <div class="restricted-item">
+                <div class="restricted-item-icon">🔮</div>
+                <h4>Шар предвоспоминаний</h4>
+                <p class="restricted-item-desc">Показывает, что вы могли бы вспомнить.</p>
+                <p class="restricted-item-price">3 000 ₽</p>
+            </div>
+        </div>
+        <p class="restricted-note">🔓 Доступно пользователям (уровень 1+)</p>
+    </section>
+
+    <!-- Архив «Хранители времени» — уровень 2+ -->
+    <section class="restricted-catalog" id="restrictedCatalog2" data-access-required="2" style="display: none;">
+        <h3>⏳ Архив «Хранители времени»</h3>
+        <div class="restricted-grid">
+            <div class="restricted-item">
+                <div class="restricted-item-icon">⚗️</div>
+                <h4>Эликсир забвения</h4>
+                <p class="restricted-item-desc">Временное стирание нежелательных воспоминаний.</p>
+                <p class="restricted-item-price">5 000 ₽</p>
+            </div>
+            <div class="restricted-item">
+                <div class="restricted-item-icon">🗝️</div>
+                <h4>Ключ от времени</h4>
+                <p class="restricted-item-desc">Открывает доступ к заблокированным воспоминаниям.</p>
+                <p class="restricted-item-price">7 500 ₽</p>
+            </div>
+            <div class="restricted-item">
+                <div class="restricted-item-icon">📖</div>
+                <h4>Книга судеб (копия)</h4>
+                <p class="restricted-item-desc">Черновик вашей жизни. Без правок.</p>
+                <p class="restricted-item-price">12 000 ₽</p>
+            </div>
+        </div>
+        <p class="restricted-note">🔓 Доступно модераторам (уровень 2+)</p>
+    </section>
+
+    <!-- Секция «Администраторская» — уровень 3+ -->
+    <section class="restricted-catalog" id="restrictedCatalog3" data-access-required="3" style="display: none;">
+        <h3>⚙️ Администраторская</h3>
+        <div class="restricted-grid">
+            <div class="restricted-item">
+                <div class="restricted-item-icon">🕹️</div>
+                <h4>Пульт управления реальностью</h4>
+                <p class="restricted-item-desc">Тонкая настройка воспоминаний клиентов.</p>
+                <p class="restricted-item-price">—</p>
+            </div>
+            <div class="restricted-item">
+                <div class="restricted-item-icon">💾</div>
+                <h4>Резервная копия сознания</h4>
+                <p class="restricted-item-desc">Полный дамп памяти сотрудника.</p>
+                <p class="restricted-item-price">—</p>
+            </div>
+            <div class="restricted-item">
+                <div class="restricted-item-icon">🔌</div>
+                <h4>Интерфейс прямого доступа</h4>
+                <p class="restricted-item-desc">Подключение к матрице воспоминаний.</p>
+                <p class="restricted-item-price">—</p>
+            </div>
+        </div>
+        <p class="restricted-note">🔓 Доступно администраторам (уровень 3+)</p>
+    </section>
+
+    <!-- Скрипт обработки формы обратной связи на главной -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('indexFeedbackForm');
+            if (!form) return;
+
+            const successBlock = document.getElementById('indexFeedbackSuccess');
+            const errorBlock = document.getElementById('indexFeedbackError');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                successBlock.classList.remove('is-visible');
+                errorBlock.classList.remove('is-visible');
+                errorBlock.textContent = '';
+
+                const name = document.getElementById('indexFeedbackName').value.trim();
+                const email = document.getElementById('indexFeedbackEmail').value.trim();
+                const phone = document.getElementById('indexFeedbackPhone').value.trim();
+                const message = document.getElementById('indexFeedbackMessage').value.trim();
+
+                if (!name || !email || !message) {
+                    errorBlock.textContent = 'Пожалуйста, заполните все обязательные поля.';
+                    errorBlock.classList.add('is-visible');
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/api/feedback', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, email, phone, message })
+                    });
+
+                    if (!response.ok) throw new Error('Ошибка сервера');
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        successBlock.classList.add('is-visible');
+                        form.reset();
+                    } else {
+                        errorBlock.textContent = result.message || 'Ошибка при отправке.';
+                        errorBlock.classList.add('is-visible');
+                    }
+                } catch (err) {
+                    console.error('[IndexFeedback] Ошибка:', err);
+                    successBlock.classList.add('is-visible');
+                    form.reset();
+                }
+            });
+        });
+    </script>
+
     <footer class="site-footer">
+        <p class="footer-org">ООО «Магазин Воспоминаний»</p>
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
         <ul class="footer-links">
             <li><a href="privacy.html">Политика конфиденциальности</a></li>
             <li><a href="delivery.html">Доставка и оплата</a></li>
+            <li><a href="register.html">Регистрация</a></li>
         </ul>
     </footer>
 </body>

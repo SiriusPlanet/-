@@ -1,0 +1,410 @@
+<!-- register.html — Регистрация новых пользователей -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация — Магазин Воспоминаний</title>
+
+    <!-- Система доступа -->
+    <script type="module" src="static/js/access-init.js"></script>
+
+    <link rel="stylesheet" href="static/css/style.css">
+    <script type="module" src="static/js/main.js"></script>
+
+    <style>
+        /* --- Система доступа — временно отключена, весь функционал виден --- */
+        #access-overlay {
+            display: none !important;
+        }
+        .access-button {
+            display: none !important;
+        }
+
+        /* Стили для страницы регистрации */
+        .register-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 200px);
+            padding: 2rem;
+        }
+
+        .register-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.18);
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .register-card h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+        }
+
+        .register-card .register-subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .register-card .register-subtitle .hint {
+            color: #8b0000;
+            font-weight: 600;
+        }
+
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .register-form label {
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .register-form input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 0.125rem solid #e0e0e0;
+            border-radius: 0.625rem;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            box-sizing: border-box;
+        }
+
+        .register-form input:focus {
+            outline: none;
+            border-color: #27ae60;
+            box-shadow: 0 0 0 0.1875rem rgba(39, 174, 96, 0.15);
+        }
+
+        .register-form input.error {
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 0.1875rem rgba(231, 76, 60, 0.15);
+        }
+
+        .register-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .register-btn {
+            flex: 1;
+            padding: 0.875rem 1.5rem;
+            border-radius: 0.625rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .register-btn-primary {
+            background: #27ae60;
+            color: white;
+            box-shadow: 0 0.25rem 0.75rem rgba(39, 174, 96, 0.3);
+        }
+
+        .register-btn-primary:hover {
+            background: #219a52;
+            transform: translateY(-0.125rem);
+            box-shadow: 0 0.375rem 1rem rgba(39, 174, 96, 0.4);
+        }
+
+        .register-btn-secondary {
+            background: #ecf0f1;
+            color: #7f8c8d;
+        }
+
+        .register-btn-secondary:hover {
+            background: #dfe6e9;
+            color: #34495e;
+        }
+
+        .register-message {
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            display: none;
+            text-align: center;
+        }
+
+        .register-message.success {
+            display: block;
+            background: rgba(39, 174, 96, 0.1);
+            color: #27ae60;
+            border: 0.0625rem solid rgba(39, 174, 96, 0.3);
+        }
+
+        .register-message.error {
+            display: block;
+            background: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+            border: 0.0625rem solid rgba(231, 76, 60, 0.3);
+        }
+
+        .register-hint {
+            margin-top: 1.5rem;
+            padding-top: 1.25rem;
+            border-top: 0.0625rem solid #eee;
+            text-align: center;
+        }
+
+        .register-hint p {
+            color: #888;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        .register-hint a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-hint a:hover {
+            text-decoration: underline;
+        }
+
+        .password-requirements {
+            font-size: 12px;
+            color: #999;
+            margin-top: 0.25rem;
+            padding-left: 0.25rem;
+        }
+
+        .password-requirements .req-met {
+            color: #27ae60;
+        }
+
+        .password-requirements .req-unmet {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <!-- Затемнение системы доступа -->
+    <div id="access-overlay"></div>
+
+    <!-- Панель доступа -->
+    <div class="access-button">
+        <button id="fileAccessButton">Получить доступ к файлам</button>
+    </div>
+
+    <!-- Шапка -->
+    <header class="site-header">
+        <a href="index.html" class="logo-link">
+            <img src="images/logo.png" alt="Магазин Воспоминаний" class="logo">
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="actions.html">Акции</a></li>
+                <li><a href="about.html">О компании</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                <li><a href="feedback.html">Обратная связь</a></li>
+                <li><a href="login.html">Вход</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <div class="register-wrapper">
+            <div class="register-card">
+                <h2>Регистрация</h2>
+                <p class="register-subtitle">
+                    Создайте аккаунт, чтобы сохранять свои воспоминания.<br>
+                    Пароль — это ключ. <span class="hint">Не потеряйте его.</span>
+                </p>
+
+                <form class="register-form" id="registerForm">
+                    <div>
+                        <label for="regUsername">Имя пользователя</label>
+                        <input type="text" id="regUsername" name="username"
+                               placeholder="Придумайте логин" required minlength="3" autocomplete="username">
+                    </div>
+
+                    <div>
+                        <label for="regEmail">Email</label>
+                        <input type="email" id="regEmail" name="email"
+                               placeholder="your@email.ru" required autocomplete="email">
+                    </div>
+
+                    <div>
+                        <label for="regPassword">Пароль</label>
+                        <input type="password" id="regPassword" name="password"
+                               placeholder="Не менее 6 символов" required minlength="6" autocomplete="new-password">
+                        <div class="password-requirements" id="passwordRequirements">
+                            <span id="reqLength" class="req-unmet">●</span> минимум 6 символов
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="regPasswordConfirm">Подтверждение пароля</label>
+                        <input type="password" id="regPasswordConfirm" name="password_confirm"
+                               placeholder="Повторите пароль" required autocomplete="new-password">
+                    </div>
+
+                    <div class="register-actions">
+                        <button type="submit" class="register-btn register-btn-primary">
+                            Зарегистрироваться
+                        </button>
+                        <button type="button" class="register-btn register-btn-secondary"
+                                onclick="window.location.href='login.html'">
+                            Войти
+                        </button>
+                    </div>
+                </form>
+
+                <div class="register-message" id="registerMessage"></div>
+
+                <div class="register-hint">
+                    <p>Уже есть аккаунт? <a href="login.html">Войдите в систему</a></p>
+                    <p style="margin-top: 0.5rem; font-size: 11px; color: #bbb;">
+                        Регистрируясь, вы соглашаетесь хранить свои воспоминания у нас.<br>
+                        Мы не несём ответственности за забытые пароли.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="site-footer">
+        <ul class="footer-links">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="news.html">Новости</a></li>
+            <li><a href="actions.html">Акции</a></li>
+            <li><a href="about.html">О компании</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+            <li><a href="delivery.html">Доставка</a></li>
+            <li><a href="privacy.html">Конфиденциальность</a></li>
+            <li><a href="requisites.html">Реквизиты</a></li>
+            <li><a href="feedback.html">Обратная связь</a></li>
+            <li><a href="login.html">Вход</a></li>
+            <li><a href="register.html">Регистрация</a></li>
+        </ul>
+        <p class="footer-copy">© 2025 Магазин Воспоминаний. Все права защищены.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registerForm');
+            const messageEl = document.getElementById('registerMessage');
+            const passwordInput = document.getElementById('regPassword');
+            const confirmInput = document.getElementById('regPasswordConfirm');
+            const reqLength = document.getElementById('reqLength');
+
+            // Валидация пароля в реальном времени
+            passwordInput.addEventListener('input', function() {
+                const len = this.value.length;
+                if (len >= 6) {
+                    reqLength.className = 'req-met';
+                } else {
+                    reqLength.className = 'req-unmet';
+                }
+            });
+
+            // Сброс ошибок при фокусе
+            document.querySelectorAll('.register-form input').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.classList.remove('error');
+                    messageEl.className = 'register-message';
+                    messageEl.textContent = '';
+                });
+            });
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const username = document.getElementById('regUsername').value.trim();
+                const email = document.getElementById('regEmail').value.trim();
+                const password = passwordInput.value;
+                const passwordConfirm = confirmInput.value;
+
+                // Валидация
+                let hasError = false;
+
+                if (username.length < 3) {
+                    document.getElementById('regUsername').classList.add('error');
+                    showMessage('Имя пользователя должно быть не менее 3 символов', 'error');
+                    hasError = true;
+                }
+
+                if (!email || !email.includes('@')) {
+                    document.getElementById('regEmail').classList.add('error');
+                    showMessage('Введите корректный email', 'error');
+                    hasError = true;
+                }
+
+                if (password.length < 6) {
+                    passwordInput.classList.add('error');
+                    showMessage('Пароль должен быть не менее 6 символов', 'error');
+                    hasError = true;
+                }
+
+                if (password !== passwordConfirm) {
+                    confirmInput.classList.add('error');
+                    showMessage('Пароли не совпадают', 'error');
+                    hasError = true;
+                }
+
+                if (hasError) return;
+
+                // Отправка на сервер
+                try {
+                    const response = await fetch('/api/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            username: username,
+                            email: email,
+                            password: password
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        showMessage(
+                            'Регистрация прошла успешно! Теперь вы можете войти в систему.',
+                            'success'
+                        );
+                        form.reset();
+                        // Через 2 секунды перенаправляем на страницу входа
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 2000);
+                    } else {
+                        showMessage(data.message || 'Ошибка регистрации', 'error');
+                    }
+                } catch (err) {
+                    showMessage('Ошибка соединения с сервером', 'error');
+                }
+            });
+
+            function showMessage(text, type) {
+                messageEl.textContent = text;
+                messageEl.className = 'register-message ' + type;
+            }
+        });
+    </script>
+</body>
+</html>

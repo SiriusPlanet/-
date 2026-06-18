@@ -35,6 +35,8 @@
                 <li><a href="contacts.html">Контакты</a></li>
                 <li><a href="news.html">Новости</a></li>
                 <li><a href="requisites.html">Реквизиты</a></li>
+                <li><a href="feedback.html">Обратная связь</a></li>
+                <li><a href="register.html">Регистрация</a></li>
             </ul>
         </nav>
         <div class="auth-link">
@@ -43,8 +45,20 @@
     </header>
 
     <main>
+        <!-- Навигация по якорям (P1) -->
+        <nav class="anchor-nav" aria-label="Навигация по странице">
+            <ul>
+                <li><a href="#sectionLegal">📜 Юридическое</a></li>
+                <li><a href="#sectionResponsibility">⚖️ Ответственность</a></li>
+                <li><a href="#sectionFacts">💡 Факты</a></li>
+                <li><a href="#sectionHistory">📖 История</a></li>
+                <li><a href="#sectionVideo">🎬 Видео</a></li>
+                <li><a href="#sectionPrinciples">🌟 Принципы</a></li>
+            </ul>
+        </nav>
+
         <!-- section: Важное юридическое уведомление -->
-        <section class="legal-humor">
+        <section class="legal-humor" id="sectionLegal">
             <div class="memory-fragment">
                 <h2>📜 Важное юридическое уведомление</h2>
                 <p><strong>ВАЖНО: юридически‑воспоминательное уведомление</strong></p>
@@ -72,7 +86,7 @@
         </section>
 
         <!-- section: Ответственность -->
-        <section class="responsibility-disclaimer">
+        <section class="responsibility-disclaimer" id="sectionResponsibility">
             <div class="memory-fragment">
                 <h2>⚖️ Ответственность</h2>
                 <p><strong>Главный индикатор нашей работы:</strong> если вы <em>помните</em> о «Магазине воспоминаний» — значит, мы справились на 100 %. Если <em>забыли</em> — вот тогда можно и нужно с нами связаться!</p>
@@ -111,7 +125,7 @@
         </section>
 
         <!-- section: Интересные факты -->
-        <section class="fun-facts">
+        <section class="fun-facts" id="sectionFacts">
             <div class="memory-fragment">
                 <h2>💡 Интересные факты о нас</h2>
                 <ul>
@@ -121,10 +135,86 @@
                 </ul>
             </div>
         </section>
+
+        <!-- section: История компании, основатели, награды (P1) -->
+        <section class="history-section" id="sectionHistory">
+            <div class="memory-fragment">
+                <h2>📖 История компании</h2>
+                
+                <div class="history-block">
+                    <h3>Основание</h3>
+                    <p>ООО «Магазин Воспоминаний» был основан в 1984 году (по одним данным) или в 2024 году (по другим).
+                    Разница в 40 лет объясняется темпоральной нестабильностью нашей бухгалтерии.
+                    Первый магазин открылся в подвале дома на улице Памяти, 3/7, где до сих пор
+                    хранятся самые ценные экспонаты.</p>
+                </div>
+
+                <div class="history-block">
+                    <h3>Основатели</h3>
+                    <div class="founders-grid">
+                        <div class="founder-card">
+                            <div class="founder-avatar">🧙</div>
+                            <h4>Иван «Хранитель» Петров</h4>
+                            <p class="founder-role">Главный хранитель воспоминаний</p>
+                            <p class="founder-desc">Отвечает за то, чтобы ни одно воспоминание не было утеряно.
+                            Говорят, помнит всё, включая то, чего никогда не было.</p>
+                        </div>
+                        <div class="founder-card">
+                            <div class="founder-avatar">🔮</div>
+                            <h4>Елена «Провидица» Смирнова</h4>
+                            <p class="founder-role">Директор по магическим операциям</p>
+                            <p class="founder-desc">Предсказывает тренды в мире воспоминаний.
+                            Именно она решила, что ностальгия по 90-м будет хитом в 2024 году.</p>
+                        </div>
+                        <div class="founder-card">
+                            <div class="founder-avatar">⚙️</div>
+                            <h4>Дмитрий «Механик» Кузнецов</h4>
+                            <p class="founder-role">Главный инженер квантовых сувениров</p>
+                            <p class="founder-desc">Собирает и чинит предметы, которые существуют
+                            одновременно во всех временных линиях.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-block">
+                    <h3>Награды и достижения</h3>
+                    <ul class="awards-list">
+                        <li>🏆 <strong>«Лучший магазин нематериальных товаров»</strong> — премия «Ностальгия года» (2024, 2025)</li>
+                        <li>🥇 <strong>«Золотой сувенир»</strong> — за вклад в развитие квантовой коммерции (2025)</li>
+                        <li>📜 <strong>Сертификат соответствия</strong> стандартам темпоральной безопасности (выдан комиссией золотых рыбок)</li>
+                        <li>⭐ <strong>Рейтинг 5/7</strong> — по версии независимого агентства «Вспомнить всё»</li>
+                        <li>🎖️ <strong>Орден «Вечная память»</strong> — за сохранение воспоминаний клиентов (вручён лично директором)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- section: Видео-экскурсия (P1) -->
+        <section class="video-section" id="sectionVideo">
+            <div class="memory-fragment">
+                <h2>🎬 Видео-экскурсия</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 1.25rem; font-style: italic;">
+                    Короткометражка о том, как работает наш магазин воспоминаний
+                </p>
+                <div class="video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 0.75rem; box-shadow: 0 0.25rem 1rem rgba(0,0,0,0.15);">
+                    <iframe
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                        title="Видео-экскурсия по магазину воспоминаний"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                    ></iframe>
+                </div>
+                <p style="text-align: center; color: #999; font-size: 0.8rem; margin-top: 0.75rem;">
+                    🔗 Ссылка на YouTube: <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer" style="color: #3498db;">youtube.com/watch?v=dQw4w9WgXcQ</a>
+                </p>
+            </div>
+        </section>
         
         
         <!-- section: Наши принципы -->
-        <section class="principles-section">
+        <section class="principles-section" id="sectionPrinciples">
             <div class="memory-fragment">
                 <h2>🌟 Наши принципы</h2>
                 
@@ -157,10 +247,12 @@
     
     <!-- Футер -->
     <footer class="site-footer">
+        <p class="footer-org">ООО «Магазин Воспоминаний»</p>
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
         <ul class="footer-links">
             <li><a href="privacy.html">Политика конфиденциальности</a></li>
             <li><a href="delivery.html">Доставка и оплата</a></li>
+            <li><a href="register.html">Регистрация</a></li>
         </ul>
     </footer>
 </body>

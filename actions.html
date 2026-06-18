@@ -1,3 +1,5 @@
+<!-- Файл: MySite/actions.html -->
+<!-- Страница акций — квантовые скидки и специальные предложения -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -23,12 +25,15 @@
     </style>
 </head>
 <body>
+    <!-- Затемнение (система доступа) -->
     <div id="access-overlay"></div>
 
+    <!-- Панель доступа -->
     <div class="access-button">
         <button id="fileAccessButton">Получить доступ к файлам</button>
     </div>
 
+    <!-- Шапка + панель акций -->
     <div class="header-group">
         <header class="site-header">
             <a href="index.html" class="logo-link">
@@ -44,12 +49,15 @@
                     <li><a href="contacts.html">Контакты</a></li>
                     <li><a href="news.html">Новости</a></li>
                     <li><a href="requisites.html">Реквизиты</a></li>
+                    <li><a href="feedback.html">Обратная связь</a></li>
+                    <li><a href="register.html">Регистрация</a></li>
                 </ul>
             </nav>
             <div class="auth-link">
                 <a href="login.html">Клиентам</a>
             </div>
         </header>
+        <!-- Панель заголовка акций -->
         <div class="news-header-panel" id="newsHeaderPanel">
             <div class="header-grid">
                 <h1>Квантовые акции</h1>
@@ -64,18 +72,20 @@
     </div>
 
     <main>
+        <!-- Герой-секция с описанием акций -->
         <section class="hero">
             <h2>Специальные предложения</h2>
             <p>!На купленный вами предмет будет выдана скидка !ЕСЛИ! вы нарушаете условия использования!</p>
             <p>Размер скидки напрямую зависит от амплетуды темпоральных колебаний.</p>
         </section>
         
+        <!-- Сетка товаров/акций -->
         <section class="catalog">
             <div class="products-grid"></div>
         </section>
     </main>
 
-    <!-- Модальное окно для ДОБАВЛЕНИЯ -->
+    <!-- Модальное окно для ДОБАВЛЕНИЯ лота -->
     <div id="addNewsModal" class="modal hidden">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -84,11 +94,13 @@
                 </div>
                 <div class="modal-body">
                     <form id="newsForm" class="modal-form">
+                        <!-- Табы: Новость / Товар -->
                         <div class="form-tabs">
                             <button type="button" class="form-tab active" data-lottype="news">📰 Новость</button>
                             <button type="button" class="form-tab" data-lottype="product">🏷️ Товар</button>
                         </div>
 
+                        <!-- Загрузка изображения -->
                         <div class="file-upload-wrapper">
                             <label for="image" class="file-upload-label">
                                 <span>📷</span>
@@ -118,11 +130,14 @@
     <!-- Основной скрипт -->
     <script type="module" src="static/js/main.js"></script>
 
+    <!-- Футер -->
     <footer class="site-footer">
+        <p class="footer-org">ООО «Магазин Воспоминаний»</p>
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
         <ul class="footer-links">
             <li><a href="privacy.html">Политика конфиденциальности</a></li>
             <li><a href="delivery.html">Доставка и оплата</a></li>
+            <li><a href="register.html">Регистрация</a></li>
         </ul>
     </footer>
 </body>

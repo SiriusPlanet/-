@@ -1,3 +1,5 @@
+<!-- Файл: MySite/requisites.html -->
+<!-- Страница реквизитов — банковские счета, криптовалюта, юридическая информация -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -21,6 +23,7 @@
             display: none !important;
         }
         
+        /* Стили секции реквизитов */
         .requisites-section {
             max-width: 700px;
             margin: 40px auto;
@@ -40,6 +43,7 @@
             font-style: italic;
         }
         
+        /* Карточка реквизитов */
         .req-card {
             background: white;
             border-radius: 12px;
@@ -56,6 +60,7 @@
             padding-bottom: 10px;
         }
         
+        /* Строка реквизита (label + value) */
         .req-row {
             display: flex;
             justify-content: space-between;
@@ -80,6 +85,7 @@
             max-width: 60%;
         }
         
+        /* Примечание внизу */
         .req-note {
             background: #f8f9fa;
             border-left: 3px solid #3498db;
@@ -108,7 +114,7 @@
     </style>
 </head>
 <body>
-    <!-- Затемнение -->
+    <!-- Затемнение (система доступа) -->
     <div id="access-overlay"></div>
     
     <!-- Панель доступа -->
@@ -116,7 +122,7 @@
         <button id="fileAccessButton">Получить доступ к файлам</button>
     </div>
     
-    <!-- Остальной контент -->
+    <!-- Шапка сайта -->
     <header class="site-header">
         <a href="index.html" class="logo-link">
             <img src="images/logo.png" alt="Логотип магазина воспоминаний" class="logo">
@@ -131,6 +137,8 @@
                 <li><a href="contacts.html">Контакты</a></li>
                 <li><a href="news.html">Новости</a></li>
                 <li><a href="requisites.html">Реквизиты</a></li>
+                <li><a href="feedback.html">Обратная связь</a></li>
+                <li><a href="register.html">Регистрация</a></li>
             </ul>
         </nav>
         <div class="auth-link">
@@ -139,10 +147,12 @@
     </header>
 
     <main>
+        <!-- Секция реквизитов -->
         <section class="requisites-section">
             <h1>Реквизиты для оплаты</h1>
             <p class="subtitle">Счёт открыт вне временного потока. Списание происходит в момент воспоминания.</p>
             
+            <!-- Карточка: Банковские реквизиты -->
             <div class="req-card">
                 <h3>🏦 Банковские реквизиты</h3>
                 <div class="req-row">
@@ -179,6 +189,7 @@
                 </div>
             </div>
             
+            <!-- Карточка: Криптовалюта -->
             <div class="req-card">
                 <h3>💳 Оплата криптовалютой</h3>
                 <div class="req-row">
@@ -195,6 +206,7 @@
                 </div>
             </div>
             
+            <!-- Карточка: Юридическая информация -->
             <div class="req-card">
                 <h3>📋 Юридическая информация</h3>
                 <div class="req-row">
@@ -219,6 +231,7 @@
                 </div>
             </div>
             
+            <!-- Примечание об оплате -->
             <div class="req-note">
                 <p><strong>📜 Важное уведомление об оплате:</strong></p>
                 <p>Согласно Положению о вневременной торговле (п. 3, ст. 7), оплата считается совершённой в момент, когда <strong>вы помните</strong>, что оплатили. Если вы не помните — проверьте историю операций. Если истории нет — значит, вы либо не платили, либо платили в другой временной линии. В любом случае, претензий нет.</p>
@@ -228,11 +241,14 @@
         </section>
     </main>
 
+    <!-- Футер -->
     <footer class="site-footer">
+        <p class="footer-org">ООО «Магазин Воспоминаний»</p>
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
         <ul class="footer-links">
             <li><a href="privacy.html">Политика конфиденциальности</a></li>
             <li><a href="delivery.html">Доставка и оплата</a></li>
+            <li><a href="register.html">Регистрация</a></li>
         </ul>
     </footer>
 </body>
