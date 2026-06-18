@@ -9,7 +9,7 @@
     <script type="module" src="./static/js/access-init.js"></script>
     
     <link rel="stylesheet" href="./static/css/style.css" />
-    <link rel="stylesheet" href="./static/css/news.css?v=2" />
+    <link rel="stylesheet" href="./static/css/news.css?v=13" />
     
     <style>
         /* --- Система доступа — временно отключена, весь функционал виден --- */
@@ -59,11 +59,7 @@
     </div>
 
     <main>
-        <section class="catalog">
-            <div class="products-grid"></div>
-        </section>
-
-        <!-- Подкаталог реакторов Тони Старка -->
+        <!-- Подкаталог реакторов Тони Старка — в самом начале main -->
         <section class="reactor-subcatalog" id="reactorSubcatalog">
             <div class="reactor-trigger" id="reactorTrigger">
                 <img src="images/90.png" alt="Реакторы Тони Старка" loading="lazy">
@@ -73,6 +69,10 @@
             <div class="reactor-grid" id="reactorGrid">
                 <!-- Карточки будут созданы через CardConstructor -->
             </div>
+        </section>
+
+        <section class="catalog">
+            <div class="products-grid"></div>
         </section>
     </main>
 
@@ -246,7 +246,27 @@
             }
         });
     </script>
-    
+
+    <!-- Таблица перемещённых товаров (видимость от уровня авторизации, TODO: привязать к accessLevel >= 3) -->
+    <section class="move-table" id="moveTable" data-access-required="3" style="display: none;">
+        <h3>📋 Перемещённые товары</h3>
+        <div class="move-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Товар</th>
+                        <th>Цена</th>
+                        <th>Действие</th>
+                    </tr>
+                </thead>
+                <tbody id="moveTableBody">
+                    <!-- Сюда будут добавляться строки -->
+                </tbody>
+            </table>
+        </div>
+        <p class="move-table-note">🔒 Доступно только администраторам (уровень 3+)</p>
+    </section>
+
     <footer class="site-footer">
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
         <ul class="footer-links">

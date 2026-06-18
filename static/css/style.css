@@ -193,6 +193,12 @@ main > section,
     margin-right: auto;
 }
 
+.product-card {
+    max-width: 22rem;
+    width: 100%;
+    justify-self: center;
+}
+
 .product-card img {
     width: 100%;
     height: 11.25rem;
@@ -518,6 +524,81 @@ main > section,
 
 .footer-links a:hover {
     color: #e74c3c;
+}
+
+/* === ТАБЛИЦА ПЕРЕМЕЩЁННЫХ ТОВАРОВ === */
+.move-table {
+    max-width: 75rem;
+    margin: 2rem auto;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
+}
+
+.move-table h3 {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.move-table-container {
+    overflow-x: auto;
+}
+
+.move-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.move-table th,
+.move-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.move-table th {
+    background: #f5f5f5;
+    color: #555;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.move-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.move-table-remove-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e67e22;
+    color: #fff;
+    border: 2px solid #f0b27a;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.move-table-remove-btn:hover {
+    background: #d35400;
+    transform: scale(1.15);
+}
+
+.move-table-note {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: 1rem;
+    font-style: italic;
 }
 
 /* === СЕКЦИЯ ПРИВЕТСТВИЯ (hero) === */

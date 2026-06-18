@@ -65,7 +65,7 @@
     aspect-ratio: 1;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .catalog-card:hover {
@@ -78,15 +78,18 @@
     width: 100%;
     /* 2/3 высоты карточки */
     flex: 2;
-    overflow: hidden;
+    overflow: visible;
     background: #f0f0f0;
     min-height: 0; /* важно для flex-дочернего сжатия */
+    z-index: 1; /* чтобы абсолютные кнопки были поверх .catalog-card-content */
 }
 
 .catalog-card-inner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    position: relative;
+    z-index: 0;
 }
 
 .catalog-no-image {
@@ -365,7 +368,7 @@
     font-weight: 700;
 }
 
-/* === Единый стиль для кнопок управления (Del и %) === */
+/* === Единый стиль для кнопок управления (Del, %, ↓, re:) === */
 .catalog-card .ctrl-btn {
     position: absolute;
     top: 8px;
@@ -374,11 +377,11 @@
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.85);
     color: #fff;
-    border: 3px solid #ffffff;
+    border: 2px solid rgba(255,255,255,0.3);
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
-    z-index: 20;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -391,6 +394,26 @@
 
 .catalog-card .ctrl-btn:hover {
     opacity: 1;
+    transform: scale(1.15);
+}
+
+/* Кнопка H (Hidden) — симметрична re: относительно левого нижнего угла */
+.catalog-card .move-btn {
+    left: 8px;      /* как у Del — слева */
+    bottom: 56px;   /* симметрично re: 8px вправо, 56px вверх */
+    top: auto;
+    width: 30px;
+    height: 30px;
+    background: #2d7d2d;
+    border-color: #88dd88;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(45, 125, 45, 0.5);
+}
+
+.catalog-card .move-btn:hover {
+    background: #3a9e3a;
+    border-color: #aaffaa;
     transform: scale(1.15);
 }
 

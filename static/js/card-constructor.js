@@ -66,6 +66,9 @@ export class CardConstructor {
             ? `<div class="discount-badge"><span class="discount-badge-text">${discount}<small>%</small></span></div>`
             : '';
 
+        // Кнопка H (Hidden) — переместить в таблицу (видна всем, временно)
+        const moveBtnHtml = `<button class="ctrl-btn move-btn" data-id="${item.id}" title="Переместить в таблицу">H</button>`;
+
         // Кнопка Del — видна всем (временно, пока не настроена система доступов)
         const delBtnHtml = `<button class="ctrl-btn del-btn" data-id="${item.id}" title="Удалить">Del</button>`;
 
@@ -91,6 +94,7 @@ export class CardConstructor {
             <div class="catalog-card-inner">
                 <img src="${imgSrc}" alt="${title}" class="catalog-image" loading="lazy">
                 ${badgeHtml}
+                ${moveBtnHtml}
                 ${delBtnHtml}
                 ${editBtnHtml}
                 ${discountBtnHtml}
@@ -105,7 +109,18 @@ export class CardConstructor {
             </div>
         `;
 
+        // ДИАГНОСТИКА: проверяем, есть ли кнопки в DOM
+        console.log(`[CardConstructor] card ${item.id}: moveBtn=${!!card.querySelector('.move-btn')}, delBtn=${!!card.querySelector('.del-btn')}, editBtn=${!!card.querySelector('.edit-btn')}, discountBtn=${!!card.querySelector('.discount-btn')}`);
+
         // Навешиваем обработчики — видно всем (временно, пока не настроена система доступов)
+        const moveBtn = card.querySelector('.move-btn');
+        if (moveBtn) {
+            moveBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.moveToTable(item, card);
+            });
+        }
+
         const delBtn = card.querySelector('.del-btn');
         if (delBtn && onDelete) {
             delBtn.addEventListener('click', (e) => {
@@ -330,6 +345,50 @@ export class CardConstructor {
         toast.textContent = '🛒 ' + message;
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 3000);
+    }
+
+    /**
+     * Перемещает товар в таблицу перемещённых товаров (#moveTable)
+     * @param {Object} item - данные лота
+     * @param {HTMLElement} card - DOM-элемент карточки
+     */
+    moveToTable(item, card) {
+        const tableBody = document.getElementById('moveTableBody');
+        const moveTable = document.getElementById('moveTable');
+        if (!tableBody || !moveTable) return;
+
+        // Показываем таблицу
+        moveTable.style.display = 'block';
+
+        // Проверяем, нет ли уже такого товара в таблице
+        const existingRow = tableBody.querySelector(`tr[data-id="${item.id}"]`);
+        if (existingRow) return;
+
+        const title = this.escapeHtml(item.title || 'Без названия');
+        const price = item.price ? `${this.escapeHtml(item.price)} ₽` : '—';
+
+        const row = document.createElement('tr');
+        row.dataset.id = item.id;
+        row.innerHTML = `
+            <td>${title}</td>
+            <td>${price}</td>
+            <td><button class="move-table-remove-btn" data-id="${item.id}" title="Вернуть">↩</button></td>
+        `;
+
+        // Обработчик кнопки "Вернуть"
+        row.querySelector('.move-table-remove-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            row.remove();
+            // Если таблица пуста — скрываем
+            if (tableBody.children.length === 0) {
+                moveTable.style.display = 'none';
+            }
+        });
+
+        tableBody.appendChild(row);
+
+        // Показываем toast
+        this.showCartToast(`«${title}» перемещён в таблицу`);
     }
 
     /**
