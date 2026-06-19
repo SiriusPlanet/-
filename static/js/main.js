@@ -103,8 +103,9 @@ class MainApp {
                 return `📅 ${date} · ${title} · ${preview}`;
             });
 
-            // Дублируем для плавной прокрутки
-            ticker.textContent = '✦ ' + items.join(' ✦ ✦ ') + ' ✦';
+            // Дублируем для плавной прокрутки (чтобы создать бесконечный эффект)
+            const tickerContent = '✦ ' + items.join(' ✦ ✦ ') + ' ✦';
+            ticker.textContent = tickerContent + ' ' + tickerContent;
         } catch (e) {
             console.warn('[MainApp] Ошибка загрузки для бегущей строки:', e);
             ticker.textContent = '✦ Хроники временно недоступны. Попробуйте вспомнить позже. ✦';

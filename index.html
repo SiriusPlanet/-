@@ -529,7 +529,7 @@
                 const reactors = allItems.filter(item => reactorIds.includes(String(item.id)));
                 
                 reactors.forEach(item => {
-                    const card = constructor.createCard(item, { accessLevel: 0 });
+                    const card = constructor.createCard(item, { accessLevel: 0, pageContext: 'index' });
                     grid.appendChild(card);
                 });
             } catch (err) {

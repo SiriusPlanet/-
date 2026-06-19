@@ -227,6 +227,7 @@ main > section,
 }
 
 /* === БЕГУЩАЯ СТРОКА НОВОСТЕЙ === */
+/* === БЕГУЩАЯ СТРОКА НОВОСТЕЙ === */
 .ticker-container {
     background: #1a1a2e;
     color: #00ff88;
@@ -235,17 +236,22 @@ main > section,
     padding: 0.5rem 0;
     text-align: center;
     border-bottom: 0.125rem solid #00ff88;
+    overflow: hidden;
+    width: 100%;
 }
 
 #news-ticker {
     display: inline-block;
     white-space: nowrap;
     animation: ticker-scroll 30s linear infinite;
+    margin: 0;
+    padding: 0;
+    width: max-content;
 }
 
 @keyframes ticker-scroll {
-    from { transform: translateX(100%); }
-    to { transform: translateX(-100%); }
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
 }
 
 /* === СЕТЬ НОВОСТЕЙ === */

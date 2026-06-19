@@ -135,6 +135,7 @@
     /* Обрезаем длинные заголовки */
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -165,15 +166,17 @@
     font-weight: bold;
 }
 
-/* Краткое описание — одна строка, многоточие */
+/* Краткое описание — 1-2 строки, многоточие если не влезает */
 .catalog-card-description {
     font-size: 12px;
-    color: #888;
-    line-height: 1.3;
-    white-space: nowrap;
+    color: #666;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 /* === Нижняя строка карточки: detail-btn + cart-icon-btn === */

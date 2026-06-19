@@ -184,7 +184,7 @@
         });
     </script>
 
-    <!-- Скрипт для подкаталога реакторов Тони Старка -->
+    <!-- Скрипт для подкаталога реакторов Тони Старка и таблицы снятых лотов -->
     <script type="module">
         import { Publisher } from './static/js/publisher.js';
         import { CardConstructor } from './static/js/card-constructor.js';
@@ -193,6 +193,8 @@
             const subcatalog = document.getElementById('reactorSubcatalog');
             const trigger = document.getElementById('reactorTrigger');
             const grid = document.getElementById('reactorGrid');
+            const moveTable = document.getElementById('moveTable');
+            const moveTableBody = document.getElementById('moveTableBody');
             
             if (!subcatalog || !trigger || !grid) return;
             
@@ -239,8 +241,61 @@
                 
                 reactors.forEach(item => {
                     const card = constructor.createCard(item, { accessLevel: 0 });
-                    grid.appendChild(card);
+                    if (card) {
+                        grid.appendChild(card);
+                    }
                 });
+                
+                // Загружаем и отображаем снятые лоты в таблицу
+                const movedIds = JSON.parse(localStorage.getItem('mySiteMovedItems') || '[]');
+                
+                if (moveTableBody) {
+                    // Очищаем таблицу перед заполнением
+                    moveTableBody.innerHTML = '';
+                    
+                    // Для каждого снятого ID ищем лот и добавляем в таблицу
+                    movedIds.forEach(id => {
+                        const movedItem = allItems.find(item => String(item.id) === String(id));
+                        if (movedItem) {
+                            const title = constructor.escapeHtml(movedItem.title || 'Без названия');
+                            const price = movedItem.price ? `${constructor.escapeHtml(movedItem.price)} ₽` : '—';
+                            
+                            const row = document.createElement('tr');
+                            row.dataset.id = id;
+                            row.innerHTML = `
+                                <td>${title}</td>
+                                <td>${price}</td>
+                                <td><button class="move-table-remove-btn" data-id="${id}" title="Вернуть в каталог">↩</button></td>
+                            `;
+                            
+                            // Обработчик кнопки "Вернуть"
+                            row.querySelector('.move-table-remove-btn').addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                // Удаляем из localStorage
+                                const ids = JSON.parse(localStorage.getItem('mySiteMovedItems') || '[]');
+                                const filteredIds = ids.filter(i => String(i) !== String(id));
+                                localStorage.setItem('mySiteMovedItems', JSON.stringify(filteredIds));
+                                
+                                // Удаляем строку
+                                row.remove();
+                                
+                                // Обновляем состояние таблицы
+                                if (moveTableBody.children.length === 0) {
+                                    moveTable.style.display = 'none';
+                                }
+                                
+                                constructor.showCartToast(`«${movedItem.title}» возвращён в каталог`);
+                            });
+                            
+                            moveTableBody.appendChild(row);
+                        }
+                    });
+                    
+                    // Показываем таблицу, если в ней есть строки
+                    if (moveTableBody.children.length > 0) {
+                        moveTable.style.display = 'block';
+                    }
+                }
             } catch (err) {
                 console.warn('[ReactorSubcatalog] Не удалось загрузить реакторы:', err);
                 grid.innerHTML = '<p style="color:#999;text-align:center;padding:20px;">Реакторы временно недоступны</p>';
