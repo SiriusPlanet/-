@@ -980,6 +980,9 @@ main > section,
     max-width: 70rem;
     box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
     border: 1px solid #e8e8e8;
+    position: sticky;
+    top: 0;
+    z-index: 99;
 }
 
 .anchor-nav ul {
@@ -1084,4 +1087,259 @@ main > section,
     margin-top: 1rem;
     padding-top: 0.75rem;
     border-top: 1px dashed #ddd;
+}
+
+/* === ПОДЛОЖКА ПОД ВИДЕО НА ABOUT.HTML (P2-4) === */
+.video-section .memory-fragment {
+    position: relative;
+    padding-bottom: 2rem;
+}
+
+.video-section .memory-fragment::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 10%;
+    right: 10%;
+    height: 24px;
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(155, 89, 182, 0.15), rgba(52, 152, 219, 0.15));
+    border-radius: 50%;
+    filter: blur(8px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* === ОГРАНИЧЕНИЕ СЕТКИ АКЦИЙ (P2-9) === */
+.actions-grid .products-grid {
+    max-width: 75rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.actions-grid .catalog-card.card-large {
+    max-width: 22rem;
+    width: 100%;
+    justify-self: center;
+    min-height: 340px;
+}
+
+/* === ЦВЕТНЫЕ ПОДЛОЖКИ ДЛЯ СТРАНИЦ (P2-3) === */
+/* Общие стили для секций с подложками */
+.contacts-section,
+.requisites-section,
+.privacy-policy,
+.delivery-section {
+    padding: 2.5rem 1.5rem;
+    max-width: 96%;
+    margin: 2.5rem auto;
+    border-radius: 1rem;
+}
+
+/* 1. contacts.html — пастельный голубой (морская тема) */
+.contacts-section {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border: 2px solid #90caf9;
+}
+
+/* 2. requisites.html — пастельный золотой (финансовая тема) */
+.requisites-section {
+    background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+    border: 2px solid #ffe082;
+}
+
+/* 3. privacy.html — пастельный серо-голубой (официальная тема) */
+.privacy-policy {
+    background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+    border: 2px solid #9fa8da;
+}
+
+/* 4. delivery.html — пастельный зелёный (тема перемещения) */
+.delivery-section {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border: 2px solid #a5d6a7;
+}
+
+/* Карточки внутри секций с подложками — белый фон как memory-fragment */
+.contacts-section .contact-card,
+.requisites-section .req-card,
+.privacy-policy .privacy-block,
+.delivery-section .delivery-block {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.5rem;
+}
+
+/* Заголовки внутри карточек */
+.contacts-section .contact-card h3,
+.requisites-section .req-card h3,
+.privacy-policy .privacy-block h2,
+.privacy-policy .privacy-block h3,
+.delivery-section .delivery-block h2,
+.delivery-section .delivery-block h3 {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+/* Текст внутри карточек */
+.contacts-section .contact-card p,
+.requisites-section .req-card p,
+.privacy-policy .privacy-block p,
+.delivery-section .delivery-block p {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.contacts-section .contact-card ul,
+.contacts-section .contact-card ol,
+.requisites-section .req-card ul,
+.privacy-policy .privacy-block ul,
+.privacy-policy .privacy-block ol,
+.delivery-section .delivery-block ul,
+.delivery-section .delivery-block ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.contacts-section .contact-card li,
+.requisites-section .req-card li,
+.privacy-policy .privacy-block li,
+.delivery-section .delivery-block li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+/* Дисклеймеры и примечания — тоже белая карточка */
+.contacts-section .memory-disclaimer,
+.requisites-section .req-note,
+.privacy-policy .contact-info,
+.delivery-section .warning-box {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.08);
+    margin-top: 1.5rem;
+}
+
+/* Форма обратной связи на contacts.html */
+.contacts-section .feedback-form {
+    margin-top: 0.5rem;
+}
+
+.contacts-section .feedback-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.contacts-section .feedback-form label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+.contacts-section .feedback-form input,
+.contacts-section .feedback-form textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.contacts-section .feedback-form input:focus,
+.contacts-section .feedback-form textarea:focus {
+    border-color: #90caf9;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(144, 202, 249, 0.2);
+}
+
+.contacts-section .feedback-form .submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.contacts-section .feedback-form .submit-btn:hover {
+    opacity: 0.9;
+}
+
+/* Подзаголовки секций */
+.contacts-section .subtitle,
+.requisites-section .subtitle {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+}
+
+/* Хинты в контактах */
+.contacts-section .contact-card .hint {
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed #eee;
+}
+
+/* Строки реквизитов */
+.requisites-section .req-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.requisites-section .req-row:last-child {
+    border-bottom: none;
+}
+
+.requisites-section .req-row .label {
+    font-weight: 600;
+    color: #555;
+    min-width: 140px;
+}
+
+.requisites-section .req-row .value {
+    color: #333;
+    text-align: right;
+}
+
+/* Предупреждение в delivery */
+.delivery-section .warning-box p {
+    color: #8b0000;
+    font-weight: 600;
+}
+
+.delivery-section .disclaimer {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #2e7d32;
+    margin-top: 1rem;
+}
+
+/* Последний параграф privacy */
+.privacy-policy .last-paragraph {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 0.5rem;
+    border-left: 4px solid #9fa8da;
+    font-style: italic;
 }

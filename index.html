@@ -26,50 +26,52 @@
             display: none !important;
         }
 
-        /* Стили для секции обратной связи на главной */
+        /* Стили для секции обратной связи на главной — компактная заявка на звонок (P2-5) */
         #indexFeedback {
-            max-width: 700px;
+            max-width: 500px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
         #indexFeedback h2 {
-            font-size: 28px;
+            font-size: 24px;
             color: #2c3e50;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
+            text-align: center;
         }
 
         #indexFeedback .subtitle {
             color: #888;
-            font-size: 14px;
-            margin-bottom: 32px;
+            font-size: 13px;
+            margin-bottom: 24px;
             font-style: italic;
+            text-align: center;
         }
 
         #indexFeedback .feedback-card {
             background: white;
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 32px;
+            padding: 24px;
             margin-bottom: 20px;
         }
 
         #indexFeedback .feedback-form {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 14px;
         }
 
         #indexFeedback .form-group {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
         #indexFeedback .feedback-form label {
             font-weight: 600;
             color: #444;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         #indexFeedback .feedback-form label .required {
@@ -80,10 +82,10 @@
         #indexFeedback .feedback-form input,
         #indexFeedback .feedback-form textarea {
             width: 100%;
-            padding: 12px 14px;
+            padding: 10px 12px;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
-            font-size: 15px;
+            font-size: 14px;
             transition: border-color 0.2s, box-shadow 0.2s;
             box-sizing: border-box;
             font-family: inherit;
@@ -98,21 +100,22 @@
 
         #indexFeedback .feedback-form textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 80px;
         }
 
         #indexFeedback .submit-btn {
-            padding: 14px 28px;
+            padding: 12px 24px;
             background: #3498db;
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s, transform 0.2s;
             box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-            align-self: flex-start;
+            align-self: center;
+            width: 100%;
         }
 
         #indexFeedback .submit-btn:hover {
@@ -125,11 +128,11 @@
             background: #d4edda;
             border: 1px solid #c3e6cb;
             border-radius: 10px;
-            padding: 20px;
+            padding: 16px;
             color: #155724;
-            font-size: 15px;
+            font-size: 14px;
             text-align: center;
-            margin-top: 16px;
+            margin-top: 12px;
         }
 
         #indexFeedback .feedback-success.is-visible {
@@ -141,14 +144,120 @@
             background: #f8d7da;
             border: 1px solid #f5c6cb;
             border-radius: 10px;
-            padding: 16px;
+            padding: 12px;
             color: #721c24;
-            font-size: 14px;
-            margin-top: 8px;
+            font-size: 13px;
+            margin-top: 6px;
         }
 
         #indexFeedback .feedback-error.is-visible {
             display: block;
+        }
+
+        /* --- DEV_MODE переключатель (P1-2) --- */
+        #devModeToggle {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 9999;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            padding: 8px 6px;
+            font-size: 11px;
+            font-weight: 700;
+            border: none;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            background: #2c3e50;
+            color: #95a5a6;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+        }
+
+        #devModeToggle.is-active {
+            background: #e74c3c;
+            color: #fff;
+            box-shadow: 2px 2px 12px rgba(231, 76, 60, 0.4);
+        }
+
+        #devModeToggle:hover {
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        /* --- Иконка корзины в хедере (P1-3) --- */
+        .cart-icon {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: background 0.2s;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        .cart-icon:hover {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .cart-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 5px;
+            background: #e74c3c;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 10px;
+            line-height: 1;
+        }
+
+        .cart-badge:empty {
+            display: none;
+        }
+
+        .cart-total {
+            font-size: 12px;
+            color: #888;
+            font-weight: 400;
+        }
+
+        /* --- Модалка корзины-шутки (P1-3) --- */
+        .cart-joke-modal .modal-body {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            padding: 2rem 2.5rem;
+        }
+
+        .cart-joke-modal .modal-body p {
+            margin-bottom: 1rem;
+        }
+
+        .cart-joke-modal .modal-body .joke-highlight {
+            color: #8b0000;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .cart-joke-modal .modal-body .joke-meta {
+            font-size: 12px;
+            color: #999;
+            text-align: right;
+            margin-top: 1.5rem;
+            border-top: 1px dashed #ddd;
+            padding-top: 1rem;
         }
     </style>
 </head>
@@ -160,6 +269,9 @@
     <div class="access-button">
         <button id="fileAccessButton">Получить доступ к файлам</button>
     </div>
+
+    <!-- DEV_MODE переключатель (P1-2) — маленькая кнопка сбоку -->
+    <button id="devModeToggle" title="Переключить DEV_MODE (все уровни доступа)">DEV</button>
     
     <!-- Остальной контент -->
     <header class="site-header">
@@ -175,26 +287,30 @@
                 <li><a href="actions.html">Акции</a></li>
                 <li><a href="contacts.html">Контакты</a></li>
                 <li><a href="news.html">Новости</a></li>
-                <li><a href="requisites.html">Реквизиты</a></li>
-                <li><a href="feedback.html">Обратная связь</a></li>
-                <li><a href="register.html">Регистрация</a></li>
+                <li><a href="delivery.html">Доставка</a></li>
             </ul>
         </nav>
         <div class="auth-link">
+            <!-- Иконка корзины (P1-3) -->
+            <a href="javascript:void(0)" class="cart-icon" id="cartIcon" title="Корзина">
+                🛒
+                <span class="cart-badge" id="cartBadge"></span>
+                <span class="cart-total" id="cartTotal"></span>
+            </a>
             <a href="login.html">Клиентам</a>
         </div>
     </header>
-    <!-- Бегущая строка -->
+    <!-- Бегущая строка (P1-5) — динамическая, заполняется из main.js -->
     <div class="ticker-container">
         <div id="news-ticker">Загрузка хроник...</div>
     </div>
     <main>
-        <!-- Навигация по якорям (P1) -->
+        <!-- Навигация по якорям (P1-7: sticky) -->
         <nav class="anchor-nav" aria-label="Навигация по странице">
             <ul>
                 <li><a href="#sectionHero">🏠 Приветствие</a></li>
                 <li><a href="#sectionCatalog">⭐ Топ-3</a></li>
-                <li><a href="#indexFeedback">✉️ Обратная связь</a></li>
+                <li><a href="#indexFeedback">📞 Заявка на звонок</a></li>
                 <li><a href="#restrictedCatalog1">🔒 Для избранных</a></li>
                 <li><a href="#restrictedCatalog2">🔒 Хранители времени</a></li>
                 <li><a href="#restrictedCatalog3">🔒 Администраторская</a></li>
@@ -233,37 +349,32 @@
             </p>
         </section>
 
-        <!-- Секция обратной связи на главной странице -->
+        <!-- Секция обратной связи на главной странице — компактная заявка на звонок (P2-5) -->
         <section class="feedback-section" id="indexFeedback">
-            <h2>Свяжитесь с нами</h2>
-            <p class="subtitle">Если вы помните — пишите. Если нет — тем более.</p>
+            <h2>Заказать звонок</h2>
+            <p class="subtitle">Мы перезвоним, если вспомним зачем.</p>
             
             <div class="feedback-card">
                 <form class="feedback-form" id="indexFeedbackForm">
                     <div class="form-group">
-                        <label for="indexFeedbackName">ФИО <span class="required">*</span></label>
-                        <input type="text" id="indexFeedbackName" name="name" placeholder="Иванов Иван Иванович" required>
+                        <label for="indexFeedbackName">Имя <span class="required">*</span></label>
+                        <input type="text" id="indexFeedbackName" name="name" placeholder="Иван" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="indexFeedbackEmail">Email <span class="required">*</span></label>
-                        <input type="email" id="indexFeedbackEmail" name="email" placeholder="ivanov@example.com" required>
+                        <label for="indexFeedbackPhone">Телефон <span class="required">*</span></label>
+                        <input type="tel" id="indexFeedbackPhone" name="phone" placeholder="+7 (999) 000-70-70" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="indexFeedbackPhone">Телефон</label>
-                        <input type="tel" id="indexFeedbackPhone" name="phone" placeholder="+7 (999) 000-70-70">
+                        <label for="indexFeedbackMessage">Когда перезвонить?</label>
+                        <textarea id="indexFeedbackMessage" name="message" placeholder="Например: после 18:00, в субботу, когда Луна в Тельце..." rows="2"></textarea>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="indexFeedbackMessage">Сообщение <span class="required">*</span></label>
-                        <textarea id="indexFeedbackMessage" name="message" placeholder="Опишите ваше воспоминание или вопрос..." required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">✉️ Отправить сообщение</button>
+                    <button type="submit" class="submit-btn">📞 Заказать звонок</button>
                     
                     <div class="feedback-success" id="indexFeedbackSuccess">
-                        ✅ Ваше сообщение отправлено!
+                        ✅ Заявка принята! Ожидайте звонка из прошлого.
                     </div>
                     
                     <div class="feedback-error" id="indexFeedbackError"></div>
@@ -293,6 +404,24 @@
         </div>
     </div>
 
+    <!-- Модальное окно корзины-шутки (P1-3) -->
+    <div id="cartJokeModal" class="modal hidden cart-joke-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>🛒 Ваша корзина</h2>
+                    <button class="modal-close-btn" id="cartJokeClose" title="Закрыть">✕</button>
+                </div>
+                <div class="modal-body">
+                    <p>Здесь должен быть функционал трансформера, пересобирающего сайт, подставляющий новости с использованием ника из регистрации и адреса доставки, пробивающий <span class="joke-highlight">4-ю стену</span> и создающий ощущение, что покупатель что-то забыл.</p>
+                    <p>Как будто он вернулся на сайт после нескольких недель использования покупок, но не помнит зачем, и что было.</p>
+                    <p>Но пока что — просто корзина. Которая ничего не делает. Как воспоминание о будущем, которого не было.</p>
+                    <div class="joke-meta">⚠️ Функционал находится за пределами вашего временного потока. Обратитесь к Хранителю времени (уровень 2+).</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Скрипт для закрытия модалки детального просмотра -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -307,6 +436,47 @@
                 detailModal.addEventListener('click', (e) => {
                     if (e.target === detailModal) {
                         detailModal.classList.add('hidden');
+                    }
+                });
+            }
+
+            // --- DEV_MODE переключатель (P1-2) ---
+            const devBtn = document.getElementById('devModeToggle');
+            if (devBtn) {
+                const isDev = localStorage.getItem('mySiteDevMode') === 'true';
+                if (isDev) devBtn.classList.add('is-active');
+                
+                devBtn.addEventListener('click', () => {
+                    if (window.toggleDevMode) {
+                        window.toggleDevMode();
+                        devBtn.classList.toggle('is-active');
+                    }
+                });
+            }
+
+            // --- Модалка корзины-шутки (P1-3) ---
+            const cartIcon = document.getElementById('cartIcon');
+            const cartJokeModal = document.getElementById('cartJokeModal');
+            const cartJokeClose = document.getElementById('cartJokeClose');
+            
+            if (cartIcon && cartJokeModal) {
+                cartIcon.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    cartJokeModal.classList.remove('hidden');
+                    cartJokeModal.classList.add('is-visible');
+                });
+                
+                if (cartJokeClose) {
+                    cartJokeClose.addEventListener('click', () => {
+                        cartJokeModal.classList.remove('is-visible');
+                        cartJokeModal.classList.add('hidden');
+                    });
+                }
+                
+                cartJokeModal.addEventListener('click', (e) => {
+                    if (e.target === cartJokeModal) {
+                        cartJokeModal.classList.remove('is-visible');
+                        cartJokeModal.classList.add('hidden');
                     }
                 });
             }
@@ -369,8 +539,8 @@
         });
     </script>
 
-    <!-- Таблица перемещённых товаров (видимость от уровня авторизации, TODO: привязать к accessLevel >= 3) -->
-    <section class="move-table" id="moveTable" data-access-required="3" style="display: none;">
+    <!-- Таблица перемещённых товаров (видимость от уровня авторизации, TODO: привязать к accessLevel >= 2) -->
+    <section class="move-table" id="moveTable" data-access-required="2" style="display: none;">
         <h3>📋 Перемещённые товары</h3>
         <div class="move-table-container">
             <table>
@@ -386,89 +556,110 @@
                 </tbody>
             </table>
         </div>
-        <p class="move-table-note">🔒 Доступно только администраторам (уровень 3+)</p>
+        <p class="move-table-note">🔓 Доступно модераторам (уровень 2+)</p>
     </section>
 
     <!-- Каталоги ограниченного доступа (P0) -->
-    <!-- Витрина «Для избранных» — уровень 1+ -->
+    <!-- Витрина «Для избранных» — уровень 1+ (P2-6: контент доработан) -->
     <section class="restricted-catalog" id="restrictedCatalog1" data-access-required="1" style="display: none;">
         <h3>⭐ Витрина «Для избранных»</h3>
+        <p style="text-align:center;color:#888;font-size:13px;margin-bottom:1.5rem;font-style:italic;">Особое предложение для постоянных клиентов и хранителей воспоминаний</p>
         <div class="restricted-grid">
             <div class="restricted-item">
                 <div class="restricted-item-icon">🎭</div>
                 <h4>Маска воспоминаний</h4>
-                <p class="restricted-item-desc">Позволяет вспомнить то, чего не было.</p>
+                <p class="restricted-item-desc">Позволяет вспомнить то, чего не было. И забыть то, что было. Двусторонняя технология.</p>
                 <p class="restricted-item-price">2 500 ₽</p>
             </div>
             <div class="restricted-item">
                 <div class="restricted-item-icon">📼</div>
                 <h4>Кассета «Ностальгия»</h4>
-                <p class="restricted-item-desc">Запись ваших лучших моментов.</p>
+                <p class="restricted-item-desc">Запись ваших лучших моментов. С эффектом «плёночного» звука и лёгким шипением времени.</p>
                 <p class="restricted-item-price">1 200 ₽</p>
             </div>
             <div class="restricted-item">
                 <div class="restricted-item-icon">🔮</div>
                 <h4>Шар предвоспоминаний</h4>
-                <p class="restricted-item-desc">Показывает, что вы могли бы вспомнить.</p>
+                <p class="restricted-item-desc">Показывает, что вы могли бы вспомнить в альтернативной реальности. Батарейки не прилагаются.</p>
                 <p class="restricted-item-price">3 000 ₽</p>
+            </div>
+            <div class="restricted-item">
+                <div class="restricted-item-icon">🧭</div>
+                <h4>Компас во времени</h4>
+                <p class="restricted-item-desc">Указывает направление к самому важному воспоминанию. Работает только в полнолуние.</p>
+                <p class="restricted-item-price">4 200 ₽</p>
             </div>
         </div>
         <p class="restricted-note">🔓 Доступно пользователям (уровень 1+)</p>
     </section>
 
-    <!-- Архив «Хранители времени» — уровень 2+ -->
+    <!-- Архив «Хранители времени» — уровень 2+ (P2-6: контент доработан) -->
     <section class="restricted-catalog" id="restrictedCatalog2" data-access-required="2" style="display: none;">
         <h3>⏳ Архив «Хранители времени»</h3>
+        <p style="text-align:center;color:#888;font-size:13px;margin-bottom:1.5rem;font-style:italic;">Эксклюзивный доступ к артефактам, изъятым из временного потока</p>
         <div class="restricted-grid">
             <div class="restricted-item">
                 <div class="restricted-item-icon">⚗️</div>
                 <h4>Эликсир забвения</h4>
-                <p class="restricted-item-desc">Временное стирание нежелательных воспоминаний.</p>
+                <p class="restricted-item-desc">Временное стирание нежелательных воспоминаний. Побочные эффекты: временная потеря чувства юмора.</p>
                 <p class="restricted-item-price">5 000 ₽</p>
             </div>
             <div class="restricted-item">
                 <div class="restricted-item-icon">🗝️</div>
                 <h4>Ключ от времени</h4>
-                <p class="restricted-item-desc">Открывает доступ к заблокированным воспоминаниям.</p>
+                <p class="restricted-item-desc">Открывает доступ к заблокированным воспоминаниям. Не подходит для дверей.</p>
                 <p class="restricted-item-price">7 500 ₽</p>
             </div>
             <div class="restricted-item">
                 <div class="restricted-item-icon">📖</div>
                 <h4>Книга судеб (копия)</h4>
-                <p class="restricted-item-desc">Черновик вашей жизни. Без правок.</p>
+                <p class="restricted-item-desc">Черновик вашей жизни. Без правок. Орфография и пунктуация сохранены.</p>
                 <p class="restricted-item-price">12 000 ₽</p>
+            </div>
+            <div class="restricted-item">
+                <div class="restricted-item-icon">⏰</div>
+                <h4>Песочные часы «Дежавю»</h4>
+                <p class="restricted-item-desc">Переворачиваются сами, когда вы чувствуете, что это уже было. Спойлер: так и было.</p>
+                <p class="restricted-item-price">6 800 ₽</p>
             </div>
         </div>
         <p class="restricted-note">🔓 Доступно модераторам (уровень 2+)</p>
     </section>
 
-    <!-- Секция «Администраторская» — уровень 3+ -->
+    <!-- Секция «Администраторская» — уровень 3+ (P2-6: контент доработан) -->
     <section class="restricted-catalog" id="restrictedCatalog3" data-access-required="3" style="display: none;">
         <h3>⚙️ Администраторская</h3>
+        <p style="text-align:center;color:#888;font-size:13px;margin-bottom:1.5rem;font-style:italic;">Панель управления реальностью магазина. Осторожно: высокая концентрация ответственности.</p>
         <div class="restricted-grid">
             <div class="restricted-item">
                 <div class="restricted-item-icon">🕹️</div>
                 <h4>Пульт управления реальностью</h4>
-                <p class="restricted-item-desc">Тонкая настройка воспоминаний клиентов.</p>
+                <p class="restricted-item-desc">Тонкая настройка воспоминаний клиентов. Кнопка «Сброс» без колпачка.</p>
                 <p class="restricted-item-price">—</p>
             </div>
             <div class="restricted-item">
                 <div class="restricted-item-icon">💾</div>
                 <h4>Резервная копия сознания</h4>
-                <p class="restricted-item-desc">Полный дамп памяти сотрудника.</p>
+                <p class="restricted-item-desc">Полный дамп памяти сотрудника. Формат: .bak. Версия: вчерашняя.</p>
                 <p class="restricted-item-price">—</p>
             </div>
             <div class="restricted-item">
                 <div class="restricted-item-icon">🔌</div>
                 <h4>Интерфейс прямого доступа</h4>
-                <p class="restricted-item-desc">Подключение к матрице воспоминаний.</p>
+                <p class="restricted-item-desc">Подключение к матрице воспоминаний. Терминал: /dev/null.</p>
+                <p class="restricted-item-price">—</p>
+            </div>
+            <div class="restricted-item">
+                <div class="restricted-item-icon">📊</div>
+                <h4>Лог событий</h4>
+                <p class="restricted-item-desc">Журнал всех изменений в реальности. Последняя запись: «Вы этого не видели».</p>
                 <p class="restricted-item-price">—</p>
             </div>
         </div>
         <p class="restricted-note">🔓 Доступно администраторам (уровень 3+)</p>
     </section>
 
-    <!-- Скрипт обработки формы обратной связи на главной -->
+    <!-- Скрипт обработки формы обратной связи на главной (P2-5: обновлён под заявку на звонок) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('indexFeedbackForm');
@@ -485,12 +676,11 @@
                 errorBlock.textContent = '';
 
                 const name = document.getElementById('indexFeedbackName').value.trim();
-                const email = document.getElementById('indexFeedbackEmail').value.trim();
                 const phone = document.getElementById('indexFeedbackPhone').value.trim();
                 const message = document.getElementById('indexFeedbackMessage').value.trim();
 
-                if (!name || !email || !message) {
-                    errorBlock.textContent = 'Пожалуйста, заполните все обязательные поля.';
+                if (!name || !phone) {
+                    errorBlock.textContent = 'Пожалуйста, укажите имя и телефон.';
                     errorBlock.classList.add('is-visible');
                     return;
                 }
@@ -499,7 +689,7 @@
                     const response = await fetch('/api/feedback', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ name, email, phone, message })
+                        body: JSON.stringify({ name, phone, message, subject: 'Заказ звонка' })
                     });
 
                     if (!response.ok) throw new Error('Ошибка сервера');
@@ -523,13 +713,75 @@
     </script>
 
     <footer class="site-footer">
-        <p class="footer-org">ООО «Магазин Воспоминаний»</p>
+        <p class="footer-org" id="footerOrgName" title="Общество с Безграничной Безответственностью">ОББ «Магазин Воспоминаний»</p>
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
         <ul class="footer-links">
             <li><a href="privacy.html">Политика конфиденциальности</a></li>
             <li><a href="delivery.html">Доставка и оплата</a></li>
             <li><a href="register.html">Регистрация</a></li>
+            <li><a href="requisites.html">Реквизиты</a></li>
+            <li><a href="feedback.html">Обратная связь</a></li>
         </ul>
     </footer>
+
+    <!-- Модальное окно Устава ОББ (P1-4) -->
+    <div id="obbCharterModal" class="modal hidden">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>📜 Устав ОББ «Магазин Воспоминаний»</h2>
+                    <button class="modal-close-btn" id="obbCharterClose" title="Закрыть">✕</button>
+                </div>
+                <div class="modal-body" style="font-size:14px;line-height:1.8;color:#444;">
+                    <p><strong>Статья 1. Общие положения</strong></p>
+                    <p>1.1. ОББ «Магазин Воспоминаний» (далее — Общество) является юридическим лицом, зарегистрированным во временном потоке №7.</p>
+                    <p>1.2. Общество не несёт ответственности за любые совпадения с реальностью, включая, но не ограничиваясь: воспоминания клиентов, сны сотрудников и предсказания ИИ.</p>
+                    
+                    <p><strong>Статья 2. Права и обязанности сторон</strong></p>
+                    <p>2.1. Клиент имеет право вспомнить то, чего не было, и забыть то, что было.</p>
+                    <p>2.2. Общество имеет право изменять условия в любой момент, включая прошлое.</p>
+                    
+                    <p><strong>Статья 3. Безграничная Безответственность</strong></p>
+                    <p>3.1. Общество не отвечает за утраченные, приобретённые или вымышленные воспоминания.</p>
+                    <p>3.2. Любые претензии рассматриваются в порядке живой очереди в приёмной, расположенной вне пространственно-временного континуума.</p>
+                    
+                    <p><strong>Статья 4. Заключительные положения</strong></p>
+                    <p>4.1. Настоящий устав не имеет юридической силы, но имеет силу воспоминания.</p>
+                    <p>4.2. Если вы помните, что читали этот устав — значит, так и было.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Модалка Устава ОББ (P1-4)
+            const orgName = document.getElementById('footerOrgName');
+            const obbModal = document.getElementById('obbCharterModal');
+            const obbClose = document.getElementById('obbCharterClose');
+            
+            if (orgName && obbModal) {
+                orgName.style.cursor = 'pointer';
+                orgName.addEventListener('click', () => {
+                    obbModal.classList.remove('hidden');
+                    obbModal.classList.add('is-visible');
+                });
+                
+                if (obbClose) {
+                    obbClose.addEventListener('click', () => {
+                        obbModal.classList.remove('is-visible');
+                        obbModal.classList.add('hidden');
+                    });
+                }
+                
+                obbModal.addEventListener('click', (e) => {
+                    if (e.target === obbModal) {
+                        obbModal.classList.remove('is-visible');
+                        obbModal.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

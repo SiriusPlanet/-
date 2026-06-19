@@ -1,25 +1,37 @@
 <!-- Файл: MySite/delivery.html -->
-<!-- Страница доставки и оплаты — способы доставки, возврата, оплаты и гарантии -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Доставка и оплата — Магазин воспоминаний. Мгновенная доставка во времени, возврат до момента покупки">
     <title>Доставка и оплата — Магазин воспоминаний</title>
-    
-    <!-- Система доступа - ЗАГРУЖАЕТСЯ ПЕРВОЙ -->
-    <script type="module" src="static/js/access-init.js"></script>
-    
     <link rel="stylesheet" href="static/css/style.css">
+    <script type="module" src="static/js/access-init.js"></script>
     <script type="module" src="static/js/main.js"></script>
-    
     <style>
-        /* --- Система доступа — временно отключена, весь функционал виден --- */
-        #access-overlay {
-            display: none !important;
+        /* Дополнительные стили для delivery.html */
+        .delivery-section .delivery-block .delivery-joke {
+            background: rgba(165, 214, 167, 0.15);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid #a5d6a7;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #555;
         }
-        .access-button {
-            display: none !important;
+        .delivery-section .delivery-block .guarantee-highlight {
+            background: rgba(255, 248, 225, 0.5);
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            border: 1px dashed #ffe082;
+            text-align: center;
+        }
+        .delivery-section .delivery-block .guarantee-highlight strong {
+            color: #2e7d32;
+            font-size: 1.1rem;
         }
     </style>
 </head>
@@ -46,9 +58,7 @@
                 <li><a href="actions.html">Акции</a></li>
                 <li><a href="contacts.html">Контакты</a></li>
                 <li><a href="news.html">Новости</a></li>
-                <li><a href="requisites.html">Реквизиты</a></li>
-                <li><a href="feedback.html">Обратная связь</a></li>
-                <li><a href="register.html">Регистрация</a></li>
+                <li><a href="delivery.html">Доставка</a></li>
             </ul>
         </nav>
         <div class="auth-link">
@@ -58,65 +68,128 @@
 
     <main>
         <!-- Секция доставки и оплаты -->
-        <section class="card">
+        <section class="delivery-section">
             <h1>Доставка и оплата</h1>
 
             <p>Добро пожаловать в раздел доставки — где время течёт не так, как вы думаете.</p>
 
-            <!-- Способы доставки -->
-            <h2>Способы доставки</h2>
-            <ul>
-                <li><strong>⚡ Мгновенная доставка во времени:</strong> товар появляется в вашем воспоминании уже сейчас. Реальность подстраивается позже.</li>
-                <li><strong>🌀 Через временные петли:</strong> вы получаете товар, используете его, потом он возвращается в прошлое. Вы остаётесь с ощущением, что всё было.</li>
-                <li><strong>📦 Классическая (не рекомендуется):</strong> может сломать хронологию. Используется только в крайних случаях.</li>
-            </ul>
+            <!-- Блок: Способы доставки -->
+            <div class="delivery-block">
+                <h2>Способы доставки</h2>
+                <ul>
+                    <li><strong>⚡ Мгновенная доставка во времени:</strong> товар появляется в вашем воспоминании уже сейчас. Реальность подстраивается позже.</li>
+                    <li><strong>🌀 Через временные петли:</strong> вы получаете товар, используете его, потом он возвращается в прошлое. Вы остаётесь с ощущением, что всё было.</li>
+                    <li><strong>📦 Классическая (не рекомендуется):</strong> может сломать хронологию. Используется только в крайних случаях.</li>
+                </ul>
+                <div class="delivery-joke">
+                    <p>⏳ <strong>Примечание:</strong> При заказе мгновенной доставки товар может появиться до того, как вы его заказали. Если вы получили посылку, но не помните, что заказывали — <em>значит, заказ ещё в пути</em>. Наслаждайтесь путешествием во времени.</p>
+                </div>
+            </div>
 
-            <!-- Условия возврата -->
-            <h2>Условия возврата</h2>
-            <p>Возврат возможен <strong>только до момента покупки</strong>. Мы автоматически корректируем хронологию, чтобы сделка никогда не произошла.</p>
-            <p>После возврата:</p>
-            <ul>
-                <li>денег нет (они стали частью прошлого),</li>
-                <li>товара нет (его никогда не было),</li>
-                <li>но воспоминание осталось (и это главное).</li>
-            </ul>
+            <!-- Блок: Условия возврата -->
+            <div class="delivery-block">
+                <h2>Условия возврата</h2>
+                <p>Возврат возможен <strong>только до момента покупки</strong>. Мы автоматически корректируем хронологию, чтобы сделка никогда не произошла.</p>
+                <p>После возврата:</p>
+                <ul>
+                    <li>денег нет (они стали частью прошлого),</li>
+                    <li>товара нет (его никогда не было),</li>
+                    <li>но воспоминание осталось (и это главное).</li>
+                </ul>
+                <div class="delivery-joke">
+                    <p>🔄 <strong>Важно:</strong> Если вы вернули товар, но помните, что он у вас был — <em>это нормально</em>. Воспоминание о владении товаром не подлежит возврату. Оно остаётся с вами навсегда, даже если самого товара больше не существует в этой временной линии.</p>
+                </div>
+            </div>
 
-            <!-- Способы оплаты -->
-            <h2>Способы оплаты</h2>
-            <ul>
-                <li>💎 Камни бесконечности (любые, кроме Камня времени — он у нас)</li>
-                <li>⏳ Единицы времени (минуты, часы, годы — принимаем в любых объёмах)</li>
-                <li>🧠 Воспоминания (особенно ценные: первый поцелуй, экзамен, встреча с родителями)</li>
-                <li>💰 Наличные (временно не принимаются — реальность нестабильна)</li>
-            </ul>
+            <!-- Блок: Способы оплаты -->
+            <div class="delivery-block">
+                <h2>Способы оплаты</h2>
+                <ul>
+                    <li>💎 Камни бесконечности (любые, кроме Камня времени — он у нас)</li>
+                    <li>⏳ Единицы времени (минуты, часы, годы — принимаем в любых объёмах)</li>
+                    <li>🧠 Воспоминания (особенно ценные: первый поцелуй, экзамен, встреча с родителями)</li>
+                    <li>💰 Наличные (временно не принимаются — реальность нестабильна)</li>
+                </ul>
+            </div>
 
-            <!-- Предупреждение -->
+            <!-- Блок: Предупреждение -->
             <div class="warning-box">
                 <p><strong>ВАЖНО:</strong> все платежи являются <em>односторонними изменениями в хронологии</em>. Отмена возможна только через суд золотых рыбок (решение — 3 желания).</p>
             </div>
 
-            <!-- Гарантии -->
-            <h2>Гарантии</h2>
-            <p>Мы не гарантируем:</p>
-            <ul>
-                <li>что товар останется с вами,</li>
-                <li>что он не начнёт разговаривать,</li>
-                <li>что вы не встретите себя в детстве.</li>
-            </ul>
-            <p>Но мы гарантируем одно:</p>
-            <p class="disclaimer"><strong>Вы запомните это навсегда.</strong></p>
+            <!-- Блок: Гарантии -->
+            <div class="delivery-block">
+                <h2>Гарантии</h2>
+                <p>Мы не гарантируем:</p>
+                <ul>
+                    <li>что товар останется с вами,</li>
+                    <li>что он не начнёт разговаривать,</li>
+                    <li>что вы не встретите себя в детстве.</li>
+                </ul>
+                <p>Но мы гарантируем одно:</p>
+                <div class="guarantee-highlight">
+                    <p><strong>Вы запомните это навсегда.</strong></p>
+                </div>
+            </div>
         </section>
     </main>
 
     <!-- Футер -->
     <footer class="site-footer">
-        <p class="footer-org">ООО «Магазин Воспоминаний»</p>
+        <p class="footer-org" id="footerOrgName" title="Общество с Безграничной Безответственностью">ОББ «Магазин Воспоминаний»</p>
         <p>© 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
         <ul class="footer-links">
             <li><a href="privacy.html">Политика конфиденциальности</a></li>
             <li><a href="delivery.html">Доставка и оплата</a></li>
-            <li><a href="register.html">Регистрация</a></li>
+            <li><a href="requisites.html">Реквизиты</a></li>
         </ul>
     </footer>
+
+    <!-- Модалка Устава ОББ -->
+    <div id="obbCharterModal" class="modal hidden">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>📜 Устав ОББ «Магазин Воспоминаний»</h2>
+                    <button class="modal-close" id="obbCharterClose">&times;</button>
+                </div>
+                <div class="modal-body" style="font-size:14px;line-height:1.8;color:#444;">
+                    <p><strong>Статья 1. О названии</strong></p>
+                    <p>ОББ расшифровывается как «Общество с Безграничной Безответственностью». Мы не отвечаем ни за что, но особенно — за последствия.</p>
+                    <p><strong>Статья 2. О воспоминаниях</strong></p>
+                    <p>Все товары, приобретённые в магазине, могут исчезнуть из памяти в любой момент. Это не брак, а особенность квантовой нестабильности.</p>
+                    <p><strong>Статья 3. О деньгах</strong></p>
+                    <p>Деньги не возвращаются. Они становятся частью вашего воспоминания о покупке. Если вы не помните покупку — значит, её не было, и деньги остались при вас.</p>
+                    <p><strong>Статья 4. О претензиях</strong></p>
+                    <p>Претензии принимаются только в письменном виде на папирусе, заверенные у нотариуса временной линии №7. Срок рассмотрения — от 7 миллисекунд до 7000 лет.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Открытие модалки устава ОББ
+        document.getElementById('footerOrgName')?.addEventListener('click', function() {
+            document.getElementById('obbCharterModal').classList.remove('hidden');
+        });
+        document.getElementById('obbCharterClose')?.addEventListener('click', function() {
+            document.getElementById('obbCharterModal').classList.add('hidden');
+        });
+        // Закрытие по клику вне модалки
+        document.getElementById('obbCharterModal')?.addEventListener('click', function(e) {
+            if (e.target === this) this.classList.add('hidden');
+        });
+    </script>
+    <script type="module">
+        import { AccessLevels } from './static/js/access-levels.js';
+        import { PermissionManager } from './static/js/permission-manager.js';
+        
+        const accessLevels = new AccessLevels();
+        const permissionManager = new PermissionManager(accessLevels);
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            await permissionManager.init();
+        });
+    </script>
 </body>
 </html>

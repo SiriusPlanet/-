@@ -1,7 +1,10 @@
-// static/js/main.js — упрощённая версия
-// Инициализирует Publisher для текущей страницы + обработку формы
+// static/js/main.js — главный скрипт приложения
+// Инициализирует Publisher, бегущую строку, скругление шапок, обработку форм
 
 import { Publisher } from './publisher.js';
+
+// P1-5: Количество новостей в бегущей строке
+const TICKER_NEWS_COUNT = 5;
 
 class MainApp {
     constructor() {
@@ -32,6 +35,9 @@ class MainApp {
             this.setupFormHandler();
             this.setupAddButton();
             this.setupScrollHandler();
+            this.initTicker();          // P1-5: бегущая строка
+            this.initBottomRadius();    // P1-6: скругление шапок
+            this.initCartBadge();       // P1-3: счётчик корзины
             console.log('[MainApp] Инициализирован');
         } catch (error) {
             console.error('[MainApp] Ошибка инициализации:', error);
@@ -63,7 +69,6 @@ class MainApp {
 
         this.publisher = new Publisher();
 
-        // Для index.html используем компактные карточки
         const options = this.currentPage === 'index'
             ? { cardClass: 'card-compact' }
             : {};
@@ -71,6 +76,127 @@ class MainApp {
         await this.publisher.publish(this.currentPage, this.container, options);
     }
 
+    // ===== P1-5: Бегущая строка из новостей =====
+    async initTicker() {
+        const ticker = document.getElementById('news-ticker');
+        if (!ticker) return;
+
+        try {
+            const res = await fetch('/get-news');
+            if (!res.ok) throw new Error('Ошибка загрузки');
+            const data = await res.json();
+            const allNews = (data.news || []).filter(n => n.lotType === 'news');
+
+            // Берём N последних
+            const latest = allNews.slice(0, TICKER_NEWS_COUNT);
+
+            if (latest.length === 0) {
+                ticker.textContent = '✦ Хроники пусты. Воспоминания ещё не записаны. ✦';
+                return;
+            }
+
+            // Формируем строку: дата → заголовок → кратко
+            const items = latest.map(n => {
+                const date = n.date || '????-??-??';
+                const title = n.title || 'Без названия';
+                const preview = (n.preview || n.content || '').slice(0, 80);
+                return `📅 ${date} · ${title} · ${preview}`;
+            });
+
+            // Дублируем для плавной прокрутки
+            ticker.textContent = '✦ ' + items.join(' ✦ ✦ ') + ' ✦';
+        } catch (e) {
+            console.warn('[MainApp] Ошибка загрузки для бегущей строки:', e);
+            ticker.textContent = '✦ Хроники временно недоступны. Попробуйте вспомнить позже. ✦';
+        }
+    }
+
+    // ===== P1-6: Адаптивное скругление нижних углов шапки =====
+    initBottomRadius() {
+        const mainNav = document.querySelector('.main-nav');
+        if (!mainNav) return;
+
+        let lastAppliedState = null;
+        let rafId;
+
+        function applyBottomRadius() {
+            const visibleChildren = Array.from(mainNav.children)
+                .filter(child =>
+                    child.offsetParent !== null &&
+                    window.getComputedStyle(child).display !== 'none'
+                );
+
+            const lastVisibleChild = visibleChildren[visibleChildren.length - 1];
+            const currentState = {
+                hasVisibleChildren: visibleChildren.length > 0,
+                lastChild: lastVisibleChild
+            };
+
+            if (JSON.stringify(currentState) === JSON.stringify(lastAppliedState)) {
+                return;
+            }
+
+            lastAppliedState = currentState;
+
+            // Сбрасываем скругления у всех
+            Array.from(mainNav.children).forEach(child => {
+                child.style.borderBottomLeftRadius = '';
+                child.style.borderBottomRightRadius = '';
+            });
+
+            if (lastVisibleChild) {
+                lastVisibleChild.style.borderBottomLeftRadius = '10px';
+                lastVisibleChild.style.borderBottomRightRadius = '10px';
+            } else {
+                mainNav.style.borderBottomLeftRadius = '10px';
+                mainNav.style.borderBottomRightRadius = '10px';
+            }
+        }
+
+        function handleScroll() {
+            cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(applyBottomRadius);
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleScroll);
+        window.addEventListener('DOMContentLoaded', applyBottomRadius);
+        // Также запускаем сразу
+        setTimeout(applyBottomRadius, 100);
+    }
+
+    // ===== P1-3: Счётчик корзины =====
+    initCartBadge() {
+        this.updateCartBadge();
+        // Обновляем при изменении localStorage (другие вкладки)
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'mySiteCart') this.updateCartBadge();
+        });
+    }
+
+    updateCartBadge() {
+        const badge = document.getElementById('cartBadge');
+        const totalEl = document.getElementById('cartTotal');
+        if (!badge) return;
+
+        try {
+            const stored = localStorage.getItem('mySiteCart');
+            const cart = stored ? JSON.parse(stored) : [];
+            const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+            const total = cart.reduce((sum, item) => sum + parseFloat(item.price || 0) * (item.quantity || 1), 0);
+
+            badge.textContent = count;
+            badge.style.display = count > 0 ? 'flex' : 'none';
+            if (totalEl) {
+                totalEl.textContent = count > 0 ? `${total.toFixed(2)} ₽` : '';
+            }
+        } catch (e) {
+            badge.textContent = '0';
+            badge.style.display = 'none';
+        }
+    }
+
+    // ===== Остальные методы (без изменений) =====
     setupAddButton() {
         const addBtn = document.querySelector('.add-news-btn');
         const modal = document.getElementById('addNewsModal');
@@ -82,18 +208,15 @@ class MainApp {
             document.body.style.overflow = 'hidden';
         });
 
-        // Закрытие по кнопке отмена
         const cancelBtn = modal.querySelector('.cancel-btn');
         if (cancelBtn) {
             cancelBtn.addEventListener('click', () => this.closeModal(modal));
         }
 
-        // Закрытие по клику вне модалки
         modal.addEventListener('click', (e) => {
             if (e.target === modal) this.closeModal(modal);
         });
 
-        // Закрытие по Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
                 this.closeModal(modal);
@@ -106,7 +229,6 @@ class MainApp {
         modal.classList.add('hidden');
         document.body.style.overflow = '';
 
-        // Сброс формы
         const form = modal.querySelector('form');
         if (form) {
             form.reset();
@@ -114,11 +236,9 @@ class MainApp {
             delete form.dataset.originalLotType;
         }
 
-        // Сброс кнопки сабмита
         const submitBtn = modal.querySelector('.btn-submit');
         if (submitBtn) submitBtn.textContent = 'Имплантировать';
 
-        // Снять ⚠️ с табов
         document.querySelectorAll('.form-tab').forEach(t => {
             t.classList.remove('has-warning');
             t.removeAttribute('title');
@@ -131,19 +251,15 @@ class MainApp {
 
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                // Переключаем активный таб
                 tabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
 
-                // Показываем/скрываем поля в зависимости от типа
                 const lotType = tab.dataset.lottype;
                 const isProduct = lotType === 'product';
 
-                // Цена — только для товара
                 const priceGroup = document.getElementById('priceGroup');
                 if (priceGroup) priceGroup.classList.toggle('hidden', !isProduct);
 
-                // Дата — только для новости
                 const dateGroup = document.getElementById('dateGroup');
                 if (dateGroup) dateGroup.classList.toggle('hidden', isProduct);
             });
@@ -159,16 +275,13 @@ class MainApp {
         const form = document.getElementById('newsForm');
         if (!form) return;
 
-        // Инициализация табов
         this.setupFormTabs();
 
-        // По умолчанию: на странице каталога активен "Товар", иначе "Новость"
         const defaultLotType = this.currentPage === 'catalog' ? 'product' : 'news';
         const defaultTab = document.querySelector(`.form-tab[data-lottype="${defaultLotType}"]`);
         if (defaultTab) {
             document.querySelectorAll('.form-tab').forEach(t => t.classList.remove('active'));
             defaultTab.classList.add('active');
-            // Показываем/скрываем поля
             const isProduct = defaultLotType === 'product';
             const priceGroup = document.getElementById('priceGroup');
             if (priceGroup) priceGroup.classList.toggle('hidden', !isProduct);
@@ -181,7 +294,6 @@ class MainApp {
             await this.handleSubmit(form);
         });
 
-        // Обновление текста при выборе файла
         const imageInput = document.getElementById('image');
         const uploadLabel = document.querySelector('.file-upload-label span:last-child');
         if (imageInput && uploadLabel) {
@@ -198,7 +310,6 @@ class MainApp {
         const originalLotType = form.dataset.originalLotType;
         const newLotType = this.getActiveLotType();
 
-        // Предупреждение при смене типа лота в режиме редактирования
         if (editId && originalLotType && originalLotType !== newLotType) {
             const typeNames = { news: 'новость', product: 'товар' };
             if (!confirm(`Вы меняете тип лота с «${typeNames[originalLotType] || originalLotType}» на «${typeNames[newLotType] || newLotType}». Продолжить?`)) {
@@ -229,12 +340,10 @@ class MainApp {
             let url, options;
 
             if (editId) {
-                // Режим редактирования
                 formData.append('id', editId);
                 url = '/api/update-news';
                 options = { method: 'POST', body: formData };
             } else {
-                // Режим создания
                 url = '/save-news';
                 options = { method: 'POST', body: formData };
             }
@@ -247,7 +356,6 @@ class MainApp {
             if (result.success) {
                 this.showToast(editId ? 'Запись обновлена' : 'Запись сохранена');
                 this.closeModal(document.getElementById('addNewsModal'));
-                // Перепубликуем
                 if (this.publisher && this.currentPage && this.container) {
                     await this.publisher.publish(this.currentPage, this.container);
                 }
@@ -295,7 +403,14 @@ class MainApp {
     }
 }
 
+// Экспортируем updateCartBadge для card-constructor.js
+window.updateCartBadge = function() {
+    const app = window.__mainApp;
+    if (app) app.updateCartBadge();
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
     const app = new MainApp();
+    window.__mainApp = app;
     await app.init();
 });

@@ -2,15 +2,19 @@
  * CardConstructor — единый конструктор карточек для лотов
  * Собирает HTML-карточку из данных лота (новость, товар, акция)
  * 
- * Карточка содержит:
- * - изображение (или заглушку)
- * - заголовок
- * - цену (если есть)
- * - бейдж скидки (если discount > 0)
- * - кнопку Del (для админа)
- * - кнопку % (для админа, только у товаров)
- * - кнопку "Узнать больше..." (detail-btn)
- * - круглую кнопку корзины 🛒 (cart-icon-btn, только для товаров)
+ * Формат карточки (P2-1):
+ * - Товар: 1 строка — заголовок, 2-3 строки — описание (с ...),
+ *   предпоследняя строка — цена (при скидке базовая + новая),
+ *   нижняя строка — кнопки "Узнать больше" + "В корзину"
+ * - Новость: 1-2 строки — заголовок (с ...), остальное — краткое содержание (с ...)
+ * 
+ * Логика снятия (P0-2):
+ * - Кнопка H скрывает карточку из каталога и добавляет в moveTable
+ * - moveTable видна для уровней 2+
+ * - При ↩ карточка возвращается в каталог
+ * 
+ * Логика скидок (P0-3):
+ * - Если discount > 0, карточка отображается ТОЛЬКО на actions.html
  */
 
 export class CardConstructor {
@@ -21,10 +25,26 @@ export class CardConstructor {
      * @param {number} options.accessLevel - уровень доступа (3 = админ)
      * @param {Function} options.onDelete - callback при удалении
      * @param {Function} options.onDiscount - callback при изменении скидки
-     * @returns {HTMLElement} - элемент .catalog-card
+     * @param {string} options.pageContext - контекст страницы ('catalog', 'actions', 'news')
+     * @returns {HTMLElement|null} - элемент .catalog-card или null если карточка скрыта
      */
     createCard(item, options = {}) {
-        const { accessLevel = 0, onDelete, onDiscount, onEdit } = options;
+        const { accessLevel = 0, onDelete, onDiscount, onEdit, pageContext = 'catalog' } = options;
+        const discount = parseInt(item.discount) || 0;
+
+        // P0-3: Если есть скидка и мы НЕ на странице акций — не показываем
+        if (discount > 0 && pageContext !== 'actions') {
+            return null;
+        }
+
+        // P0-2: Если лот в moveTable (localStorage) и мы на каталоге — не показываем
+        if (pageContext === 'catalog') {
+            const movedIds = this._getMovedIds();
+            if (movedIds.includes(item.id)) {
+                return null;
+            }
+        }
+
         const card = document.createElement('div');
         card.classList.add('catalog-card');
         card.dataset.id = item.id;
@@ -42,9 +62,8 @@ export class CardConstructor {
 
         const title = this.escapeHtml(item.title || '');
         const desc = this.escapeHtml(item.preview || item.content || '');
-        const discount = parseInt(item.discount) || 0;
 
-        // Цена: если есть скидка — показываем старую цену зачёркнутой и новую справа
+        // P2-1: Цена — всегда прижата к низу
         let priceHtml = '';
         if (item.price) {
             const originalPrice = parseFloat(item.price);
@@ -61,35 +80,37 @@ export class CardConstructor {
             }
         }
 
-        // Бейдж скидки — круг с радиальным градиентом, центр в левом верхнем углу
+        // Бейдж скидки
         const badgeHtml = discount > 0
             ? `<div class="discount-badge"><span class="discount-badge-text">${discount}<small>%</small></span></div>`
             : '';
 
-        // Кнопка H (Hidden) — переместить в таблицу (видна всем, временно)
-        const moveBtnHtml = `<button class="ctrl-btn move-btn" data-id="${item.id}" title="Переместить в таблицу">H</button>`;
+        // P2-1: Описание с ограничением по строкам (CSS text-overflow)
+        const descClass = item.lotType === 'product' ? 'card-desc card-desc--product' : 'card-desc card-desc--news';
 
-        // Кнопка Del — видна всем (временно, пока не настроена система доступов)
-        const delBtnHtml = `<button class="ctrl-btn del-btn" data-id="${item.id}" title="Удалить">Del</button>`;
-
-        // Кнопка re: — редактирование лота
-        const editBtnHtml = `<button class="ctrl-btn edit-btn" data-id="${item.id}" title="Редактировать">re:</button>`;
-
-        // Кнопка % — видна всем, только для товаров (временно, пока не настроена система доступов)
-        const discountBtnHtml = item.lotType === 'product'
+        // Кнопки управления (видимы для админа)
+        const moveBtnHtml = accessLevel >= 2
+            ? `<button class="ctrl-btn move-btn" data-id="${item.id}" title="Снять с показа">H</button>`
+            : '';
+        const delBtnHtml = accessLevel >= 3
+            ? `<button class="ctrl-btn del-btn" data-id="${item.id}" title="Удалить">Del</button>`
+            : '';
+        const editBtnHtml = accessLevel >= 2
+            ? `<button class="ctrl-btn edit-btn" data-id="${item.id}" title="Редактировать">re:</button>`
+            : '';
+        const discountBtnHtml = (item.lotType === 'product' && accessLevel >= 2)
             ? `<button class="ctrl-btn discount-btn" data-id="${item.id}" data-discount="${discount}" data-price="${item.price || ''}" title="Установить скидку">%</button>`
             : '';
 
-        // Кнопка "Узнать больше..." — для всех типов лотов
+        // Кнопка "Узнать больше..." — для всех
         const detailBtnHtml = `<button class="detail-btn" data-id="${item.id}" title="Подробнее">Узнать больше...</button>`;
 
-        // Круглая кнопка корзины 🛒 — только для товаров
+        // Кнопка корзины 🛒 — только для товаров
         const cartIconHtml = item.lotType === 'product'
             ? `<button class="cart-icon-btn" data-id="${item.id}" title="Добавить в корзину">🛒</button>`
             : '';
 
-        console.log(`[CardConstructor] lotType=${item.lotType}, delBtn=${!!delBtnHtml}, discountBtn=${!!discountBtnHtml}`);
-
+        // P2-1: Собираем карточку — заголовок, описание, цена, кнопки
         card.innerHTML = `
             <div class="catalog-card-inner">
                 <img src="${imgSrc}" alt="${title}" class="catalog-image" loading="lazy">
@@ -100,7 +121,8 @@ export class CardConstructor {
                 ${discountBtnHtml}
             </div>
             <div class="catalog-card-content">
-                <h3 class="catalog-card-title">${title}</h3>
+                <h3 class="catalog-card-title" title="${title}">${title}</h3>
+                <div class="${descClass}" title="${desc}">${desc || 'Описание отсутствует'}</div>
                 ${priceHtml}
                 <div class="catalog-card-footer">
                     ${detailBtnHtml}
@@ -109,10 +131,7 @@ export class CardConstructor {
             </div>
         `;
 
-        // ДИАГНОСТИКА: проверяем, есть ли кнопки в DOM
-        console.log(`[CardConstructor] card ${item.id}: moveBtn=${!!card.querySelector('.move-btn')}, delBtn=${!!card.querySelector('.del-btn')}, editBtn=${!!card.querySelector('.edit-btn')}, discountBtn=${!!card.querySelector('.discount-btn')}`);
-
-        // Навешиваем обработчики — видно всем (временно, пока не настроена система доступов)
+        // Навешиваем обработчики
         const moveBtn = card.querySelector('.move-btn');
         if (moveBtn) {
             moveBtn.addEventListener('click', (e) => {
@@ -129,7 +148,6 @@ export class CardConstructor {
             });
         }
 
-        // Обработчик кнопки re:
         const editBtn = card.querySelector('.edit-btn');
         if (editBtn && onEdit) {
             editBtn.addEventListener('click', (e) => {
@@ -142,11 +160,11 @@ export class CardConstructor {
         if (dscBtn && onDiscount) {
             dscBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                onDiscount(item.id, dscBtn, card);
+                // P2-7: передаём item целиком для поля причины скидки
+                this._openDiscountModal(item, dscBtn, card, onDiscount);
             });
         }
 
-        // Обработчик кнопки "Узнать больше..."
         const detailBtn = card.querySelector('.detail-btn');
         if (detailBtn) {
             detailBtn.addEventListener('click', (e) => {
@@ -155,7 +173,6 @@ export class CardConstructor {
             });
         }
 
-        // Обработчик круглой кнопки корзины
         const cartIcon = card.querySelector('.cart-icon-btn');
         if (cartIcon) {
             cartIcon.addEventListener('click', (e) => {
@@ -168,8 +185,119 @@ export class CardConstructor {
     }
 
     /**
+     * P2-7: Открывает модалку установки скидки с полем "причина"
+     */
+    _openDiscountModal(item, btn, card, onDiscount) {
+        const currentDiscount = parseInt(item.discount) || 0;
+        const currentReason = item.discountReason || '';
+        const price = item.price || '0';
+
+        const reason = prompt(
+            `Укажите скидку (%) для «${item.title}»\nТекущая: ${currentDiscount}%\n\nИ причину скидки (необязательно):`,
+            `${currentDiscount}\n${currentReason}`
+        );
+
+        if (reason === null) return;
+
+        const lines = reason.split('\n');
+        const discountStr = lines[0].trim();
+        const reasonText = lines.slice(1).join('\n').trim() || '';
+
+        const discountVal = parseInt(discountStr);
+        if (isNaN(discountVal) || discountVal < 0 || discountVal > 100) {
+            alert('Скидка должна быть числом от 0 до 100');
+            return;
+        }
+
+        // Обновляем данные лота
+        item.discount = discountVal;
+        item.discountReason = reasonText;
+
+        // Вызываем колбэк
+        if (onDiscount) {
+            onDiscount(item.id, btn, card);
+        }
+    }
+
+    /**
+     * P0-2: Перемещает товар в таблицу снятых (#moveTable) и скрывает из каталога
+     */
+    moveToTable(item, card) {
+        const tableBody = document.getElementById('moveTableBody');
+        const moveTable = document.getElementById('moveTable');
+        if (!tableBody || !moveTable) return;
+
+        // Показываем таблицу
+        moveTable.style.display = 'block';
+
+        // Проверяем, нет ли уже такого товара в таблице
+        const existingRow = tableBody.querySelector(`tr[data-id="${item.id}"]`);
+        if (existingRow) return;
+
+        // Сохраняем ID в localStorage, чтобы при перезагрузке не показывать
+        this._addMovedId(item.id);
+
+        // Скрываем карточку из каталога
+        card.style.display = 'none';
+
+        const title = this.escapeHtml(item.title || 'Без названия');
+        const price = item.price ? `${this.escapeHtml(item.price)} ₽` : '—';
+
+        const row = document.createElement('tr');
+        row.dataset.id = item.id;
+        row.innerHTML = `
+            <td>${title}</td>
+            <td>${price}</td>
+            <td><button class="move-table-remove-btn" data-id="${item.id}" title="Вернуть в каталог">↩</button></td>
+        `;
+
+        // Обработчик кнопки "Вернуть"
+        row.querySelector('.move-table-remove-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Удаляем из localStorage
+            this._removeMovedId(item.id);
+            // Удаляем строку
+            row.remove();
+            // Показываем карточку снова (если она ещё в DOM)
+            card.style.display = '';
+            // Если таблица пуста — скрываем
+            if (tableBody.children.length === 0) {
+                moveTable.style.display = 'none';
+            }
+            this.showCartToast(`«${title}» возвращён в каталог`);
+        });
+
+        tableBody.appendChild(row);
+        this.showCartToast(`«${title}» снят с показа`);
+    }
+
+    /**
+     * P0-2: Сохраняет ID снятого лота в localStorage
+     */
+    _getMovedIds() {
+        try {
+            const data = localStorage.getItem('mySiteMovedItems');
+            return data ? JSON.parse(data) : [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    _addMovedId(id) {
+        const ids = this._getMovedIds();
+        if (!ids.includes(id)) {
+            ids.push(id);
+            localStorage.setItem('mySiteMovedItems', JSON.stringify(ids));
+        }
+    }
+
+    _removeMovedId(id) {
+        const ids = this._getMovedIds().filter(i => i !== id);
+        localStorage.setItem('mySiteMovedItems', JSON.stringify(ids));
+    }
+
+    /**
      * Открывает модальное окно с детальной информацией о товаре
-     * @param {Object} item - данные лота
      */
     openDetailModal(item) {
         const modal = document.getElementById('detailModal');
@@ -183,7 +311,6 @@ export class CardConstructor {
         const content = this.escapeHtml(item.content || '');
         const discount = parseInt(item.discount) || 0;
 
-        // Нормализуем путь к изображению
         let imgSrc = '/images/img_n/400.png';
         if (item.image) {
             if (item.image.startsWith('images/') || item.image.startsWith('/images/')) {
@@ -193,7 +320,6 @@ export class CardConstructor {
             }
         }
 
-        // Цена
         let priceHtml = '';
         if (item.price) {
             const originalPrice = parseFloat(item.price);
@@ -210,10 +336,8 @@ export class CardConstructor {
             }
         }
 
-        // Полное описание (content) + preview отдельно
         const fullDesc = content || 'Описание отсутствует';
 
-        // Контекст вселенной (для товаров)
         const contextHtml = item.lotType === 'product' ? `
             <div class="detail-context">
                 <p>🕰️ Данный предмет подвержен <strong>локальной квантовой нестабильности</strong>.
@@ -227,7 +351,6 @@ export class CardConstructor {
             </div>
         ` : '';
 
-        // Заполняем модалку
         const headerEl = modal.querySelector('.modal-header h2');
         const bodyEl = modal.querySelector('.modal-body');
         const footerEl = modal.querySelector('.modal-footer');
@@ -246,7 +369,6 @@ export class CardConstructor {
             `;
         }
 
-        // Кнопка в футере — только для товаров
         if (footerEl) {
             const cartBtn = footerEl.querySelector('.cart-btn');
             if (item.lotType === 'product') {
@@ -272,30 +394,21 @@ export class CardConstructor {
             }
         }
 
-        // Показываем модалку
         modal.classList.remove('hidden');
-        // Небольшая задержка для срабатывания transition
         requestAnimationFrame(() => {
             modal.classList.add('is-visible');
         });
     }
 
-    /**
-     * Закрывает модальное окно детального просмотра
-     */
     closeDetailModal() {
         const modal = document.getElementById('detailModal');
         if (!modal) return;
         modal.classList.remove('is-visible');
-        // После завершения анимации скрываем
         setTimeout(() => {
             modal.classList.add('hidden');
         }, 300);
     }
 
-    /**
-     * Добавляет товар в корзину (localStorage)
-     */
     addToCart(item) {
         const discount = parseInt(item.discount) || 0;
         const originalPrice = parseFloat(item.price) || 0;
@@ -313,7 +426,6 @@ export class CardConstructor {
             quantity: 1
         };
 
-        // Получаем текущую корзину из localStorage
         let cart = [];
         try {
             const stored = localStorage.getItem('mySiteCart');
@@ -322,7 +434,6 @@ export class CardConstructor {
             cart = [];
         }
 
-        // Проверяем, есть ли уже такой товар
         const existing = cart.find(c => c.id === item.id);
         if (existing) {
             existing.quantity += 1;
@@ -331,14 +442,14 @@ export class CardConstructor {
         }
 
         localStorage.setItem('mySiteCart', JSON.stringify(cart));
-
-        // Показываем уведомление
         this.showCartToast(`«${item.title}» добавлен в корзину`);
+
+        // Обновляем счётчик корзины, если функция есть
+        if (window.updateCartBadge) {
+            window.updateCartBadge();
+        }
     }
 
-    /**
-     * Показывает toast-уведомление о добавлении в корзину
-     */
     showCartToast(message) {
         const toast = document.createElement('div');
         toast.className = 'toast-notification success';
@@ -347,53 +458,6 @@ export class CardConstructor {
         setTimeout(() => toast.remove(), 3000);
     }
 
-    /**
-     * Перемещает товар в таблицу перемещённых товаров (#moveTable)
-     * @param {Object} item - данные лота
-     * @param {HTMLElement} card - DOM-элемент карточки
-     */
-    moveToTable(item, card) {
-        const tableBody = document.getElementById('moveTableBody');
-        const moveTable = document.getElementById('moveTable');
-        if (!tableBody || !moveTable) return;
-
-        // Показываем таблицу
-        moveTable.style.display = 'block';
-
-        // Проверяем, нет ли уже такого товара в таблице
-        const existingRow = tableBody.querySelector(`tr[data-id="${item.id}"]`);
-        if (existingRow) return;
-
-        const title = this.escapeHtml(item.title || 'Без названия');
-        const price = item.price ? `${this.escapeHtml(item.price)} ₽` : '—';
-
-        const row = document.createElement('tr');
-        row.dataset.id = item.id;
-        row.innerHTML = `
-            <td>${title}</td>
-            <td>${price}</td>
-            <td><button class="move-table-remove-btn" data-id="${item.id}" title="Вернуть">↩</button></td>
-        `;
-
-        // Обработчик кнопки "Вернуть"
-        row.querySelector('.move-table-remove-btn').addEventListener('click', (e) => {
-            e.stopPropagation();
-            row.remove();
-            // Если таблица пуста — скрываем
-            if (tableBody.children.length === 0) {
-                moveTable.style.display = 'none';
-            }
-        });
-
-        tableBody.appendChild(row);
-
-        // Показываем toast
-        this.showCartToast(`«${title}» перемещён в таблицу`);
-    }
-
-    /**
-     * Экранирует HTML-сущности
-     */
     escapeHtml(text) {
         if (!text) return '';
         const div = document.createElement('div');

@@ -349,17 +349,22 @@ class SimpleHandler(BaseHTTPRequestHandler):
             username = data.get('username', '').strip()
             password = data.get('password', '').strip()
 
-            # ⚠️ ВРЕМЕННАЯ АВТОРИЗАЦИЯ (демо)
-            # В продакшене используйте хеширование паролей!
+            # ⚠️ ДЕМО-РЕЖИМ: пароли в открытом виде
             user_level = 0  # Гость по умолчанию
 
             # Проверка встроенных учётных записей
-            if username == 'admin' and password == 'admin123':
+            if username == '333333' and password == '333333':
                 user_level = 3  # Администратор
-            elif username == 'moderator' and password == 'mod123':
+            elif username == '222222' and password == '222222':
                 user_level = 2  # Модератор
-            elif username == 'user' and password == 'user123':
+            elif username == '111111' and password == '111111':
                 user_level = 1  # Пользователь
+            elif username == 'admin' and password == 'admin123':
+                user_level = 3  # Администратор (старая учётка)
+            elif username == 'moderator' and password == 'mod123':
+                user_level = 2  # Модератор (старая учётка)
+            elif username == 'user' and password == 'user123':
+                user_level = 1  # Пользователь (старая учётка)
             else:
                 # Проверка зарегистрированных пользователей из data/users/
                 users_dir = os.path.join(PROJECT_ROOT, 'data', 'users')

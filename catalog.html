@@ -42,9 +42,7 @@
                     <li><a href="actions.html">Акции</a></li>
                     <li><a href="contacts.html">Контакты</a></li>
                     <li><a href="news.html">Новости</a></li>
-                    <li><a href="requisites.html">Реквизиты</a></li>
-                    <li><a href="feedback.html">Обратная связь</a></li>
-                    <li><a href="register.html">Регистрация</a></li>
+                    <li><a href="delivery.html">Доставка</a></li>
                 </ul>
             </nav>
             <div class="auth-link">
@@ -89,6 +87,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h2>Добавление лота</h2>
+                    <small class="warning">ВНИМАНИЕ: все изменения необратимо изменят временной поток!</small>
                 </div>
                 <div class="modal-body">
                     <form id="newsForm" class="modal-form">
@@ -349,7 +348,7 @@
     </section>
 
     <footer class="site-footer">
-        <p class="footer-org">ООО «Магазин Воспоминаний»</p>
+        <p class="footer-org" id="footerOrgName" title="Общество с Безграничной Безответственностью">ОББ «Магазин Воспоминаний»</p>
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
         <ul class="footer-links">
             <li><a href="privacy.html">Политика конфиденциальности</a></li>
@@ -357,5 +356,58 @@
             <li><a href="register.html">Регистрация</a></li>
         </ul>
     </footer>
+
+    <!-- Модальное окно Устава ОББ (P1-4) -->
+    <div id="obbCharterModal" class="modal hidden">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>📜 Устав ОББ «Магазин Воспоминаний»</h2>
+                    <button class="modal-close-btn" id="obbCharterClose" title="Закрыть">✕</button>
+                </div>
+                <div class="modal-body" style="font-size:14px;line-height:1.8;color:#444;">
+                    <p><strong>Статья 1. Общие положения</strong></p>
+                    <p>1.1. ОББ «Магазин Воспоминаний» (далее — Общество) является юридическим лицом, зарегистрированным во временном потоке №7.</p>
+                    <p>1.2. Общество не несёт ответственности за любые совпадения с реальностью, включая, но не ограничиваясь: воспоминания клиентов, сны сотрудников и предсказания ИИ.</p>
+                    <p><strong>Статья 2. Права и обязанности сторон</strong></p>
+                    <p>2.1. Клиент имеет право вспомнить то, чего не было, и забыть то, что было.</p>
+                    <p>2.2. Общество имеет право изменять условия в любой момент, включая прошлое.</p>
+                    <p><strong>Статья 3. Безграничная Безответственность</strong></p>
+                    <p>3.1. Общество не отвечает за утраченные, приобретённые или вымышленные воспоминания.</p>
+                    <p>3.2. Любые претензии рассматриваются в порядке живой очереди в приёмной, расположенной вне пространственно-временного континуума.</p>
+                    <p><strong>Статья 4. Заключительные положения</strong></p>
+                    <p>4.1. Настоящий устав не имеет юридической силы, но имеет силу воспоминания.</p>
+                    <p>4.2. Если вы помните, что читали этот устав — значит, так и было.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const orgName = document.getElementById('footerOrgName');
+            const obbModal = document.getElementById('obbCharterModal');
+            const obbClose = document.getElementById('obbCharterClose');
+            if (orgName && obbModal) {
+                orgName.style.cursor = 'pointer';
+                orgName.addEventListener('click', () => {
+                    obbModal.classList.remove('hidden');
+                    obbModal.classList.add('is-visible');
+                });
+                if (obbClose) {
+                    obbClose.addEventListener('click', () => {
+                        obbModal.classList.remove('is-visible');
+                        obbModal.classList.add('hidden');
+                    });
+                }
+                obbModal.addEventListener('click', (e) => {
+                    if (e.target === obbModal) {
+                        obbModal.classList.remove('is-visible');
+                        obbModal.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,196 +1,41 @@
 <!-- Файл: MySite/contacts.html -->
-<!-- Страница контактов — адрес, телефон, факс, карта проезда, форма обратной связи -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Контакты магазина воспоминаний — связь с вневременным отделом">
-    <title>Контакты - Магазин воспоминаний</title>
-    
-    <!-- Система доступа - ЗАГРУЖАЕТСЯ ПЕРВОЙ -->
-    <script type="module" src="static/js/access-init.js"></script>
-    
+    <meta name="description" content="Контакты — Магазин воспоминаний. Связь с вневременным отделом, адрес, телефон, факс, карта проезда">
+    <title>Контакты — Магазин воспоминаний</title>
     <link rel="stylesheet" href="static/css/style.css">
+    <script type="module" src="static/js/access-init.js"></script>
     <script type="module" src="static/js/main.js"></script>
-    
     <style>
-        /* --- Система доступа — временно отключена, весь функционал виден --- */
-        #access-overlay {
-            display: none !important;
-        }
-        .access-button {
-            display: none !important;
-        }
-        
-        /* Стили секции контактов */
-        .contacts-section {
-            max-width: 700px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        
-        .contacts-section h1 {
-            font-size: 28px;
-            color: #2c3e50;
-            margin-bottom: 8px;
-        }
-        
-        .contacts-section .subtitle {
-            color: #888;
-            font-size: 14px;
-            margin-bottom: 32px;
-            font-style: italic;
-        }
-        
-        /* Карточка контакта */
-        .contact-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 24px;
-            margin-bottom: 20px;
-        }
-        
-        .contact-card h3 {
-            margin: 0 0 12px;
-            font-size: 18px;
-            color: #2c3e50;
-        }
-        
-        .contact-card p {
-            margin: 6px 0;
-            color: #555;
-            line-height: 1.6;
-            font-size: 14px;
-        }
-        
-        .contact-card .hint {
-            color: #8b0000;
-            font-weight: 600;
-            font-size: 13px;
-            margin-top: 12px;
-        }
-        
-        .contact-card .label {
-            font-weight: 600;
-            color: #333;
-        }
-        
-        /* Дисклеймер внизу страницы */
-        .memory-disclaimer {
-            background: #f8f9fa;
-            border-left: 3px solid #3498db;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 24px;
-            font-size: 14px;
-            color: #555;
-            line-height: 1.7;
-        }
-        
-        .memory-disclaimer strong {
-            color: #2c3e50;
-        }
-
-        /* Стили для формы обратной связи на контактах */
-        .contacts-section .feedback-form {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .contacts-section .feedback-form .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .contacts-section .feedback-form label {
-            font-weight: 600;
-            color: #444;
-            font-size: 14px;
-        }
-
-        .contacts-section .feedback-form label .required {
-            color: #e74c3c;
-            margin-left: 2px;
-        }
-
-        .contacts-section .feedback-form input,
-        .contacts-section .feedback-form textarea {
-            width: 100%;
-            padding: 12px 14px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 15px;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            box-sizing: border-box;
-            font-family: inherit;
-        }
-
-        .contacts-section .feedback-form input:focus,
-        .contacts-section .feedback-form textarea:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
-        }
-
-        .contacts-section .feedback-form textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .contacts-section .submit-btn {
-            padding: 14px 28px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-            align-self: flex-start;
-        }
-
-        .contacts-section .submit-btn:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-
-        /* Блок успешной отправки */
-        .contacts-section .feedback-success {
-            display: none;
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            border-radius: 10px;
-            padding: 20px;
-            color: #155724;
-            font-size: 15px;
+        /* Дополнительные стили для contacts.html */
+        .contacts-section .contact-card .coords-display {
+            background: rgba(144, 202, 249, 0.1);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
             text-align: center;
-            margin-top: 16px;
+            border: 1px dashed #90caf9;
         }
-
-        .contacts-section .feedback-success.is-visible {
-            display: block;
+        .contacts-section .contact-card .coords-display span {
+            color: #1565c0;
+            font-weight: 700;
         }
-
-        /* Блок ошибки */
-        .contacts-section .feedback-error {
-            display: none;
-            background: #f8d7da;
-            border: 1px solid #f5c6cb;
-            border-radius: 10px;
-            padding: 16px;
-            color: #721c24;
-            font-size: 14px;
-            margin-top: 8px;
+        .contacts-section .contact-card .ancient-address {
+            background: rgba(255, 193, 7, 0.1);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            text-align: center;
+            border: 1px dashed #ffb300;
+            font-size: 0.95rem;
         }
-
-        .contacts-section .feedback-error.is-visible {
-            display: block;
+        .contacts-section .contact-card .ancient-address strong {
+            color: #e65100;
         }
     </style>
 </head>
@@ -207,7 +52,7 @@
     <header class="site-header">
         <a href="index.html" class="logo-link">
             <img src="images/logo.png" alt="Логотип магазина воспоминаний" class="logo">
-            <span class="site-title"></span>
+            <span class="site-title">Магазин воспоминаний</span>
         </a>
         <nav class="main-nav">
             <ul>
@@ -217,9 +62,7 @@
                 <li><a href="actions.html">Акции</a></li>
                 <li><a href="contacts.html">Контакты</a></li>
                 <li><a href="news.html">Новости</a></li>
-                <li><a href="requisites.html">Реквизиты</a></li>
-                <li><a href="feedback.html">Обратная связь</a></li>
-                <li><a href="register.html">Регистрация</a></li>
+                <li><a href="delivery.html">Доставка</a></li>
             </ul>
         </nav>
         <div class="auth-link">
@@ -239,6 +82,24 @@
                 <p><span class="label">Локация:</span> Пересечение улицы Вечности и проспекта Забвения, строение 7</p>
                 <p><span class="label">Ориентир:</span> Третья дверь слева после Врат Санктума. Если видите зелёную неоновую вывеску «TVA» — вы пришли.</p>
                 <p><span class="label">Часы приёма:</span> Вневременные. Мы работаем, пока вы помните, что мы существуем.</p>
+                
+                <!-- Координаты в море (палеоконтиненты) — юмор -->
+                <div class="coords-display">
+                    <p>🌊 <strong>Координаты для навигации по палеоконтинентам:</strong></p>
+                    <p>Пангея: <span>7°07'07"N 70°70'70"E</span> (северо-западнее от будущей Африки)</p>
+                    <p>Гондвана: <span>70°70'70"S 7°07'07"W</span> (ориентир — ледник, который растает через 200 млн лет)</p>
+                    <p>Лавразия: <span>7°07'07"S 70°70'70"W</span> (рядом с будущим месторождением нефти)</p>
+                    <p style="font-size: 0.8rem; color: #888; margin-top: 0.5rem;">⚠️ Координаты указаны в системе «Вневременной Геоцентрический Дата-Григорианский Стандарт» (ВГДГС). Фактическое местоположение может отличаться в зависимости от текущей временной линии.</p>
+                </div>
+                
+                <!-- Адрес в 5000 днэ -->
+                <div class="ancient-address">
+                    <p>📜 <strong>Историческая справка (5000 днэ):</strong></p>
+                    <p>В 5000 году до нашей эры наш офис находился по адресу: <strong>«Третья пирамида слева, комплекс Гиза, сектор 7, ярус 7, ниша 7»</strong>.</p>
+                    <p>Если вы жили в Древнем Египте и помните, что покупали у нас сувенир — <em>поздравляем, ваше воспоминание пережило 7000 лет</em>. Это абсолютный рекорд.</p>
+                    <p style="font-size: 0.8rem; color: #888; margin-top: 0.5rem;">🏛️ Сейчас на этом месте находится парковка. Мы переехали.</p>
+                </div>
+                
                 <p class="hint">⚠️ Если вы не можете найти здание — проверьте, не отозвали ли вашу временную линию.</p>
             </div>
             
@@ -334,13 +195,60 @@
 
     <!-- Футер -->
     <footer class="site-footer">
-        <p class="footer-org">ООО «Магазин Воспоминаний»</p>
+        <p class="footer-org" id="footerOrgName" title="Общество с Безграничной Безответственностью">ОББ «Магазин Воспоминаний»</p>
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
         <ul class="footer-links">
             <li><a href="privacy.html">Политика конфиденциальности</a></li>
             <li><a href="delivery.html">Доставка и оплата</a></li>
-            <li><a href="register.html">Регистрация</a></li>
+            <li><a href="requisites.html">Реквизиты</a></li>
         </ul>
     </footer>
+
+    <!-- Модалка Устава ОББ -->
+    <div id="obbCharterModal" class="modal hidden">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>📜 Устав ОББ «Магазин Воспоминаний»</h2>
+                    <button class="modal-close" id="obbCharterClose">&times;</button>
+                </div>
+                <div class="modal-body" style="font-size:14px;line-height:1.8;color:#444;">
+                    <p><strong>Статья 1. О названии</strong></p>
+                    <p>ОББ расшифровывается как «Общество с Безграничной Безответственностью». Мы не отвечаем ни за что, но особенно — за последствия.</p>
+                    <p><strong>Статья 2. О воспоминаниях</strong></p>
+                    <p>Все товары, приобретённые в магазине, могут исчезнуть из памяти в любой момент. Это не брак, а особенность квантовой нестабильности.</p>
+                    <p><strong>Статья 3. О деньгах</strong></p>
+                    <p>Деньги не возвращаются. Они становятся частью вашего воспоминания о покупке. Если вы не помните покупку — значит, её не было, и деньги остались при вас.</p>
+                    <p><strong>Статья 4. О претензиях</strong></p>
+                    <p>Претензии принимаются только в письменном виде на папирусе, заверенные у нотариуса временной линии №7. Срок рассмотрения — от 7 миллисекунд до 7000 лет.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Открытие модалки устава ОББ
+        document.getElementById('footerOrgName')?.addEventListener('click', function() {
+            document.getElementById('obbCharterModal').classList.remove('hidden');
+        });
+        document.getElementById('obbCharterClose')?.addEventListener('click', function() {
+            document.getElementById('obbCharterModal').classList.add('hidden');
+        });
+        // Закрытие по клику вне модалки
+        document.getElementById('obbCharterModal')?.addEventListener('click', function(e) {
+            if (e.target === this) this.classList.add('hidden');
+        });
+    </script>
+    <script type="module">
+        import { AccessLevels } from './static/js/access-levels.js';
+        import { PermissionManager } from './static/js/permission-manager.js';
+        
+        const accessLevels = new AccessLevels();
+        const permissionManager = new PermissionManager(accessLevels);
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            await permissionManager.init();
+        });
+    </script>
 </body>
 </html>

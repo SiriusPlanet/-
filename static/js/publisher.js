@@ -74,10 +74,13 @@ export class Publisher {
         lots.forEach(item => {
             const card = this.cardConstructor.createCard(item, {
                 accessLevel: 3,
+                pageContext: page,
                 onDelete: (id) => this.deleteLot(id, container, page),
                 onDiscount: (id, btn, cardEl) => this.showDiscountPanel(id, btn, cardEl, container, page),
                 onEdit: (item) => this.editLot(item, container, page)
             });
+            // Если createCard вернул null (скидочный лот не на actions) — пропускаем
+            if (!card) return;
             // Добавляем CSS-класс для масштабирования, если передан
             if (options.cardClass) {
                 card.classList.add(options.cardClass);
@@ -97,11 +100,15 @@ export class Publisher {
             case 'news':
                 return this.allLots.filter(n => n.lotType === 'news');
             case 'catalog':
-                return this.allLots.filter(n => n.lotType === 'product');
-            case 'index':
-                // Только топ-лоты для главной
+                // P0-3: Товары со скидкой не показываем в каталоге — они только в акциях
                 return this.allLots.filter(n =>
-                    Publisher.TOP_LOT_IDS.includes(n.id)
+                    n.lotType === 'product' && (!n.discount || parseInt(n.discount) === 0)
+                );
+            case 'index':
+                // Только топ-лоты для главной (без скидочных)
+                return this.allLots.filter(n =>
+                    Publisher.TOP_LOT_IDS.includes(n.id) &&
+                    (!n.discount || parseInt(n.discount) === 0)
                 );
             case 'actions':
                 // В акции попадают только ТОВАРЫ со скидкой

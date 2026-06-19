@@ -1,115 +1,37 @@
 <!-- Файл: MySite/requisites.html -->
-<!-- Страница реквизитов — банковские счета, криптовалюта, юридическая информация -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Реквизиты магазина воспоминаний — счёт вне временного потока">
-    <title>Реквизиты - Магазин воспоминаний</title>
-    
-    <!-- Система доступа - ЗАГРУЖАЕТСЯ ПЕРВОЙ -->
-    <script type="module" src="static/js/access-init.js"></script>
-    
+    <meta name="description" content="Реквизиты для оплаты — Магазин воспоминаний. Счёт открыт вне временного потока">
+    <title>Реквизиты — Магазин воспоминаний</title>
     <link rel="stylesheet" href="static/css/style.css">
+    <script type="module" src="static/js/access-init.js"></script>
     <script type="module" src="static/js/main.js"></script>
-    
     <style>
-        /* --- Система доступа — временно отключена, весь функционал виден --- */
-        #access-overlay {
-            display: none !important;
+        /* Дополнительные стили для requisites.html */
+        .requisites-section .req-card .time-warning {
+            background: rgba(255, 224, 130, 0.15);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            text-align: center;
+            border: 1px dashed #ffe082;
+            font-size: 0.9rem;
         }
-        .access-button {
-            display: none !important;
+        .requisites-section .req-card .time-warning strong {
+            color: #e65100;
         }
-        
-        /* Стили секции реквизитов */
-        .requisites-section {
-            max-width: 700px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        
-        .requisites-section h1 {
-            font-size: 28px;
-            color: #2c3e50;
-            margin-bottom: 8px;
-        }
-        
-        .requisites-section .subtitle {
-            color: #888;
-            font-size: 14px;
-            margin-bottom: 32px;
+        .requisites-section .req-card .payment-joke {
+            background: rgba(255, 248, 225, 0.5);
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            border-left: 4px solid #ffb300;
             font-style: italic;
-        }
-        
-        /* Карточка реквизитов */
-        .req-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 24px;
-            margin-bottom: 20px;
-        }
-        
-        .req-card h3 {
-            margin: 0 0 16px;
-            font-size: 18px;
-            color: #2c3e50;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        
-        /* Строка реквизита (label + value) */
-        .req-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #f5f5f5;
-            font-size: 14px;
-        }
-        
-        .req-row:last-child {
-            border-bottom: none;
-        }
-        
-        .req-row .label {
-            color: #888;
-            font-weight: 500;
-        }
-        
-        .req-row .value {
-            color: #333;
-            font-weight: 600;
-            text-align: right;
-            max-width: 60%;
-        }
-        
-        /* Примечание внизу */
-        .req-note {
-            background: #f8f9fa;
-            border-left: 3px solid #3498db;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 24px;
-            font-size: 14px;
-            color: #555;
-            line-height: 1.7;
-        }
-        
-        .req-note strong {
-            color: #2c3e50;
-        }
-        
-        .req-note .warning {
-            color: #8b0000;
-            font-weight: 600;
-        }
-        
-        .req-note .highlight {
-            background: #fff3cd;
-            padding: 2px 6px;
-            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #666;
         }
     </style>
 </head>
@@ -126,7 +48,7 @@
     <header class="site-header">
         <a href="index.html" class="logo-link">
             <img src="images/logo.png" alt="Логотип магазина воспоминаний" class="logo">
-            <span class="site-title"></span>
+            <span class="site-title">Магазин воспоминаний</span>
         </a>
         <nav class="main-nav">
             <ul>
@@ -136,9 +58,7 @@
                 <li><a href="actions.html">Акции</a></li>
                 <li><a href="contacts.html">Контакты</a></li>
                 <li><a href="news.html">Новости</a></li>
-                <li><a href="requisites.html">Реквизиты</a></li>
-                <li><a href="feedback.html">Обратная связь</a></li>
-                <li><a href="register.html">Регистрация</a></li>
+                <li><a href="delivery.html">Доставка</a></li>
             </ul>
         </nav>
         <div class="auth-link">
@@ -155,6 +75,16 @@
             <!-- Карточка: Банковские реквизиты -->
             <div class="req-card">
                 <h3>🏦 Банковские реквизиты</h3>
+                
+                <!-- Шутка про счёт вне временного потока -->
+                <div class="time-warning">
+                    <p>⏳ <strong>Внимание:</strong> Расчётный счёт обрабатывается вне временного потока.</p>
+                    <p>Это означает, что:</p>
+                    <p>— если вы отправили платёж, но не помните этого — он ушёл в параллельную временную линию;</p>
+                    <p>— если вы помните, что отправили, но деньги не дошли — проверьте, не оплатили ли вы счёт в будущем;</p>
+                    <p>— если вы не помните, что должны были платить — <strong>вы ничего не должны</strong>. Воспользуйтесь этим.</p>
+                </div>
+                
                 <div class="req-row">
                     <span class="label">Получатель</span>
                     <span class="value">ООО «Хроно-Архив TVA»</span>
@@ -186,6 +116,10 @@
                 <div class="req-row">
                     <span class="label">Корр. счёт</span>
                     <span class="value">30107 810 7 0000 0000707</span>
+                </div>
+                
+                <div class="payment-joke">
+                    <p>💡 <strong>Совет:</strong> Если вы не помните, как оплатили — оплатите ещё раз. В худшем случае у вас будет два воспоминания об одной покупке. В лучшем — вы получите два товара (но помнить будете только один).</p>
                 </div>
             </div>
             
@@ -243,13 +177,60 @@
 
     <!-- Футер -->
     <footer class="site-footer">
-        <p class="footer-org">ООО «Магазин Воспоминаний»</p>
+        <p class="footer-org" id="footerOrgName" title="Общество с Безграничной Безответственностью">ОББ «Магазин Воспоминаний»</p>
         <p>© 2026 3+3+3+3+3+3=7 Сувенирный магазин. Всё не то, чем кажется.</p>
         <ul class="footer-links">
             <li><a href="privacy.html">Политика конфиденциальности</a></li>
             <li><a href="delivery.html">Доставка и оплата</a></li>
-            <li><a href="register.html">Регистрация</a></li>
+            <li><a href="requisites.html">Реквизиты</a></li>
         </ul>
     </footer>
+
+    <!-- Модалка Устава ОББ -->
+    <div id="obbCharterModal" class="modal hidden">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>📜 Устав ОББ «Магазин Воспоминаний»</h2>
+                    <button class="modal-close" id="obbCharterClose">&times;</button>
+                </div>
+                <div class="modal-body" style="font-size:14px;line-height:1.8;color:#444;">
+                    <p><strong>Статья 1. О названии</strong></p>
+                    <p>ОББ расшифровывается как «Общество с Безграничной Безответственностью». Мы не отвечаем ни за что, но особенно — за последствия.</p>
+                    <p><strong>Статья 2. О воспоминаниях</strong></p>
+                    <p>Все товары, приобретённые в магазине, могут исчезнуть из памяти в любой момент. Это не брак, а особенность квантовой нестабильности.</p>
+                    <p><strong>Статья 3. О деньгах</strong></p>
+                    <p>Деньги не возвращаются. Они становятся частью вашего воспоминания о покупке. Если вы не помните покупку — значит, её не было, и деньги остались при вас.</p>
+                    <p><strong>Статья 4. О претензиях</strong></p>
+                    <p>Претензии принимаются только в письменном виде на папирусе, заверенные у нотариуса временной линии №7. Срок рассмотрения — от 7 миллисекунд до 7000 лет.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Открытие модалки устава ОББ
+        document.getElementById('footerOrgName')?.addEventListener('click', function() {
+            document.getElementById('obbCharterModal').classList.remove('hidden');
+        });
+        document.getElementById('obbCharterClose')?.addEventListener('click', function() {
+            document.getElementById('obbCharterModal').classList.add('hidden');
+        });
+        // Закрытие по клику вне модалки
+        document.getElementById('obbCharterModal')?.addEventListener('click', function(e) {
+            if (e.target === this) this.classList.add('hidden');
+        });
+    </script>
+    <script type="module">
+        import { AccessLevels } from './static/js/access-levels.js';
+        import { PermissionManager } from './static/js/permission-manager.js';
+        
+        const accessLevels = new AccessLevels();
+        const permissionManager = new PermissionManager(accessLevels);
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            await permissionManager.init();
+        });
+    </script>
 </body>
 </html>
