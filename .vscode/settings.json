@@ -1,17 +1,14 @@
 {
-  "gitlens.enabled": true,
-  "gitlens.codeLens": {
-    "enabled": true,
-    "scmFormat": "default"
+  "files.exclude": {
+    "**/node_modules": true
   },
-  "gitlens.views.history.enabled": true,
-  "gitlens.views.fileHistory.enabled": true,
-  "gitlens.views.lineHistory.enabled": true,
-  "gitlens.views.remoteBranches.enabled": true,
-
-  "gitlens.currentLine.enabled": true,
-  "gitlens.advanced.messages": {
-    "suppressCommitHasNoWrapper": true,
-    "suppressCommitNotFoundWarning": true
-  }
+  "files.associations": {
+    "*.js": "javascript"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "javascript.validate.enable": false,
+  "typescript.validate.enable": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
