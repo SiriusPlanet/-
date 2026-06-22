@@ -16,8 +16,250 @@
     min-height: 100vh;
     margin: 0;
     padding: 0;
+/* --- Стили для index.html (специфичные для главной страницы) --- */
 
+/* --- Система доступа — временно отключена, весь функционал виден --- */
+#access-overlay {
+    display: none !important;
+}
 
+.access-button {
+    display: none !important;
+}
+
+/* Стили для секции обратной связи на главной — компактная заявка на звонок (P2-5) */
+#indexFeedback {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+#indexFeedback h2 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+#indexFeedback .subtitle {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 24px;
+    font-style: italic;
+    text-align: center;
+}
+
+#indexFeedback .feedback-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+#indexFeedback .feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+#indexFeedback .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#indexFeedback .feedback-form label {
+    font-weight: 600;
+    color: #444;
+    font-size: 13px;
+}
+
+#indexFeedback .feedback-form label .required {
+    color: #e74c3c;
+    margin-left: 2px;
+}
+
+#indexFeedback .feedback-form input,
+#indexFeedback .feedback-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+#indexFeedback .feedback-form input:focus,
+#indexFeedback .feedback-form textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+}
+
+#indexFeedback .feedback-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+#indexFeedback .submit-btn {
+    padding: 12px 24px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    align-self: center;
+    width: 100%;
+}
+
+#indexFeedback .submit-btn:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+#indexFeedback .feedback-success {
+    display: none;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 10px;
+    padding: 16px;
+    color: #155724;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 12px;
+}
+
+#indexFeedback .feedback-success.is-visible {
+    display: block;
+}
+
+#indexFeedback .feedback-error {
+    display: none;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 10px;
+    padding: 12px;
+    color: #721c24;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+#indexFeedback .feedback-error.is-visible {
+    display: block;
+}
+
+/* --- DEV_MODE переключатель (P1-2) --- */
+#devModeToggle {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9999;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    padding: 8px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    border: none;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    background: #2c3e50;
+    color: #95a5a6;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
+
+#devModeToggle.is-active {
+    background: #e74c3c;
+    color: #fff;
+    box-shadow: 2px 2px 12px rgba(231, 76, 60, 0.4);
+}
+
+#devModeToggle:hover {
+    transform: translateY(-50%) scale(1.05);
+}
+
+/* --- Иконка корзины в хедере (P1-3) --- */
+.cart-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.cart-icon:hover {
+    background: rgba(52, 152, 219, 0.1);
+}
+
+.cart-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    background: #e74c3c;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 10px;
+    line-height: 1;
+}
+
+.cart-badge:empty {
+    display: none;
+}
+
+.cart-total {
+    font-size: 12px;
+    color: #888;
+    font-weight: 400;
+}
+
+/* --- Модалка корзины-шутки (P1-3) --- */
+.cart-joke-modal .modal-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444;
+    padding: 2rem 2.5rem;
+}
+
+.cart-joke-modal .modal-body p {
+    margin-bottom: 1rem;
+}
+
+.cart-joke-modal .modal-body .joke-highlight {
+    color: #8b0000;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.cart-joke-modal .modal-body .joke-meta {
+    font-size: 12px;
+    color: #999;
+    text-align: right;
+    margin-top: 1.5rem;
+    border-top: 1px dashed #ddd;
+    padding-top: 1rem;
+}
 }
 
 
