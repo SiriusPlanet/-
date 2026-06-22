@@ -262,21 +262,6 @@
 }
 }
 
-
-/* --- Система доступа — временно отключена --- */
-#access-overlay {
-
-    display: none !important;
-
-}
-
-.access-button {
-
-    display: none !important;
-
-}
-
-
 /* === Единый стиль для всех карточек и блоков (кроме шапок) === */
 .card,
 .hero,
