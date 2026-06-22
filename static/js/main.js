@@ -71,7 +71,7 @@ class MainApp {
 
         const options = this.currentPage === 'index'
             ? { cardClass: 'card-compact' }
-            : {};
+            : (this.currentPage === 'actions' ? { cardClass: 'card-large' } : {});
 
         await this.publisher.publish(this.currentPage, this.container, options);
     }

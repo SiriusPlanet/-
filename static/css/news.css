@@ -76,7 +76,7 @@
     position: relative;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     /* Компактная геометрия: фиксированная высота, карточка не расширяется */
-    aspect-ratio: auto;
+    aspect-ratio: 1/1;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -122,7 +122,7 @@
     padding: 8px 12px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+
     min-height: 0;
 }
 
@@ -149,16 +149,6 @@
 }
 
 
-.catalog-card-price {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    font-size: 14px;
-    font-weight: bold;
-    color: #e74c3c;
-    margin-bottom: 4px;
-    gap: 6px;
-}
 
 /* Старая цена — зачёркнутая, серого цвета */
 .catalog-card-price .old-price {
@@ -168,13 +158,12 @@
     font-weight: normal;
 }
 
-/* Новая цена со скидкой — красная, жирная */
+/* Новая цена со скидкой — зелено-голубая, жирная */
 .catalog-card-price .new-price {
     font-size: 16px;
-    color: #e74c3c;
+    color: #00b894;
     font-weight: bold;
 }
-
 /* Краткое описание — 1-2 строки, многоточие если не влезает */
 .catalog-card-description {
     font-size: 12px;
@@ -192,7 +181,7 @@
 .catalog-card-footer {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+
     gap: 8px;
     margin-top: 4px;
 }
@@ -540,7 +529,7 @@
     padding: 16px 20px 12px;
     border-bottom: 1px solid #e8e8e8;
     display: flex;
-    justify-content: space-between;
+
     align-items: flex-start;
     gap: 12px;
 }
@@ -1021,7 +1010,7 @@
 /* === Классы масштабирования карточек === */
 /* Компактные карточки (для index.html — Топ 3) */
 .catalog-card.card-compact {
-    aspect-ratio: auto;
+    aspect-ratio: 1/1;
 }
 
 .catalog-card.card-compact .catalog-card-inner {
@@ -1036,6 +1025,7 @@
 .catalog-card.card-compact .catalog-card-title {
     font-size: 14px;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
 }
 
 .catalog-card.card-compact .catalog-card-price {
@@ -1046,6 +1036,7 @@
 .catalog-card.card-compact .catalog-card-description {
     font-size: 11px;
     -webkit-line-clamp: 1;
+    line-clamp: 1;
     line-height: 1.3;
     color: #555;
     font-style: italic;
@@ -1070,16 +1061,15 @@
         padding: 4px 8px;
     }
 
-    .catalog-card.card-compact .catalog-card-title {
-        font-size: 12px;
-        margin-bottom: 2px;
+    .catalog-card.card-compact .catalog-card-title {       
+        font-size: 12px;       
+        margin-bottom: 2px; 
     }
-
     .catalog-card.card-compact .catalog-card-description {
         font-size: 10px;
         margin: 1px 0 2px;
     }
-
+    
     .catalog-card.card-compact .catalog-card-price {
         font-size: 12px;
         margin-bottom: 2px;
@@ -1119,7 +1109,7 @@
 
 /* Крупные карточки (для страницы акций) */
 .catalog-card.card-large {
-    aspect-ratio: auto;
+    aspect-ratio: 1/1;
     min-height: 380px;
 }
 
@@ -1341,12 +1331,15 @@
 }
 
 /* Сетка товаров внутри секции */
+/* Сетка товаров внутри секции */
 .index-catalog .products-grid {
-    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    position: relative;   
     z-index: 1;
 }
-
-/* Футер-сноска внутри секции */
+    /* Футер-сноска внутри секции */
 .index-catalog .catalog-footnote {
     position: relative;
     z-index: 1;

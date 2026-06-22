@@ -121,8 +121,10 @@ export class CardConstructor {
                 ${discountBtnHtml}
             </div>
             <div class="catalog-card-content">
-                <h3 class="catalog-card-title" title="${title}">${title}</h3>
-                <div class="${descClass}" title="${desc}">${desc || 'Описание отсутствует'}</div>
+                <div class="catalog-card-header">
+                    <h3 class="catalog-card-title" title="${title}">${title}</h3>
+                    <div class="${descClass}" title="${desc}">${desc || "Описание отсутствует"}</div>
+                </div>
                 ${priceHtml}
                 <div class="catalog-card-footer">
                     ${detailBtnHtml}
@@ -130,7 +132,6 @@ export class CardConstructor {
                 </div>
             </div>
         `;
-
         // Навешиваем обработчики
         const moveBtn = card.querySelector('.move-btn');
         if (moveBtn) {
