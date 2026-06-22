@@ -8,7 +8,7 @@
     <!-- Управление доступом - ЗАГРУЖАЕТСЯ ПЕРВЫМ -->
     <script type="module" src="./static/js/access-init.js"></script>
     
-{"text": "    <link rel=\"stylesheet\" href=\"./static/css/style.css\" />"}
+    <link rel="stylesheet" href="./static/css/style.css" />
     
     <style>
         /* --- Система доступа — временно отключена, весь функционал виден --- */
@@ -75,11 +75,7 @@
         </section>
     </main>
 
-    <!-- Модальное окно для ПРОСМОТРА -->
-    <div id="viewNewsModal" class="modal hidden">
-        <div class="modal-content"></div>
-    </div>
-
+}
     <!-- Модальное окно для ДОБАВЛЕНИЯ -->
     <div id="addNewsModal" class="modal hidden">
         <div class="modal-dialog">
@@ -184,9 +180,7 @@
     </script>
 
     <!-- Скрипт для подкаталога реакторов Тони Старка и таблицы снятых лотов -->
-    <script type="module">
-        import { Publisher } from './static/js/publisher.js';
-        import { CardConstructor } from './static/js/card-constructor.js';
+    <script type=\"module\">\n        import { Publisher } from 'static/js/publisher.js';\n        import { CardConstructor } from 'static/js/card-constructor.js';"}
 
         document.addEventListener('DOMContentLoaded', async () => {
             const subcatalog = document.getElementById('reactorSubcatalog');
