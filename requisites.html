@@ -4,36 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Реквизиты для оплаты — Магазин воспоминаний. Счёт открыт вне временного потока">
+    <meta name="description" content="Реквизиты магазина — юридические данные и математические приколы">
     <title>Реквизиты — Магазин воспоминаний</title>
     <link rel="stylesheet" href="static/css/style.css">
     <script type="module" src="static/js/access-init.js"></script>
     <script type="module" src="static/js/main.js"></script>
-    <style>
-        /* Дополнительные стили для requisites.html */
-        .requisites-section .req-card .time-warning {
-            background: rgba(255, 224, 130, 0.15);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin: 1rem 0;
-            text-align: center;
-            border: 1px dashed #ffe082;
-            font-size: 0.9rem;
-        }
-        .requisites-section .req-card .time-warning strong {
-            color: #e65100;
-        }
-        .requisites-section .req-card .payment-joke {
-            background: rgba(255, 248, 225, 0.5);
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-            border-left: 4px solid #ffb300;
-            font-style: italic;
-            font-size: 0.9rem;
-            color: #666;
-        }
-    </style>
 </head>
 <body>
     <!-- Затемнение (система доступа) -->
@@ -68,109 +43,136 @@
 
     <main>
         <!-- Секция реквизитов -->
-        <section class="requisites-section">
-            <h1>Реквизиты для оплаты</h1>
-            <p class="subtitle">Счёт открыт вне временного потока. Списание происходит в момент воспоминания.</p>
+        <section class="requisites">
+            <h1>Наши реквизиты</h1>
             
-            <!-- Карточка: Банковские реквизиты -->
-            <div class="req-card">
-                <h3>🏦 Банковские реквизиты</h3>
-                
-                <!-- Шутка про счёт вне временного потока -->
-                <div class="time-warning">
-                    <p>⏳ <strong>Внимание:</strong> Расчётный счёт обрабатывается вне временного потока.</p>
-                    <p>Это означает, что:</p>
-                    <p>— если вы отправили платёж, но не помните этого — он ушёл в параллельную временную линию;</p>
-                    <p>— если вы помните, что отправили, но деньги не дошли — проверьте, не оплатили ли вы счёт в будущем;</p>
-                    <p>— если вы не помните, что должны были платить — <strong>вы ничего не должны</strong>. Воспользуйтесь этим.</p>
-                </div>
-                
-                <div class="req-row">
-                    <span class="label">Получатель</span>
-                    <span class="value">ООО «Хроно-Архив TVA»</span>
-                </div>
-                <div class="req-row">
-                    <span class="label">ИНН</span>
-                    <span class="value">7707 0707 0707</span>
-                </div>
-                <div class="req-row">
-                    <span class="label">КПП</span>
-                    <span class="value">7707 0707 001</span>
-                </div>
-                <div class="req-row">
-                    <span class="label">ОГРН</span>
-                    <span class="value">1227700070707</span>
-                </div>
-                <div class="req-row">
-                    <span class="label">Расчётный счёт</span>
-                    <span class="value">40707 810 7 0000 0000707</span>
-                </div>
-                <div class="req-row">
-                    <span class="label">Банк</span>
-                    <span class="value">АО «Банк Вневременных Расчётов»</span>
-                </div>
-                <div class="req-row">
-                    <span class="label">БИК</span>
-                    <span class="value">044707707</span>
-                </div>
-                <div class="req-row">
-                    <span class="label">Корр. счёт</span>
-                    <span class="value">30107 810 7 0000 0000707</span>
-                </div>
-                
-                <div class="payment-joke">
-                    <p>💡 <strong>Совет:</strong> Если вы не помните, как оплатили — оплатите ещё раз. В худшем случае у вас будет два воспоминания об одной покупке. В лучшем — вы получите два товара (но помнить будете только один).</p>
+            <p class="intro">Чтобы заказать воспоминание в юридическом формате, вам нужны наши реквизиты. Или нет — мы принимаем любые формы оплаты, включая обмен воспоминаниями и квантовые кредиты.</p>
+
+            <!-- Юридические данные -->
+            <div class="requisites-block">
+                <h2>Юридические данные</h2>
+                <table class="requisites-table">
+                    <tr>
+                        <th>Параметр</th>
+                        <th>Значение</th>
+                    </tr>
+                    <tr>
+                        <td>Полное название</td>
+                        <td>ОББ «Магазин Воспоминаний»</td>
+                    </tr>
+                    <tr>
+                        <td>Сокращение</td>
+                        <td>ОББ МВ</td>
+                    </tr>
+                    <tr>
+                        <td>ИНН</td>
+                        <td>0000000000 (скрыт для защиты от налоговой инспекции времени)</td>
+                    </tr>
+                    <tr>
+                        <td>ОГРН</td>
+                        <td>0000000000000 (регистрация в dimension://7)</td>
+                    </tr>
+                    <tr>
+                        <td>КПП</td>
+                        <td>3+3+3=10 (математика работает по-своему)</td>
+                    </tr>
+                    <tr>
+                        <td>Юридический адрес</td>
+                        <td>г. Время, ул. Памяти, д. 42, кв. «Не существует»</td>
+                    </tr>
+                    <tr>
+                        <td>Фактический адрес</td>
+                        <td>Там, где вы его представили в воображении</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Банковские реквизиты -->
+            <div class="requisites-block">
+                <h2>Банковские реквизиты</h2>
+                <table class="requisites-table">
+                    <tr>
+                        <th>Параметр</th>
+                        <th>Значение</th>
+                    </tr>
+                    <tr>
+                        <td>Название банка</td>
+                        <td>Банк «Квантовый Поток»</td>
+                    </tr>
+                    <tr>
+                        <td>БИК</td>
+                        <td>000000000 (связь с другими измерениями)</td>
+                    </tr>
+                    <tr>
+                        <td>Корреспондентский счёт</td>
+                        <td>301018104000000000000 (межбанковский канал)</td>
+                    </tr>
+                    <tr>
+                        <td>Расчётный счёт</td>
+                        <td>40702810100000000000 (счёт в реальности №7)</td>
+                    </tr>
+                    <tr>
+                        <td>Сумма на счету</td>
+                        <td>∞ (бесконечность, но только если вы в неё верите)</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Оплаты -->
+            <div class="requisites-block">
+                <h2>Как оплатить</h2>
+                <p>Мы принимаем:</p>
+                <ul>
+                    <li>💰 Обычные деньги (рубли, доллары, евро — главное, чтобы верили)</li>
+                    <li>💳 Карты (включая квантовые кредитки)</li>
+                    <li>🔄 Обмен воспоминаниями (при условии сохранения originals)</li>
+                    <li>⚡ Квантовые кредиты (только по приглашению)</li>
+                    <li>📜 Бартер: что-то ценное вместо чего-то дорого</li>
+                </ul>
+                <div class="magic-note">
+                    <p>🔮 <strong>Важно:</strong> Если вы не помните, что платили — значит, плату ещё не применили. Проверьте лог времени.</p>
                 </div>
             </div>
-            
-            <!-- Карточка: Криптовалюта -->
-            <div class="req-card">
-                <h3>💳 Оплата криптовалютой</h3>
-                <div class="req-row">
-                    <span class="label">Bitcoin (BTC)</span>
-                    <span class="value" style="font-size: 12px; word-break: break-all;">bc1q7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7</span>
-                </div>
-                <div class="req-row">
-                    <span class="label">Ethereum (ETH)</span>
-                    <span class="value" style="font-size: 12px; word-break: break-all;">0x7070707070707070707070707070707070707070</span>
-                </div>
-                <div class="req-row">
-                    <span class="label">Камень Времени (TVA)</span>
-                    <span class="value" style="color: #8b0000; font-style: italic;">Не принимается. Никогда. Мы серьёзно.</span>
+
+            <!-- Контакты для юрлиц -->
+            <div class="requisites-block">
+                <h2>Контакты для юридических лиц</h2>
+                <p>Для оформления заказов от юрлиц обращайтесь:</p>
+                <ul>
+                    <li>📧 <a href="mailto:legal@memoryshop.ru">legal@memoryshop.ru</a> (юридический отдел)</li>
+                    <li>📞 +7 (999) 000-00-00 (только в рабочее время — если оно существует)</li>
+                    <li>📍 Личный прием по предварительной записи (через портал «Время»)</li>
+                </ul>
+                <div class="magic-note">
+                    <p>⏳ <strong>Сроки ответа:</strong> от 7 миллисекунд до 7000 лет. Среднее — вчера.</p>
                 </div>
             </div>
-            
-            <!-- Карточка: Юридическая информация -->
-            <div class="req-card">
-                <h3>📋 Юридическая информация</h3>
-                <div class="req-row">
-                    <span class="label">Юридический адрес</span>
-                    <span class="value">г. Москва, ул. Ткацкая, д. 7, стр. 7, офис 707</span>
-                </div>
-                <div class="req-row">
-                    <span class="label">Фактический адрес</span>
-                    <span class="value">Пересечение улицы Вечности и проспекта Забвения</span>
-                </div>
-                <div class="req-row">
-                    <span class="label">Временная зона</span>
-                    <span class="value">UTC+0 / Вневременная / Любая, которую вы помните</span>
-                </div>
-                <div class="req-row">
-                    <span class="label">Режим работы</span>
-                    <span class="value">Пн-Пт: 07:07 — 19:07 (по времени Гринвича)</span>
-                </div>
-                <div class="req-row">
-                    <span class="label">Перерыв</span>
-                    <span class="value">С 07:07:07 до 07:07:08 (минута вневременного молчания)</span>
-                </div>
-            </div>
-            
-            <!-- Примечание об оплате -->
-            <div class="req-note">
-                <p><strong>📜 Важное уведомление об оплате:</strong></p>
-                <p>Согласно Положению о вневременной торговле (п. 3, ст. 7), оплата считается совершённой в момент, когда <strong>вы помните</strong>, что оплатили. Если вы не помните — проверьте историю операций. Если истории нет — значит, вы либо не платили, либо платили в другой временной линии. В любом случае, претензий нет.</p>
-                <p><span class="warning">⚠️ Внимание:</span> Переводы в <span class="highlight">Камень Времени</span> блокируются автоматически на уровне межпространственного межсетевого экрана. Мы не принимаем Камень Времени. Мы не храним Камень Времени. Мы не знаем, где Камень Времени. Если у вас есть Камень Времени — положите на место, пока Танос не заметил.</p>
-                <p style="margin-top: 12px; color: #8b0000; font-weight: 600;">⚖️ Если помните — претензий нет. Если не помните — тем более.</p>
+
+            <!-- Прочие реквизиты -->
+            <div class="requisites-block">
+                <h2>Прочие реквизиты</h2>
+                <table class="requisites-table">
+                    <tr>
+                        <th>Параметр</th>
+                        <th>Значение</th>
+                    </tr>
+                    <tr>
+                        <td>Кассир</td>
+                        <td>Г-н Невидимый (работает по выходным — если они есть)</td>
+                    </tr>
+                    <tr>
+                        <td>Бухгалтер</td>
+                        <td>Г-жа Несуществующая (суммы у неё всегда верные — если не перепутать измерения)</td>
+                    </tr>
+                    <tr>
+                        <td>Генеральный директор</td>
+                        <td>Тот, кто сейчас читает эти реквизиты (временная смена власти работает)</td>
+                    </tr>
+                    <tr>
+                        <td>Логотип</td>
+                        <td>Зарегистрирован в министерстве магии (заявка №0000001)</td>
+                    </tr>
+                </table>
             </div>
         </section>
     </main>
@@ -219,17 +221,6 @@
         // Закрытие по клику вне модалки
         document.getElementById('obbCharterModal')?.addEventListener('click', function(e) {
             if (e.target === this) this.classList.add('hidden');
-        });
-    </script>
-    <script type="module">
-        import { AccessLevels } from './static/js/access-levels.js';
-        import { PermissionManager } from './static/js/permission-manager.js';
-        
-        const accessLevels = new AccessLevels();
-        const permissionManager = new PermissionManager(accessLevels);
-        
-        document.addEventListener('DOMContentLoaded', async () => {
-            await permissionManager.init();
         });
     </script>
 </body>

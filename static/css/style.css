@@ -2907,6 +2907,7 @@ main > section,
 
     font-size: 17px;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
 
 }
 
@@ -2925,6 +2926,7 @@ main > section,
     overflow: visible;
     text-overflow: clip;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     display: -webkit-box;
     -webkit-box-orient: vertical;
 

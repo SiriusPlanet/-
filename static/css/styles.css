@@ -413,13 +413,7 @@ main > section,
 }
 
 
-/* === ГЛАВНЫЙ БАННЕР === */
-.hero {
-    text-align: center;
-    padding: 3.125rem 1.875rem;
-    max-width: 50rem;
-    margin: 2.5rem auto 1.875rem;
-}/* Дубликат селектора ".hero h2" удалён *//* Дубликат селектора ".hero p" удалён */
+"/* === ГЛАВНЫЙ БАННЕР === */\r\n.hero {\r\n    text-align: center;\r\n    padding: 3.125rem 1.875rem;\r\n    max-width: 50rem;\r\n    margin: 2.5rem auto 1.875rem;\r\n    background-image: url('/images/BG.jpg');\r\n    background-size: cover;\r\n    background-position: center;\r\n    background-attachment: scroll;\r\n    min-height: 250px;\r\n    position: relative;\r\n}\r\n.hero::before {\r\n    content: '';\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    background: rgba(255, 255, 255, 0.6);\r\n}\r\n.hero > * {\r\n    position: relative;\r\n    z-index: 1;\r\n}/* Дубликат селектора \".hero h2\" удалён *//* Дубликат селектора \".hero p\" удалён */"}
 
 /* === КАТАЛОГ ТОВАРОВ === */
 .catalog h2 {

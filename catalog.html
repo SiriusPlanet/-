@@ -75,7 +75,6 @@
         </section>
     </main>
 
-}
     <!-- Модальное окно для ДОБАВЛЕНИЯ -->
     <div id="addNewsModal" class="modal hidden">
         <div class="modal-dialog">
@@ -180,7 +179,9 @@
     </script>
 
     <!-- Скрипт для подкаталога реакторов Тони Старка и таблицы снятых лотов -->
-    <script type=\"module\">\n        import { Publisher } from 'static/js/publisher.js';\n        import { CardConstructor } from 'static/js/card-constructor.js';"}
+    <script type="module">
+        import { Publisher } from './static/js/publisher.js';
+        import { CardConstructor } from './static/js/card-constructor.js';
 
         document.addEventListener('DOMContentLoaded', async () => {
             const subcatalog = document.getElementById('reactorSubcatalog');
