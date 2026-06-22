@@ -1,40 +1,78 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""Fix CSS syntax errors in style.css"""
 
-# Read the CSS file
-with open('f:\\I0\\002MySiS\\MySite\\static\\css\\styles.css', 'r', encoding='utf-8') as f:
+import re
+
+# Read the file
+with open('f:\\I0\\002MySiS\\MySite\\static\\css\\style.css', 'r', encoding='utf-8') as f:
     content = f.read()
 
-# Fix 1: Replace malformed comment on line 415
-# The malformed line is: "/* === ГЛАВНЫЙ БАННЕР === */\\r\\n.hero {"
-# Should be: /* === ГЛАВНЫЙ БАННЕР === */\n.hero {
-content = content.replace(
-    '"/* === ГЛАВНЫЙ БАННЕР === */\\r\\n.hero {"',
-    '/* === ГЛАВНЫЙ БАННЕР === */\n.hero {'
+# Pattern 1: Fix .site-header (line ~108-110)
+content = re.sub(
+    r'(    padding: 0\.9375rem 1\.25rem;)\nbackground: rgba\(255, 255, 255, 0\.98\);}\n    box-shadow:',
+    r'\1\n    background: rgba(255, 255, 255, 0.98);\n    box-shadow:',
+    content
 )
 
-# Fix 2: Remove stray quote before .catalog h2
-# Looking for: \n"\n.catalog h2 {
-content = content.replace(
-    '\n"\n.catalog h2 {',
-    '\n.catalog h2 {'
+# Pattern 2: Fix .move-table (line ~592-594)
+content = re.sub(
+    r'(    padding: 1\.5rem 2rem;)\nbackground: rgba\(255, 255, 255, 0\.98\);}\n    border-radius:',
+    r'\1\n    background: rgba(255, 255, 255, 0.98);\n    border-radius:',
+    content
 )
 
-# Fix 3: Add standard line-clamp property for vendor prefix warnings
-# For .catalog-card.card-large .catalog-card-title
-content = content.replace(
-    '.catalog-card.card-large .catalog-card-title {\n\n    font-size: 17px;\n    -webkit-line-clamp: 3;\n\n}',
-    '.catalog-card.card-large .catalog-card-title {\n\n    font-size: 17px;\n    -webkit-line-clamp: 3;\n    line-clamp: 3;\n\n}'
+# Pattern 3: Fix .hero (line ~692-694) - has escaped text that needs removal
+content = re.sub(
+    r'    padding: 2rem 2rem;\n"    text-align: center;\\\\n    background: rgba\(255, 255, 255, 0\.98\);\\\\n    border-radius: 1rem;"\n    box-shadow:',
+    r'    padding: 2rem 2rem;\n    background: rgba(255, 255, 255, 0.98);\n    border-radius: 1rem;\n    box-shadow:',
+    content
 )
 
-# For .catalog-card.card-large .catalog-card-description
-content = content.replace(
-    '.catalog-card.card-large .catalog-card-description {\n\n    font-size: 13px;\n    white-space: normal;\n    overflow: visible;\n    text-overflow: clip;\n    -webkit-line-clamp: 2;\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n\n}',
-    '.catalog-card.card-large .catalog-card-description {\n\n    font-size: 13px;\n    white-space: normal;\n    overflow: visible;\n    text-overflow: clip;\n    -webkit-line-clamp: 2;\n    line-clamp: 2;\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n\n}'
+# Pattern 4: Fix .terms (line ~701-703)
+content = re.sub(
+    r'(    padding: 2\.5rem 2rem;)\nbackground: rgba\(255, 255, 255, 0\.98\);}\n    border-radius:',
+    r'\1\n    background: rgba(255, 255, 255, 0.98);\n    border-radius:',
+    content
+)
+
+# Pattern 5: Fix .news-header-panel (line ~757-759)
+content = re.sub(
+    r'\nbackground: rgba\(255, 255, 255, 0\.98\);}\n    padding: 1\.25rem;',
+    r'\n    background: rgba(255, 255, 255, 0.98);\n    padding: 1.25rem;',
+    content
+)
+
+# Pattern 6: Fix .site-footer (line ~894-896)
+content = re.sub(
+    r'\nbackground: rgba\(255, 255, 255, 0\.98\);}\n    padding: 1\.5rem 2rem;',
+    r'\n    background: rgba(255, 255, 255, 0.98);\n    padding: 1.5rem 2rem;',
+    content
+)
+
+# Pattern 7: Fix .contacts-section .contact-card, ... (line ~1373-1375)
+content = re.sub(
+    r'\nbackground: rgba\(255, 255, 255, 0\.98\);}\n    padding: 2rem;',
+    r'\n    background: rgba(255, 255, 255, 0.98);\n    padding: 2rem;',
+    content
+)
+
+# Pattern 8: Fix .contacts-section .memory-disclaimer, ... (line ~1443-1445)
+content = re.sub(
+    r'\nbackground: rgba\(255, 255, 255, 0\.98\);}\n    padding: 2rem;',
+    r'\n    background: rgba(255, 255, 255, 0.98);\n    padding: 2rem;',
+    content
+)
+
+# Pattern 9: Fix .memory-fragment (line ~3228-3230)
+content = re.sub(
+    r'\nbackground: rgba\(255, 255, 255, 0\.98\);}\n    padding: 2rem;',
+    r'\n    background: rgba(255, 255, 255, 0.98);\n    padding: 2rem;',
+    content
 )
 
 # Write the fixed content
-with open('f:\\I0\\002MySiS\\MySite\\static\\css\\styles.css', 'w', encoding='utf-8') as f:
+with open('f:\\I0\\002MySiS\\MySite\\static\\css\\style.css', 'w', encoding='utf-8') as f:
     f.write(content)
 
-print("CSS file fixed successfully!")
+print("CSS errors fixed successfully!")
