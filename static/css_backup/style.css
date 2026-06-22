@@ -1,0 +1,1351 @@
+/* === СБРОС И БАЗОВЫЕ СТИЛИ === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-image: url('/images/bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+
+}
+
+/* --- Система доступа — временно отключена --- */
+#access-overlay {
+    display: none !important;
+}
+.access-button {
+    display: none !important;
+}
+
+/* === Единый стиль для всех карточек и блоков (кроме шапок) === */
+.card,
+.hero,
+.product-card,
+.privacy-policy {
+    border-radius: 1rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(0.625rem);
+    -webkit-backdrop-filter: blur(0.625rem);
+    box-shadow: 0 0.375rem 1.25rem rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover,
+.product-card:hover,
+.news-card:hover {
+    transform: translateY(-0.3125rem);
+    box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.18);
+}
+
+/* === ОТСТУПЫ МЕЖДУ СЕКЦИЯМИ === */
+main > section,
+.catalog,
+.news-container,
+.privacy-policy {
+    margin: 2.5rem auto;
+    max-width: 96%;
+}
+
+/* === ГРУППА ШАПКИ И ПАНЕЛИ === */
+.header-group {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
+
+/* === АДАПТИВНОЕ СКРУГЛЕНИЕ УГЛОВ ДЛЯ ХЕДЕРОВ === */
+/* Верхний угол первого блока */
+.header-group > :first-child {
+    border-radius: 1rem 1rem 0 0;
+}
+
+/* Нижний угол последнего блока */
+.header-group > :last-child {
+    border-radius: 0 0 1rem 1rem;
+}
+
+/* Все углы у единственного блока */
+.header-group > :only-child {
+    border-radius: 1rem;
+}
+
+/* Средние блоки (прямые углы) */
+.header-group > :nth-child(n+2):not(:last-child) {
+    border-radius: 0;
+}
+
+/* === ШАПКА САЙТА === */
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9375rem 1.25rem;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.12);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    min-height: 4.5rem;
+    box-sizing: border-box;
+}
+
+.logo-link {
+    display: block;
+    margin-right: 1.25rem;
+    flex-shrink: 0;
+}
+
+.site-title {
+    flex: 1;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* === НАВИГАЦИЯ === */
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5625rem;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    padding: 0.3125rem 0.625rem;
+    border-radius: 0.25rem;
+}
+
+.main-nav a:hover {
+    color: #2980b9;
+    background: rgba(52, 152, 219, 0.1);
+}
+
+/* === КНОПКА АВТОРИЗАЦИИ === */
+.auth-link a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: 0.0625rem solid #3498db;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.auth-link a:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+/* === ГЛАВНЫЙ БАННЕР === */
+.hero {
+    text-align: center;
+    padding: 3.125rem 1.875rem;
+    max-width: 50rem;
+    margin: 2.5rem auto 1.875rem;
+}
+
+.hero h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+}
+
+.hero p {
+    font-size: 1.125rem;
+    color: #7f8c8d;
+}
+
+/* === КАТАЛОГ ТОВАРОВ === */
+.catalog h2 {
+    text-align: center;
+    font-size: 1.75rem;
+    margin-bottom: 1.875rem;
+    color: #2c3e50;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 1.875rem;
+    max-width: 75rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product-card {
+    max-width: 22rem;
+    width: 100%;
+    justify-self: center;
+}
+
+.product-card img {
+    width: 100%;
+    height: 11.25rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 0.9375rem;
+}
+
+.product-card h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.625rem;
+    color: #2c3e50;
+}
+
+.product-card p {
+    margin-bottom: 0.375rem;
+    color: #555;
+    font-size: 0.95em;
+}
+
+.price {
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 1.125rem;
+    margin-top: 0.5rem;
+}
+
+/* === БЕГУЩАЯ СТРОКА НОВОСТЕЙ === */
+/* === БЕГУЩАЯ СТРОКА НОВОСТЕЙ === */
+.ticker-container {
+    background: #1a1a2e;
+    color: #00ff88;
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    padding: 0.5rem 0;
+    text-align: center;
+    border-bottom: 0.125rem solid #00ff88;
+    overflow: hidden;
+    width: 100%;
+}
+
+#news-ticker {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker-scroll 30s linear infinite;
+    margin: 0;
+    padding: 0;
+    width: max-content;
+}
+
+@keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* === СЕТЬ НОВОСТЕЙ === */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 1.3125rem;
+    padding: 1.3125rem;
+    justify-content: center;
+}
+
+/* === КАРТОЧКА НОВОСТИ === */
+.news-card {
+    max-width: 28rem;
+    width: 100%;
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.news-card-image-wrapper {
+    width: 100%;
+    padding-bottom: 56.25%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.625rem;
+    background: #f8f9fa;
+    margin-bottom: 0.9375rem;
+}
+
+.news-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.news-card-content {
+    padding: 0.875rem;
+}
+
+.news-card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 0 0 0.375rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.news-card-description {
+    font-size: 0.8125rem;
+    color: #7f8c8d;
+    margin: 0;
+    line-height: 1.4;
+    padding: 0.5rem;
+    word-break: break-word;
+    overflow: hidden;
+    display: block;
+    max-height: calc(3 * 1.4em);
+}
+
+@media (max-width: 480px) {
+    .news-card-description {
+        font-size: 0.75rem;
+        line-height: 1.5;
+        max-height: calc(4 * 1.5em);
+    }
+}
+
+/* === МОДАЛЬНЫЕ ОКНА === */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.modal.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-dialog {
+    width: min(90vw, 35rem);
+    max-height: 90vh;
+    position: relative;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 0.0625rem solid #e8e8e8;
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+.modal-body {
+    padding: 1.5rem 2rem;
+    overflow-y: auto;
+    max-height: 70vh;
+}
+
+.modal-actions {
+    padding: 1rem 2rem;
+    border-top: 0.0625rem solid #e8e8e8;
+    background: #fafafa;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.modal-footer {
+    padding: 0.75rem 1.25rem;
+    border-top: 0.0625rem solid #e0e0e0;
+    background: #f9f9f9;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.625rem;
+    width: 100%;
+}
+
+/* === СТИЛИ ДЛЯ КНОПОК В МОДАЛКАХ === */
+.save-btn, .cancel-btn {
+    padding: 0.625rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+    border: none;
+}
+
+.save-btn {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 0.25rem 0.75rem rgba(52, 152, 219, 0.3);
+}
+
+.save-btn:hover {
+    background: #2980b9;
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.375rem 1rem rgba(52, 152, 219, 0.4);
+}
+
+.cancel-btn {
+    background: #ecf0f1;
+    color: #7f8c8d;
+}
+
+.cancel-btn:hover {
+    background: #dfe6e9;
+    color: #34495e;
+}
+
+/* === МЕЛКИЙ ТЕКСТ === */
+.warning {
+    font-size: 0.75rem;
+    color: #8b0000;
+    font-weight: 500;
+}
+
+/* === КНОПКА ОТПРАВКИ ФОРМЫ === */
+.btn-submit {
+    padding: 0.625rem 1.5rem;
+    background: #3498db;
+    color: white;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-submit:hover {
+    background: #2980b9;
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.75rem rgba(52, 152, 219, 0.3);
+}
+
+/* === СПЕЦИФИЧНЫЕ СТИЛИ ДЛЯ НОВОСТЕЙ === */
+.news-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+    width: 100%;
+}
+
+.news-form label {
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.news-form input,
+.news-form textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 0.125rem solid #e0e0e0;
+    border-radius: 0.625rem;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.news-form input:focus,
+.news-form textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.1875rem rgba(52, 152, 219, 0.15);
+}
+
+.news-form textarea {
+    min-height: 7.5rem;
+    resize: vertical;
+}
+
+.news-form input[type="file"] {
+    padding: 0.375rem;
+    background: #f9f9f9;
+}
+
+@media (max-width: 600px) {
+    .news-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #8e44ad;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #e74c3c;
+}
+
+/* === ТАБЛИЦА ПЕРЕМЕЩЁННЫХ ТОВАРОВ === */
+.move-table {
+    max-width: 75rem;
+    margin: 2rem auto;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
+}
+
+.move-table h3 {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.move-table-container {
+    overflow-x: auto;
+}
+
+.move-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.move-table th,
+.move-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.move-table th {
+    background: #f5f5f5;
+    color: #555;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.move-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.move-table-remove-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e67e22;
+    color: #fff;
+    border: 2px solid #f0b27a;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.move-table-remove-btn:hover {
+    background: #d35400;
+    transform: scale(1.15);
+}
+
+.move-table-note {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+/* === СЕКЦИЯ ПРИВЕТСТВИЯ (hero) === */
+.hero {
+    max-width: 96%;
+    margin: 2.5rem auto;
+    padding: 2rem 2rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: #666;
+}
+
+/* === СЕКЦИЯ УСЛОВИЙ (terms) === */
+.terms {
+    max-width: 96%;
+    margin: 2.5rem auto;
+    padding: 2.5rem 2rem;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
+}
+
+.terms h2 {
+    font-size: 2.25rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.terms ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.terms li {
+    padding: 0.75rem 0;
+    padding-left: 2rem;
+    position: relative;
+    color: #555;
+}
+
+.terms li::before {
+    content: "⚡";
+    position: absolute;
+    left: 0;
+    font-size: 1.25rem;
+}
+
+/* === СТАТУС НА СКЛАДЕ === */
+.stock-status {
+    font-weight: bold;
+    color: #27ae60;
+    margin-top: 0.5rem;
+}
+
+.stock-status.out-of-stock {
+    color: #e74c3c;
+}
+
+/* === ПАНЕЛЬ "ХРОНИКИ ИЗМЕРЕНИЙ" === */
+.news-header-panel {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 1.25rem;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
+    position: sticky;
+    top: 4.5rem;
+    z-index: 90;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.news-header-panel.hidden {
+    transform: translateY(-100%);
+}
+
+/* === ПАНЕЛЬ ЗАГОЛОВКА СТРАНИЦЫ НОВОСТЕЙ === */
+.header-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.header-grid h1 {
+    font-size: 1.75rem;
+    color: #2c3e50;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.header-grid .last-update {
+    flex: 1;
+    text-align: center;
+    font-size: 1rem;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.header-grid .add-news-btn {
+    padding: 0.625rem 1.25rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.header-grid .add-news-btn:hover {
+    background: #2980b9;
+}
+
+/* === АДАПТИВНОСТЬ === */
+@media (max-width: 600px) {
+    .hero h2 {
+        font-size: 1.75rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .terms h2 {
+        font-size: 1.75rem;
+    }
+}
+
+/* === АДАПТАЦИЯ — УПРОЩЁННАЯ === */
+@media (max-width: 768px) {
+    .site-header,
+    main > section,
+    .catalog,
+    .news-container {
+        max-width: 98%;
+        margin: 0.9375rem auto;
+        border-radius: 0.75rem;
+    }
+
+    .site-header {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0.75rem 0.9375rem;
+    }
+
+    .main-nav ul {
+        flex-direction: row;
+        gap: 0.9375rem;
+    }
+
+    .products-grid,
+    .news-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    #fileAccessButton {
+        width: 90%;
+        min-width: auto;
+    }
+
+    .news-header-panel {
+        top: 3.75rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .news-card {
+        max-width: 100%;
+    }
+}
+
+/* === ФУТЕР === */
+.site-footer {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    border-radius: 1rem 1rem 0 0;
+    box-shadow: 0 -0.25rem 0.9375rem rgba(0, 0, 0, 0.12);
+    margin: 2.5rem auto 0;
+    width: 100%;
+    max-width: none;
+}
+
+.site-footer p {
+    color: #2c3e50;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.site-footer ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.site-footer ul li a {
+    color: #8e44ad;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.site-footer ul li a:hover {
+    color: #e74c3c;
+}
+
+/* Адаптивные стили для футера */
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 1rem;
+        margin: 1rem auto 0;
+        max-width: 98%;
+    }
+}
+
+/* === Toast-уведомления === */
+.toast-notification {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: bold;
+    z-index: 10000;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease-out forwards;
+    max-width: 25rem;
+    word-wrap: break-word;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* === ОБЩАЯ ОБЁРТКА СТРАНИЦЫ === */
+.page-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/* === ОГРАНИЧЕНИЕ КОНТЕНТА === */
+.container {
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    position: relative;
+}
+
+/* === ЛОГОТИП === */
+.logo {
+    max-height: 3.4375rem;
+    height: auto;
+    width: auto;
+    display: block;
+}
+
+/* === ИСТОРИЯ КОМПАНИИ (about.html) === */
+.history-block {
+    margin-bottom: 1.5rem;
+}
+
+.history-block h3 {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.375rem;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.history-block p {
+    color: #555;
+    line-height: 1.7;
+}
+
+.founders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin: 1rem 0;
+}
+
+.founder-card {
+    background: linear-gradient(135deg, #fdfcfb 0%, #f0f4f8 100%);
+    border: 1px solid #e0e0e0;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.founder-card:hover {
+    transform: translateY(-2px);
+}
+
+.founder-avatar {
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
+}
+
+.founder-card h4 {
+    color: #2c3e50;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.founder-role {
+    color: #888;
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.founder-desc {
+    color: #666;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.awards-list {
+    list-style: none;
+    padding: 0;
+}
+
+.awards-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed #eee;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.awards-list li:last-child {
+    border-bottom: none;
+}
+
+/* === ФУТЕР: КРАТКОЕ НАЗВАНИЕ ОРГАНИЗАЦИИ === */
+.footer-org {
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+/* === НАВИГАЦИЯ ПО ЯКОРЯМ (anchor-nav) === */
+.anchor-nav {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    margin: 1rem auto;
+    max-width: 70rem;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8e8e8;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+.anchor-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.anchor-nav li {
+    margin: 0;
+}
+
+.anchor-nav a {
+    color: #555;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+}
+
+.anchor-nav a:hover {
+    background: #f0f0f0;
+    color: #2c3e50;
+}
+
+/* === КАТАЛОГИ ОГРАНИЧЕННОГО ДОСТУПА (restricted-catalog) === */
+.restricted-catalog {
+    background: rgba(255, 255, 255, 0.97);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 70rem;
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.restricted-catalog h3 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.restricted-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.restricted-item {
+    background: linear-gradient(135deg, #fdfcfb 0%, #f8f9fa 100%);
+    border: 1px solid #e8e8e8;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.restricted-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.1);
+}
+
+.restricted-item-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.restricted-item h4 {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.restricted-item-desc {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+}
+
+.restricted-item-price {
+    color: #8b0000;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.restricted-note {
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    font-style: italic;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed #ddd;
+}
+
+/* === ПОДЛОЖКА ПОД ВИДЕО НА ABOUT.HTML (P2-4) === */
+.video-section .memory-fragment {
+    position: relative;
+    padding-bottom: 2rem;
+}
+
+.video-section .memory-fragment::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 10%;
+    right: 10%;
+    height: 24px;
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(155, 89, 182, 0.15), rgba(52, 152, 219, 0.15));
+    border-radius: 50%;
+    filter: blur(8px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* === ОГРАНИЧЕНИЕ СЕТКИ АКЦИЙ (P2-9) === */
+.actions-grid .products-grid {
+    max-width: 75rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.actions-grid .catalog-card.card-large {
+    max-width: 22rem;
+    width: 100%;
+    justify-self: center;
+    min-height: 340px;
+}
+
+/* === ЦВЕТНЫЕ ПОДЛОЖКИ ДЛЯ СТРАНИЦ (P2-3) === */
+/* Общие стили для секций с подложками */
+.contacts-section,
+.requisites-section,
+.privacy-policy,
+.delivery-section {
+    padding: 2.5rem 1.5rem;
+    max-width: 96%;
+    margin: 2.5rem auto;
+    border-radius: 1rem;
+}
+
+/* 1. contacts.html — пастельный голубой (морская тема) */
+.contacts-section {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border: 2px solid #90caf9;
+}
+
+/* 2. requisites.html — пастельный золотой (финансовая тема) */
+.requisites-section {
+    background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+    border: 2px solid #ffe082;
+}
+
+/* 3. privacy.html — пастельный серо-голубой (официальная тема) */
+.privacy-policy {
+    background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+    border: 2px solid #9fa8da;
+}
+
+/* 4. delivery.html — пастельный зелёный (тема перемещения) */
+.delivery-section {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border: 2px solid #a5d6a7;
+}
+
+/* Карточки внутри секций с подложками — белый фон как memory-fragment */
+.contacts-section .contact-card,
+.requisites-section .req-card,
+.privacy-policy .privacy-block,
+.delivery-section .delivery-block {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.5rem;
+}
+
+/* Заголовки внутри карточек */
+.contacts-section .contact-card h3,
+.requisites-section .req-card h3,
+.privacy-policy .privacy-block h2,
+.privacy-policy .privacy-block h3,
+.delivery-section .delivery-block h2,
+.delivery-section .delivery-block h3 {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+/* Текст внутри карточек */
+.contacts-section .contact-card p,
+.requisites-section .req-card p,
+.privacy-policy .privacy-block p,
+.delivery-section .delivery-block p {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.contacts-section .contact-card ul,
+.contacts-section .contact-card ol,
+.requisites-section .req-card ul,
+.privacy-policy .privacy-block ul,
+.privacy-policy .privacy-block ol,
+.delivery-section .delivery-block ul,
+.delivery-section .delivery-block ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.contacts-section .contact-card li,
+.requisites-section .req-card li,
+.privacy-policy .privacy-block li,
+.delivery-section .delivery-block li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+/* Дисклеймеры и примечания — тоже белая карточка */
+.contacts-section .memory-disclaimer,
+.requisites-section .req-note,
+.privacy-policy .contact-info,
+.delivery-section .warning-box {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.08);
+    margin-top: 1.5rem;
+}
+
+/* Форма обратной связи на contacts.html */
+.contacts-section .feedback-form {
+    margin-top: 0.5rem;
+}
+
+.contacts-section .feedback-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.contacts-section .feedback-form label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+.contacts-section .feedback-form input,
+.contacts-section .feedback-form textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.contacts-section .feedback-form input:focus,
+.contacts-section .feedback-form textarea:focus {
+    border-color: #90caf9;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(144, 202, 249, 0.2);
+}
+
+.contacts-section .feedback-form .submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.contacts-section .feedback-form .submit-btn:hover {
+    opacity: 0.9;
+}
+
+/* Подзаголовки секций */
+.contacts-section .subtitle,
+.requisites-section .subtitle {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+}
+
+/* Хинты в контактах */
+.contacts-section .contact-card .hint {
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed #eee;
+}
+
+/* Строки реквизитов */
+.requisites-section .req-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.requisites-section .req-row:last-child {
+    border-bottom: none;
+}
+
+.requisites-section .req-row .label {
+    font-weight: 600;
+    color: #555;
+    min-width: 140px;
+}
+
+.requisites-section .req-row .value {
+    color: #333;
+    text-align: right;
+}
+
+/* Предупреждение в delivery */
+.delivery-section .warning-box p {
+    color: #8b0000;
+    font-weight: 600;
+}
+
+.delivery-section .disclaimer {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #2e7d32;
+    margin-top: 1rem;
+}
+
+/* Последний параграф privacy */
+.privacy-policy .last-paragraph {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 0.5rem;
+    border-left: 4px solid #9fa8da;
+    font-style: italic;
+}
