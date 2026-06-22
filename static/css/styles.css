@@ -412,20 +412,40 @@ main > section,
 
 }
 
-
-"/* === ГЛАВНЫЙ БАННЕР === */\r\n.hero {\r\n    text-align: center;\r\n    padding: 3.125rem 1.875rem;\r\n    max-width: 50rem;\r\n    margin: 2.5rem auto 1.875rem;\r\n    background-image: url('/images/BG.jpg');\r\n    background-size: cover;\r\n    background-position: center;\r\n    background-attachment: scroll;\r\n    min-height: 250px;\r\n    position: relative;\r\n}\r\n.hero::before {\r\n    content: '';\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    background: rgba(255, 255, 255, 0.6);\r\n}\r\n.hero > * {\r\n    position: relative;\r\n    z-index: 1;\r\n}/* Дубликат селектора \".hero h2\" удалён *//* Дубликат селектора \".hero p\" удалён */"}
-
-/* === КАТАЛОГ ТОВАРОВ === */
-.catalog h2 {
-
+/* === ГЛАВНЫЙ БАННЕР === */
+.hero {
     text-align: center;
-    font-size: 1.75rem;
-    margin-bottom: 1.875rem;
-    color: #2c3e50;
-
+    padding: 3.125rem 1.875rem;
+    max-width: 50rem;  
+    margin: 2.5rem auto 1.875rem;
+    background-image: url('/images/BG.jpg');  
+    background-size: cover;  
+    background-position: center;   
+    background-attachment: scroll;    
+    min-height: 250px;   
+    position: relative;
+}\r\n
+.hero::before {  
+    content: '';   
+    position: absolute;   
+    top: 0;   
+    left: 0;  
+    right: 0;   
+    bottom: 0;   
+    background: rgba(255, 255, 255, 0.6);
+}
+.hero > * {  
+    position: relative;  
+    z-index: 1;
 }
 
-
+/* === КАТАЛОГ ТОВАРОВ === */
+.catalog h2 { 
+    text-align: center;
+    font-size: 1.75rem;
+    margin-bottom: 1.875rem;  
+    color: #2c3e50;
+}
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
@@ -3128,6 +3148,7 @@ main > section,
 
     font-size: 17px;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
 
 }
 
@@ -3146,6 +3167,7 @@ main > section,
     overflow: visible;
     text-overflow: clip;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     display: -webkit-box;
     -webkit-box-orient: vertical;
 
