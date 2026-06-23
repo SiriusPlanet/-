@@ -1,33 +1,4 @@
-<!-- Файл: MySite/index.html -->
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Сувенирный магазин с уникальными подарками и воспоминаниями на любой вкус">
-    <title>Сувенирный магазин</title>
-    <link rel="icon" href="images/Favicon.png">
-
-    <!-- Управление доступом - ЗАГРУЖАЕТСЯ ПЕРВЫМ -->
-    <script type="module" src="static/js/access-init.js"></script>
-    
-    <!-- Основные стили -->
-    <link rel="stylesheet" href="static/css/styles.css">
-    
-    <!-- Основной скрипт -->   
-    <script type="module" src="static/js/main.js"></script>
-</head>
-<body>
-    <!-- Затемнение -->
-    <div id="access-overlay"></div>
-    
-    <!-- Панель доступа — появляется только если нет прав -->
-    <div class="access-button">
-        <button id="fileAccessButton">Получить доступ к файлам</button>
-    </div>
-
-    <!-- Остальной контент -->
-    <header class="site-header">
+    <header class=\"site-header\">"}
         <a href="index.html" class="logo-link">
             <img src="images/logo.png" alt="Логотип магазина воспоминаний" class="logo">
             <span class="site-title"></span>
@@ -44,23 +15,13 @@
             </ul>
         </nav>
         <div class="auth-link">
-            <!-- Строка 1: корзина и очистка -->
-            <div class="auth-row-1">
-                <!-- Иконка корзины (🛒) со счётчиком -->
-                <a href="javascript:void(0)" class="cart-icon" id="cartIcon" title="Корзина">
-                    🛒
-                    <span class="cart-badge" id="cartBadge"></span>
-                    <span class="cart-total" id="cartTotal"></span>
-                </a>
-                <!-- Кнопка сброса корзины (🗑️) -->
-                <button id="cartResetBtn" class="cart-reset-btn" title="Очистить корзину">🗑️</button>
-            </div>
-            <!-- Строка 2: клиентам и DEV -->
-            <div class="auth-row-2">
-                <a href="login.html">Клиентам</a>
-                <!-- DEV-переключатель (DEV) -->
-                <button id="devModeToggle" class="dev-mode-btn" title="Переключить DEV_MODE (все уровни доступа)">DEV</button>
-            </div>
+            <!-- Иконка корзины (P1-3) -->
+            <a href="javascript:void(0)" class="cart-icon" id="cartIcon" title="Корзина">
+                🛒
+                <span class="cart-badge" id="cartBadge"></span>
+                <span class="cart-total" id="cartTotal"></span>
+            </a>
+            <a href="login.html">Клиентам</a>
         </div>
     </header>
     <!-- Бегущая строка (P1-5) — динамическая, заполняется из main.js -->
@@ -205,16 +166,6 @@
                 });
             }
 
-            // --- Сброс корзины (🗑️) ---
-            const cartResetBtn = document.getElementById('cartResetBtn');
-            if (cartResetBtn) {
-                cartResetBtn.addEventListener('click', () => {
-                    if (window.resetCart) {
-                        window.resetCart();
-                    }
-                });
-            }
-
             // --- Модалка корзины-шутки (P1-3) ---
             const cartIcon = document.getElementById('cartIcon');
             const cartJokeModal = document.getElementById('cartJokeModal');
@@ -323,19 +274,19 @@
     <!-- Каталоги ограниченного доступа (P0) -->
     <!-- Витрина «Для избранных» — уровень 1+ (P2-6: контент доработан) -->
     <section class="restricted-catalog" id="restrictedCatalog1" data-access-required="1" style="display: none;">
-        <h3>⭐ Витрина «Для избранных»</h3>
+        <h3>⭐ Витрина «Для постоянных клиентов»</h3>
         <p style="text-align:center;color:#888;font-size:13px;margin-bottom:1.5rem;font-style:italic;">Особое предложение для постоянных клиентов и хранителей воспоминаний</p>
         <div class="restricted-grid">
             <div class="restricted-item">
                 <div class="restricted-item-icon">🎭</div>
                 <h4>Маска воспоминаний</h4>
-                <p class="restricted-item-desc">Позволяет вспомнить то, чего не было. И забыть то, что было. Двусторонняя технология.</p>
+                <p class="restricted-item-desc">Позволяет вспомнить то, чего не было. И забыть то, что было. Двусторонняя технология. (не препутайте)</p>
                 <p class="restricted-item-price">2 500 ₽</p>
             </div>
             <div class="restricted-item">
                 <div class="restricted-item-icon">📼</div>
                 <h4>Кассета «Ностальгия»</h4>
-                <p class="restricted-item-desc">Запись ваших лучших моментов. С эффектом «плёночного» звука и лёгким шипением времени.</p>
+                <p class="restricted-item-desc">Запись ваших будущих лучших моментов. С эффектом «плёночного» звука и лёгким шипением времени.</p>
                 <p class="restricted-item-price">1 200 ₽</p>
             </div>
             <div class="restricted-item">
@@ -347,7 +298,7 @@
             <div class="restricted-item">
                 <div class="restricted-item-icon">🧭</div>
                 <h4>Компас во времени</h4>
-                <p class="restricted-item-desc">Указывает направление к самому важному воспоминанию. Работает только в полнолуние.</p>
+                <p class="restricted-item-desc">Указывает направление к самому важному воспоминанию. Работает только в до, но не в после.</p>
                 <p class="restricted-item-price">4 200 ₽</p>
             </div>
         </div>

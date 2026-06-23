@@ -6,17 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Сувенирный магазин с уникальными подарками и воспоминаниями на любой вкус">
     <title>Сувенирный магазин</title>
-    <link rel="icon" href="images/Favicon.png">
-
+    
     <!-- Управление доступом - ЗАГРУЖАЕТСЯ ПЕРВЫМ -->
     <script type="module" src="static/js/access-init.js"></script>
     
     <!-- Основные стили -->
     <link rel="stylesheet" href="static/css/styles.css">
     
-    <!-- Основной скрипт -->   
-    <script type="module" src="static/js/main.js"></script>
-</head>
+    <!-- Основной скрипт -->
+    <script type="module" src="static/js/main.js"></script></head>
 <body>
     <!-- Затемнение -->
     <div id="access-overlay"></div>
@@ -26,6 +24,9 @@
         <button id="fileAccessButton">Получить доступ к файлам</button>
     </div>
 
+    <!-- DEV_MODE переключатель (P1-2) — маленькая кнопка сбоку -->
+    <button id="devModeToggle" title="Переключить DEV_MODE (все уровни доступа)">DEV</button>
+    
     <!-- Остальной контент -->
     <header class="site-header">
         <a href="index.html" class="logo-link">
@@ -44,23 +45,13 @@
             </ul>
         </nav>
         <div class="auth-link">
-            <!-- Строка 1: корзина и очистка -->
-            <div class="auth-row-1">
-                <!-- Иконка корзины (🛒) со счётчиком -->
-                <a href="javascript:void(0)" class="cart-icon" id="cartIcon" title="Корзина">
-                    🛒
-                    <span class="cart-badge" id="cartBadge"></span>
-                    <span class="cart-total" id="cartTotal"></span>
-                </a>
-                <!-- Кнопка сброса корзины (🗑️) -->
-                <button id="cartResetBtn" class="cart-reset-btn" title="Очистить корзину">🗑️</button>
-            </div>
-            <!-- Строка 2: клиентам и DEV -->
-            <div class="auth-row-2">
-                <a href="login.html">Клиентам</a>
-                <!-- DEV-переключатель (DEV) -->
-                <button id="devModeToggle" class="dev-mode-btn" title="Переключить DEV_MODE (все уровни доступа)">DEV</button>
-            </div>
+            <!-- Иконка корзины (P1-3) -->
+            <a href="javascript:void(0)" class="cart-icon" id="cartIcon" title="Корзина">
+                🛒
+                <span class="cart-badge" id="cartBadge"></span>
+                <span class="cart-total" id="cartTotal"></span>
+            </a>
+            <a href="login.html">Клиентам</a>
         </div>
     </header>
     <!-- Бегущая строка (P1-5) — динамическая, заполняется из main.js -->
@@ -201,16 +192,6 @@
                     if (window.toggleDevMode) {
                         window.toggleDevMode();
                         devBtn.classList.toggle('is-active');
-                    }
-                });
-            }
-
-            // --- Сброс корзины (🗑️) ---
-            const cartResetBtn = document.getElementById('cartResetBtn');
-            if (cartResetBtn) {
-                cartResetBtn.addEventListener('click', () => {
-                    if (window.resetCart) {
-                        window.resetCart();
                     }
                 });
             }
