@@ -24,36 +24,7 @@
         <button id="fileAccessButton">Получить доступ к файлам</button>
     </div>
 
-    <!-- DEV_MODE переключатель (P1-2) — маленькая кнопка сбоку -->
-    <button id="devModeToggle" title="Переключить DEV_MODE (все уровни доступа)">DEV</button>
-    
-    <!-- Остальной контент -->
-    <header class="site-header">
-        <a href="index.html" class="logo-link">
-            <img src="images/logo.png" alt="Логотип магазина воспоминаний" class="logo">
-            <span class="site-title"></span>
-        </a>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="catalog.html">Каталог</a></li>
-                <li><a href="actions.html">Акции</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-                <li><a href="news.html">Новости</a></li>
-                <li><a href="delivery.html">Доставка</a></li>
-            </ul>
-        </nav>
-        <div class="auth-link">
-            <!-- Иконка корзины (P1-3) -->
-            <a href="javascript:void(0)" class="cart-icon" id="cartIcon" title="Корзина">
-                🛒
-                <span class="cart-badge" id="cartBadge"></span>
-                <span class="cart-total" id="cartTotal"></span>
-            </a>
-            <a href="login.html">Клиентам</a>
-        </div>
-    </header>
+"    <!-- Остальной контент -->\r\n    <header class=\"site-header\">\r\n        <a href=\"index.html\" class=\"logo-link\">\r\n            <img src=\"images/logo.png\" alt=\"Логотип магазина воспоминаний\" class=\"logo\">\r\n            <span class=\"site-title\"></span>\r\n        </a>\r\n        <nav class=\"main-nav\">\r\n            <ul>\r\n                <li><a href=\"index.html\">Главная</a></li>\r\n                <li><a href=\"about.html\">О нас</a></li>\r\n                <li><a href=\"catalog.html\">Каталог</a></li>\r\n                <li><a href=\"actions.html\">Акции</a></li>\r\n                <li><a href=\"contacts.html\">Контакты</a></li>\r\n                <li><a href=\"news.html\">Новости</a></li>\r\n                <li><a href=\"delivery.html\">Доставка</a></li>\r\n            </ul>\r\n        </nav>\r\n        <div class=\"auth-link\">\r\n            <!-- Кнопка сброса корзины (очистка) -->\r\n            <button type=\"button\" class=\"cart-reset-btn\" id=\"cartResetBtn\" title=\"Очистить корзину\">🗑️</button>\r\n            \r\n            <!-- Иконка корзины со счётчиком -->\r\n            <a href=\"javascript:void(0)\" class=\"cart-icon\" id=\"cartIcon\" title=\"Корзина\">\r\n                🛒\r\n                <span class=\"cart-badge\" id=\"cartBadge\"></span>\r\n                <span class=\"cart-total\" id=\"cartTotal\"></span>\r\n            </a>\r\n            \r\n            <!-- DEV_MODE переключатель (вкл/выкл) -->\r\n            <button type=\"button\" id=\"devModeToggle\" class=\"dev-mode-btn\" title=\"Переключить DEV_MODE (все уровни доступа)\">DEV</button>\r\n            \r\n            <a href=\"login.html\">Клиентам</a>\r\n        </div>\r\n    </header>"}
     <!-- Бегущая строка (P1-5) — динамическая, заполняется из main.js -->
     <div class="ticker-container">
         <div id="news-ticker">Загрузка хроник...</div>
@@ -400,7 +371,7 @@
         </div>
         <p class="restricted-note">🔓 Доступно администраторам (уровень 3+)</p>
     </section>
-
+    
     <!-- Скрипт обработки формы обратной связи на главной (P2-5: обновлён под заявку на звонок) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
