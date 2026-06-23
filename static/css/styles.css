@@ -57,7 +57,18 @@
 }
 
 /* === ОТСТУПЫ МЕЖДУ СЕКЦИЯМИ === */
-"main > section,\r\n.catalog,\r\n.news-container,\r\n.privacy-policy {\r\n    margin: 2.5rem auto;\r\n    max-width: 96%;\r\n}\r\n\r\n/* === ОТСТУП ДЛЯ ШАПКИ === */\r\nmain {\r\n    padding-top: 5rem;\r\n}"}
+main > section,
+.catalog,
+.news-container,
+.privacy-policy {
+    margin: 2.5rem auto;
+    max-width: 96%;
+}
+
+/* === ОТСТУП ДЛЯ ШАПКИ === */
+main {
+    padding-top: 5rem;
+}
 
 /* === ГРУППА ШАПКИ И ПАНЕЛИ === */
 .header-group {
@@ -2759,7 +2770,6 @@
     pointer-events: none;
 
 }
-
 
 /* Выезжающая сетка */
 .reactor-grid {
