@@ -161,8 +161,8 @@ export class CardConstructor {
         if (dscBtn && onDiscount) {
             dscBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                // P2-7: передаём item целиком для поля причины скидки
-                this._openDiscountModal(item, dscBtn, card, onDiscount);
+                // Вызываем onDiscount для открытия панели скидки (в publisher.js)
+                onDiscount(item.id, dscBtn, card);
             });
         }
 
@@ -185,33 +185,6 @@ export class CardConstructor {
         return card;
     }
 
-    /**
-     "* P2-7: Открывает модалку установки скидки (только процент)"}"}
-     */
-    _openDiscountModal(item, btn, card, onDiscount) {
-        const currentDiscount = parseInt(item.discount) || 0;
-
-        const discountStr = prompt(
-            `Укажите скидку (%) для «${item.title}»\nТекущая: ${currentDiscount}%`,
-            `${currentDiscount}`
-        );
-
-        if (discountStr === null) return;
-
-        const discountVal = parseInt(discountStr);
-        if (isNaN(discountVal) || discountVal < 0 || discountVal > 100) {
-            alert('Скидка должна быть числом от 0 до 100');
-            return;
-        }
-
-        // Обновляем данные лота
-        item.discount = discountVal;
-
-        // Вызываем колбэк
-        if (onDiscount) {
-            onDiscount(item, btn, card);
-        }
-    }
 
     /**
      * P0-2: Перемещает товар в таблицу снятых (#moveTable) и скрывает из каталога
