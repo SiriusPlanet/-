@@ -186,23 +186,17 @@ export class CardConstructor {
     }
 
     /**
-     * P2-7: Открывает модалку установки скидки с полем "причина"
+     "* P2-7: Открывает модалку установки скидки (только процент)"}"}
      */
     _openDiscountModal(item, btn, card, onDiscount) {
         const currentDiscount = parseInt(item.discount) || 0;
-        const currentReason = item.discountReason || '';
-        const price = item.price || '0';
 
-        const reason = prompt(
-            `Укажите скидку (%) для «${item.title}»\nТекущая: ${currentDiscount}%\n\nИ причину скидки (необязательно):`,
-            `${currentDiscount}\n${currentReason}`
+        const discountStr = prompt(
+            `Укажите скидку (%) для «${item.title}»\nТекущая: ${currentDiscount}%`,
+            `${currentDiscount}`
         );
 
-        if (reason === null) return;
-
-        const lines = reason.split('\n');
-        const discountStr = lines[0].trim();
-        const reasonText = lines.slice(1).join('\n').trim() || '';
+        if (discountStr === null) return;
 
         const discountVal = parseInt(discountStr);
         if (isNaN(discountVal) || discountVal < 0 || discountVal > 100) {
@@ -212,11 +206,10 @@ export class CardConstructor {
 
         // Обновляем данные лота
         item.discount = discountVal;
-        item.discountReason = reasonText;
 
         // Вызываем колбэк
         if (onDiscount) {
-            onDiscount(item.id, btn, card);
+            onDiscount(item, btn, card);
         }
     }
 

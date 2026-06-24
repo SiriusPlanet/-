@@ -410,6 +410,17 @@ window.updateCartBadge = function() {
     if (app) app.updateCartBadge();
 };
 
+// Экспортируем resetCart для очистки корзины
+window.resetCart = function() {
+    try {
+        localStorage.removeItem('mySiteCart');
+        window.updateCartBadge();
+        console.log('Корзина очищена');
+    } catch (error) {
+        console.error('Ошибка при очистке корзины:', error);
+    }
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
     const app = new MainApp();
     window.__mainApp = app;

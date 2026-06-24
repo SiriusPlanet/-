@@ -76,7 +76,7 @@ export class Publisher {
                 accessLevel: 3,
                 pageContext: page,
                 onDelete: (id) => this.deleteLot(id, container, page),
-                onDiscount: (id, btn, cardEl) => this.showDiscountPanel(id, btn, cardEl, container, page),
+                onDiscount: (item, btn, cardEl) => this.saveDiscountFromCard(item, btn, cardEl, container, page),
                 onEdit: (item) => this.editLot(item, container, page)
             });
             // Если createCard вернул null (скидочный лот не на actions) — пропускаем
@@ -198,59 +198,13 @@ export class Publisher {
     }
 
     /**
-     * Показывает панель управления скидкой
+     * Сохраняет скидку из card-constructor.js (без панели)
      */
-    showDiscountPanel(itemId, btn, card, container, page) {
-        const currentDiscount = parseInt(btn.dataset.discount) || 0;
-
-        // Скрываем кнопку %, пока панель открыта
-        btn.style.display = 'none';
-
-        // Закрываем другие открытые панели
-        card.querySelectorAll('.discount-panel').forEach(p => p.remove());
-
-        const panel = document.createElement('div');
-        panel.className = 'discount-panel';
-        panel.innerHTML = `
-            <label>Скидка %</label>
-            <input type="range" min="0" max="100" value="${currentDiscount}" class="discount-slider">
-            <input type="number" min="0" max="100" value="${currentDiscount}" class="discount-value-input">
-            <div class="discount-actions">
-                <button class="discount-save-btn">Сохранить</button>
-                <button class="discount-cancel-btn">Отмена</button>
-            </div>
-        `;
-
-        card.appendChild(panel);
-
-        const slider = panel.querySelector('.discount-slider');
-        const numInput = panel.querySelector('.discount-value-input');
-
-        slider.addEventListener('input', () => { numInput.value = slider.value; });
-        numInput.addEventListener('input', () => { slider.value = numInput.value; });
-
-        panel.querySelector('.discount-save-btn').addEventListener('click', async () => {
-            const discount = parseInt(numInput.value) || 0;
-            await this.saveDiscount(itemId, discount, btn, panel, container, page);
-        });
-
-        panel.querySelector('.discount-cancel-btn').addEventListener('click', () => {
-            this.closeDiscountPanel(btn, panel);
-        });
-
-        // Закрыть по клику вне панели
-        const closeHandler = (e) => {
-            if (!panel.contains(e.target) && e.target !== btn) {
-                this.closeDiscountPanel(btn, panel);
-                document.removeEventListener('click', closeHandler);
-            }
-        };
-        setTimeout(() => document.addEventListener('click', closeHandler), 100);
+    async saveDiscountFromCard(item, btn, card, container, page) {
+        const discount = parseInt(item.discount) || 0;
+        await this.saveDiscount(item.id, discount, btn, null, container, page);
     }
 
-    /**
-     * Сохраняет скидку и обновляет цену на карточке без перезагрузки страницы
-     */
     async saveDiscount(itemId, discount, btn, panel, container, page) {
         try {
             const res = await fetch('/api/update-news', {
@@ -262,7 +216,7 @@ export class Publisher {
             const result = await res.json();
             if (result.success) {
                 this.showToast(discount > 0 ? `Скидка ${discount}% установлена` : 'Скидка удалена');
-                this.closeDiscountPanel(btn, panel);
+                if (panel) this.closeDiscountPanel(btn, panel);
 
                 // Обновляем цену на карточке на месте
                 const card = btn.closest('.catalog-card');
