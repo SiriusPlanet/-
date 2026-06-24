@@ -162,7 +162,7 @@ export class CardConstructor {
             dscBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 // Вызываем onDiscount для открытия панели скидки (в publisher.js)
-                onDiscount(item.id, dscBtn, card);
+                onDiscount(item, dscBtn, card);
             });
         }
 
