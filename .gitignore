@@ -22,3 +22,8 @@ start-server.bat
 # Системные файлы
 Thumbs.db
 .DS_Store
+
+# Папки для работы (не публикуются на GitHub)
+InDone/
+InDel/
+msis311_env/
