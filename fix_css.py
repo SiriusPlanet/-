@@ -1,17 +1,23 @@
+# Скрипт для исправления CSS-файла - удаление ошибочной секции с кавычками
+
 import re
 
-# Read the file
-with open('static/css/news.css', 'r', encoding='utf-8') as f:
+# Читаем файл
+with open('c:\\I0\\002MySiS\\MySite\\static\\css\\style.css', 'r', encoding='utf-8') as f:
     content = f.read()
 
-# Replace literal \\r\\n with actual newlines
-content = content.replace('\\\\r\\\\n', '\n')
+# Паттерн для поиска и удаления ошибочной секции с кавычками
+# Ищем строку, начинающуюся с кавычки, за которой следует /* --- Система доступа
+pattern = r'\"/\* --- Система доступа --- \*/\\r\\n.*?access-overlay \{.*?\}\r\n\r\n\r\n/\* === Единый стиль'
 
-# Fix duplicate closing braces pattern
-content = re.sub(r'\}\r\n\r\n\}', '}\n}', content)
+# Заменяем на корректный CSS-комментарий без кавычек
+replacement = '''/* --- Система доступа --- */
+#access-overlay {'''
 
-# Write back
-with open('static/css/news.css', 'w', encoding='utf-8') as f:
+content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+
+# Сохраняем файл
+with open('c:\\I0\\002MySiS\\MySite\\static\\css\\style.css', 'w', encoding='utf-8') as f:
     f.write(content)
 
-print('Fixed escape sequences')
+print("CSS-файл исправлен!")

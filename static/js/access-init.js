@@ -75,6 +75,18 @@ window.__globalAccessPromise = new Promise((resolve, reject) => {
                 applyAccessRestrictions(isDevMode ? 3 : level);
             };
             
+            // Вешаем слушатель на кнопку "Получить доступ"
+            if (pm.button) {
+                pm.button.addEventListener('click', async () => {
+                    console.log('[access-init] Клик по кнопке "Получить доступ"');
+                    await pm.requestAccess();
+                    // Перезагружаем страницу после получения доступа
+                    setTimeout(() => {
+                        location.reload();
+                    }, 500);
+                });
+            }
+            
             console.log('[access-init] PermissionManager инициализирован и готов');
             resolve(pm);
         } catch (error) {

@@ -24,16 +24,6 @@ from datetime import datetime
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 os.chdir(PROJECT_ROOT)
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("server.log", encoding='utf-8'),
-        logging.StreamHandler()
-    ]
-)
-
-
 class SimpleHandler(BaseHTTPRequestHandler):
     # Убран __init__ — он опасен для BaseHTTPRequestHandler!
     # Вся инициализация теперь в run()
